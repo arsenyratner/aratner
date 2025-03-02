@@ -1,0 +1,90 @@
+{
+  "id": 790,
+  "option-data": [
+    {
+      "data": "10.3.79.254",
+      "name": "routers"
+    }
+  ],
+  "pools": [
+    {
+      "pool": "10.3.79.50 - 10.3.79.254"
+    }
+  ],
+  "reservations": [
+    {
+      "hostname": "admrsat1",
+      "hw-address": "56:6f:6a:30:00:30",
+      "ip-address": "10.3.79.30"
+    },
+    {
+      "hostname": "admrep1",
+      "hw-address": "56:6f:6a:30:00:10",
+      "ip-address": "10.3.79.10"
+    },
+    {
+      "hostname": "admdc1",
+      "hw-address": "56:6f:6a:30:00:11",
+      "ip-address": "10.3.79.11"
+    },
+    {
+      "hostname": "admdc2",
+      "hw-address": "56:6f:6a:30:00:12",
+      "ip-address": "10.3.79.12"
+    },
+    {
+      "hostname": "admdhcp1",
+      "hw-address": "56:6f:6a:30:00:06",
+      "ip-address": "10.3.79.6"
+    },
+    {
+      "hostname": "admdhcp2",
+      "hw-address": "56:6f:6a:30:00:07",
+      "ip-address": "10.3.79.7"
+    },
+    {
+      "hostname": "admpki1",
+      "hw-address": "56:6f:6a:30:00:08",
+      "ip-address": "10.3.79.8"
+    },
+    {
+      "hostname": "admca1",
+      "hw-address": "56:6f:6a:30:00:09",
+      "ip-address": "10.3.79.9"
+    },
+    {
+      "hostname": "admmng1",
+      "hw-address": "56:6f:6a:30:00:13",
+      "ip-address": "10.3.79.13"
+    },
+    {
+      "hostname": "admfs1",
+      "hw-address": "56:6f:6a:30:00:14",
+      "ip-address": "10.3.79.14"
+    },
+    {
+      "hostname": "admps1",
+      "hw-address": "56:6f:6a:30:00:15",
+      "ip-address": "10.3.79.15"
+    },
+    {
+      "hostname": "admos1",
+      "hw-address": "56:6f:6a:30:00:22",
+      "ip-address": "10.3.79.22"
+    },
+    {
+      "hostname": "admmon1",
+      "hw-address": "56:6f:6a:30:00:23",
+      "ip-address": "10.3.79.23"
+    },
+    {
+      "hostname": "admstork1",
+      "hw-address": "56:6f:6a:30:00:24",
+      "ip-address": "10.3.79.24"
+    }
+  ],
+  "subnet": "10.3.79.0/24",
+  "user-context": {
+    "description": "ADM 3 79 segment"
+  }
+}

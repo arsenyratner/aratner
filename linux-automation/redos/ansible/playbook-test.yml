@@ -1,0 +1,67 @@
+---
+- name: This will get hostname localy on control node
+  hosts: localhost
+  tasks:
+    - name: get hostname
+      command: hostname
+      register: result
+
+    - name: print hostname
+      debug:
+          var: result
+
+    - name: become
+      become: true
+      command: id -u
+      register: id_output
+
+    - name: print id_output
+      debug:
+        var: id_output.stdout
+
+    - name: delete file '"ansibleuser"'
+      file:
+        path: /etc/sudoers.d/"{{ new_ansible_user }}"
+        state: absent
+
+    - name: get current user
+      become: false
+      command: whoami
+      register: currentuser
+
+    - name: print current user
+      debug:
+        var: currentuser.stdout
+
+- name: This will get hostname remote on manged node
+  hosts: all
+  tasks:
+    - name: get hostname
+      command: hostname
+      register: result
+
+    - name: print hostname
+      debug:
+          var: result
+    - name: become
+      become: true
+      command: id -u
+      register: id_output
+
+    - name: print id_output
+      debug:
+        var: id_output.stdout
+
+    - name: delete file '"ansibleuser"'
+      file:
+        path: /etc/sudoers.d/"{{ new_ansible_user }}"
+        state: absent
+
+    - name: get current user
+      become: false
+      command: whoami
+      register: currentuser
+
+    - name: print current user
+      debug:
+        var: currentuser.stdout

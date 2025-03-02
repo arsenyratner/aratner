@@ -1,0 +1,47 @@
+---
+- name: Preconfig firstdc
+  become: true
+  hosts: first_dc
+  roles:
+    - general
+
+  handlers:
+    - name: Restart bind9 service
+      service:
+        name: bind9-pkcs11
+        state: restarted
+
+  tasks: 
+    - name: Firstdc create setup script
+      ansible.builtin.copy:
+        dest: /usr/local/bin/ald_firstdc.sh
+        content: |
+          #!/bin/bash
+          apt-get install -y -q aldpro-mp aldpro-gc aldpro-syncer
+          aldpro-server-install -d {{ domain_name }} -n {{ ansible_hostname }} -p '{{ domain_password | string }}' --ip {{ ansible_default_ipv4.address }} --no-reboot >> /var/tmp/ald-install.log 2>> /var/tmp/ald-errors.log
+        mode: '0755'
+        owner: root
+        group: root
+
+    - name: Firstdc install packages
+      ansible.builtin.apt:
+        name: 
+          - aldpro-mp
+          - aldpro-gc
+          - aldpro-syncer
+        state: latest
+        update_cache: yes
+        dpkg_options: "force-confnew"
+
+    # - name: Firstdc install packages
+    #   command: apt-get install -y -q aldpro-mp aldpro-gc aldpro-syncer
+    #   environment:
+    #     DEBIAN_FRONTEND: noninteractive
+
+    - name: Creating Firstdc
+      ansible.builtin.shell: |
+        /usr/bin/python3 /usr/sbin/aldpro-server-install -d {{ domain_name }} -n {{ ansible_hostname }} -p '{{ domain_password | string }}' --ip {{ ansible_default_ipv4.address }} --no-reboot >> /var/tmp/ald-install.log 2>> /var/tmp/ald-errors.log
+      register: create_firstdc_result
+      notify: General reboot system
+    - debug:
+        var: create_firstdc_result

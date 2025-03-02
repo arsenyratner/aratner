@@ -1,0 +1,26 @@
+---
+- name: create new user
+  hosts: all
+  vars_files:
+    - vars/passwords
+  tasks:
+    - name: "Create user accounts"
+      user:
+        name: "{{ new_ansible_user }}"
+        groups: "wheel"
+        password: "{{ new_ansible_password | password_hash('sha512') }}"
+        update_password: "on_create"
+        # update_password: "always"
+    - name: "Add authorized keys"
+      authorized_key:
+        user: "{{ new_ansible_user }}"
+        key: "{{ lookup('file', '{{ ansible_ssh_public_key_file }}') }}"
+        state: "present"
+    - name: "Allow admin users to sudo without a password"
+      lineinfile:
+        path: "/etc/sudoers.d/{{ new_ansible_user }}"
+        line: '{{ new_ansible_user }} ALL=(ALL) NOPASSWD: ALL'
+        state: present
+        mode: 0440
+        create: yes
+        validate: 'visudo -cf %s'

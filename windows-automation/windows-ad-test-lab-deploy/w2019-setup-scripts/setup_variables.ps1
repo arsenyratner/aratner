@@ -1,0 +1,22 @@
+$domainname = "ad.aratner.ru"
+$nbname="AD"
+$domainadmin="Administrator"
+$sitename="Default-First-Site-Name"
+$restorepassword=ConvertTo-SecureString 'Re$t0rePa$$w0rd' -AsPlainText -Force
+$adminpassword=ConvertTo-SecureString 'Pa$$w0rd' -AsPlainText -Force
+#$domainmode="Win2003"
+$domainmode="Win2008"
+#$domainmode="Win2008R2"
+#$domainmode="Win2012"
+#$domainmode="Win2012R2"
+#$domainmode="Win2016"
+$basepath="c:\arad"
+$dbpath="$basepath\db"
+$logpath = "$basepath\log"
+$sysvolpath = "$basepath\sysvol"
+$compname = "aratner-newcomp"
+$joinuser = "joinuser"
+$joinpassword = ConvertTo-SecureString 'j0inD0mainjoinDom@in' -AsPlainText -Force
+
+$sharedfoldername = "pub"
+$sharedfolderlocalpath = "c:\$sharedfoldername"

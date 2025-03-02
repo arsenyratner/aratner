@@ -1,0 +1,26 @@
+failover peer "{{ dhcpd_failover.name }}" {
+{% if dhcpd_failover.role == "primary" %}
+#primary
+  {{ dhcpd_failover.role }};
+  address {{ dhcpd_failover.primaryid }};
+  peer address {{ dhcpd_failover.secondaryid }};
+  port 647;
+  peer port 847;
+  mclt 3600;
+  split 255; #100/0
+#  split 128; #50/50
+{% else %}
+#secondary
+  {{ dhcpd_failover.role }};
+  address {{ dhcpd_failover.secondaryid }};
+  peer address {{ dhcpd_failover.primaryid }};
+  port 847;
+  peer port 647;
+{% endif %}
+
+#both
+  load balance max seconds 3;
+  auto-partner-down 86400;
+  max-response-delay 60;
+  max-unacked-updates 10;
+}

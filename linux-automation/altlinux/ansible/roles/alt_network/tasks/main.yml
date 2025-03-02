@@ -1,0 +1,81 @@
+---
+- name: Capture Existing Configurations
+  ansible.builtin.find:
+    paths: /etc/netplan
+    patterns: "*.yml,*.yaml"
+  register: alt_network_netplan_configs
+
+- debug: 
+    var: alt_network_netplan_configs
+
+- name: Backup Existing Configurations
+  ansible.builtin.copy:
+    remote_src: true
+    src: "{{item['path']}}"
+    dest: "{{item['path']}}.backup"
+  with_items: "{{ alt_network_netplan_configs['files'] }}"
+  when:
+  #   - netplan_backup_existing
+    - item['path'] != alt_network_netplan_config_file
+    - netplan_configuration != []
+
+- name: Removing Existing Configurations
+  file:
+    path: "{{ item['path'] }}"
+    state: absent
+  become: true
+  with_items: "{{ alt_network_netplan_configs['files'] }}"
+  when:
+    - item['path'] != alt_network_netplan_config_file
+    - alt_network_netplan_configuration != []
+
+# - name: ipv4 convert dhcp to static
+#   block:
+#     - name: Converting address
+#       community.general.nmcli:
+#         conn_name: "{{ ansible_default_ipv4.alias }}"
+#         ifname: "{{ ansible_default_ipv4.interface }}"
+#         type: ethernet
+#         # ipv4.method: "{{ network_ipv4_method }}"
+#         ip4: "{{ ansible_default_ipv4.address }}/{{ ansible_default_ipv4.prefix }}"
+#         gw4: "{{ ansible_default_ipv4.gateway }}"
+#         state: present
+#       notify: General reboot
+#   when:
+#     - network_ipv4_method == "convert"
+
+# - name: NM ipv4 setup manual
+#   block:
+#     - name: Seting address
+#       community.general.nmcli:
+#         conn_name: "{{ ansible_default_ipv4.alias }}"
+#         ifname: "{{ ansible_default_ipv4.interface }}"
+#         type: ethernet
+#         # ipv4.method: "{{ network_ipv4_method }}"
+#         ip4: "{{ network_ipv4.address }}/{{ network_ipv4.prefix }}"
+#         gw4: "{{ network_ipv4.gw }}"
+#         state: present
+#       notify: General reboot
+
+#   when:
+#     - network_ipv4_method == "manual"
+#     - network_ipv4.address is defined
+#     - network_ipv4.gw is defined
+
+# - debug:
+#     var: network_ipv4_dns
+
+# - name: NM ipv4 setup dns
+#   community.general.nmcli:
+#     conn_name: "{{ ansible_default_ipv4.alias }}"
+#     type: ethernet
+#     dns4_search: "{{ network_ipv4_dns.search }}"
+#     dns4: "{{ network_ipv4_dns.servers }}"
+#     state: present
+#   notify: General reboot
+#   when:
+#     - network_ipv4_dns.search
+#     - network_ipv4_dns.servers
+
+# - name: Running handlers
+#   meta: flush_handlers

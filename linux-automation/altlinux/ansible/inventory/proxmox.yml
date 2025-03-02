@@ -1,0 +1,29 @@
+plugin: community.general.proxmox
+url: "https://r-pve1.r.ratners.ru:8006"
+validate_certs: true
+
+user: root@pam
+password: Rr19871979
+token_id: root-token
+token_secret: fd73d634-7af4-4665-9e57-c6cae2ff0731
+
+facts_prefix: proxmox_
+group_prefix: proxmox_
+
+want_facts: true
+keyed_groups:
+    # proxmox_tags_parsed is an example of a fact only returned when 'want_facts=true'
+  - key: proxmox_tags_parsed
+    separator: ""
+    prefix: ""
+
+compose:
+  # ansible_host: proxmox_agent_interfaces[1].get("ip-addresses")[0] | default(proxmox_net0.ip) | ansible.utils.ipaddr("address")
+  ansible_host: proxmox_agent_interfaces | selectattr('name', 'equalto', 'eth0') | map(attribute='ip-addresses') | flatten | first | ansible.utils.ipaddr('address')
+
+groups:
+  os_alt: "'tmp-alt-' in (proxmox_tags_parsed|list)"
+
+filters:
+  - proxmox_status == "running"
+  - "proxmox_tags_parsed is defined and 'project_r' in proxmox_tags_parsed"

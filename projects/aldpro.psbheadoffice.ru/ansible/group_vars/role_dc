@@ -1,0 +1,6 @@
+domain_packages:
+  - mc
+  - aldpro-mp
+  - aldpro-gc
+  - aldpro-syncer
+  - aldpro-client

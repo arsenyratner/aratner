@@ -1,0 +1,4 @@
+---
+sssd_join: true
+domain_joinscript: /usr/bin/join-to-domain.sh
+domainjoin_reboot: true

@@ -1,0 +1,35 @@
+---
+- name: SSHD settings
+  hosts: project_ald,&os_astra
+
+  handlers:
+    - name: Restart sshd
+      service:
+        name: ssh
+        state: restarted
+
+  tasks:
+    - name: Config UseDNS no
+      lineinfile:
+        dest: /etc/ssh/sshd_config
+        regexp: "^UseDNS"
+        line: "UseDNS no"
+        insertafter: EOF
+        state: present
+      notify: Restart sshd
+
+    - name: Config GSSAPIAuthentication no
+      lineinfile:
+        dest: /etc/ssh/sshd_config
+        regexp: "^GSSAPIAuthentication"
+        line: "GSSAPIAuthentication no"
+        insertafter: EOF
+        state: present
+      notify: Restart sshd
+
+# ChallengeResponseAuthentication no
+# KerberosAuthentication no
+# GSSAPIAuthentication no
+# IgnoreRhosts yes
+# RhostsRSAAuthentication no
+# HostbasedAuthentication no

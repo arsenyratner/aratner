@@ -1,0 +1,27 @@
+# newvm_proxmox:
+#   api_user:
+#   api_password:
+#   api_token_id:
+#   api_token_secret:
+#   api_host:
+#   node:
+#   clontype: 
+#   storage: # clonetype: full
+#   format: # clonetype: full
+#   name:
+#   template:
+#   disk:
+#     name:
+#     size:
+#   citype: 
+#   ciuser:
+#     name: 
+#     password: 
+#     sshkeys: 
+#   nic:
+#     name: 
+#     bridge: 
+#     moidel: 
+#     mtu: 
+#     mac: 
+#   tags:

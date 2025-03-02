@@ -1,0 +1,9 @@
+key omapikey {
+	algorithm HMAC-MD5;
+    # openssl rand -base64 64 | tr -d '\n'; echo
+    # dnssec-keygen -a HMAC-MD5 -b 512 -n HOST omapikey
+    # cat Komapikey.*.private | grep Key
+	secret {{ dhcpd_omapi.secret }}; 
+};
+omapi-key omapikey;
+omapi-port {{ dhcpd_omapi.port }};

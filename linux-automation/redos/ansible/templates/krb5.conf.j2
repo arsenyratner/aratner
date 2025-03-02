@@ -1,0 +1,43 @@
+includedir /etc/krb5.conf.d/
+
+[logging]
+    default = FILE:/var/log/krb5libs.log
+    kdc = FILE:/var/log/krb5kdc.log
+    admin_server = FILE:/var/log/kadmind.log
+
+[libdefaults]
+    default_realm = {{ JOINAD_DOMAIN|upper }}
+    # Отключить поиск kerberos-имени домена через DNS
+    dns_lookup_realm = false
+    # Включить поиск kerberos-настроек домена через DNS
+    dns_lookup_kdc = true
+    ticket_lifetime = 24h
+    renew_lifetime = 7d
+    forwardable = true
+    rdns = false
+    pkinit_anchors = /etc/pki/tls/certs/ca-bundle.crt
+    spake_preauth_groups = edwards25519
+    # Файл кэша билетов (credential cache) для системы Kerberos
+    default_ccache_name = FILE:/tmp/krb5cc_%{uid}
+
+    # Список предпочтительных методов шифрования (encryption types), которые будут использоваться для билетов, запрашиваемых у Ticket Granting Server (TGS).
+    default_tgs_enctypes = aes256-cts-hmac-sha1-96 aes128-cts-hmac-sha1-96 RC4-HMAC DES-CBC-CRC DES3-CBC-SHA1 DES-CBC-MD5
+    # Список предпочтительных методов шифрования для TGT (Ticket Granting Ticket), который получается при аутентификации.
+    default_tkt_enctypes = aes256-cts-hmac-sha1-96 aes128-cts-hmac-sha1-96 RC4-HMAC DES-CBC-CRC DES3-CBC-SHA1 DES-CBC-MD5
+    # Список предпочтительных методов шифрования, которые система Kerberos будет предпочитать при установке защищенных соединений и при обмене билетами.
+    preferred_enctypes = aes256-cts-hmac-sha1-96 aes128-cts-hmac-sha1-96 RC4-HMAC DES-CBC-CRC DES3-CBC-SHA1 DES-CBC-MD5
+
+[realms]
+{{ JOINAD_DOMAIN|upper }} = {
+    # Key Distribution Center (KDC)
+    kdc = {{ JOINAD_DC1 }}
+    kdc = {{ JOINAD_DC2 }}
+    # Сервер администрирования. Обычно это главный сервер Kerberos.
+    admin_server = {{ JOINAD_DC1 }}
+    # Имя домена
+    default_domain = {{ JOINAD_DOMAIN }}
+}
+
+[domain_realm]
+.{{ JOINAD_DOMAIN }} = {{ JOINAD_DOMAIN|upper }}
+{{ JOINAD_DOMAIN }} = {{ JOINAD_DOMAIN|upper }}

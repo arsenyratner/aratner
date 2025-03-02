@@ -1,0 +1,11 @@
+FolderName
+Проект1 
+Проект2
+Проект3
+Сложный проект
+Очень сложный проект
+shared
+FTP
+Install
+Backups
+ISO

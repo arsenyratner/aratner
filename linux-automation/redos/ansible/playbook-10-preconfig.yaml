@@ -1,0 +1,9 @@
+---
+- name: preconfig any vm
+  hosts: all,!role_dc
+
+  vars_files:
+    - vars/passwords
+
+  roles:
+    - preconfig

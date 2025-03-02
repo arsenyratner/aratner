@@ -1,0 +1,73 @@
+---
+- name: Check if already domain joined
+  shell: timeout 5s net ads testjoin
+  register: testjoin_result
+  ignore_errors: true
+
+- name: DEBUG alredy joined
+  debug:
+    msg: "{{ testjoin_result.stdout }}"
+
+- name: Install realm apps 
+  yum:
+    name:
+     - realmd
+     - sssd
+     - oddjob
+     - oddjob-mkhomedir
+     - adcli
+     - join-to-domain
+     - samba-client
+     - samba-common.noarch
+     - samba-common
+     - samba-libs
+     - samba-winbind
+     - krb5-workstation
+    state: present
+
+# custom join script
+- name: copy join script
+  ansible.builtin.copy:
+    src: join-to-domain.sh
+    dest: /usr/local/bin/join-to-domain.sh
+    owner: root
+    group: root
+    mode: '0755'
+    force: yes
+
+- name: Join domain sssd
+  when:
+    - sssd_join == true
+    - '"Join is OK" not in testjoin_result.stdout'
+  command:
+    # cmd: "{{ domain_joinscript }} -d {{ domain_name }} -n {{ ansible_hostname }} -u administrator -p {{ domain_password }} --dc {{ domain_dc1 }} -y -f"
+    cmd: "{{ domain_joinscript }} -d {{ domain_name }} -n {{ ansible_hostname }} -u administrator -p {{ domain_password }} -y"
+
+- name: Join domain winbind
+  block:
+  - name: Copy template smb.conf
+    when:
+      - sssd_join == false
+      - domainjoin_replacesmbconf is true
+    ansible.builtin.template:
+      src: smb.conf.j2
+      dest: "/tmp/smb-conf"
+      owner: "root"
+      group: "root"
+      mode: '0644'
+
+  - name: Join winbind
+    when:
+      - sssd_join == false
+      - '"Join is OK" not in testjoin_result.stdout'
+    command:
+      # cmd: "{{ domain_joinscript }} -d {{ domain_name }} -n {{ ansible_hostname }} -u administrator -p {{ domain_password }} --dc {{ domain_dc1 }} -w -y f"
+      cmd: "{{ domain_joinscript }} -d {{ domain_name }} -n {{ ansible_hostname }} -u administrator -p {{ domain_password }} -w -y"
+
+- name: add sudoers.d
+  ansible.builtin.template:
+    src: sudoers-red.j2
+    dest: /etc/sudoers.d/red
+    owner: "root"
+    group: "root"
+    mode: '0440'

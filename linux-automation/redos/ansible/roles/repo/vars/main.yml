@@ -1,0 +1,12 @@
+---
+# vars file for repository
+# gpgkeyurlbase: "file:///etc/pki/rpm-gpg/RPM-GPG-KEY-RED-SOFT"
+# gpgkeyurlupdates: "{{ gpgkeyurlbase }}"
+# gpgkeyurlkernels: "{{ gpgkeyurlbase }}"
+# gpgkeyurlkernels6: "{{ gpgkeyurlbase }}"
+# gpgkeyurlextra: "{{ gpgkeyurlbase }}"
+# filenamebase: "RedOS-Base"
+# filenameupdates: "RedOS-Updates"
+# filenamekernels: "RedOS-kernels"
+# filenamekernels6: "RedOS-kernels6"
+# filenameextra: "RedOS-extra"

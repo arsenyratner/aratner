@@ -1,0 +1,42 @@
+---
+#  tasks:
+
+- name: apt remove all repositories
+  community.general.apt_repo:
+    repo: all
+    state: absent
+  when: repo_rm_all is true
+
+- name: apt add repo
+  community.general.apt_repo:
+    repo: "{{ repo }}"
+    state: present
+    update: true
+  loop: "{{ repo_list }}"
+  loop_control:
+    loop_var: repo
+
+- name: apt update cache 
+  community.general.apt_rpm:
+    update_cache: true
+
+- name: apt upgrade os
+  community.general.apt_rpm:
+    dist_upgrade: true
+  notify: General reboot
+
+- name: apt upgrade kernel
+  community.general.apt_rpm:
+    update_kernel: true
+  notify: General reboot
+  when: repo_upgrade_kernel is true
+
+- name: apt clean
+  community.general.apt_rpm:
+    clean: true
+
+- name: Install packages
+  community.general.apt_rpm:
+    state: present
+    name: "{{ repo_packages }}"
+  when: repo_packages is defined

@@ -1,0 +1,94 @@
+---
+# tasks file for acl
+- name: Firewall Address Lists - BGP
+  routeros_command:
+    commands:
+      - /ip firewall address-list add address="{{ item.peer }}" comment="{{ item.name }}" list="{{ item.acl }}"
+  when:
+    - rtr_role is search("edge")
+    - bgp is defined
+    - bgp.neighbors is defined
+    - bgp.neighbors.ipv4 is defined
+    - item.acl is defined
+  loop: "{{ bgp.neighbors.ipv4 }}"
+  tags:
+    - acl
+    - acl_ipv4
+
+- name: Firewall Address Lists - BGPv6
+  routeros_command:
+    commands:
+      - /ipv6 firewall address-list add address="{{ item.peer }}" comment="{{ item.name }}" list="{{ item.acl }}"
+  when:
+    - rtr_role is search("edge")
+    - bgp is defined
+    - bgp.neighbors is defined
+    - bgp.neighbors.ipv6 is defined
+    - item.acl is defined
+  loop: "{{ bgp.neighbors.ipv6 }}"
+  tags:
+    - acl
+    - acl_ipv6
+
+- name: Firewall Address Lists - Services
+  routeros_command:
+    commands:
+      - /ip firewall address-list add address="{{ log_host }}" comment="netsvr-01-syslog" list="syslog"
+      - /ip firewall address-list add address="{{ tacacs['ipv4'] }}" comment="netsvr-01-aaa" list="aaa"
+  when:
+    - rtr_role is search("edge")
+  tags:
+    - acl
+    - acl_ipv4
+
+- name: Firewall Filters - IPv4
+  routeros_command:
+    commands:
+      - /ip firewall filter remove [find where comment~"ICMP"]
+      - /ip firewall filter add action=accept chain=input protocol=icmp comment="ICMP In"
+      - /ip firewall filter add action=accept chain=output protocol=icmp comment="ICMP Out"
+      - /ip firewall filter add action=accept chain=forward protocol=icmp comment="ICMP Forward"
+      - /ip firewall filter remove [find where comment="BGP IPv4 Peers Inbound"]
+      - /ip firewall filter remove [find where comment="BGP IPv4 Peers Outbound"]
+      - /ip firewall filter add action=accept chain=input in-interface="{{ item.routeros_if }}" src-address-list="bgp-ipv4-peers" port="179" protocol="tcp" comment="BGP IPv4 Peers Inbound"
+      - /ip firewall filter add action=accept chain=output out-interface="{{ item.routeros_if }}" dst-address-list="bgp-ipv4-peers" port="179" protocol="tcp" comment="BGP IPv4 Peers Outbound"
+      - /ip firewall filter remove [find where comment~"RADIUS"]
+      - /ip firewall filter remove [find where comment~"Syslog"]
+      - /ip firewall filter add action=accept chain=input in-interface="{{ item.routeros_if }}" src-address-list="aaa" port="1812-1813" protocol="udp" comment="RADIUS Inbound"
+      - /ip firewall filter add action=accept chain=output out-interface="{{ item.routeros_if }}" dst-address-list="syslog" port="514" protocol="udp" comment="Syslog Outbound"
+      - /ip firewall filter add action=accept chain=output out-interface="{{ item.routeros_if }}" src-address-list="aaa" port="1812-1813" protocol="udp" comment="RADIUS Outbound"
+      - /ip firewall filter add action=accept chain=forward in-interface="{{ item.routeros_if }}" src-address-list="aaa" port="1812-1813" protocol="udp" comment="RADIUS Forward Inbound"
+      - /ip firewall filter add action=accept chain=forward out-interface="{{ item.routeros_if }}" dst-address-list="syslog" port="514" protocol="udp" comment="Syslog Forward Outbound"
+      - /ip firewall filter add action=accept chain=forward out-interface="{{ item.routeros_if }}" dst-address-list="aaa" port="1812-1813" protocol="udp" comment="RADIUS Forward Outbound"
+      - /ip firewall filter remove [find where comment~"Drop all"]
+      - /ip firewall filter add action drop in-interface="{{ item.routeros_if }}" chain=input comment="Drop all inbound"
+      - /ip firewall filter add action drop out-interface="{{ item.routeros_if }}" chain=output comment="Drop all outbound"
+  when:
+    - rtr_role is search("edge")
+    - item.acl is defined
+  loop: "{{ interfaces }}"
+  tags:
+    - acl
+    - acl_ipv4
+
+- name: Firewall Filters - IPv6
+  routeros_command:
+    commands:
+      - /ipv6 firewall filter remove [find where comment~"ICMP"]
+      - /ipv6 firewall filter add action=accept chain=input protocol=icmpv6 comment="ICMPv6 In"
+      - /ipv6 firewall filter add action=accept chain=output protocol=icmpv6 comment="ICMPv6 Out"
+      - /ipv6 firewall filter add action=accept chain=forward protocol=icmpv6 comment="ICMPv6 Forward"
+      - /ipv6 firewall filter remove [find where comment="BGP IPv6 Peers Inbound"]
+      - /ipv6 firewall filter remove [find where comment="BGP IPv6 Peers Outbound"]
+      - /ipv6 firewall filter add action=accept chain=input in-interface="{{ item.routeros_if }}" src-address-list="bgp-ipv6-peers" port="179" protocol="tcp" comment="BGP IPv6 Peers Inbound"
+      - /ipv6 firewall filter add action=accept chain=output out-interface="{{ item.routeros_if }}" dst-address-list="bgp-ipv6-peers" port="179" protocol="tcp" comment="BGP IPv6 Peers Outbound"
+      - /ipv6 firewall filter remove [find where comment~"Drop all"]
+      - /ipv6 firewall filter add action drop in-interface="{{ item.routeros_if }}" chain=input comment="Drop all inbound"
+      - /ipv6 firewall filter add action drop out-interface="{{ item.routeros_if }}" chain=output comment="Drop all outbound"
+  when:
+    - rtr_role is search("edge")
+    - item.acl is defined
+  loop: "{{ interfaces }}"
+  tags:
+    - acl
+    - acl_ipv6

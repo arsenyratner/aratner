@@ -1,0 +1,112 @@
+---
+- name: Create first dc
+  hosts: project_r,site_alt,&first_dc
+  roles:
+    - general
+  tasks:
+    - name: Role network
+      ansible.builtin.include_role:
+        name: alt_network
+      vars:
+        network_ipv4_method: convert
+        network_ipv4_dns:
+          servers:
+            - "{{ r_alt_domain_forwarder }}"
+          search:
+            - "{{ r_alt_domain_name }}"
+
+    - name: Role repo
+      ansible.builtin.include_role:
+        name: alt_repo
+      vars:
+        repo_upgrade_kernel: false
+        repo_rm_all: true
+        repo_list:
+          - "http://mirror.yandex.ru/altlinux/p10/branch/"
+        repo_packages:
+          - mc
+          - tmux
+
+    # - name: Role preconfig
+    #   ansible.builtin.include_role:
+    #     name: preconfig
+    #   vars:
+    #     preconfig_selinux: disabled
+    #     preconfig_installpackages: true
+    #     preconfig_packages:
+    #       - tmux
+    #       - ansible
+    #       - chrony
+    #       - python3-libselinux
+
+    # - name: Role samba-dc
+    #   ansible.builtin.include_role:
+    #     name: samba-dc
+    #   vars:
+    #     sambadc_removeoldconfig: true
+    #     sambadc_firstdc: true
+    #     sambadc_adddc: false
+    #     sambadc_configurebind: true
+    #     sambadc_hostname: "{{ ansible_hostname }}"
+    #     sambadc_sitename: Default-First-Site-Name
+    #     sambadc_domname: "{{ gtnn_domain_name }}"
+    #     sambadc_domshortname: "{{ gtnn_domain_shortname }}"
+    #     sambadc_adminuser: "{{ gtnn_domain_admin }}"
+    #     sambadc_adminpass: "{{ gtnn_domain_password }}"
+    #     sambadc_dnsbackend: BIND9_DLZ
+    #     sambadc_packages:
+    #       - samba-client
+    #       - samba-common.noarch
+    #       - samba-common
+    #       - samba-dc
+    #       - samba-libs
+    #       - samba-winbind
+    #       - krb5-workstation
+    #       - samba-dc-bind-dlz
+    #       - bind
+
+    # - name: Role bind
+    #   ansible.builtin.include_role:
+    #     name: bind
+    #   vars:
+    #     bind_conf_file: /etc/named.conf
+    #     bind_confd_dir: /etc/named
+    #     bind_zones_dir: /var/named
+    #     bind_user: named
+    #     bind_group: named
+    #     bind_acl_trusted: trusted
+    #     bind_acl_nottrusted: nottrusted
+    #     bind_sambaincludefile: /var/lib/samba/bind-dns/named.conf
+    #     bind_packages:
+    #       - bind
+    #       - bind-dnssec-utils
+    #       - bind-libs
+    #       - bind-license.noarch
+    #       - bind-utils
+    #     bind:
+    #       acls:
+    #         - name: "{{ bind_acl_trusted }}"
+    #           members:
+    #             - localhost
+    #             - 127.0.0.0/8
+    #             - 10.20.4.0/24
+    #       forwarders: 
+    #         - "{{ gtnn_domain_forwarder }}"
+    #       namedca_file: "{{ bind_zones_dir }}/named.ca.{{ gtnn_domain_shortname }}"
+    #       zones:
+    #         - name: aup.ds.vtg.gazprom.ru
+    #           type: forward
+    #           forwarders:
+    #             - 10.20.4.1
+    #             - 10.20.4.2
+
+    # - name: Role network
+    #   ansible.builtin.include_role:
+    #     name: network
+    #   vars:
+    #     network_ipv4_method: convert
+    #     network_ipv4_dns:
+    #       servers:
+    #         - 127.0.0.1
+    #       search: 
+    #         - "{{ gtnn_domain_name }}"

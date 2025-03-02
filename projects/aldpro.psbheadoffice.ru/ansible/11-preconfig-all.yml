@@ -1,0 +1,75 @@
+---
+- name: Preconfig all exept DC
+  hosts: project_ald,!ald_role_dc
+  become: true
+  roles:
+    - general
+
+  handlers:
+    - name: Update ca trust
+      ansible.builtin.command: update-ca-certificates
+
+  tasks: 
+    - name: Network config nameserver firstdc
+      vars:
+        network_ipv4_type: convert
+        network_dns_search:
+          - "{{ domain_name }}"
+        network_dns_nameservers:
+          - "{{ domain_firstdc_address }}"
+      ansible.builtin.include_role:
+        name: network
+
+    - name: Disable cloud-init
+      ansible.builtin.include_role:
+        name: cidisable
+
+    - name: Flush handlers
+      meta: flush_handlers
+
+    - name: Add repo
+      ansible.builtin.include_role:
+        name: repo
+
+    - name: Install packages
+      ansible.builtin.apt:
+        name: 
+          - aldpro-client
+          - sssd-tools
+        state: latest
+        update_cache: yes
+
+    - name: Install CA certs 
+      ansible.builtin.get_url:
+        validate_certs: false
+        url: http://{{ domain_firstdc_name }}.{{ domain_name }}/ipa/config/ca.crt
+        dest: /usr/local/share/ca-certificates/ca-{{ domain_name }}.crt
+        owner: root
+        group: root
+        mode: "0644"
+      notify: Update ca trust
+
+    - name: Create ald join script
+      ansible.builtin.copy:
+        dest: /usr/local/bin/ald_join.sh
+        content: |
+          #!/bin/bash
+          /opt/rbta/aldpro/client/bin/aldpro-client-installer --domain {{ domain_name }} --account {{ domain_admin }} --password '{{ domain_password | string }}' --host {{ ansible_hostname }} --gui --force
+        mode: '0755'
+        owner: root
+        group: root
+
+    - name: Check alredy domain joined
+      ansible.builtin.shell: sssctl domain-status {{ domain_name }}
+      register: check_domain_joined
+      ignore_errors: true
+
+    - debug:
+        var: check_domain_joined
+      # when: '"Online status: Online" in check_domain_joined.stdout'
+
+    - name: Run domain join
+      ansible.builtin.shell: |
+        /opt/rbta/aldpro/client/bin/aldpro-client-installer --domain {{ domain_name }} --account {{ domain_admin }} --password '{{ domain_password | string }}' --host {{ ansible_hostname }} --gui --force
+      notify: General reboot system
+      when: '"Online status: Online" not in check_domain_joined.stdout'

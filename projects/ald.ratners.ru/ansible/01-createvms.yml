@@ -1,0 +1,47 @@
+---
+- name: Create VMs
+  hosts: localhost
+  become: false
+  gather_facts: false
+  vars_files:
+    - vars/proxmox.yml
+    - vars/newvms.yml
+  roles:
+    - general
+
+  tasks:
+    - name: Create VMs
+      ansible.builtin.include_role:
+        name: createvm
+      vars:
+        createvm:
+          node: "{{ newvm.node | default(proxmox.node) }}"
+          citype: "nocloud"
+          ciuser: 
+            name: "{{ ansible_user }}"
+            password: "{{ ansible_password | string }}"
+            sshkeys: "{{ lookup('file', ansible_pubkey ) }}"
+          name: "{{ newvm.pr }}-{{ newvm.site }}-{{ newvm.role }}{{ newvm.suf }}"
+          template: "{{ newvm.template }}"
+          cores: "{{ newvm.cores | default('2') }}"
+          memory: "{{ newvm.memory | default('2048') }}"
+          balloon: "{{ newvm.balloon | default('512') }}"
+          disk:
+            size: "{{ newvm.disksize | default(omit) }}"
+          nic:
+            bridge: "{{ newvm.nic.bridge | default('vmbr0') }}"
+            mac: "{{ newvm.nic.mac | default(omit) }}"
+          tags:
+            - "project_{{ newvm.pr }}"
+            - "{{ newvm.pr }}_site_{{ newvm.site }}"
+            - "{{ newvm.pr }}_role_{{ newvm.role }}"
+            - "{{ newvm.template }}"
+          ipconfig0: "{{ newvm.ipconfig0 | default('ip=dhcp') }}"
+          nameservers: "{{ newvm.nameservers | default(omit) }}"
+          searchdomains: "{{ newvm.searchdomains | default(omit) }}"
+          clontype: linked
+          # storage: # clonetype: full
+          # format: # clonetype: full
+      loop: "{{ newvms }}"
+      loop_control:
+        loop_var: newvm

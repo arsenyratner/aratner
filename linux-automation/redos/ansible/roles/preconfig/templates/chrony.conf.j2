@@ -1,0 +1,13 @@
+{% if preconfig_ntpsrv1 is defined %}
+server {{ preconfig_ntpsrv1 }} iburst
+{% endif %}
+{% if preconfig_ntpsrv2 is defined %}
+server {{ preconfig_ntpsrv2 }} iburst
+{% endif %}
+driftfile /var/lib/chrony/drift
+makestep 1.0 3
+rtcsync
+keyfile /etc/chrony.keys
+ntsdumpdir /var/lib/chrony
+leapsectz right/UTC
+logdir /var/log/chrony

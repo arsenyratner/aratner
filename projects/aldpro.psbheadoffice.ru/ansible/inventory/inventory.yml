@@ -1,0 +1,16 @@
+site_croccloud_psb:
+  hosts:
+    aldpro-01:
+      ansible_host: 172.31.32.52
+      ansible_user: ec2-user
+    aldpro-02:
+      ansible_host: 172.31.32.53
+      ansible_user: ec2-user
+role_dc:
+  hosts:
+    aldpro-01:
+    aldpro-02:
+  children:
+    first_dc:
+      hosts:
+        aldpro-01:

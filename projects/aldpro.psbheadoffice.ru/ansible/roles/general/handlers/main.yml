@@ -1,0 +1,9 @@
+- name: General reboot
+  ansible.builtin.reboot:
+    pre_reboot_delay: 15
+    post_reboot_delay: 15
+    reboot_timeout: 600
+    msg: "Rebooting after update insatll"
+  # ignore_errors: true
+  # when: repo_rebootafterupdate is true
+  listen: General reboot system

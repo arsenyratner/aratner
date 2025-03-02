@@ -1,0 +1,39 @@
+[global]
+    password server = {{ domain_dc1 }} {{ domain_dc2 }} *
+    workgroup = {{ domain_name.split('.', 1)[0]|upper }}
+    realm = {{ domain_name|upper }}
+    security = ADS
+    passdb backend = tdbsam
+ 
+    winbind enum groups = Yes
+    winbind enum users = Yes
+    winbind offline logon = Yes
+    winbind use default domain = Yes
+    winbind refresh tickets = Yes
+    winbind cache time = 300
+    wins support = No
+
+    idmap cache time = 900
+    idmap config * : backend = tdb
+    idmap config * : range = 10000-99999
+
+    idmap config  {{ domain_name.split('.', 1)[0]|upper }}: backend = rid
+    idmap config  {{ domain_name.split('.', 1)[0]|upper }}: range = 100000-999999
+
+    client min protocol = NT1
+    client max protocol = SMB3
+
+    kerberos method = system keytab
+
+    template homedir = /home/%U@%D
+
+    template shell = /bin/bash
+    nt pipe support = yes
+    machine password timeout = 60
+
+    unix extensions = no
+    follow symlinks = yes
+    wide links = yes
+
+    create mask = 0660
+    directory mask = 0770

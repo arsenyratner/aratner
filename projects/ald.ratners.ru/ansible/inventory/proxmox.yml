@@ -1,0 +1,18 @@
+plugin: community.general.proxmox
+user: root@pam
+token_id: root-token
+token_secret: fd73d634-7af4-4665-9e57-c6cae2ff0731
+validate_certs: false
+want_facts: true
+keyed_groups:
+    # proxmox_tags_parsed is an example of a fact only returned when 'want_facts=true'
+  - key: proxmox_tags_parsed
+    separator: ""
+    prefix: ""
+facts_prefix: proxmox_
+group_prefix: proxmox_
+want_proxmox_nodes_ansible_host: false
+compose:
+  ansible_host: proxmox_agent_interfaces[1].get("ip-addresses")[0] | default(proxmox_net0.ip) | ansible.utils.ipaddr("address")
+groups:
+  os_astra: "'tmp-alse-1.7.4uu1-max' in (proxmox_tags_parsed|list)"

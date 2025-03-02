@@ -1,0 +1,48 @@
+{
+  "reservations": [],
+  "subnet": "10.3.53.0/24",
+  "pools": [
+    {
+      "pool": "10.3.53.128 - 10.3.53.253"
+    }
+  ],
+  "id": 530,
+  "user-context": {
+    "name": "ITC_53",
+    "description": "ITC_53"
+  },
+  "option-data": [
+    {
+      "csv-format": true,
+      "name": "routers",
+      "code": 3,
+      "data": "10.3.53.254",
+      "space": "dhcp4",
+      "always-send": true
+    },
+    {
+      "csv-format": true,
+      "name": "domain-name-servers",
+      "code": 6,
+      "data": "10.3.77.112,10.3.77.113",
+      "space": "dhcp4",
+      "always-send": true
+    },
+    {
+      "csv-format": true,
+      "name": "domain-name",
+      "code": 15,
+      "data": "gtm.gazprom.ru",
+      "space": "dhcp4",
+      "always-send": true
+    },
+    {
+      "csv-format": true,
+      "name": "dhcp-lease-time",
+      "code": 51,
+      "data": "2592000",
+      "space": "dhcp4",
+      "always-send": true
+    }
+  ]
+}

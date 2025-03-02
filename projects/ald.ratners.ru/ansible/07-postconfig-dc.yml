@@ -1,0 +1,37 @@
+---
+- name: Preconfig firstdc
+  become: true
+  hosts: ald_role_dc
+  roles:
+    - general
+
+  handlers:
+    - name: Restart bind9 service
+      service:
+        name: bind9-pkcs11
+        state: restarted
+
+  tasks: 
+    - name: Allow query cache
+      ansible.builtin.lineinfile:
+        path: /etc/bind/ipa-options-ext.conf
+        regexp: '^allow-query-cache'
+        insertafter: EOF
+        line: 'allow-query-cache { any; };'
+      notify: Restart bind9 service
+
+    - name: Allow recursion
+      ansible.builtin.lineinfile:
+        path: /etc/bind/ipa-options-ext.conf
+        regexp: '^allow-recursion'
+        insertafter: EOF
+        line: 'allow-recursion { any; };'
+      notify: Restart bind9 service
+
+    - name: Disable dnssec-validation
+      ansible.builtin.lineinfile:
+        path: /etc/bind/ipa-options-ext.conf
+        regexp: '^dnssec-validation'
+        insertafter: EOF
+        line: 'dnssec-validation no;'
+      notify: Restart bind9 service

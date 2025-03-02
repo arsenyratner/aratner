@@ -1,0 +1,32 @@
+ansible_become: yes
+ansible_become_method: sudo 
+ansible_python_interpreter: /usr/bin/python3
+
+domain_admin: admin
+domain_password: DyKnoal6
+domain_forwarder: 172.31.32.26
+domain_firstdc_address: 172.31.32.52
+domain_firstdc_name: aldpro-01
+domain_name: aldpro.psbheadoffice.ru
+domain_packages:
+  - aldpro-client
+
+network_ipv6_disable: true
+network_ipv4_type: dhcp
+network_dns_search:
+  - "{{ domain_name }}"
+network_dns_nameserver:
+  - "{{ domain_firstdc_address }}"
+
+repo_repolist:
+  - { type: deb, urlpre: http://download.astralinux.ru/astra/frozen/1.7_x86-64/1.7.4, urlsuf: repository-main, distribution: 1.7_x86-64,  components: "main contrib non-free" }
+  - { type: deb, urlpre: http://download.astralinux.ru/astra/frozen/1.7_x86-64/1.7.4, urlsuf: repository-extended, distribution: 1.7_x86-64,  components: "main contrib non-free" }
+  - { type: deb, urlpre: http://download.astralinux.ru/astra/frozen/1.7_x86-64/1.7.4, urlsuf: repository-update, distribution: 1.7_x86-64,  components: "main contrib non-free" }
+  - { type: deb, urlpre: http://download.astralinux.ru/astra/frozen/1.7_x86-64/1.7.4, urlsuf: repository-base, distribution: 1.7_x86-64,  components: "main contrib non-free" }
+  - { type: deb, urlpre: https://dl.astralinux.ru/aldpro/frozen/01, urlsuf: 2.2.0, distribution: 1.7_x86-64,  components: "main base" }
+
+repo_packages:
+  - mc
+  - astra-update
+  - htop
+  - sssd-tools

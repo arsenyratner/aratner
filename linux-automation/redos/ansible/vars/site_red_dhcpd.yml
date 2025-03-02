@@ -1,0 +1,60 @@
+---
+dhcpd_failover: 
+  name: dhcp-failover
+  primaryid: 10.20.30.11 
+  secondaryid: 10.20.30.12
+  role: "{{ dhcpd_failover_role }}" # а эту переменную определяем в host_vars файле
+
+dhcpd_user: dhcpd
+dhcpd_group: dhcpd 
+dhcpd_conf_dir: /etc/dhcp
+dhcpd_confd_dir: /etc/dhcp/conf.d
+dhcpd_leases_file: /var/lib/dhcpd/dhcpd.leases
+dhcpd_serverid: "{{ ansible_default_ipv4.address }}"
+dhcpd_omapi:
+  secret: SJuSjKQjBy3Lx7CUXR/rw/zh8hljqFkNEjYRO5pF5ZiqoTqpK9ACMm0g4DDHX7b+/005AbHK3lG27bjuvCt4Mg==
+  port: 7911
+dhcpd_hosts:
+  - name: red-fs1
+    hardwareethernet: 00:15:5d:7e:1a:36
+    fixedaddress: 10.20.30.13
+  - name: red-ps1
+    hardwareethernet: 00:15:5d:7e:1a:37
+    fixedaddress: 10.20.30.14
+  - name: red-ws1
+    hardwareethernet: 00:01:02:03:04:03
+    fixedaddress: 10.20.30.101
+  - name: red-ws2
+    hardwareethernet: 00:01:02:03:04:03
+    fixedaddress: 10.20.30.102
+  - name: red-ws3
+    hardwareethernet: 00:01:02:03:04:03
+    fixedaddress: 10.20.30.103
+    routers: 10.20.30.254
+    domainname: red.aratner.ru
+    domainsearch:
+      - red.aratner.ru
+    domainnameservers:
+      - 10.20.30.254
+    timeservers:
+      - 10.20.30.254
+    nextserver: 10.20.30.254
+dhcpd_subnets:
+  - address: 10.20.30.0
+    mask: 255.255.255.0
+    broadcast: 10.20.30.255
+    routers: 10.20.30.254
+    domainname: red.aratner.ru
+    domainsearch:
+      - red.aratner.ru
+    domainnameservers:
+      - 10.20.30.11
+      - 10.20.30.12
+    timeservers:
+      - 10.20.30.11
+      - 10.20.30.12
+    nextserver: 10.20.30.254
+    pools:
+      - ranges:
+        - startaddress: 10.20.30.200
+          endaddress: 10.20.30.249

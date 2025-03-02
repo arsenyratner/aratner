@@ -1,0 +1,22 @@
+---
+# sambadc_removeoldconfig: false
+# sambadc_firstdc: false
+# sambadc_adddc: false
+# sambadc_configurebind: false
+# sambadc_hostname: temp-dc
+# sambadc_sitename: Default-First-Site-Name
+# sambadc_domname: red.aratner.ru
+# sambadc_domshortname: red
+# sambadc_adminuser: administrator
+# sambadc_adminpass: NenDilvUn6
+# sambadc_dnsbackend: BIND9_DLZ
+# sambadc_dnsbackend: SAMBA_INTERNAL
+sambadc_packages:
+  - samba-client
+  - samba-common.noarch
+  - samba-common
+  - samba-dc
+  - samba-libs
+  - samba-winbind
+  - krb5-workstation
+  - samba-dc-bind-dlz

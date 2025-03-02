@@ -1,0 +1,41 @@
+---
+#tasks
+- name: Delete all yum repo files
+  shell: rm -rf /etc/yum.repos.d/*
+  args:
+    warn: false
+  when: repo_deleteoldrepofiles is true
+
+- name: add repo files
+  ansible.builtin.yum_repository:
+    name: "{{item.name}}"
+    description: "{{item.description}}"
+    baseurl: "{{item.baseurl}}"
+    file: "{{item.file}}"
+    gpgkey: "{{item.gpgkey}}"
+    gpgcheck: "{{item.gpgcheck}}"
+    enabled: "{{item.enabled}}"
+    state: "{{item.state}}"
+  loop: "{{ repo }}"
+  when: repo is defined
+
+- name : Update packages
+  block:
+  - name: Install updates
+    ansible.builtin.dnf:
+      name: "*"
+      state: latest
+    notify: Repo reboot
+  - name: restart NetworkManager
+    ansible.builtin.service:
+      name: NetworkManager
+      state: restarted
+    notify: Repo reboot
+  when: repo_installupdates is true
+
+- name: Install packages for ansible
+  ansible.builtin.dnf:
+    name: 
+      - ansible 
+      - python3-libselinux
+    state: present

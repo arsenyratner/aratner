@@ -1,0 +1,56 @@
+ansible_become: yes
+ansible_become_method: sudo 
+ansible_python_interpreter: /usr/bin/python3
+ansible_user: ansible
+ansible_pubkey: /home/appc/.ssh/ald.ratners.ru_id_rsa.pub
+ansible_password: !vault |
+  $ANSIBLE_VAULT;1.1;AES256
+  66613561323065373037613133303834303636623030376562663736663533613666316438356337
+  3462363266613861316661396135363933653461396531650a353463363563656266393539633939
+  63663566343662316130303336636261373830643562666264323631376662623035396231616431
+  6638306334623765390a346433666133306465323235366337613537386336633134323039653032
+  3061
+ansible_sudo_pass: !vault |
+  $ANSIBLE_VAULT;1.1;AES256
+  66613561323065373037613133303834303636623030376562663736663533613666316438356337
+  3462363266613861316661396135363933653461396531650a353463363563656266393539633939
+  63663566343662316130303336636261373830643562666264323631376662623035396231616431
+  6638306334623765390a346433666133306465323235366337613537386336633134323039653032
+  3061
+
+domain_admin: admin
+domain_password: !vault |
+          $ANSIBLE_VAULT;1.1;AES256
+          61303231393331356139363666333265326430346332613333626362626465353664643564613864
+          6539303630303530316432396461356463373030383837650a373032383530366336343739393465
+          34323763626535386131313635633133326666346536343561626139396366396436646364313130
+          3266343334383230660a343733616464366439313261353935353065353038653737366265343332
+          3561
+domain_forwarder: 192.168.126.1
+domain_firstdc_address: 192.168.126.57
+domain_firstdc_name: ald-firstdc
+domain_name: ald.ratners.ru
+domain_packages:
+  - aldpro-client
+
+network_ipv6_disable: true
+network_ipv4_type: dhcp
+network_dns_search:
+  - "{{ domain_name }}"
+  - r.ratners.ru
+  - ratners.ru
+network_dns_nameserver:
+  - "{{ domain_firstdc_address }}"
+
+repo_repolist:
+  - { type: deb, urlpre: http://download.astralinux.ru/astra/frozen/1.7_x86-64/1.7.4, urlsuf: repository-main, distribution: 1.7_x86-64,  components: "main contrib non-free" }
+  - { type: deb, urlpre: http://download.astralinux.ru/astra/frozen/1.7_x86-64/1.7.4, urlsuf: repository-extended, distribution: 1.7_x86-64,  components: "main contrib non-free" }
+  - { type: deb, urlpre: http://download.astralinux.ru/astra/frozen/1.7_x86-64/1.7.4, urlsuf: repository-update, distribution: 1.7_x86-64,  components: "main contrib non-free" }
+  - { type: deb, urlpre: http://download.astralinux.ru/astra/frozen/1.7_x86-64/1.7.4, urlsuf: repository-base, distribution: 1.7_x86-64,  components: "main contrib non-free" }
+  - { type: deb, urlpre: https://dl.astralinux.ru/aldpro/frozen/01, urlsuf: 2.2.0, distribution: 1.7_x86-64,  components: "main base" }
+
+repo_packages:
+  - mc
+  - astra-update
+  - htop
+  - sssd-tools

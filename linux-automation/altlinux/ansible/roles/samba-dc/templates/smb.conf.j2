@@ -1,0 +1,21 @@
+[global]
+        netbios name = {{ sambadc_hostname }}
+        realm = {{ sambadc_domname|upper }}
+        server role = active directory domain controller
+        server services = s3fs, rpc, nbt, wrepl, ldap, cldap, kdc, drepl, winbindd, ntp_signd, kcc, dnsupdate
+        workgroup = {{ sambadc_domshortname|upper }}
+        idmap_ldb:use rfc2307 = yes
+
+        allow dns updates = nonsecure
+        nsupdate command = /usr/bin/nsupdate -g
+        dsdb:schema update allowed = true
+        ldap server require strong auth = no
+        rpc server dynamic port range = 49152-65535
+
+[sysvol]
+        path = /var/lib/samba/sysvol
+        read only = No
+
+[netlogon]
+        path = /var/lib/samba/sysvol/{{ sambadc_domshortname|upper }}/scripts
+        read only = No

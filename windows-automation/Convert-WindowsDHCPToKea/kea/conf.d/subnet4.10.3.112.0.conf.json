@@ -1,0 +1,32 @@
+{
+  "reservations": [],
+  "subnet": "10.3.112.0/24",
+  "pools": [
+    {
+      "pool": "10.3.112.1 - 10.3.112.50"
+    }
+  ],
+  "id": 1120,
+  "user-context": {
+    "name": "VoIP",
+    "description": "VoIP"
+  },
+  "option-data": [
+    {
+      "csv-format": true,
+      "name": "routers",
+      "code": 3,
+      "data": "10.3.112.254",
+      "space": "dhcp4",
+      "always-send": true
+    },
+    {
+      "csv-format": true,
+      "name": "dhcp-lease-time",
+      "code": 51,
+      "data": "2592000",
+      "space": "dhcp4",
+      "always-send": true
+    }
+  ]
+}

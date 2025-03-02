@@ -1,0 +1,10 @@
+domain_firstdc_true:
+  hosts:
+    ald-firstdc:
+      ansible_host: 192.168.126.57
+      network_dns_search:
+        - "{{ domain_name }}"
+        - r.ratners.ru
+        - ratners.ru
+      network_dns_nameserver:
+        - 127.0.0.1

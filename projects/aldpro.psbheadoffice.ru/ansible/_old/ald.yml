@@ -1,0 +1,48 @@
+---
+ald_site_z20vn1:
+  hosts:
+    ald-z20vn1-dc1:
+    ald-z20vn1-dc2:
+    ald-z20vn1-mon1:
+    ald-z20vn1-audit1:
+    ald-z20vn1-repo1:
+    ald-z20vn1-print1:
+    ald-z20vn1-fs1:
+    ald-z20vn1-ws1:
+
+# ald_site_z20vn2:
+#   hosts:
+#     ald-z20vn2-dc1:
+#     ald-z20vn2-dc2:
+
+role_dc:
+  hosts:
+    ald-z20vn1-dc1:
+    ald-z20vn1-dc2:
+    # ald-z20vn2-dc1:
+    # ald-z20vn2-dc2:
+
+role_ws:
+  hosts:
+    ald-ws1:
+    # ald-ws2:
+
+astra:
+  hosts:
+    ald-z20vn1-dc1:
+    ald-z20vn1-dc2:
+    ald-z20vn1-mon1:
+    ald-z20vn1-audit1:
+    ald-z20vn1-repo1:
+    ald-z20vn1-print1:
+    ald-z20vn1-fs1:
+    ald-z20vn1-ws1:
+
+w10pro:
+  hosts:
+    ald-ws2:
+
+project_ald: 
+  children:
+    ald_site_z20vn1:
+    # ald_site_z20vn2:

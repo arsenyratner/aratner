@@ -1,0 +1,1006 @@
+[
+  {
+    "hw-address": "00:bb:c1:7a:b5:6f",
+    "ip-address": "10.3.33.168",
+    "hostname": "1-2008a-522.gtm.gazprom.ru",
+    "option-data": []
+  },
+  {
+    "hw-address": "00:bb:c1:79:91:92",
+    "ip-address": "10.3.33.173",
+    "hostname": "1-2804-mf446.gtm.gazprom.ru",
+    "option-data": []
+  },
+  {
+    "hw-address": "74:bf:c0:15:1c:3d",
+    "ip-address": "10.3.33.85",
+    "hostname": "Canon151C3D.gtm.gazprom.ru",
+    "option-data": []
+  },
+  {
+    "hw-address": "74:bf:c0:15:1b:9c",
+    "ip-address": "10.3.33.180",
+    "hostname": "m-d-803.gtm.gazprom.ru",
+    "option-data": []
+  },
+  {
+    "hw-address": "74:bf:c0:15:18:d3",
+    "ip-address": "10.3.33.161",
+    "hostname": "1-2220-ir2630.gtm.gazprom.ru",
+    "option-data": []
+  },
+  {
+    "hw-address": "74:bf:c0:15:19:38",
+    "ip-address": "10.3.33.182",
+    "hostname": "1-2303-canon2630.gtm.gazprom.ru",
+    "option-data": []
+  },
+  {
+    "hw-address": "00:bb:c1:79:91:ef",
+    "ip-address": "10.3.33.181",
+    "hostname": "1-2301-mf446.gtm.gazprom.ru",
+    "option-data": []
+  },
+  {
+    "hw-address": "00:bb:c1:79:92:34",
+    "ip-address": "10.3.33.220",
+    "hostname": "1-2302-mf446.gtm.gazprom.ru"
+  },
+  {
+    "hw-address": "00:bb:c1:79:91:89",
+    "ip-address": "10.3.33.213",
+    "hostname": "1-2723a-mf476.gtm.gazprom.ru"
+  },
+  {
+    "hw-address": "00:bb:c1:79:92:1e",
+    "ip-address": "10.3.33.228",
+    "hostname": "1-1625-mf446.gtm.gazprom.ru"
+  },
+  {
+    "hw-address": "74:bf:c0:15:1a:f3",
+    "ip-address": "10.3.33.123",
+    "hostname": "1-2028-ir2630.gtm.gazprom.ru",
+    "option-data": []
+  },
+  {
+    "hw-address": "74:bf:c0:15:1a:e4",
+    "ip-address": "10.3.33.231",
+    "hostname": "2-219-ir2630.gtm.gazprom.ru"
+  },
+  {
+    "hw-address": "74:bf:c0:15:1b:23",
+    "ip-address": "10.3.33.128",
+    "hostname": "1-2210-ir2630.gtm.gazprom.ru",
+    "option-data": []
+  },
+  {
+    "hw-address": "74:bf:c0:15:19:34",
+    "ip-address": "10.3.33.11",
+    "hostname": "1-1919-ir2630.gtm.gazprom.ru",
+    "option-data": []
+  },
+  {
+    "hw-address": "00:bb:c1:79:92:1d",
+    "ip-address": "10.3.33.150",
+    "hostname": "1-1504-mf446.gtm.gazprom.ru",
+    "option-data": []
+  },
+  {
+    "hw-address": "00:bb:c1:79:91:8d",
+    "ip-address": "10.3.33.225",
+    "hostname": "Canon79918d.gtm.gazprom.ru"
+  },
+  {
+    "hw-address": "00:bb:c1:79:92:1f",
+    "ip-address": "10.3.33.131",
+    "hostname": "Canon79921f.gtm.gazprom.ru"
+  },
+  {
+    "hw-address": "00:bb:c1:79:91:5c",
+    "ip-address": "10.3.33.216",
+    "hostname": "1-2515-mfu.gtm.gazprom.ru"
+  },
+  {
+    "hw-address": "00:bb:c1:79:92:2b",
+    "ip-address": "10.3.33.221",
+    "hostname": "1-2519-mfu.gtm.gazprom.ru"
+  },
+  {
+    "hw-address": "00:bb:c1:79:91:77",
+    "ip-address": "10.3.33.222",
+    "hostname": "Canon799177.gtm.gazprom.ru"
+  },
+  {
+    "hw-address": "ac:c5:1b:3c:16:25",
+    "ip-address": "10.3.33.223",
+    "hostname": ""
+  },
+  {
+    "hw-address": "74:38:b7:f8:97:c8",
+    "ip-address": "10.3.33.69",
+    "hostname": "Canonf897c8.gtm.gazprom.ru",
+    "option-data": []
+  },
+  {
+    "hw-address": "74:38:b7:f9:81:55",
+    "ip-address": "10.3.33.143",
+    "hostname": "Canonf98155.gtm.gazprom.ru",
+    "option-data": []
+  },
+  {
+    "hw-address": "94:57:a5:12:33:22",
+    "ip-address": "10.3.33.100",
+    "hostname": "1-2007-MFU.gtm.gazprom.ru",
+    "option-data": []
+  },
+  {
+    "hw-address": "00:bb:c1:79:97:2f",
+    "ip-address": "10.3.33.116",
+    "hostname": "Canon79972f.gtm.gazprom.ru",
+    "option-data": []
+  },
+  {
+    "hw-address": "00:17:c8:52:15:dc",
+    "ip-address": "10.3.33.250",
+    "hostname": "KM5215DC.gtm.gazprom.ru",
+    "option-data": []
+  },
+  {
+    "hw-address": "00:17:c8:52:6a:18",
+    "ip-address": "10.3.33.183",
+    "hostname": "KM526A18.gtm.gazprom.ru",
+    "option-data": []
+  },
+  {
+    "hw-address": "74:38:b7:f9:a9:9c",
+    "ip-address": "10.3.33.33",
+    "hostname": "Canonf9a99c.gtm.gazprom.ru",
+    "option-data": []
+  },
+  {
+    "hw-address": "00:17:c8:51:fa:78",
+    "ip-address": "10.3.33.126",
+    "hostname": "KM51FA78.gtm.gazprom.ru",
+    "option-data": []
+  },
+  {
+    "hw-address": "74:38:b7:f9:a9:9e",
+    "ip-address": "10.3.33.55",
+    "hostname": "Canonf9a99e.gtm.gazprom.ru",
+    "option-data": []
+  },
+  {
+    "hw-address": "f8:a2:6d:df:be:db",
+    "ip-address": "10.3.33.164",
+    "hostname": "Canondfbedb.gtm.gazprom.ru",
+    "option-data": []
+  },
+  {
+    "hw-address": "74:bf:c0:15:18:da",
+    "ip-address": "10.3.33.119",
+    "hostname": "Canon1518DA.gtm.gazprom.ru",
+    "option-data": []
+  },
+  {
+    "hw-address": "74:38:b7:f9:81:3b",
+    "ip-address": "10.3.33.26",
+    "hostname": "1-1922-mf446.gtm.gazprom.ru",
+    "option-data": []
+  },
+  {
+    "hw-address": "00:17:c8:51:71:bf",
+    "ip-address": "10.3.33.138",
+    "hostname": "KM5171BF.gtm.gazprom.ru",
+    "option-data": []
+  },
+  {
+    "hw-address": "74:38:b7:fd:7e:32",
+    "ip-address": "10.3.33.204",
+    "hostname": "Canonfd7e32.gtm.gazprom.ru"
+  },
+  {
+    "hw-address": "74:38:b7:f9:a0:8a",
+    "ip-address": "10.3.33.40",
+    "hostname": "Canonf9a08a.gtm.gazprom.ru",
+    "option-data": []
+  },
+  {
+    "hw-address": "74:bf:c0:87:42:42",
+    "ip-address": "10.3.33.229",
+    "hostname": "Canon874242.gtm.gazprom.ru"
+  },
+  {
+    "hw-address": "ac:c5:1b:3c:83:9a",
+    "ip-address": "10.3.33.200",
+    "hostname": "m-d-610-21.gtm.gazprom.ru",
+    "option-data": []
+  },
+  {
+    "hw-address": "74:38:b7:f9:ba:29",
+    "ip-address": "10.3.33.233",
+    "hostname": "Canonf9ba29.gtm.gazprom.ru"
+  },
+  {
+    "hw-address": "74:38:b7:f9:a0:82",
+    "ip-address": "10.3.33.104",
+    "hostname": "Canonf9a082.gtm.gazprom.ru",
+    "option-data": []
+  },
+  {
+    "hw-address": "00:bb:c1:79:91:d2",
+    "ip-address": "10.3.33.215",
+    "hostname": "1-1605-mf446.gtm.gazprom.ru"
+  },
+  {
+    "hw-address": "f4:81:39:de:42:56",
+    "ip-address": "10.3.33.189",
+    "hostname": "Canonde4256.gtm.gazprom.ru"
+  },
+  {
+    "hw-address": "74:46:a0:4e:fb:15",
+    "ip-address": "10.3.33.106",
+    "hostname": "NPI4EFB15.gtm.gazprom.ru"
+  },
+  {
+    "hw-address": "00:bb:c1:79:61:b9",
+    "ip-address": "10.3.33.166",
+    "hostname": "Canon7961b9.gtm.gazprom.ru"
+  },
+  {
+    "hw-address": "74:bf:c0:15:17:71",
+    "ip-address": "10.3.33.219",
+    "hostname": "Canon151771.gtm.gazprom.ru"
+  },
+  {
+    "hw-address": "00:bb:c1:7a:c3:e8",
+    "ip-address": "10.3.33.136",
+    "hostname": "Canon7ac3e8.gtm.gazprom.ru"
+  },
+  {
+    "hw-address": "00:bb:c1:79:77:05",
+    "ip-address": "10.3.33.23",
+    "hostname": "Canon797705.gtm.gazprom.ru"
+  },
+  {
+    "hw-address": "00:bb:c1:7a:cb:0f",
+    "ip-address": "10.3.33.35",
+    "hostname": "Canon7acb0f.gtm.gazprom.ru"
+  },
+  {
+    "hw-address": "f4:81:39:de:80:2d",
+    "ip-address": "10.3.33.158",
+    "hostname": "Canonde802d.gtm.gazprom.ru"
+  },
+  {
+    "hw-address": "34:64:a9:6a:72:c9",
+    "ip-address": "10.3.33.227",
+    "hostname": "NPI6A72C9.gtm.gazprom.ru"
+  },
+  {
+    "hw-address": "2c:44:fd:03:43:77",
+    "ip-address": "10.3.33.234",
+    "hostname": "NPI034377.gtm.gazprom.ru"
+  },
+  {
+    "hw-address": "8c:dc:d4:5a:ba:f4",
+    "ip-address": "10.3.33.214",
+    "hostname": "NPI5ABAF4.gtm.gazprom.ru"
+  },
+  {
+    "hw-address": "f4:81:39:de:40:59",
+    "ip-address": "10.3.33.232",
+    "hostname": "2009-canon1435.gtm.gazprom.ru",
+    "option-data": []
+  },
+  {
+    "hw-address": "74:38:b7:f9:ba:2c",
+    "ip-address": "10.3.33.235",
+    "hostname": "Canonf9ba2c.gtm.gazprom.ru"
+  },
+  {
+    "hw-address": "00:18:21:4a:10:12",
+    "ip-address": "10.3.33.237",
+    "hostname": "M3481012.gtm.gazprom.ru"
+  },
+  {
+    "hw-address": "74:38:b7:fb:fb:17",
+    "ip-address": "10.3.33.236",
+    "hostname": "Canonfbfb17.gtm.gazprom.ru"
+  },
+  {
+    "hw-address": "f4:81:39:de:3e:98",
+    "ip-address": "10.3.33.76",
+    "hostname": "1-1512A-Canon1435.gtm.gazprom.ru"
+  },
+  {
+    "hw-address": "74:38:b7:f9:a9:90",
+    "ip-address": "10.3.33.3",
+    "hostname": "Canonf9a990.gtm.gazprom.ru"
+  },
+  {
+    "hw-address": "bc:f6:85:00:fc:74",
+    "ip-address": "10.3.33.44",
+    "hostname": "prs1020.gtm.gazprom.ru"
+  },
+  {
+    "hw-address": "74:bf:c0:15:19:09",
+    "ip-address": "10.3.33.249",
+    "hostname": "Canon151909.gtm.gazprom.ru"
+  },
+  {
+    "hw-address": "74:38:b7:fd:ab:ea",
+    "ip-address": "10.3.33.4",
+    "hostname": "Canonfdabea.gtm.gazprom.ru"
+  },
+  {
+    "hw-address": "74:38:b7:fd:ab:ef",
+    "ip-address": "10.3.33.22",
+    "hostname": "Canonfdabef.gtm.gazprom.ru",
+    "option-data": []
+  },
+  {
+    "hw-address": "48:ba:4e:c1:d7:8d",
+    "ip-address": "10.3.33.16",
+    "hostname": "1-2609-plotr.gtm.gazprom.ru"
+  },
+  {
+    "hw-address": "08:00:37:26:12:50",
+    "ip-address": "10.3.33.101",
+    "hostname": "m-d-708-22.gtm.gazprom.ru",
+    "option-data": []
+  },
+  {
+    "hw-address": "2c:59:e5:d6:0e:45",
+    "ip-address": "10.3.33.7",
+    "hostname": "7-703-hp521.gtm.gazprom.ru"
+  },
+  {
+    "hw-address": "00:bb:c1:79:91:c9",
+    "ip-address": "10.3.33.17",
+    "hostname": "Canon7991c9.gtm.gazprom.ru"
+  },
+  {
+    "hw-address": "74:38:b7:fe:36:a9",
+    "ip-address": "10.3.33.5",
+    "hostname": "7-616-mf445.gtm.gazprom.ru"
+  },
+  {
+    "hw-address": "08:00:37:24:4a:4b",
+    "ip-address": "10.3.33.171",
+    "hostname": "m-d-513-13.gtm.gazprom.ru",
+    "option-data": []
+  },
+  {
+    "hw-address": "08:00:37:24:3b:11",
+    "ip-address": "10.3.33.132",
+    "hostname": "FX-243B11.gtm.gazprom.ru",
+    "option-data": []
+  },
+  {
+    "hw-address": "c4:34:6b:14:83:93",
+    "ip-address": "10.3.33.156",
+    "hostname": "NPI148393.gtm.gazprom.ru"
+  },
+  {
+    "hw-address": "08:00:37:b9:4f:c9",
+    "ip-address": "10.3.33.6",
+    "hostname": "m-d-612-42.gtm.gazprom.ru"
+  },
+  {
+    "hw-address": "3c:a8:2a:f9:8f:9c",
+    "ip-address": "10.3.33.46",
+    "hostname": "1-1904-mfu.gtm.gazprom.ru"
+  },
+  {
+    "hw-address": "9c:93:4e:04:04:40",
+    "ip-address": "10.3.33.13",
+    "hostname": "XRX_9C934E040440.gtm.gazprom.ru"
+  },
+  {
+    "hw-address": "00:25:b3:fa:e4:5c",
+    "ip-address": "10.3.33.169",
+    "hostname": "m-d-102-12.gtm.gazprom.ru"
+  },
+  {
+    "hw-address": "40:a8:f0:b7:0c:b9",
+    "ip-address": "10.3.33.39",
+    "hostname": "1-2625-m521.gtm.gazprom.ru"
+  },
+  {
+    "hw-address": "c4:34:6b:14:83:5e",
+    "ip-address": "10.3.33.52",
+    "hostname": "m-d-1214-64.gtm.gazprom.ru"
+  },
+  {
+    "hw-address": "c4:34:6b:14:83:61",
+    "ip-address": "10.3.33.25",
+    "hostname": "m-d-310-32.gtm.gazprom.ru"
+  },
+  {
+    "hw-address": "08:00:37:26:0d:79",
+    "ip-address": "10.3.33.112",
+    "hostname": "m-d-1017-12.gtm.gazprom.ru"
+  },
+  {
+    "hw-address": "08:00:37:fe:de:2b",
+    "ip-address": "10.3.33.15",
+    "hostname": "m-a-225-14.gtm.gazprom.ru"
+  },
+  {
+    "hw-address": "88:51:fb:ea:af:07",
+    "ip-address": "10.3.33.28",
+    "hostname": "NPIEAAF07.gtm.gazprom.ru"
+  },
+  {
+    "hw-address": "08:00:37:fe:cf:e4",
+    "ip-address": "10.3.33.57",
+    "hostname": "m-d-807-22.gtm.gazprom.ru"
+  },
+  {
+    "hw-address": "c4:34:6b:1a:7b:ef",
+    "ip-address": "10.3.33.60",
+    "hostname": "m-d-417-13.gtm.gazprom.ru"
+  },
+  {
+    "hw-address": "08:00:37:fe:de:00",
+    "ip-address": "10.3.33.65",
+    "hostname": "m-d-825-22.gtm.gazprom.ru"
+  },
+  {
+    "hw-address": "08:00:37:fe:da:fe",
+    "ip-address": "10.3.33.66",
+    "hostname": "m-a-301-43.gtm.gazprom.ru"
+  },
+  {
+    "hw-address": "08:00:37:fe:da:c0",
+    "ip-address": "10.3.33.68",
+    "hostname": "m-d-918-11.gtm.gazprom.ru"
+  },
+  {
+    "hw-address": "3c:52:82:c1:6c:53",
+    "ip-address": "10.3.33.72",
+    "hostname": "m-d-1002-mfu.gtm.gazprom.ru"
+  },
+  {
+    "hw-address": "c8:d3:ff:0e:a9:c1",
+    "ip-address": "10.3.33.75",
+    "hostname": "m-d-1017-11.gtm.gazprom.ru"
+  },
+  {
+    "hw-address": "3c:a8:2a:f5:3f:0d",
+    "ip-address": "10.3.33.54",
+    "hostname": "m-s-303-1.gtm.gazprom.ru"
+  },
+  {
+    "hw-address": "ec:8e:b5:22:f8:f2",
+    "ip-address": "10.3.33.98",
+    "hostname": "m-b-112-41.gtm.gazprom.ru"
+  },
+  {
+    "hw-address": "fc:15:b4:2c:f2:98",
+    "ip-address": "10.3.33.89",
+    "hostname": "NPI2CF298.gtm.gazprom.ru",
+    "option-data": []
+  },
+  {
+    "hw-address": "34:64:a9:6a:d3:19",
+    "ip-address": "10.3.33.36",
+    "hostname": "NPI6AD319.gtm.gazprom.ru",
+    "option-data": []
+  },
+  {
+    "hw-address": "a4:5d:36:64:a3:96",
+    "ip-address": "10.3.33.27",
+    "hostname": "NPI64A396.gtm.gazprom.ru"
+  },
+  {
+    "hw-address": "00:25:b3:fa:a8:f5",
+    "ip-address": "10.3.33.67",
+    "hostname": "m-s-310-3.gtm.gazprom.ru"
+  },
+  {
+    "hw-address": "08:00:37:26:10:31",
+    "ip-address": "10.3.33.121",
+    "hostname": "FX-261031.gtm.gazprom.ru"
+  },
+  {
+    "hw-address": "18:a9:05:ff:2e:62",
+    "ip-address": "10.3.33.42",
+    "hostname": "m-d-c08-11.gtm.gazprom.ru"
+  },
+  {
+    "hw-address": "3c:a8:2a:fb:b4:13",
+    "ip-address": "10.3.33.61",
+    "hostname": "NPIFBB413.gtm.gazprom.ru"
+  },
+  {
+    "hw-address": "a4:5d:36:64:73:fd",
+    "ip-address": "10.3.33.62",
+    "hostname": "m-d-1202-1.gtm.gazprom.ru"
+  },
+  {
+    "hw-address": "3c:a8:2a:f5:3f:07",
+    "ip-address": "10.3.33.48",
+    "hostname": "m-d-1003-mfu.gtm.gazprom.ru"
+  },
+  {
+    "hw-address": "08:00:37:26:15:70",
+    "ip-address": "10.3.33.178",
+    "hostname": "m-b-322-72.gtm.gazprom.ru"
+  },
+  {
+    "hw-address": "ec:8e:b5:20:39:c0",
+    "ip-address": "10.3.33.92",
+    "hostname": "1404b-hp426.gtm.gazprom.ru"
+  },
+  {
+    "hw-address": "08:00:37:fe:de:4e",
+    "ip-address": "10.3.33.14",
+    "hostname": "XC-FEDE4E.gtm.gazprom.ru"
+  },
+  {
+    "hw-address": "08:00:37:fe:cc:1d",
+    "ip-address": "10.3.33.74",
+    "hostname": "m-d-626-12.gtm.gazprom.ru"
+  },
+  {
+    "hw-address": "10:62:e5:61:11:87",
+    "ip-address": "10.3.33.99",
+    "hostname": "2506-hpm477.gtm.gazprom.ru"
+  },
+  {
+    "hw-address": "f4:30:b9:75:45:b6",
+    "ip-address": "10.3.33.115",
+    "hostname": "1-2406.gtm.gazprom.ru"
+  },
+  {
+    "hw-address": "f4:81:39:de:40:74",
+    "ip-address": "10.3.33.207",
+    "hostname": "2102-canon1435i.gtm.gazprom.ru"
+  },
+  {
+    "hw-address": "f4:81:39:de:41:66",
+    "ip-address": "10.3.33.53",
+    "hostname": "3021-canon1435.gtm.gazprom.ru"
+  },
+  {
+    "hw-address": "f4:81:39:de:42:03",
+    "ip-address": "10.3.33.209",
+    "hostname": "2012-canon1435.gtm.gazprom.ru"
+  },
+  {
+    "hw-address": "f4:81:39:de:3f:fd",
+    "ip-address": "10.3.33.105",
+    "hostname": "2205-canon1435.gtm.gazprom.ru"
+  },
+  {
+    "hw-address": "f4:81:39:de:40:0b",
+    "ip-address": "10.3.33.125",
+    "hostname": "2724-canon1435.gtm.gazprom.ru"
+  },
+  {
+    "hw-address": "f4:81:39:de:42:01",
+    "ip-address": "10.3.33.50",
+    "hostname": "1-2202-canon1435.gtm.gazprom.ru"
+  },
+  {
+    "hw-address": "f4:81:39:de:40:67",
+    "ip-address": "10.3.33.127",
+    "hostname": "2811-canon1435.gtm.gazprom.ru"
+  },
+  {
+    "hw-address": "f4:81:39:de:3f:18",
+    "ip-address": "10.3.33.102",
+    "hostname": "2720-canon1435.gtm.gazprom.ru"
+  },
+  {
+    "hw-address": "f4:81:39:de:42:05",
+    "ip-address": "10.3.33.190",
+    "hostname": "1-2410-Canon1435.gtm.gazprom.ru"
+  },
+  {
+    "hw-address": "ec:8e:b5:20:f1:e0",
+    "ip-address": "10.3.33.8",
+    "hostname": "1-1721-hp426.gtm.gazprom.ru",
+    "option-data": []
+  },
+  {
+    "hw-address": "f4:81:39:de:42:0a",
+    "ip-address": "10.3.33.177",
+    "hostname": "mfu"
+  },
+  {
+    "hw-address": "f4:81:39:de:3e:a8",
+    "ip-address": "10.3.33.34",
+    "hostname": "1-2623-IR1435.gtm.gazprom.ru"
+  },
+  {
+    "hw-address": "08:00:37:fe:d4:98",
+    "ip-address": "10.3.33.185",
+    "hostname": "1-2727-xerox5330.gtm.gazprom.ru"
+  },
+  {
+    "hw-address": "f4:81:39:de:40:52",
+    "ip-address": "10.3.33.80",
+    "hostname": "1-2211.gtm.gazprom.ru"
+  },
+  {
+    "hw-address": "f4:81:39:de:40:0a",
+    "ip-address": "10.3.33.10",
+    "hostname": "1-2616.gtm.gazprom.ru"
+  },
+  {
+    "hw-address": "9c:93:4e:02:3e:4a",
+    "ip-address": "10.3.33.12",
+    "hostname": "m-d-505-mfu.gtm.gazprom.ru"
+  },
+  {
+    "hw-address": "f4:81:39:de:3f:10",
+    "ip-address": "10.3.33.71",
+    "hostname": "Canonde3f10.gtm.gazprom.ru",
+    "option-data": []
+  },
+  {
+    "hw-address": "74:46:a0:4e:fb:0e",
+    "ip-address": "10.3.33.130",
+    "hostname": "1-3004-hp500.gtm.gazprom.ru"
+  },
+  {
+    "hw-address": "f4:81:39:de:3f:13",
+    "ip-address": "10.3.33.83",
+    "hostname": "1-2319-ir1435.gtm.gazprom.ru",
+    "option-data": []
+  },
+  {
+    "hw-address": "f4:81:39:de:3f:06",
+    "ip-address": "10.3.33.1",
+    "hostname": "1-2505-CanoniR1435.gtm.gazprom.ru"
+  },
+  {
+    "hw-address": "08:00:37:b9:50:22",
+    "ip-address": "10.3.33.193",
+    "hostname": "XC-B95022.gtm.gazprom.ru",
+    "option-data": []
+  },
+  {
+    "hw-address": "f4:81:39:de:40:02",
+    "ip-address": "10.3.33.134",
+    "hostname": "1-2603-IR1435.gtm.gazprom.ru",
+    "option-data": []
+  },
+  {
+    "hw-address": "f4:81:39:de:3e:ab",
+    "ip-address": "10.3.33.162",
+    "hostname": "1-2305-ir1435.gtm.gazprom.ru",
+    "option-data": []
+  },
+  {
+    "hw-address": "00:bb:c1:7a:ca:f5",
+    "ip-address": "10.3.33.84",
+    "hostname": "1-2011-mf522.gtm.gazprom.ru",
+    "option-data": []
+  },
+  {
+    "hw-address": "74:bf:c0:44:b1:89",
+    "ip-address": "10.3.33.91",
+    "hostname": "1-2512-mf520.gtm.gazprom.ru",
+    "option-data": []
+  },
+  {
+    "hw-address": "00:bb:c1:7a:cb:0d",
+    "ip-address": "10.3.33.201",
+    "hostname": "1-1718-mf522.gtm.gazprom.ru",
+    "option-data": []
+  },
+  {
+    "hw-address": "f4:81:39:de:42:04",
+    "ip-address": "10.3.33.203",
+    "hostname": "Canonde4204.gtm.gazprom.ru"
+  },
+  {
+    "hw-address": "f4:81:39:de:41:5d",
+    "ip-address": "10.3.33.195",
+    "hostname": "1-2003-ir1435.gtm.gazprom.ru"
+  },
+  {
+    "hw-address": "00:bb:c1:7a:c3:b4",
+    "ip-address": "10.3.33.88",
+    "hostname": "1-2213-mf522.gtm.gazprom.ru",
+    "option-data": []
+  },
+  {
+    "hw-address": "74:bf:c0:44:b1:b6",
+    "ip-address": "10.3.33.141",
+    "hostname": "1-1416-mf522.gtm.gazprom.ru"
+  },
+  {
+    "hw-address": "00:bb:c1:7a:c4:1f",
+    "ip-address": "10.3.33.208",
+    "hostname": "1-2501-mf522.gtm.gazprom.ru"
+  },
+  {
+    "hw-address": "00:bb:c1:7a:b5:7c",
+    "ip-address": "10.3.33.157",
+    "hostname": "1-2503-mf522.gtm.gazprom.ru",
+    "option-data": []
+  },
+  {
+    "hw-address": "74:bf:c0:87:51:c6",
+    "ip-address": "10.3.33.146",
+    "hostname": "1-2702b-canon2530.gtm.gazprom.ru"
+  },
+  {
+    "hw-address": "74:bf:c0:87:51:ae",
+    "ip-address": "10.3.33.147",
+    "hostname": "Canon8751AE.gtm.gazprom.ru"
+  },
+  {
+    "hw-address": "74:bf:c0:87:51:a6",
+    "ip-address": "10.3.33.144",
+    "hostname": "1-2027-canon2530.gtm.gazprom.ru"
+  },
+  {
+    "hw-address": "74:bf:c0:87:55:68",
+    "ip-address": "10.3.33.145",
+    "hostname": "1-2010-Canon2530.gtm.gazprom.ru"
+  },
+  {
+    "hw-address": "74:bf:c0:87:52:63",
+    "ip-address": "10.3.33.149",
+    "hostname": "1-2801-canon2530.gtm.gazprom.ru"
+  },
+  {
+    "hw-address": "74:bf:c0:87:41:b5",
+    "ip-address": "10.3.33.148",
+    "hostname": "Canon8741B5.gtm.gazprom.ru"
+  },
+  {
+    "hw-address": "74:bf:c0:87:51:a5",
+    "ip-address": "10.3.33.151",
+    "hostname": "Canon8751A5.gtm.gazprom.ru"
+  },
+  {
+    "hw-address": "74:bf:c0:87:51:c7",
+    "ip-address": "10.3.33.152",
+    "hostname": "Canon8751C7.gtm.gazprom.ru"
+  },
+  {
+    "hw-address": "00:bb:c1:7a:ca:ce",
+    "ip-address": "10.3.33.9",
+    "hostname": "1-1701-canon522.gtm.gazprom.ru",
+    "option-data": []
+  },
+  {
+    "hw-address": "00:bb:c1:7a:c4:33",
+    "ip-address": "10.3.33.154",
+    "hostname": "Canon7ac433.gtm.gazprom.ru",
+    "option-data": []
+  },
+  {
+    "hw-address": "00:bb:c1:7a:b5:79",
+    "ip-address": "10.3.33.59",
+    "hostname": "1-2422a-mf522.gtm.gazprom.ru"
+  },
+  {
+    "hw-address": "74:bf:c0:44:b1:70",
+    "ip-address": "10.3.33.179",
+    "hostname": "Canon44b170.gtm.gazprom.ru"
+  },
+  {
+    "hw-address": "00:bb:c1:7a:cb:39",
+    "ip-address": "10.3.33.78",
+    "hostname": "1-2419-mf522.gtm.gazprom.ru"
+  },
+  {
+    "hw-address": "74:bf:c0:44:ad:92",
+    "ip-address": "10.3.33.70",
+    "hostname": "1-2402-mf522.gtm.gazprom.ru"
+  },
+  {
+    "hw-address": "00:bb:c1:7a:c3:89",
+    "ip-address": "10.3.33.29",
+    "hostname": "1-1511-mf522.gtm.gazprom.ru",
+    "option-data": []
+  },
+  {
+    "hw-address": "00:bb:c1:7a:c4:29",
+    "ip-address": "10.3.33.81",
+    "hostname": "1-1720-mf522.gtm.gazprom.ru",
+    "option-data": []
+  },
+  {
+    "hw-address": "00:bb:c1:7a:c3:52",
+    "ip-address": "10.3.33.2",
+    "hostname": "Canon7ac352.gtm.gazprom.ru",
+    "option-data": []
+  },
+  {
+    "hw-address": "74:bf:c0:44:b1:8d",
+    "ip-address": "10.3.33.79",
+    "hostname": "1-2613-mf522.gtm.gazprom.ru",
+    "option-data": []
+  },
+  {
+    "hw-address": "f4:81:39:de:42:57",
+    "ip-address": "10.3.33.129",
+    "hostname": "Canonde4257.gtm.gazprom.ru"
+  },
+  {
+    "hw-address": "00:bb:c1:7a:b5:6a",
+    "ip-address": "10.3.33.167",
+    "hostname": "Canon7ab56a.gtm.gazprom.ru"
+  },
+  {
+    "hw-address": "f8:0d:60:76:55:f8",
+    "ip-address": "10.3.33.107",
+    "hostname": "Canon7655F8.gtm.gazprom.ru"
+  },
+  {
+    "hw-address": "74:bf:c0:87:42:44",
+    "ip-address": "10.3.33.142",
+    "hostname": "Canon874244.gtm.gazprom.ru"
+  },
+  {
+    "hw-address": "74:bf:c0:87:51:88",
+    "ip-address": "10.3.33.140",
+    "hostname": "1-2822-ir2530.gtm.gazprom.ru"
+  },
+  {
+    "hw-address": "00:bb:c1:7a:c4:07",
+    "ip-address": "10.3.33.38",
+    "hostname": "Canon7ac407.gtm.gazprom.ru"
+  },
+  {
+    "hw-address": "f4:81:39:de:81:7a",
+    "ip-address": "10.3.33.111",
+    "hostname": "1-2833-Canon1435.gtm.gazprom.ru"
+  },
+  {
+    "hw-address": "f4:81:39:de:3f:09",
+    "ip-address": "10.3.33.188",
+    "hostname": "Canonde3f09.gtm.gazprom.ru"
+  },
+  {
+    "hw-address": "00:bb:c1:7a:ca:f3",
+    "ip-address": "10.3.33.155",
+    "hostname": "1-1508a-mf522.gtm.gazprom.ru"
+  },
+  {
+    "hw-address": "74:bf:c0:87:e3:7b",
+    "ip-address": "10.3.33.137",
+    "hostname": "1-2815-ir2520.gtm.gazprom.ru"
+  },
+  {
+    "hw-address": "74:bf:c0:87:e3:82",
+    "ip-address": "10.3.33.186",
+    "hostname": "1-2601-ir2520.gtm.gazprom.ru"
+  },
+  {
+    "hw-address": "74:bf:c0:87:e2:0e",
+    "ip-address": "10.3.33.194",
+    "hostname": "Canon87E20E.gtm.gazprom.ru"
+  },
+  {
+    "hw-address": "74:bf:c0:87:41:b1",
+    "ip-address": "10.3.33.86",
+    "hostname": "Canon8741B1.gtm.gazprom.ru"
+  },
+  {
+    "hw-address": "f4:81:39:de:40:6a",
+    "ip-address": "10.3.33.94",
+    "hostname": "1-2602.gtm.gazprom.ru"
+  },
+  {
+    "hw-address": "f4:81:39:de:81:7d",
+    "ip-address": "10.3.33.63",
+    "hostname": "1-2607-IR1435.gtm.gazprom.ru"
+  },
+  {
+    "hw-address": "00:bb:c1:7a:c4:52",
+    "ip-address": "10.3.33.174",
+    "hostname": "1-2105.gtm.gazprom.ru"
+  },
+  {
+    "hw-address": "f4:81:39:de:42:0f",
+    "ip-address": "10.3.33.210",
+    "hostname": "1-2712-ir.gtm.gazprom.ru"
+  },
+  {
+    "hw-address": "74:bf:c0:44:ad:a6",
+    "ip-address": "10.3.33.211",
+    "hostname": "1-2803-mf522.gtm.gazprom.ru",
+    "option-data": []
+  },
+  {
+    "hw-address": "74:bf:c0:87:e3:a0",
+    "ip-address": "10.3.33.197",
+    "hostname": "Canon87E3A0.gtm.gazprom.ru"
+  },
+  {
+    "hw-address": "2c:44:fd:02:64:ad",
+    "ip-address": "10.3.33.212",
+    "hostname": "m-d-1202-2.gtm.gazprom.ru"
+  },
+  {
+    "hw-address": "2c:44:fd:02:64:ab",
+    "ip-address": "10.3.33.170",
+    "hostname": "1-2403-hp.gtm.gazprom.ru"
+  },
+  {
+    "hw-address": "c4:34:6b:14:83:56",
+    "ip-address": "10.3.33.187",
+    "hostname": "1-2427-hp521.gtm.gazprom.ru"
+  },
+  {
+    "hw-address": "74:bf:c0:87:e3:93",
+    "ip-address": "10.3.33.139",
+    "hostname": "Canon87E393.gtm.gazprom.ru"
+  },
+  {
+    "hw-address": "00:bb:c1:79:91:ce",
+    "ip-address": "10.3.33.199",
+    "hostname": "1-1307-mf446.gtm.gazprom.ru"
+  },
+  {
+    "hw-address": "00:bb:c1:79:91:96",
+    "ip-address": "10.3.33.205",
+    "hostname": "1-1513-446.gtm.gazprom.ru"
+  },
+  {
+    "hw-address": "00:bb:c1:7a:ca:f2",
+    "ip-address": "10.3.33.218",
+    "hostname": "1-1501-mf522.gtm.gazprom.ru"
+  },
+  {
+    "hw-address": "ec:8e:b5:20:39:bf",
+    "ip-address": "10.3.33.159",
+    "hostname": "1-1403-hp426.gtm.gazprom.ru",
+    "option-data": []
+  },
+  {
+    "hw-address": "74:38:b7:f9:81:4e",
+    "ip-address": "10.3.33.20",
+    "hostname": "Canonf9814e.gtm.gazprom.ru"
+  },
+  {
+    "hw-address": "74:38:b7:f8:8d:57",
+    "ip-address": "10.3.33.19",
+    "hostname": "Canonf88d57.gtm.gazprom.ru"
+  },
+  {
+    "hw-address": "d4:c9:ef:fe:2f:7f",
+    "ip-address": "10.3.33.18",
+    "hostname": "NPIFE2F7F.gtm.gazprom.ru"
+  },
+  {
+    "hw-address": "74:38:b7:f9:ba:21",
+    "ip-address": "10.3.33.21",
+    "hostname": "Canonf9ba21.gtm.gazprom.ru"
+  },
+  {
+    "hw-address": "74:38:b7:f9:a0:78",
+    "ip-address": "10.3.33.24",
+    "hostname": "Canonf9a078.gtm.gazprom.ru"
+  },
+  {
+    "hw-address": "ec:8e:b5:20:f1:c4",
+    "ip-address": "10.3.33.32",
+    "hostname": "1-1315-mfu.gtm.gazprom.ru"
+  },
+  {
+    "hw-address": "00:18:21:4a:14:02",
+    "ip-address": "10.3.33.64",
+    "hostname": "M3481402.gtm.gazprom.ru",
+    "option-data": []
+  },
+  {
+    "hw-address": "74:38:b7:f8:8d:53",
+    "ip-address": "10.3.33.31",
+    "hostname": "Canonf88d53.gtm.gazprom.ru"
+  },
+  {
+    "hw-address": "00:bb:c1:7a:cb:3b",
+    "ip-address": "10.3.33.37",
+    "hostname": "m-2203.gtm.gazprom.ru"
+  }
+]

@@ -1,0 +1,22 @@
+---
+#handlers
+- name: sssd restart
+  systemd:
+    name: sssd
+    enabled: yes
+    state: reloaded
+
+- name: winbind restart
+  systemd:
+    name: winbind
+    enabled: yes
+    state: reloaded
+
+- name: Repo Rebooting
+  ansible.builtin.reboot:
+    pre_reboot_delay: 15
+    post_reboot_delay: 15
+    reboot_timeout: 100
+    msg: "Rebooting after update insatll"
+  ignore_errors: true
+  when: domainjoin_reboot is true

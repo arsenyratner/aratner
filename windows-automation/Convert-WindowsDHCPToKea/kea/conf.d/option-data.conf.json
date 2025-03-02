@@ -1,0 +1,34 @@
+[
+  {
+    "csv-format": true,
+    "name": "domain-name-servers",
+    "code": 6,
+    "data": "10.3.77.112,10.3.77.113",
+    "space": "dhcp4",
+    "always-send": true
+  },
+  {
+    "csv-format": true,
+    "name": "domain-name",
+    "code": 15,
+    "data": "gtm.gazprom.ru",
+    "space": "dhcp4",
+    "always-send": true
+  },
+  {
+    "csv-format": true,
+    "name": "tftp-server-name",
+    "code": 66,
+    "data": "10.3.11.56",
+    "space": "dhcp4",
+    "always-send": true
+  },
+  {
+    "csv-format": true,
+    "name": "boot-file-name",
+    "code": 67,
+    "data": "iventoy_loader_16000_uefi",
+    "space": "dhcp4",
+    "always-send": true
+  }
+]

@@ -1,0 +1,3237 @@
+{
+    "_meta": {
+        "hostvars": {
+            "ald-ekb-dc1": {
+                "ansible_become": true,
+                "ansible_become_method": "sudo",
+                "ansible_host": "10.20.3.1",
+                "ansible_password": {
+                    "__ansible_vault": "$ANSIBLE_VAULT;1.1;AES256\n66613561323065373037613133303834303636623030376562663736663533613666316438356337\n3462363266613861316661396135363933653461396531650a353463363563656266393539633939\n63663566343662316130303336636261373830643562666264323631376662623035396231616431\n6638306334623765390a346433666133306465323235366337613537386336633134323039653032\n3061\n"
+                },
+                "ansible_pubkey": "/home/appc/.ssh/ald.ratners.ru_id_rsa.pub",
+                "ansible_python_interpreter": "/usr/bin/python3",
+                "ansible_sudo_pass": {
+                    "__ansible_vault": "$ANSIBLE_VAULT;1.1;AES256\n66613561323065373037613133303834303636623030376562663736663533613666316438356337\n3462363266613861316661396135363933653461396531650a353463363563656266393539633939\n63663566343662316130303336636261373830643562666264323631376662623035396231616431\n6638306334623765390a346433666133306465323235366337613537386336633134323039653032\n3061\n"
+                },
+                "ansible_user": "ansible",
+                "domain_admin": "admin",
+                "domain_firstdc_address": "192.168.126.57",
+                "domain_firstdc_name": "ald-firstdc",
+                "domain_forwarder": "192.168.126.1",
+                "domain_name": "ald.ratners.ru",
+                "domain_packages": [
+                    "mc",
+                    "aldpro-mp",
+                    "aldpro-gc",
+                    "aldpro-syncer",
+                    "aldpro-client"
+                ],
+                "domain_password": {
+                    "__ansible_vault": "$ANSIBLE_VAULT;1.1;AES256\n61303231393331356139363666333265326430346332613333626362626465353664643564613864\n6539303630303530316432396461356463373030383837650a373032383530366336343739393465\n34323763626535386131313635633133326666346536343561626139396366396436646364313130\n3266343334383230660a343733616464366439313261353935353065353038653737366265343332\n3561\n"
+                },
+                "network_dns_nameserver": [
+                    "{{ domain_firstdc_address }}"
+                ],
+                "network_dns_search": [
+                    "{{ domain_name }}",
+                    "r.ratners.ru",
+                    "ratners.ru"
+                ],
+                "network_ipv4_type": "convert",
+                "network_ipv6_disable": true,
+                "proxmox_agent": "1",
+                "proxmox_agent_interfaces": [
+                    {
+                        "ip-addresses": [
+                            "127.0.0.1/8",
+                            "::1/128"
+                        ],
+                        "mac-address": "00:00:00:00:00:00",
+                        "name": "lo"
+                    },
+                    {
+                        "ip-addresses": [
+                            "10.20.3.1/24"
+                        ],
+                        "mac-address": "bc:24:11:f7:bd:e0",
+                        "name": "eth0"
+                    }
+                ],
+                "proxmox_balloon": 512,
+                "proxmox_boot": "c",
+                "proxmox_bootdisk": "virtio0",
+                "proxmox_cipassword": "**********",
+                "proxmox_citype": "nocloud",
+                "proxmox_ciupgrade": 0,
+                "proxmox_ciuser": "ansible",
+                "proxmox_cores": 6,
+                "proxmox_cpu": "host",
+                "proxmox_digest": "a585fd12019608eeaf0257300d738f065d66c133",
+                "proxmox_ide2": {
+                    "disk_image": "local-zfs:vm-114-cloudinit",
+                    "media": "cdrom",
+                    "size": "4M"
+                },
+                "proxmox_ipconfig0": {
+                    "gw": "10.20.3.254",
+                    "ip": "10.20.3.1/24"
+                },
+                "proxmox_machine": "q35",
+                "proxmox_memory": "8192",
+                "proxmox_meta": {
+                    "creation-qemu": "8.1.2",
+                    "ctime": "1702233049"
+                },
+                "proxmox_name": "ald-ekb-dc1",
+                "proxmox_nameserver": "192.168.126.57",
+                "proxmox_net0": {
+                    "bridge": "z20vn3",
+                    "mtu": "1",
+                    "virtio": "BC:24:11:F7:BD:E0"
+                },
+                "proxmox_node": "r-pve1",
+                "proxmox_numa": 1,
+                "proxmox_ostype": "l26",
+                "proxmox_qmpstatus": "running",
+                "proxmox_scsihw": {
+                    "disk_image": "virtio-scsi-single"
+                },
+                "proxmox_searchdomain": "ald.ratners.ru",
+                "proxmox_smbios1": {
+                    "uuid": "2cdd0e94-2b57-41d8-8d06-cf5d430dd827"
+                },
+                "proxmox_snapshots": [],
+                "proxmox_sockets": 1,
+                "proxmox_sshkeys": "ssh-rsa%20AAAAB3NzaC1yc2EAAAADAQABAAABgQCr6l0xXU3J2ojC9mAgVKpuyEbb5fYA9RCp1OIUWNDRpXFvqyFQYF%2F6ZrJqD1f4WwsMaUQeYIyAu4MMij1imzJkXiwUc%2BHIyrUwR9Ij28yJBvc37IwKEQ8%2B%2BfID6BeUgYUVDDoYnE7iuMIz4WwmWffgP1V7ysvGNV%2B7BXo79oXLUVm0f3CNNTd2Cr%2Bdq%2BRVlhiaBnKNHJeoFvQjKUcKvUjaCOakRynrUNFTK%2F%2FTKDcYFzUC94dh6ye1ZroGT5PTUnkCL42Muos0kNc9aAHK8gMQ8qIVvswExiwV99RB4l4pZ2Tv9k0Np423qexDk6r2c4PZqwvbvYb%2FHQ6krylYy2EEC1Y3%2F67FlyornHGTmLbphaqoPX725IUKSf4l4b5Cnn2F2V18V%2F2%2FOGDwIYugaaLHQRe%2FwGzUwdWmAbn%2FDatPYWI5rHeHLGFNiXdjkQQYSlDMfA2NZY2Lmm7JhgOjw82%2Bc6fRavAvR0mEZvRghKzC%2F4N2XAAc3Fozw%2F75IbA2PkM%3D%20ansible%40ald.ratners.ru",
+                "proxmox_status": "running",
+                "proxmox_tags": "ald_role_dc;ald_site_ekb;project_ald;tmp-alse-1.7.4-max",
+                "proxmox_tags_parsed": [
+                    "ald_role_dc",
+                    "ald_site_ekb",
+                    "project_ald",
+                    "tmp-alse-1.7.4-max"
+                ],
+                "proxmox_vga": "qxl,memory=16",
+                "proxmox_virtio0": {
+                    "cache": "writeback",
+                    "disk_image": "local-zfs:base-9014-disk-0/vm-114-disk-0",
+                    "size": "60G"
+                },
+                "proxmox_vmgenid": "f4f20fb8-1223-4d7a-9057-9595cc7a0916",
+                "proxmox_vmid": 114,
+                "proxmox_vmtype": "qemu",
+                "repo_packages": [
+                    "mc",
+                    "astra-update",
+                    "htop",
+                    "sssd-tools"
+                ],
+                "repo_repolist": [
+                    {
+                        "components": "main contrib non-free",
+                        "distribution": "1.7_x86-64",
+                        "type": "deb",
+                        "urlpre": "http://download.astralinux.ru/astra/frozen/1.7_x86-64/1.7.4",
+                        "urlsuf": "repository-main"
+                    },
+                    {
+                        "components": "main contrib non-free",
+                        "distribution": "1.7_x86-64",
+                        "type": "deb",
+                        "urlpre": "http://download.astralinux.ru/astra/frozen/1.7_x86-64/1.7.4",
+                        "urlsuf": "repository-extended"
+                    },
+                    {
+                        "components": "main contrib non-free",
+                        "distribution": "1.7_x86-64",
+                        "type": "deb",
+                        "urlpre": "http://download.astralinux.ru/astra/frozen/1.7_x86-64/1.7.4",
+                        "urlsuf": "repository-update"
+                    },
+                    {
+                        "components": "main contrib non-free",
+                        "distribution": "1.7_x86-64",
+                        "type": "deb",
+                        "urlpre": "http://download.astralinux.ru/astra/frozen/1.7_x86-64/1.7.4",
+                        "urlsuf": "repository-base"
+                    },
+                    {
+                        "components": "main base",
+                        "distribution": "1.7_x86-64",
+                        "type": "deb",
+                        "urlpre": "https://dl.astralinux.ru/aldpro/frozen/01",
+                        "urlsuf": "2.2.0"
+                    }
+                ]
+            },
+            "ald-ekb-dc2": {
+                "ansible_become": true,
+                "ansible_become_method": "sudo",
+                "ansible_host": "10.20.3.2",
+                "ansible_password": {
+                    "__ansible_vault": "$ANSIBLE_VAULT;1.1;AES256\n66613561323065373037613133303834303636623030376562663736663533613666316438356337\n3462363266613861316661396135363933653461396531650a353463363563656266393539633939\n63663566343662316130303336636261373830643562666264323631376662623035396231616431\n6638306334623765390a346433666133306465323235366337613537386336633134323039653032\n3061\n"
+                },
+                "ansible_pubkey": "/home/appc/.ssh/ald.ratners.ru_id_rsa.pub",
+                "ansible_python_interpreter": "/usr/bin/python3",
+                "ansible_sudo_pass": {
+                    "__ansible_vault": "$ANSIBLE_VAULT;1.1;AES256\n66613561323065373037613133303834303636623030376562663736663533613666316438356337\n3462363266613861316661396135363933653461396531650a353463363563656266393539633939\n63663566343662316130303336636261373830643562666264323631376662623035396231616431\n6638306334623765390a346433666133306465323235366337613537386336633134323039653032\n3061\n"
+                },
+                "ansible_user": "ansible",
+                "domain_admin": "admin",
+                "domain_firstdc_address": "192.168.126.57",
+                "domain_firstdc_name": "ald-firstdc",
+                "domain_forwarder": "192.168.126.1",
+                "domain_name": "ald.ratners.ru",
+                "domain_packages": [
+                    "mc",
+                    "aldpro-mp",
+                    "aldpro-gc",
+                    "aldpro-syncer",
+                    "aldpro-client"
+                ],
+                "domain_password": {
+                    "__ansible_vault": "$ANSIBLE_VAULT;1.1;AES256\n61303231393331356139363666333265326430346332613333626362626465353664643564613864\n6539303630303530316432396461356463373030383837650a373032383530366336343739393465\n34323763626535386131313635633133326666346536343561626139396366396436646364313130\n3266343334383230660a343733616464366439313261353935353065353038653737366265343332\n3561\n"
+                },
+                "network_dns_nameserver": [
+                    "{{ domain_firstdc_address }}"
+                ],
+                "network_dns_search": [
+                    "{{ domain_name }}",
+                    "r.ratners.ru",
+                    "ratners.ru"
+                ],
+                "network_ipv4_type": "convert",
+                "network_ipv6_disable": true,
+                "proxmox_agent": "1",
+                "proxmox_agent_interfaces": [
+                    {
+                        "ip-addresses": [
+                            "127.0.0.1/8",
+                            "::1/128"
+                        ],
+                        "mac-address": "00:00:00:00:00:00",
+                        "name": "lo"
+                    },
+                    {
+                        "ip-addresses": [
+                            "10.20.3.2/24"
+                        ],
+                        "mac-address": "bc:24:11:14:c2:ae",
+                        "name": "eth0"
+                    }
+                ],
+                "proxmox_balloon": 512,
+                "proxmox_boot": "c",
+                "proxmox_bootdisk": "virtio0",
+                "proxmox_cipassword": "**********",
+                "proxmox_citype": "nocloud",
+                "proxmox_ciupgrade": 0,
+                "proxmox_ciuser": "ansible",
+                "proxmox_cores": 6,
+                "proxmox_cpu": "host",
+                "proxmox_digest": "3737897fd0df5ec2d9a789db131676f7b7fee8ef",
+                "proxmox_ide2": {
+                    "disk_image": "local-zfs:vm-115-cloudinit",
+                    "media": "cdrom",
+                    "size": "4M"
+                },
+                "proxmox_ipconfig0": {
+                    "gw": "10.20.3.254",
+                    "ip": "10.20.3.2/24"
+                },
+                "proxmox_machine": "q35",
+                "proxmox_memory": "8192",
+                "proxmox_meta": {
+                    "creation-qemu": "8.1.2",
+                    "ctime": "1702233049"
+                },
+                "proxmox_name": "ald-ekb-dc2",
+                "proxmox_nameserver": "192.168.126.57",
+                "proxmox_net0": {
+                    "bridge": "z20vn3",
+                    "mtu": "1",
+                    "virtio": "BC:24:11:14:C2:AE"
+                },
+                "proxmox_node": "r-pve1",
+                "proxmox_numa": 1,
+                "proxmox_ostype": "l26",
+                "proxmox_qmpstatus": "running",
+                "proxmox_scsihw": {
+                    "disk_image": "virtio-scsi-single"
+                },
+                "proxmox_searchdomain": "ald.ratners.ru",
+                "proxmox_smbios1": {
+                    "uuid": "6c18f94b-dcaf-4fd7-aea1-7d3f82c05c5e"
+                },
+                "proxmox_snapshots": [],
+                "proxmox_sockets": 1,
+                "proxmox_sshkeys": "ssh-rsa%20AAAAB3NzaC1yc2EAAAADAQABAAABgQCr6l0xXU3J2ojC9mAgVKpuyEbb5fYA9RCp1OIUWNDRpXFvqyFQYF%2F6ZrJqD1f4WwsMaUQeYIyAu4MMij1imzJkXiwUc%2BHIyrUwR9Ij28yJBvc37IwKEQ8%2B%2BfID6BeUgYUVDDoYnE7iuMIz4WwmWffgP1V7ysvGNV%2B7BXo79oXLUVm0f3CNNTd2Cr%2Bdq%2BRVlhiaBnKNHJeoFvQjKUcKvUjaCOakRynrUNFTK%2F%2FTKDcYFzUC94dh6ye1ZroGT5PTUnkCL42Muos0kNc9aAHK8gMQ8qIVvswExiwV99RB4l4pZ2Tv9k0Np423qexDk6r2c4PZqwvbvYb%2FHQ6krylYy2EEC1Y3%2F67FlyornHGTmLbphaqoPX725IUKSf4l4b5Cnn2F2V18V%2F2%2FOGDwIYugaaLHQRe%2FwGzUwdWmAbn%2FDatPYWI5rHeHLGFNiXdjkQQYSlDMfA2NZY2Lmm7JhgOjw82%2Bc6fRavAvR0mEZvRghKzC%2F4N2XAAc3Fozw%2F75IbA2PkM%3D%20ansible%40ald.ratners.ru",
+                "proxmox_status": "running",
+                "proxmox_tags": "ald_role_dc;ald_site_ekb;project_ald;tmp-alse-1.7.4-max",
+                "proxmox_tags_parsed": [
+                    "ald_role_dc",
+                    "ald_site_ekb",
+                    "project_ald",
+                    "tmp-alse-1.7.4-max"
+                ],
+                "proxmox_vga": "qxl,memory=16",
+                "proxmox_virtio0": {
+                    "cache": "writeback",
+                    "disk_image": "local-zfs:base-9014-disk-0/vm-115-disk-0",
+                    "size": "60G"
+                },
+                "proxmox_vmgenid": "e6a0fd5f-2322-4e23-aaf4-a63acd4d056b",
+                "proxmox_vmid": 115,
+                "proxmox_vmtype": "qemu",
+                "repo_packages": [
+                    "mc",
+                    "astra-update",
+                    "htop",
+                    "sssd-tools"
+                ],
+                "repo_repolist": [
+                    {
+                        "components": "main contrib non-free",
+                        "distribution": "1.7_x86-64",
+                        "type": "deb",
+                        "urlpre": "http://download.astralinux.ru/astra/frozen/1.7_x86-64/1.7.4",
+                        "urlsuf": "repository-main"
+                    },
+                    {
+                        "components": "main contrib non-free",
+                        "distribution": "1.7_x86-64",
+                        "type": "deb",
+                        "urlpre": "http://download.astralinux.ru/astra/frozen/1.7_x86-64/1.7.4",
+                        "urlsuf": "repository-extended"
+                    },
+                    {
+                        "components": "main contrib non-free",
+                        "distribution": "1.7_x86-64",
+                        "type": "deb",
+                        "urlpre": "http://download.astralinux.ru/astra/frozen/1.7_x86-64/1.7.4",
+                        "urlsuf": "repository-update"
+                    },
+                    {
+                        "components": "main contrib non-free",
+                        "distribution": "1.7_x86-64",
+                        "type": "deb",
+                        "urlpre": "http://download.astralinux.ru/astra/frozen/1.7_x86-64/1.7.4",
+                        "urlsuf": "repository-base"
+                    },
+                    {
+                        "components": "main base",
+                        "distribution": "1.7_x86-64",
+                        "type": "deb",
+                        "urlpre": "https://dl.astralinux.ru/aldpro/frozen/01",
+                        "urlsuf": "2.2.0"
+                    }
+                ]
+            },
+            "ald-ekb-dhcp1": {
+                "ansible_become": true,
+                "ansible_become_method": "sudo",
+                "ansible_host": "10.20.3.3",
+                "ansible_password": {
+                    "__ansible_vault": "$ANSIBLE_VAULT;1.1;AES256\n66613561323065373037613133303834303636623030376562663736663533613666316438356337\n3462363266613861316661396135363933653461396531650a353463363563656266393539633939\n63663566343662316130303336636261373830643562666264323631376662623035396231616431\n6638306334623765390a346433666133306465323235366337613537386336633134323039653032\n3061\n"
+                },
+                "ansible_pubkey": "/home/appc/.ssh/ald.ratners.ru_id_rsa.pub",
+                "ansible_python_interpreter": "/usr/bin/python3",
+                "ansible_sudo_pass": {
+                    "__ansible_vault": "$ANSIBLE_VAULT;1.1;AES256\n66613561323065373037613133303834303636623030376562663736663533613666316438356337\n3462363266613861316661396135363933653461396531650a353463363563656266393539633939\n63663566343662316130303336636261373830643562666264323631376662623035396231616431\n6638306334623765390a346433666133306465323235366337613537386336633134323039653032\n3061\n"
+                },
+                "ansible_user": "ansible",
+                "domain_admin": "admin",
+                "domain_firstdc_address": "192.168.126.57",
+                "domain_firstdc_name": "ald-firstdc",
+                "domain_forwarder": "192.168.126.1",
+                "domain_name": "ald.ratners.ru",
+                "domain_packages": [
+                    "aldpro-client"
+                ],
+                "domain_password": {
+                    "__ansible_vault": "$ANSIBLE_VAULT;1.1;AES256\n61303231393331356139363666333265326430346332613333626362626465353664643564613864\n6539303630303530316432396461356463373030383837650a373032383530366336343739393465\n34323763626535386131313635633133326666346536343561626139396366396436646364313130\n3266343334383230660a343733616464366439313261353935353065353038653737366265343332\n3561\n"
+                },
+                "network_dns_nameserver": [
+                    "{{ domain_firstdc_address }}"
+                ],
+                "network_dns_search": [
+                    "{{ domain_name }}",
+                    "r.ratners.ru",
+                    "ratners.ru"
+                ],
+                "network_ipv4_type": "convert",
+                "network_ipv6_disable": true,
+                "proxmox_agent": "1",
+                "proxmox_agent_interfaces": [
+                    {
+                        "ip-addresses": [
+                            "127.0.0.1/8",
+                            "::1/128"
+                        ],
+                        "mac-address": "00:00:00:00:00:00",
+                        "name": "lo"
+                    },
+                    {
+                        "ip-addresses": [
+                            "10.20.3.3/24"
+                        ],
+                        "mac-address": "bc:24:11:c2:78:0d",
+                        "name": "eth0"
+                    }
+                ],
+                "proxmox_balloon": 512,
+                "proxmox_boot": "c",
+                "proxmox_bootdisk": "virtio0",
+                "proxmox_cipassword": "**********",
+                "proxmox_citype": "nocloud",
+                "proxmox_ciupgrade": 0,
+                "proxmox_ciuser": "ansible",
+                "proxmox_cores": 6,
+                "proxmox_cpu": "host",
+                "proxmox_digest": "081ee2b728c108286ecbd60220ef949da924057e",
+                "proxmox_ide2": {
+                    "disk_image": "local-zfs:vm-116-cloudinit",
+                    "media": "cdrom",
+                    "size": "4M"
+                },
+                "proxmox_ipconfig0": {
+                    "gw": "10.20.3.254",
+                    "ip": "10.20.3.3/24"
+                },
+                "proxmox_machine": "q35",
+                "proxmox_memory": "8192",
+                "proxmox_meta": {
+                    "creation-qemu": "8.1.2",
+                    "ctime": "1702233049"
+                },
+                "proxmox_name": "ald-ekb-dhcp1",
+                "proxmox_nameserver": "192.168.126.57",
+                "proxmox_net0": {
+                    "bridge": "z20vn3",
+                    "mtu": "1",
+                    "virtio": "BC:24:11:C2:78:0D"
+                },
+                "proxmox_node": "r-pve1",
+                "proxmox_numa": 1,
+                "proxmox_ostype": "l26",
+                "proxmox_qmpstatus": "running",
+                "proxmox_scsihw": {
+                    "disk_image": "virtio-scsi-single"
+                },
+                "proxmox_searchdomain": "ald.ratners.ru",
+                "proxmox_smbios1": {
+                    "uuid": "03c45446-d698-4e81-b5fe-ccd7257345fc"
+                },
+                "proxmox_snapshots": [],
+                "proxmox_sockets": 1,
+                "proxmox_sshkeys": "ssh-rsa%20AAAAB3NzaC1yc2EAAAADAQABAAABgQCr6l0xXU3J2ojC9mAgVKpuyEbb5fYA9RCp1OIUWNDRpXFvqyFQYF%2F6ZrJqD1f4WwsMaUQeYIyAu4MMij1imzJkXiwUc%2BHIyrUwR9Ij28yJBvc37IwKEQ8%2B%2BfID6BeUgYUVDDoYnE7iuMIz4WwmWffgP1V7ysvGNV%2B7BXo79oXLUVm0f3CNNTd2Cr%2Bdq%2BRVlhiaBnKNHJeoFvQjKUcKvUjaCOakRynrUNFTK%2F%2FTKDcYFzUC94dh6ye1ZroGT5PTUnkCL42Muos0kNc9aAHK8gMQ8qIVvswExiwV99RB4l4pZ2Tv9k0Np423qexDk6r2c4PZqwvbvYb%2FHQ6krylYy2EEC1Y3%2F67FlyornHGTmLbphaqoPX725IUKSf4l4b5Cnn2F2V18V%2F2%2FOGDwIYugaaLHQRe%2FwGzUwdWmAbn%2FDatPYWI5rHeHLGFNiXdjkQQYSlDMfA2NZY2Lmm7JhgOjw82%2Bc6fRavAvR0mEZvRghKzC%2F4N2XAAc3Fozw%2F75IbA2PkM%3D%20ansible%40ald.ratners.ru",
+                "proxmox_status": "running",
+                "proxmox_tags": "ald_role_dhcp;ald_site_ekb;project_ald;tmp-alse-1.7.4-max",
+                "proxmox_tags_parsed": [
+                    "ald_role_dhcp",
+                    "ald_site_ekb",
+                    "project_ald",
+                    "tmp-alse-1.7.4-max"
+                ],
+                "proxmox_vga": "qxl,memory=16",
+                "proxmox_virtio0": {
+                    "cache": "writeback",
+                    "disk_image": "local-zfs:base-9014-disk-0/vm-116-disk-0",
+                    "size": "60G"
+                },
+                "proxmox_vmgenid": "755693e5-c2e7-4c21-abcf-6d6f46b3833d",
+                "proxmox_vmid": 116,
+                "proxmox_vmtype": "qemu",
+                "repo_packages": [
+                    "mc",
+                    "astra-update",
+                    "htop",
+                    "sssd-tools"
+                ],
+                "repo_repolist": [
+                    {
+                        "components": "main contrib non-free",
+                        "distribution": "1.7_x86-64",
+                        "type": "deb",
+                        "urlpre": "http://download.astralinux.ru/astra/frozen/1.7_x86-64/1.7.4",
+                        "urlsuf": "repository-main"
+                    },
+                    {
+                        "components": "main contrib non-free",
+                        "distribution": "1.7_x86-64",
+                        "type": "deb",
+                        "urlpre": "http://download.astralinux.ru/astra/frozen/1.7_x86-64/1.7.4",
+                        "urlsuf": "repository-extended"
+                    },
+                    {
+                        "components": "main contrib non-free",
+                        "distribution": "1.7_x86-64",
+                        "type": "deb",
+                        "urlpre": "http://download.astralinux.ru/astra/frozen/1.7_x86-64/1.7.4",
+                        "urlsuf": "repository-update"
+                    },
+                    {
+                        "components": "main contrib non-free",
+                        "distribution": "1.7_x86-64",
+                        "type": "deb",
+                        "urlpre": "http://download.astralinux.ru/astra/frozen/1.7_x86-64/1.7.4",
+                        "urlsuf": "repository-base"
+                    },
+                    {
+                        "components": "main base",
+                        "distribution": "1.7_x86-64",
+                        "type": "deb",
+                        "urlpre": "https://dl.astralinux.ru/aldpro/frozen/01",
+                        "urlsuf": "2.2.0"
+                    }
+                ]
+            },
+            "ald-ekb-ws1": {
+                "ansible_become": true,
+                "ansible_become_method": "sudo",
+                "ansible_host": "10.20.3.99",
+                "ansible_password": {
+                    "__ansible_vault": "$ANSIBLE_VAULT;1.1;AES256\n66613561323065373037613133303834303636623030376562663736663533613666316438356337\n3462363266613861316661396135363933653461396531650a353463363563656266393539633939\n63663566343662316130303336636261373830643562666264323631376662623035396231616431\n6638306334623765390a346433666133306465323235366337613537386336633134323039653032\n3061\n"
+                },
+                "ansible_pubkey": "/home/appc/.ssh/ald.ratners.ru_id_rsa.pub",
+                "ansible_python_interpreter": "/usr/bin/python3",
+                "ansible_sudo_pass": {
+                    "__ansible_vault": "$ANSIBLE_VAULT;1.1;AES256\n66613561323065373037613133303834303636623030376562663736663533613666316438356337\n3462363266613861316661396135363933653461396531650a353463363563656266393539633939\n63663566343662316130303336636261373830643562666264323631376662623035396231616431\n6638306334623765390a346433666133306465323235366337613537386336633134323039653032\n3061\n"
+                },
+                "ansible_user": "ansible",
+                "domain_admin": "admin",
+                "domain_firstdc_address": "192.168.126.57",
+                "domain_firstdc_name": "ald-firstdc",
+                "domain_forwarder": "192.168.126.1",
+                "domain_name": "ald.ratners.ru",
+                "domain_packages": [
+                    "aldpro-client"
+                ],
+                "domain_password": {
+                    "__ansible_vault": "$ANSIBLE_VAULT;1.1;AES256\n61303231393331356139363666333265326430346332613333626362626465353664643564613864\n6539303630303530316432396461356463373030383837650a373032383530366336343739393465\n34323763626535386131313635633133326666346536343561626139396366396436646364313130\n3266343334383230660a343733616464366439313261353935353065353038653737366265343332\n3561\n"
+                },
+                "network_dns_nameserver": [
+                    "{{ domain_firstdc_address }}"
+                ],
+                "network_dns_search": [
+                    "{{ domain_name }}",
+                    "r.ratners.ru",
+                    "ratners.ru"
+                ],
+                "network_ipv4_type": "dhcp",
+                "network_ipv6_disable": true,
+                "proxmox_agent": "1",
+                "proxmox_agent_interfaces": [
+                    {
+                        "ip-addresses": [
+                            "127.0.0.1/8",
+                            "::1/128"
+                        ],
+                        "mac-address": "00:00:00:00:00:00",
+                        "name": "lo"
+                    },
+                    {
+                        "ip-addresses": [
+                            "10.20.3.99/24"
+                        ],
+                        "mac-address": "bc:24:11:ad:e7:77",
+                        "name": "eth0"
+                    }
+                ],
+                "proxmox_balloon": 512,
+                "proxmox_boot": "c",
+                "proxmox_bootdisk": "virtio0",
+                "proxmox_cipassword": "**********",
+                "proxmox_citype": "nocloud",
+                "proxmox_ciupgrade": 0,
+                "proxmox_ciuser": "ansible",
+                "proxmox_cores": 3,
+                "proxmox_cpu": "host",
+                "proxmox_digest": "3f93b86c8e1a0f369b3fb65ca3d2b7ec176d4250",
+                "proxmox_ide2": {
+                    "disk_image": "local-zfs:vm-117-cloudinit",
+                    "media": "cdrom",
+                    "size": "4M"
+                },
+                "proxmox_ipconfig0": {
+                    "gw": "10.20.3.254",
+                    "ip": "10.20.3.99/24"
+                },
+                "proxmox_machine": "q35",
+                "proxmox_memory": "6144",
+                "proxmox_meta": {
+                    "creation-qemu": "8.1.2",
+                    "ctime": "1702233049"
+                },
+                "proxmox_name": "ald-ekb-ws1",
+                "proxmox_nameserver": "192.168.126.57",
+                "proxmox_net0": {
+                    "bridge": "z20vn3",
+                    "mtu": "1",
+                    "virtio": "BC:24:11:AD:E7:77"
+                },
+                "proxmox_node": "r-pve1",
+                "proxmox_numa": 1,
+                "proxmox_ostype": "l26",
+                "proxmox_qmpstatus": "running",
+                "proxmox_scsihw": {
+                    "disk_image": "virtio-scsi-single"
+                },
+                "proxmox_searchdomain": "ald.ratners.ru",
+                "proxmox_smbios1": {
+                    "uuid": "390665be-4e6c-4573-a64c-80232d84f89e"
+                },
+                "proxmox_snapshots": [],
+                "proxmox_sockets": 1,
+                "proxmox_spice_enhancements": {
+                    "videostreaming": "all"
+                },
+                "proxmox_sshkeys": "ssh-rsa%20AAAAB3NzaC1yc2EAAAADAQABAAABgQCr6l0xXU3J2ojC9mAgVKpuyEbb5fYA9RCp1OIUWNDRpXFvqyFQYF%2F6ZrJqD1f4WwsMaUQeYIyAu4MMij1imzJkXiwUc%2BHIyrUwR9Ij28yJBvc37IwKEQ8%2B%2BfID6BeUgYUVDDoYnE7iuMIz4WwmWffgP1V7ysvGNV%2B7BXo79oXLUVm0f3CNNTd2Cr%2Bdq%2BRVlhiaBnKNHJeoFvQjKUcKvUjaCOakRynrUNFTK%2F%2FTKDcYFzUC94dh6ye1ZroGT5PTUnkCL42Muos0kNc9aAHK8gMQ8qIVvswExiwV99RB4l4pZ2Tv9k0Np423qexDk6r2c4PZqwvbvYb%2FHQ6krylYy2EEC1Y3%2F67FlyornHGTmLbphaqoPX725IUKSf4l4b5Cnn2F2V18V%2F2%2FOGDwIYugaaLHQRe%2FwGzUwdWmAbn%2FDatPYWI5rHeHLGFNiXdjkQQYSlDMfA2NZY2Lmm7JhgOjw82%2Bc6fRavAvR0mEZvRghKzC%2F4N2XAAc3Fozw%2F75IbA2PkM%3D%20ansible%40ald.ratners.ru",
+                "proxmox_status": "running",
+                "proxmox_tags": "ald_role_ws;ald_site_ekb;project_ald;tmp-alse-1.7.4-base-gui",
+                "proxmox_tags_parsed": [
+                    "ald_role_ws",
+                    "ald_site_ekb",
+                    "project_ald",
+                    "tmp-alse-1.7.4-base-gui"
+                ],
+                "proxmox_vga": "qxl,memory=16",
+                "proxmox_virtio0": {
+                    "cache": "writeback",
+                    "disk_image": "local-zfs:base-9016-disk-0/vm-117-disk-0",
+                    "size": "30G"
+                },
+                "proxmox_vmgenid": "2d637147-e946-4d9c-9aae-cfcb7f14285e",
+                "proxmox_vmid": 117,
+                "proxmox_vmtype": "qemu",
+                "repo_packages": [
+                    "mc",
+                    "astra-update",
+                    "htop",
+                    "sssd-tools"
+                ],
+                "repo_repolist": [
+                    {
+                        "components": "main contrib non-free",
+                        "distribution": "1.7_x86-64",
+                        "type": "deb",
+                        "urlpre": "http://download.astralinux.ru/astra/frozen/1.7_x86-64/1.7.4",
+                        "urlsuf": "repository-main"
+                    },
+                    {
+                        "components": "main contrib non-free",
+                        "distribution": "1.7_x86-64",
+                        "type": "deb",
+                        "urlpre": "http://download.astralinux.ru/astra/frozen/1.7_x86-64/1.7.4",
+                        "urlsuf": "repository-extended"
+                    },
+                    {
+                        "components": "main contrib non-free",
+                        "distribution": "1.7_x86-64",
+                        "type": "deb",
+                        "urlpre": "http://download.astralinux.ru/astra/frozen/1.7_x86-64/1.7.4",
+                        "urlsuf": "repository-update"
+                    },
+                    {
+                        "components": "main contrib non-free",
+                        "distribution": "1.7_x86-64",
+                        "type": "deb",
+                        "urlpre": "http://download.astralinux.ru/astra/frozen/1.7_x86-64/1.7.4",
+                        "urlsuf": "repository-base"
+                    },
+                    {
+                        "components": "main base",
+                        "distribution": "1.7_x86-64",
+                        "type": "deb",
+                        "urlpre": "https://dl.astralinux.ru/aldpro/frozen/01",
+                        "urlsuf": "2.2.0"
+                    }
+                ]
+            },
+            "ald-firstdc": {
+                "ansible_become": true,
+                "ansible_become_method": "sudo",
+                "ansible_host": "192.168.126.57",
+                "ansible_password": {
+                    "__ansible_vault": "$ANSIBLE_VAULT;1.1;AES256\n66613561323065373037613133303834303636623030376562663736663533613666316438356337\n3462363266613861316661396135363933653461396531650a353463363563656266393539633939\n63663566343662316130303336636261373830643562666264323631376662623035396231616431\n6638306334623765390a346433666133306465323235366337613537386336633134323039653032\n3061\n"
+                },
+                "ansible_pubkey": "/home/appc/.ssh/ald.ratners.ru_id_rsa.pub",
+                "ansible_python_interpreter": "/usr/bin/python3",
+                "ansible_sudo_pass": {
+                    "__ansible_vault": "$ANSIBLE_VAULT;1.1;AES256\n66613561323065373037613133303834303636623030376562663736663533613666316438356337\n3462363266613861316661396135363933653461396531650a353463363563656266393539633939\n63663566343662316130303336636261373830643562666264323631376662623035396231616431\n6638306334623765390a346433666133306465323235366337613537386336633134323039653032\n3061\n"
+                },
+                "ansible_user": "ansible",
+                "domain_admin": "admin",
+                "domain_firstdc_address": "192.168.126.57",
+                "domain_firstdc_name": "ald-firstdc",
+                "domain_forwarder": "192.168.126.1",
+                "domain_name": "ald.ratners.ru",
+                "domain_packages": [
+                    "aldpro-client"
+                ],
+                "domain_password": {
+                    "__ansible_vault": "$ANSIBLE_VAULT;1.1;AES256\n61303231393331356139363666333265326430346332613333626362626465353664643564613864\n6539303630303530316432396461356463373030383837650a373032383530366336343739393465\n34323763626535386131313635633133326666346536343561626139396366396436646364313130\n3266343334383230660a343733616464366439313261353935353065353038653737366265343332\n3561\n"
+                },
+                "network_dns_nameserver": [
+                    "127.0.0.1"
+                ],
+                "network_dns_search": [
+                    "{{ domain_name }}",
+                    "r.ratners.ru",
+                    "ratners.ru"
+                ],
+                "network_ipv4_type": "dhcp",
+                "network_ipv6_disable": true,
+                "repo_packages": [
+                    "mc",
+                    "astra-update",
+                    "htop",
+                    "sssd-tools"
+                ],
+                "repo_repolist": [
+                    {
+                        "components": "main contrib non-free",
+                        "distribution": "1.7_x86-64",
+                        "type": "deb",
+                        "urlpre": "http://download.astralinux.ru/astra/frozen/1.7_x86-64/1.7.4",
+                        "urlsuf": "repository-main"
+                    },
+                    {
+                        "components": "main contrib non-free",
+                        "distribution": "1.7_x86-64",
+                        "type": "deb",
+                        "urlpre": "http://download.astralinux.ru/astra/frozen/1.7_x86-64/1.7.4",
+                        "urlsuf": "repository-extended"
+                    },
+                    {
+                        "components": "main contrib non-free",
+                        "distribution": "1.7_x86-64",
+                        "type": "deb",
+                        "urlpre": "http://download.astralinux.ru/astra/frozen/1.7_x86-64/1.7.4",
+                        "urlsuf": "repository-update"
+                    },
+                    {
+                        "components": "main contrib non-free",
+                        "distribution": "1.7_x86-64",
+                        "type": "deb",
+                        "urlpre": "http://download.astralinux.ru/astra/frozen/1.7_x86-64/1.7.4",
+                        "urlsuf": "repository-base"
+                    },
+                    {
+                        "components": "main base",
+                        "distribution": "1.7_x86-64",
+                        "type": "deb",
+                        "urlpre": "https://dl.astralinux.ru/aldpro/frozen/01",
+                        "urlsuf": "2.2.0"
+                    }
+                ]
+            },
+            "ald-hq-audit1": {
+                "ansible_become": true,
+                "ansible_become_method": "sudo",
+                "ansible_host": "10.20.1.4",
+                "ansible_password": {
+                    "__ansible_vault": "$ANSIBLE_VAULT;1.1;AES256\n66613561323065373037613133303834303636623030376562663736663533613666316438356337\n3462363266613861316661396135363933653461396531650a353463363563656266393539633939\n63663566343662316130303336636261373830643562666264323631376662623035396231616431\n6638306334623765390a346433666133306465323235366337613537386336633134323039653032\n3061\n"
+                },
+                "ansible_pubkey": "/home/appc/.ssh/ald.ratners.ru_id_rsa.pub",
+                "ansible_python_interpreter": "/usr/bin/python3",
+                "ansible_sudo_pass": {
+                    "__ansible_vault": "$ANSIBLE_VAULT;1.1;AES256\n66613561323065373037613133303834303636623030376562663736663533613666316438356337\n3462363266613861316661396135363933653461396531650a353463363563656266393539633939\n63663566343662316130303336636261373830643562666264323631376662623035396231616431\n6638306334623765390a346433666133306465323235366337613537386336633134323039653032\n3061\n"
+                },
+                "ansible_user": "ansible",
+                "domain_admin": "admin",
+                "domain_firstdc_address": "192.168.126.57",
+                "domain_firstdc_name": "ald-firstdc",
+                "domain_forwarder": "192.168.126.1",
+                "domain_name": "ald.ratners.ru",
+                "domain_packages": [
+                    "aldpro-client"
+                ],
+                "domain_password": {
+                    "__ansible_vault": "$ANSIBLE_VAULT;1.1;AES256\n61303231393331356139363666333265326430346332613333626362626465353664643564613864\n6539303630303530316432396461356463373030383837650a373032383530366336343739393465\n34323763626535386131313635633133326666346536343561626139396366396436646364313130\n3266343334383230660a343733616464366439313261353935353065353038653737366265343332\n3561\n"
+                },
+                "network_dns_nameserver": [
+                    "{{ domain_firstdc_address }}"
+                ],
+                "network_dns_search": [
+                    "{{ domain_name }}",
+                    "r.ratners.ru",
+                    "ratners.ru"
+                ],
+                "network_ipv4_type": "convert",
+                "network_ipv6_disable": true,
+                "proxmox_agent": "1",
+                "proxmox_agent_interfaces": [
+                    {
+                        "ip-addresses": [
+                            "127.0.0.1/8",
+                            "::1/128"
+                        ],
+                        "mac-address": "00:00:00:00:00:00",
+                        "name": "lo"
+                    },
+                    {
+                        "ip-addresses": [
+                            "10.20.1.4/24"
+                        ],
+                        "mac-address": "bc:24:11:41:b5:ac",
+                        "name": "eth0"
+                    }
+                ],
+                "proxmox_balloon": 512,
+                "proxmox_boot": "c",
+                "proxmox_bootdisk": "virtio0",
+                "proxmox_cipassword": "**********",
+                "proxmox_citype": "nocloud",
+                "proxmox_ciupgrade": 0,
+                "proxmox_ciuser": "ansible",
+                "proxmox_cores": 2,
+                "proxmox_cpu": "host",
+                "proxmox_digest": "9e732f64792178bbb4a0519d963c441451319c6f",
+                "proxmox_ide2": {
+                    "disk_image": "local-zfs:vm-107-cloudinit",
+                    "media": "cdrom",
+                    "size": "4M"
+                },
+                "proxmox_ipconfig0": {
+                    "ip": "dhcp"
+                },
+                "proxmox_machine": "q35",
+                "proxmox_memory": "4096",
+                "proxmox_meta": {
+                    "creation-qemu": "8.1.2",
+                    "ctime": "1702233049"
+                },
+                "proxmox_name": "ald-hq-audit1",
+                "proxmox_net0": {
+                    "bridge": "z20vn1",
+                    "mtu": "1",
+                    "virtio": "BC:24:11:41:B5:AC"
+                },
+                "proxmox_node": "r-pve1",
+                "proxmox_numa": 1,
+                "proxmox_ostype": "l26",
+                "proxmox_qmpstatus": "running",
+                "proxmox_scsihw": {
+                    "disk_image": "virtio-scsi-single"
+                },
+                "proxmox_smbios1": {
+                    "uuid": "eab3bafb-262c-4784-8a5d-3b0897151d43"
+                },
+                "proxmox_snapshots": [],
+                "proxmox_sockets": 1,
+                "proxmox_sshkeys": "ssh-rsa%20AAAAB3NzaC1yc2EAAAADAQABAAABgQCr6l0xXU3J2ojC9mAgVKpuyEbb5fYA9RCp1OIUWNDRpXFvqyFQYF%2F6ZrJqD1f4WwsMaUQeYIyAu4MMij1imzJkXiwUc%2BHIyrUwR9Ij28yJBvc37IwKEQ8%2B%2BfID6BeUgYUVDDoYnE7iuMIz4WwmWffgP1V7ysvGNV%2B7BXo79oXLUVm0f3CNNTd2Cr%2Bdq%2BRVlhiaBnKNHJeoFvQjKUcKvUjaCOakRynrUNFTK%2F%2FTKDcYFzUC94dh6ye1ZroGT5PTUnkCL42Muos0kNc9aAHK8gMQ8qIVvswExiwV99RB4l4pZ2Tv9k0Np423qexDk6r2c4PZqwvbvYb%2FHQ6krylYy2EEC1Y3%2F67FlyornHGTmLbphaqoPX725IUKSf4l4b5Cnn2F2V18V%2F2%2FOGDwIYugaaLHQRe%2FwGzUwdWmAbn%2FDatPYWI5rHeHLGFNiXdjkQQYSlDMfA2NZY2Lmm7JhgOjw82%2Bc6fRavAvR0mEZvRghKzC%2F4N2XAAc3Fozw%2F75IbA2PkM%3D%20ansible%40ald.ratners.ru",
+                "proxmox_status": "running",
+                "proxmox_tags": "ald_role_audit;ald_site_hq;project_ald;tmp-alse-1.7.4-max",
+                "proxmox_tags_parsed": [
+                    "ald_role_audit",
+                    "ald_site_hq",
+                    "project_ald",
+                    "tmp-alse-1.7.4-max"
+                ],
+                "proxmox_vga": "qxl,memory=16",
+                "proxmox_virtio0": {
+                    "cache": "writeback",
+                    "disk_image": "local-zfs:base-9014-disk-0/vm-107-disk-0",
+                    "size": "30G"
+                },
+                "proxmox_vmgenid": "7f8e3fcb-767b-4572-835f-08f85f6dd642",
+                "proxmox_vmid": 107,
+                "proxmox_vmtype": "qemu",
+                "repo_packages": [
+                    "mc",
+                    "astra-update",
+                    "htop",
+                    "sssd-tools"
+                ],
+                "repo_repolist": [
+                    {
+                        "components": "main contrib non-free",
+                        "distribution": "1.7_x86-64",
+                        "type": "deb",
+                        "urlpre": "http://download.astralinux.ru/astra/frozen/1.7_x86-64/1.7.4",
+                        "urlsuf": "repository-main"
+                    },
+                    {
+                        "components": "main contrib non-free",
+                        "distribution": "1.7_x86-64",
+                        "type": "deb",
+                        "urlpre": "http://download.astralinux.ru/astra/frozen/1.7_x86-64/1.7.4",
+                        "urlsuf": "repository-extended"
+                    },
+                    {
+                        "components": "main contrib non-free",
+                        "distribution": "1.7_x86-64",
+                        "type": "deb",
+                        "urlpre": "http://download.astralinux.ru/astra/frozen/1.7_x86-64/1.7.4",
+                        "urlsuf": "repository-update"
+                    },
+                    {
+                        "components": "main contrib non-free",
+                        "distribution": "1.7_x86-64",
+                        "type": "deb",
+                        "urlpre": "http://download.astralinux.ru/astra/frozen/1.7_x86-64/1.7.4",
+                        "urlsuf": "repository-base"
+                    },
+                    {
+                        "components": "main base",
+                        "distribution": "1.7_x86-64",
+                        "type": "deb",
+                        "urlpre": "https://dl.astralinux.ru/aldpro/frozen/01",
+                        "urlsuf": "2.2.0"
+                    }
+                ]
+            },
+            "ald-hq-cups1": {
+                "ansible_become": true,
+                "ansible_become_method": "sudo",
+                "ansible_host": "10.20.1.5",
+                "ansible_password": {
+                    "__ansible_vault": "$ANSIBLE_VAULT;1.1;AES256\n66613561323065373037613133303834303636623030376562663736663533613666316438356337\n3462363266613861316661396135363933653461396531650a353463363563656266393539633939\n63663566343662316130303336636261373830643562666264323631376662623035396231616431\n6638306334623765390a346433666133306465323235366337613537386336633134323039653032\n3061\n"
+                },
+                "ansible_pubkey": "/home/appc/.ssh/ald.ratners.ru_id_rsa.pub",
+                "ansible_python_interpreter": "/usr/bin/python3",
+                "ansible_sudo_pass": {
+                    "__ansible_vault": "$ANSIBLE_VAULT;1.1;AES256\n66613561323065373037613133303834303636623030376562663736663533613666316438356337\n3462363266613861316661396135363933653461396531650a353463363563656266393539633939\n63663566343662316130303336636261373830643562666264323631376662623035396231616431\n6638306334623765390a346433666133306465323235366337613537386336633134323039653032\n3061\n"
+                },
+                "ansible_user": "ansible",
+                "domain_admin": "admin",
+                "domain_firstdc_address": "192.168.126.57",
+                "domain_firstdc_name": "ald-firstdc",
+                "domain_forwarder": "192.168.126.1",
+                "domain_name": "ald.ratners.ru",
+                "domain_packages": [
+                    "aldpro-client"
+                ],
+                "domain_password": {
+                    "__ansible_vault": "$ANSIBLE_VAULT;1.1;AES256\n61303231393331356139363666333265326430346332613333626362626465353664643564613864\n6539303630303530316432396461356463373030383837650a373032383530366336343739393465\n34323763626535386131313635633133326666346536343561626139396366396436646364313130\n3266343334383230660a343733616464366439313261353935353065353038653737366265343332\n3561\n"
+                },
+                "network_dns_nameserver": [
+                    "{{ domain_firstdc_address }}"
+                ],
+                "network_dns_search": [
+                    "{{ domain_name }}",
+                    "r.ratners.ru",
+                    "ratners.ru"
+                ],
+                "network_ipv4_type": "convert",
+                "network_ipv6_disable": true,
+                "proxmox_agent": "1",
+                "proxmox_agent_interfaces": [
+                    {
+                        "ip-addresses": [
+                            "127.0.0.1/8",
+                            "::1/128"
+                        ],
+                        "mac-address": "00:00:00:00:00:00",
+                        "name": "lo"
+                    },
+                    {
+                        "ip-addresses": [
+                            "10.20.1.5/24"
+                        ],
+                        "mac-address": "bc:24:11:da:dd:62",
+                        "name": "eth0"
+                    }
+                ],
+                "proxmox_balloon": 512,
+                "proxmox_boot": "c",
+                "proxmox_bootdisk": "virtio0",
+                "proxmox_cipassword": "**********",
+                "proxmox_citype": "nocloud",
+                "proxmox_ciupgrade": 0,
+                "proxmox_ciuser": "ansible",
+                "proxmox_cores": 2,
+                "proxmox_cpu": "host",
+                "proxmox_digest": "7585a4c31f36a130ff2a401b65bf24a09be3ad73",
+                "proxmox_ide2": {
+                    "disk_image": "local-zfs:vm-108-cloudinit",
+                    "media": "cdrom",
+                    "size": "4M"
+                },
+                "proxmox_ipconfig0": {
+                    "ip": "dhcp"
+                },
+                "proxmox_machine": "q35",
+                "proxmox_memory": "4096",
+                "proxmox_meta": {
+                    "creation-qemu": "8.1.2",
+                    "ctime": "1702233049"
+                },
+                "proxmox_name": "ald-hq-cups1",
+                "proxmox_net0": {
+                    "bridge": "z20vn1",
+                    "mtu": "1",
+                    "virtio": "BC:24:11:DA:DD:62"
+                },
+                "proxmox_node": "r-pve1",
+                "proxmox_numa": 1,
+                "proxmox_ostype": "l26",
+                "proxmox_qmpstatus": "running",
+                "proxmox_scsihw": {
+                    "disk_image": "virtio-scsi-single"
+                },
+                "proxmox_smbios1": {
+                    "uuid": "5156069a-f4e9-48a0-8482-bdd6dc5f4b1a"
+                },
+                "proxmox_snapshots": [],
+                "proxmox_sockets": 1,
+                "proxmox_sshkeys": "ssh-rsa%20AAAAB3NzaC1yc2EAAAADAQABAAABgQCr6l0xXU3J2ojC9mAgVKpuyEbb5fYA9RCp1OIUWNDRpXFvqyFQYF%2F6ZrJqD1f4WwsMaUQeYIyAu4MMij1imzJkXiwUc%2BHIyrUwR9Ij28yJBvc37IwKEQ8%2B%2BfID6BeUgYUVDDoYnE7iuMIz4WwmWffgP1V7ysvGNV%2B7BXo79oXLUVm0f3CNNTd2Cr%2Bdq%2BRVlhiaBnKNHJeoFvQjKUcKvUjaCOakRynrUNFTK%2F%2FTKDcYFzUC94dh6ye1ZroGT5PTUnkCL42Muos0kNc9aAHK8gMQ8qIVvswExiwV99RB4l4pZ2Tv9k0Np423qexDk6r2c4PZqwvbvYb%2FHQ6krylYy2EEC1Y3%2F67FlyornHGTmLbphaqoPX725IUKSf4l4b5Cnn2F2V18V%2F2%2FOGDwIYugaaLHQRe%2FwGzUwdWmAbn%2FDatPYWI5rHeHLGFNiXdjkQQYSlDMfA2NZY2Lmm7JhgOjw82%2Bc6fRavAvR0mEZvRghKzC%2F4N2XAAc3Fozw%2F75IbA2PkM%3D%20ansible%40ald.ratners.ru",
+                "proxmox_status": "running",
+                "proxmox_tags": "ald_role_cups;ald_site_hq;project_ald;tmp-alse-1.7.4-max",
+                "proxmox_tags_parsed": [
+                    "ald_role_cups",
+                    "ald_site_hq",
+                    "project_ald",
+                    "tmp-alse-1.7.4-max"
+                ],
+                "proxmox_vga": "qxl,memory=16",
+                "proxmox_virtio0": {
+                    "cache": "writeback",
+                    "disk_image": "local-zfs:base-9014-disk-0/vm-108-disk-0",
+                    "size": "30G"
+                },
+                "proxmox_vmgenid": "0027c8b1-5b66-4e9a-b051-0a73c1467588",
+                "proxmox_vmid": 108,
+                "proxmox_vmtype": "qemu",
+                "repo_packages": [
+                    "mc",
+                    "astra-update",
+                    "htop",
+                    "sssd-tools"
+                ],
+                "repo_repolist": [
+                    {
+                        "components": "main contrib non-free",
+                        "distribution": "1.7_x86-64",
+                        "type": "deb",
+                        "urlpre": "http://download.astralinux.ru/astra/frozen/1.7_x86-64/1.7.4",
+                        "urlsuf": "repository-main"
+                    },
+                    {
+                        "components": "main contrib non-free",
+                        "distribution": "1.7_x86-64",
+                        "type": "deb",
+                        "urlpre": "http://download.astralinux.ru/astra/frozen/1.7_x86-64/1.7.4",
+                        "urlsuf": "repository-extended"
+                    },
+                    {
+                        "components": "main contrib non-free",
+                        "distribution": "1.7_x86-64",
+                        "type": "deb",
+                        "urlpre": "http://download.astralinux.ru/astra/frozen/1.7_x86-64/1.7.4",
+                        "urlsuf": "repository-update"
+                    },
+                    {
+                        "components": "main contrib non-free",
+                        "distribution": "1.7_x86-64",
+                        "type": "deb",
+                        "urlpre": "http://download.astralinux.ru/astra/frozen/1.7_x86-64/1.7.4",
+                        "urlsuf": "repository-base"
+                    },
+                    {
+                        "components": "main base",
+                        "distribution": "1.7_x86-64",
+                        "type": "deb",
+                        "urlpre": "https://dl.astralinux.ru/aldpro/frozen/01",
+                        "urlsuf": "2.2.0"
+                    }
+                ]
+            },
+            "ald-hq-dc1": {
+                "ansible_become": true,
+                "ansible_become_method": "sudo",
+                "ansible_host": "10.20.1.1",
+                "ansible_password": {
+                    "__ansible_vault": "$ANSIBLE_VAULT;1.1;AES256\n66613561323065373037613133303834303636623030376562663736663533613666316438356337\n3462363266613861316661396135363933653461396531650a353463363563656266393539633939\n63663566343662316130303336636261373830643562666264323631376662623035396231616431\n6638306334623765390a346433666133306465323235366337613537386336633134323039653032\n3061\n"
+                },
+                "ansible_pubkey": "/home/appc/.ssh/ald.ratners.ru_id_rsa.pub",
+                "ansible_python_interpreter": "/usr/bin/python3",
+                "ansible_sudo_pass": {
+                    "__ansible_vault": "$ANSIBLE_VAULT;1.1;AES256\n66613561323065373037613133303834303636623030376562663736663533613666316438356337\n3462363266613861316661396135363933653461396531650a353463363563656266393539633939\n63663566343662316130303336636261373830643562666264323631376662623035396231616431\n6638306334623765390a346433666133306465323235366337613537386336633134323039653032\n3061\n"
+                },
+                "ansible_user": "ansible",
+                "domain_admin": "admin",
+                "domain_firstdc_address": "192.168.126.57",
+                "domain_firstdc_name": "ald-firstdc",
+                "domain_forwarder": "192.168.126.1",
+                "domain_name": "ald.ratners.ru",
+                "domain_packages": [
+                    "mc",
+                    "aldpro-mp",
+                    "aldpro-gc",
+                    "aldpro-syncer",
+                    "aldpro-client"
+                ],
+                "domain_password": {
+                    "__ansible_vault": "$ANSIBLE_VAULT;1.1;AES256\n61303231393331356139363666333265326430346332613333626362626465353664643564613864\n6539303630303530316432396461356463373030383837650a373032383530366336343739393465\n34323763626535386131313635633133326666346536343561626139396366396436646364313130\n3266343334383230660a343733616464366439313261353935353065353038653737366265343332\n3561\n"
+                },
+                "network_dns_nameserver": [
+                    "{{ domain_firstdc_address }}"
+                ],
+                "network_dns_search": [
+                    "{{ domain_name }}",
+                    "r.ratners.ru",
+                    "ratners.ru"
+                ],
+                "network_ipv4_type": "convert",
+                "network_ipv6_disable": true,
+                "proxmox_agent": "1",
+                "proxmox_agent_interfaces": [
+                    {
+                        "ip-addresses": [
+                            "127.0.0.1/8",
+                            "::1/128"
+                        ],
+                        "mac-address": "00:00:00:00:00:00",
+                        "name": "lo"
+                    },
+                    {
+                        "ip-addresses": [
+                            "10.20.1.1/24"
+                        ],
+                        "mac-address": "bc:24:11:9c:2f:17",
+                        "name": "eth0"
+                    }
+                ],
+                "proxmox_balloon": 512,
+                "proxmox_boot": "c",
+                "proxmox_bootdisk": "virtio0",
+                "proxmox_cipassword": "**********",
+                "proxmox_citype": "nocloud",
+                "proxmox_ciupgrade": 0,
+                "proxmox_ciuser": "ansible",
+                "proxmox_cores": 6,
+                "proxmox_cpu": "host",
+                "proxmox_digest": "3359e30bb9920fd979e9077fa479babc29fb65ec",
+                "proxmox_ide2": {
+                    "disk_image": "local-zfs:vm-104-cloudinit",
+                    "media": "cdrom",
+                    "size": "4M"
+                },
+                "proxmox_ipconfig0": {
+                    "ip": "dhcp"
+                },
+                "proxmox_machine": "q35",
+                "proxmox_memory": "16384",
+                "proxmox_meta": {
+                    "creation-qemu": "8.1.2",
+                    "ctime": "1702233049"
+                },
+                "proxmox_name": "ald-hq-dc1",
+                "proxmox_net0": {
+                    "bridge": "z20vn1",
+                    "mtu": "1",
+                    "virtio": "BC:24:11:9C:2F:17"
+                },
+                "proxmox_node": "r-pve1",
+                "proxmox_numa": 1,
+                "proxmox_ostype": "l26",
+                "proxmox_qmpstatus": "running",
+                "proxmox_scsihw": {
+                    "disk_image": "virtio-scsi-single"
+                },
+                "proxmox_smbios1": {
+                    "uuid": "3b04ee7a-78ac-4964-a6a6-cfb43ae5c010"
+                },
+                "proxmox_snapshots": [],
+                "proxmox_sockets": 1,
+                "proxmox_sshkeys": "ssh-rsa%20AAAAB3NzaC1yc2EAAAADAQABAAABgQCr6l0xXU3J2ojC9mAgVKpuyEbb5fYA9RCp1OIUWNDRpXFvqyFQYF%2F6ZrJqD1f4WwsMaUQeYIyAu4MMij1imzJkXiwUc%2BHIyrUwR9Ij28yJBvc37IwKEQ8%2B%2BfID6BeUgYUVDDoYnE7iuMIz4WwmWffgP1V7ysvGNV%2B7BXo79oXLUVm0f3CNNTd2Cr%2Bdq%2BRVlhiaBnKNHJeoFvQjKUcKvUjaCOakRynrUNFTK%2F%2FTKDcYFzUC94dh6ye1ZroGT5PTUnkCL42Muos0kNc9aAHK8gMQ8qIVvswExiwV99RB4l4pZ2Tv9k0Np423qexDk6r2c4PZqwvbvYb%2FHQ6krylYy2EEC1Y3%2F67FlyornHGTmLbphaqoPX725IUKSf4l4b5Cnn2F2V18V%2F2%2FOGDwIYugaaLHQRe%2FwGzUwdWmAbn%2FDatPYWI5rHeHLGFNiXdjkQQYSlDMfA2NZY2Lmm7JhgOjw82%2Bc6fRavAvR0mEZvRghKzC%2F4N2XAAc3Fozw%2F75IbA2PkM%3D%20ansible%40ald.ratners.ru",
+                "proxmox_status": "running",
+                "proxmox_tags": "ald_role_dc;ald_site_hq;project_ald;tmp-alse-1.7.4-max",
+                "proxmox_tags_parsed": [
+                    "ald_role_dc",
+                    "ald_site_hq",
+                    "project_ald",
+                    "tmp-alse-1.7.4-max"
+                ],
+                "proxmox_vga": "qxl,memory=16",
+                "proxmox_virtio0": {
+                    "cache": "writeback",
+                    "disk_image": "local-zfs:base-9014-disk-0/vm-104-disk-0",
+                    "size": "60G"
+                },
+                "proxmox_vmgenid": "1a3df9a1-c18c-415c-9eae-6c85d6bb1ee9",
+                "proxmox_vmid": 104,
+                "proxmox_vmtype": "qemu",
+                "repo_packages": [
+                    "mc",
+                    "astra-update",
+                    "htop",
+                    "sssd-tools"
+                ],
+                "repo_repolist": [
+                    {
+                        "components": "main contrib non-free",
+                        "distribution": "1.7_x86-64",
+                        "type": "deb",
+                        "urlpre": "http://download.astralinux.ru/astra/frozen/1.7_x86-64/1.7.4",
+                        "urlsuf": "repository-main"
+                    },
+                    {
+                        "components": "main contrib non-free",
+                        "distribution": "1.7_x86-64",
+                        "type": "deb",
+                        "urlpre": "http://download.astralinux.ru/astra/frozen/1.7_x86-64/1.7.4",
+                        "urlsuf": "repository-extended"
+                    },
+                    {
+                        "components": "main contrib non-free",
+                        "distribution": "1.7_x86-64",
+                        "type": "deb",
+                        "urlpre": "http://download.astralinux.ru/astra/frozen/1.7_x86-64/1.7.4",
+                        "urlsuf": "repository-update"
+                    },
+                    {
+                        "components": "main contrib non-free",
+                        "distribution": "1.7_x86-64",
+                        "type": "deb",
+                        "urlpre": "http://download.astralinux.ru/astra/frozen/1.7_x86-64/1.7.4",
+                        "urlsuf": "repository-base"
+                    },
+                    {
+                        "components": "main base",
+                        "distribution": "1.7_x86-64",
+                        "type": "deb",
+                        "urlpre": "https://dl.astralinux.ru/aldpro/frozen/01",
+                        "urlsuf": "2.2.0"
+                    }
+                ]
+            },
+            "ald-hq-dc2": {
+                "ansible_become": true,
+                "ansible_become_method": "sudo",
+                "ansible_host": "10.20.1.2",
+                "ansible_password": {
+                    "__ansible_vault": "$ANSIBLE_VAULT;1.1;AES256\n66613561323065373037613133303834303636623030376562663736663533613666316438356337\n3462363266613861316661396135363933653461396531650a353463363563656266393539633939\n63663566343662316130303336636261373830643562666264323631376662623035396231616431\n6638306334623765390a346433666133306465323235366337613537386336633134323039653032\n3061\n"
+                },
+                "ansible_pubkey": "/home/appc/.ssh/ald.ratners.ru_id_rsa.pub",
+                "ansible_python_interpreter": "/usr/bin/python3",
+                "ansible_sudo_pass": {
+                    "__ansible_vault": "$ANSIBLE_VAULT;1.1;AES256\n66613561323065373037613133303834303636623030376562663736663533613666316438356337\n3462363266613861316661396135363933653461396531650a353463363563656266393539633939\n63663566343662316130303336636261373830643562666264323631376662623035396231616431\n6638306334623765390a346433666133306465323235366337613537386336633134323039653032\n3061\n"
+                },
+                "ansible_user": "ansible",
+                "domain_admin": "admin",
+                "domain_firstdc_address": "192.168.126.57",
+                "domain_firstdc_name": "ald-firstdc",
+                "domain_forwarder": "192.168.126.1",
+                "domain_name": "ald.ratners.ru",
+                "domain_packages": [
+                    "mc",
+                    "aldpro-mp",
+                    "aldpro-gc",
+                    "aldpro-syncer",
+                    "aldpro-client"
+                ],
+                "domain_password": {
+                    "__ansible_vault": "$ANSIBLE_VAULT;1.1;AES256\n61303231393331356139363666333265326430346332613333626362626465353664643564613864\n6539303630303530316432396461356463373030383837650a373032383530366336343739393465\n34323763626535386131313635633133326666346536343561626139396366396436646364313130\n3266343334383230660a343733616464366439313261353935353065353038653737366265343332\n3561\n"
+                },
+                "network_dns_nameserver": [
+                    "{{ domain_firstdc_address }}"
+                ],
+                "network_dns_search": [
+                    "{{ domain_name }}",
+                    "r.ratners.ru",
+                    "ratners.ru"
+                ],
+                "network_ipv4_type": "convert",
+                "network_ipv6_disable": true,
+                "proxmox_agent": "1",
+                "proxmox_agent_interfaces": [
+                    {
+                        "ip-addresses": [
+                            "127.0.0.1/8",
+                            "::1/128"
+                        ],
+                        "mac-address": "00:00:00:00:00:00",
+                        "name": "lo"
+                    },
+                    {
+                        "ip-addresses": [
+                            "10.20.1.2/24"
+                        ],
+                        "mac-address": "bc:24:11:27:1f:a1",
+                        "name": "eth0"
+                    }
+                ],
+                "proxmox_balloon": 512,
+                "proxmox_boot": "c",
+                "proxmox_bootdisk": "virtio0",
+                "proxmox_cipassword": "**********",
+                "proxmox_citype": "nocloud",
+                "proxmox_ciupgrade": 0,
+                "proxmox_ciuser": "ansible",
+                "proxmox_cores": 6,
+                "proxmox_cpu": "host",
+                "proxmox_digest": "4a0ca4a1c1a3910b98fd5ba7da4ae0c0e6c03874",
+                "proxmox_ide2": {
+                    "disk_image": "local-zfs:vm-105-cloudinit",
+                    "media": "cdrom",
+                    "size": "4M"
+                },
+                "proxmox_ipconfig0": {
+                    "ip": "dhcp"
+                },
+                "proxmox_machine": "q35",
+                "proxmox_memory": "8192",
+                "proxmox_meta": {
+                    "creation-qemu": "8.1.2",
+                    "ctime": "1702233049"
+                },
+                "proxmox_name": "ald-hq-dc2",
+                "proxmox_net0": {
+                    "bridge": "z20vn1",
+                    "mtu": "1",
+                    "virtio": "BC:24:11:27:1F:A1"
+                },
+                "proxmox_node": "r-pve1",
+                "proxmox_numa": 1,
+                "proxmox_ostype": "l26",
+                "proxmox_qmpstatus": "running",
+                "proxmox_scsihw": {
+                    "disk_image": "virtio-scsi-single"
+                },
+                "proxmox_smbios1": {
+                    "uuid": "e9648e1e-5447-435e-b8ec-24672f74cec6"
+                },
+                "proxmox_snapshots": [],
+                "proxmox_sockets": 1,
+                "proxmox_sshkeys": "ssh-rsa%20AAAAB3NzaC1yc2EAAAADAQABAAABgQCr6l0xXU3J2ojC9mAgVKpuyEbb5fYA9RCp1OIUWNDRpXFvqyFQYF%2F6ZrJqD1f4WwsMaUQeYIyAu4MMij1imzJkXiwUc%2BHIyrUwR9Ij28yJBvc37IwKEQ8%2B%2BfID6BeUgYUVDDoYnE7iuMIz4WwmWffgP1V7ysvGNV%2B7BXo79oXLUVm0f3CNNTd2Cr%2Bdq%2BRVlhiaBnKNHJeoFvQjKUcKvUjaCOakRynrUNFTK%2F%2FTKDcYFzUC94dh6ye1ZroGT5PTUnkCL42Muos0kNc9aAHK8gMQ8qIVvswExiwV99RB4l4pZ2Tv9k0Np423qexDk6r2c4PZqwvbvYb%2FHQ6krylYy2EEC1Y3%2F67FlyornHGTmLbphaqoPX725IUKSf4l4b5Cnn2F2V18V%2F2%2FOGDwIYugaaLHQRe%2FwGzUwdWmAbn%2FDatPYWI5rHeHLGFNiXdjkQQYSlDMfA2NZY2Lmm7JhgOjw82%2Bc6fRavAvR0mEZvRghKzC%2F4N2XAAc3Fozw%2F75IbA2PkM%3D%20ansible%40ald.ratners.ru",
+                "proxmox_status": "running",
+                "proxmox_tags": "ald_role_dc;ald_site_hq;project_ald;tmp-alse-1.7.4-max",
+                "proxmox_tags_parsed": [
+                    "ald_role_dc",
+                    "ald_site_hq",
+                    "project_ald",
+                    "tmp-alse-1.7.4-max"
+                ],
+                "proxmox_vga": "qxl,memory=16",
+                "proxmox_virtio0": {
+                    "cache": "writeback",
+                    "disk_image": "local-zfs:base-9014-disk-0/vm-105-disk-0",
+                    "size": "60G"
+                },
+                "proxmox_vmgenid": "653b1f3f-2285-433c-82ff-91a0ab237c2d",
+                "proxmox_vmid": 105,
+                "proxmox_vmtype": "qemu",
+                "repo_packages": [
+                    "mc",
+                    "astra-update",
+                    "htop",
+                    "sssd-tools"
+                ],
+                "repo_repolist": [
+                    {
+                        "components": "main contrib non-free",
+                        "distribution": "1.7_x86-64",
+                        "type": "deb",
+                        "urlpre": "http://download.astralinux.ru/astra/frozen/1.7_x86-64/1.7.4",
+                        "urlsuf": "repository-main"
+                    },
+                    {
+                        "components": "main contrib non-free",
+                        "distribution": "1.7_x86-64",
+                        "type": "deb",
+                        "urlpre": "http://download.astralinux.ru/astra/frozen/1.7_x86-64/1.7.4",
+                        "urlsuf": "repository-extended"
+                    },
+                    {
+                        "components": "main contrib non-free",
+                        "distribution": "1.7_x86-64",
+                        "type": "deb",
+                        "urlpre": "http://download.astralinux.ru/astra/frozen/1.7_x86-64/1.7.4",
+                        "urlsuf": "repository-update"
+                    },
+                    {
+                        "components": "main contrib non-free",
+                        "distribution": "1.7_x86-64",
+                        "type": "deb",
+                        "urlpre": "http://download.astralinux.ru/astra/frozen/1.7_x86-64/1.7.4",
+                        "urlsuf": "repository-base"
+                    },
+                    {
+                        "components": "main base",
+                        "distribution": "1.7_x86-64",
+                        "type": "deb",
+                        "urlpre": "https://dl.astralinux.ru/aldpro/frozen/01",
+                        "urlsuf": "2.2.0"
+                    }
+                ]
+            },
+            "ald-hq-fs1": {
+                "ansible_become": true,
+                "ansible_become_method": "sudo",
+                "ansible_host": "10.20.1.6",
+                "ansible_password": {
+                    "__ansible_vault": "$ANSIBLE_VAULT;1.1;AES256\n66613561323065373037613133303834303636623030376562663736663533613666316438356337\n3462363266613861316661396135363933653461396531650a353463363563656266393539633939\n63663566343662316130303336636261373830643562666264323631376662623035396231616431\n6638306334623765390a346433666133306465323235366337613537386336633134323039653032\n3061\n"
+                },
+                "ansible_pubkey": "/home/appc/.ssh/ald.ratners.ru_id_rsa.pub",
+                "ansible_python_interpreter": "/usr/bin/python3",
+                "ansible_sudo_pass": {
+                    "__ansible_vault": "$ANSIBLE_VAULT;1.1;AES256\n66613561323065373037613133303834303636623030376562663736663533613666316438356337\n3462363266613861316661396135363933653461396531650a353463363563656266393539633939\n63663566343662316130303336636261373830643562666264323631376662623035396231616431\n6638306334623765390a346433666133306465323235366337613537386336633134323039653032\n3061\n"
+                },
+                "ansible_user": "ansible",
+                "domain_admin": "admin",
+                "domain_firstdc_address": "192.168.126.57",
+                "domain_firstdc_name": "ald-firstdc",
+                "domain_forwarder": "192.168.126.1",
+                "domain_name": "ald.ratners.ru",
+                "domain_packages": [
+                    "aldpro-client"
+                ],
+                "domain_password": {
+                    "__ansible_vault": "$ANSIBLE_VAULT;1.1;AES256\n61303231393331356139363666333265326430346332613333626362626465353664643564613864\n6539303630303530316432396461356463373030383837650a373032383530366336343739393465\n34323763626535386131313635633133326666346536343561626139396366396436646364313130\n3266343334383230660a343733616464366439313261353935353065353038653737366265343332\n3561\n"
+                },
+                "network_dns_nameserver": [
+                    "{{ domain_firstdc_address }}"
+                ],
+                "network_dns_search": [
+                    "{{ domain_name }}",
+                    "r.ratners.ru",
+                    "ratners.ru"
+                ],
+                "network_ipv4_type": "convert",
+                "network_ipv6_disable": true,
+                "proxmox_agent": "1",
+                "proxmox_agent_interfaces": [
+                    {
+                        "ip-addresses": [
+                            "127.0.0.1/8",
+                            "::1/128"
+                        ],
+                        "mac-address": "00:00:00:00:00:00",
+                        "name": "lo"
+                    },
+                    {
+                        "ip-addresses": [
+                            "10.20.1.6/24"
+                        ],
+                        "mac-address": "bc:24:11:f8:ce:7a",
+                        "name": "eth0"
+                    }
+                ],
+                "proxmox_balloon": 512,
+                "proxmox_boot": "c",
+                "proxmox_bootdisk": "virtio0",
+                "proxmox_cipassword": "**********",
+                "proxmox_citype": "nocloud",
+                "proxmox_ciupgrade": 0,
+                "proxmox_ciuser": "ansible",
+                "proxmox_cores": 2,
+                "proxmox_cpu": "host",
+                "proxmox_digest": "900fb80efd8c6152da8a8cc7b0203f9ac2b064dc",
+                "proxmox_ide2": {
+                    "disk_image": "local-zfs:vm-109-cloudinit",
+                    "media": "cdrom",
+                    "size": "4M"
+                },
+                "proxmox_ipconfig0": {
+                    "ip": "dhcp"
+                },
+                "proxmox_machine": "q35",
+                "proxmox_memory": "4096",
+                "proxmox_meta": {
+                    "creation-qemu": "8.1.2",
+                    "ctime": "1702233049"
+                },
+                "proxmox_name": "ald-hq-fs1",
+                "proxmox_net0": {
+                    "bridge": "z20vn1",
+                    "mtu": "1",
+                    "virtio": "BC:24:11:F8:CE:7A"
+                },
+                "proxmox_node": "r-pve1",
+                "proxmox_numa": 1,
+                "proxmox_ostype": "l26",
+                "proxmox_qmpstatus": "running",
+                "proxmox_scsihw": {
+                    "disk_image": "virtio-scsi-single"
+                },
+                "proxmox_smbios1": {
+                    "uuid": "9d356fd3-8488-4f04-9490-5f02d5c38c09"
+                },
+                "proxmox_snapshots": [],
+                "proxmox_sockets": 1,
+                "proxmox_sshkeys": "ssh-rsa%20AAAAB3NzaC1yc2EAAAADAQABAAABgQCr6l0xXU3J2ojC9mAgVKpuyEbb5fYA9RCp1OIUWNDRpXFvqyFQYF%2F6ZrJqD1f4WwsMaUQeYIyAu4MMij1imzJkXiwUc%2BHIyrUwR9Ij28yJBvc37IwKEQ8%2B%2BfID6BeUgYUVDDoYnE7iuMIz4WwmWffgP1V7ysvGNV%2B7BXo79oXLUVm0f3CNNTd2Cr%2Bdq%2BRVlhiaBnKNHJeoFvQjKUcKvUjaCOakRynrUNFTK%2F%2FTKDcYFzUC94dh6ye1ZroGT5PTUnkCL42Muos0kNc9aAHK8gMQ8qIVvswExiwV99RB4l4pZ2Tv9k0Np423qexDk6r2c4PZqwvbvYb%2FHQ6krylYy2EEC1Y3%2F67FlyornHGTmLbphaqoPX725IUKSf4l4b5Cnn2F2V18V%2F2%2FOGDwIYugaaLHQRe%2FwGzUwdWmAbn%2FDatPYWI5rHeHLGFNiXdjkQQYSlDMfA2NZY2Lmm7JhgOjw82%2Bc6fRavAvR0mEZvRghKzC%2F4N2XAAc3Fozw%2F75IbA2PkM%3D%20ansible%40ald.ratners.ru",
+                "proxmox_status": "running",
+                "proxmox_tags": "ald_role_fs;ald_site_hq;project_ald;tmp-alse-1.7.4-max",
+                "proxmox_tags_parsed": [
+                    "ald_role_fs",
+                    "ald_site_hq",
+                    "project_ald",
+                    "tmp-alse-1.7.4-max"
+                ],
+                "proxmox_vga": "qxl,memory=16",
+                "proxmox_virtio0": {
+                    "cache": "writeback",
+                    "disk_image": "local-zfs:base-9014-disk-0/vm-109-disk-0",
+                    "size": "30G"
+                },
+                "proxmox_vmgenid": "dfe4f12b-5728-4614-ae94-9a1c14b0ceb2",
+                "proxmox_vmid": 109,
+                "proxmox_vmtype": "qemu",
+                "repo_packages": [
+                    "mc",
+                    "astra-update",
+                    "htop",
+                    "sssd-tools"
+                ],
+                "repo_repolist": [
+                    {
+                        "components": "main contrib non-free",
+                        "distribution": "1.7_x86-64",
+                        "type": "deb",
+                        "urlpre": "http://download.astralinux.ru/astra/frozen/1.7_x86-64/1.7.4",
+                        "urlsuf": "repository-main"
+                    },
+                    {
+                        "components": "main contrib non-free",
+                        "distribution": "1.7_x86-64",
+                        "type": "deb",
+                        "urlpre": "http://download.astralinux.ru/astra/frozen/1.7_x86-64/1.7.4",
+                        "urlsuf": "repository-extended"
+                    },
+                    {
+                        "components": "main contrib non-free",
+                        "distribution": "1.7_x86-64",
+                        "type": "deb",
+                        "urlpre": "http://download.astralinux.ru/astra/frozen/1.7_x86-64/1.7.4",
+                        "urlsuf": "repository-update"
+                    },
+                    {
+                        "components": "main contrib non-free",
+                        "distribution": "1.7_x86-64",
+                        "type": "deb",
+                        "urlpre": "http://download.astralinux.ru/astra/frozen/1.7_x86-64/1.7.4",
+                        "urlsuf": "repository-base"
+                    },
+                    {
+                        "components": "main base",
+                        "distribution": "1.7_x86-64",
+                        "type": "deb",
+                        "urlpre": "https://dl.astralinux.ru/aldpro/frozen/01",
+                        "urlsuf": "2.2.0"
+                    }
+                ]
+            },
+            "ald-hq-mon1": {
+                "ansible_become": true,
+                "ansible_become_method": "sudo",
+                "ansible_host": "10.20.1.3",
+                "ansible_password": {
+                    "__ansible_vault": "$ANSIBLE_VAULT;1.1;AES256\n66613561323065373037613133303834303636623030376562663736663533613666316438356337\n3462363266613861316661396135363933653461396531650a353463363563656266393539633939\n63663566343662316130303336636261373830643562666264323631376662623035396231616431\n6638306334623765390a346433666133306465323235366337613537386336633134323039653032\n3061\n"
+                },
+                "ansible_pubkey": "/home/appc/.ssh/ald.ratners.ru_id_rsa.pub",
+                "ansible_python_interpreter": "/usr/bin/python3",
+                "ansible_sudo_pass": {
+                    "__ansible_vault": "$ANSIBLE_VAULT;1.1;AES256\n66613561323065373037613133303834303636623030376562663736663533613666316438356337\n3462363266613861316661396135363933653461396531650a353463363563656266393539633939\n63663566343662316130303336636261373830643562666264323631376662623035396231616431\n6638306334623765390a346433666133306465323235366337613537386336633134323039653032\n3061\n"
+                },
+                "ansible_user": "ansible",
+                "domain_admin": "admin",
+                "domain_firstdc_address": "192.168.126.57",
+                "domain_firstdc_name": "ald-firstdc",
+                "domain_forwarder": "192.168.126.1",
+                "domain_name": "ald.ratners.ru",
+                "domain_packages": [
+                    "aldpro-client"
+                ],
+                "domain_password": {
+                    "__ansible_vault": "$ANSIBLE_VAULT;1.1;AES256\n61303231393331356139363666333265326430346332613333626362626465353664643564613864\n6539303630303530316432396461356463373030383837650a373032383530366336343739393465\n34323763626535386131313635633133326666346536343561626139396366396436646364313130\n3266343334383230660a343733616464366439313261353935353065353038653737366265343332\n3561\n"
+                },
+                "network_dns_nameserver": [
+                    "{{ domain_firstdc_address }}"
+                ],
+                "network_dns_search": [
+                    "{{ domain_name }}",
+                    "r.ratners.ru",
+                    "ratners.ru"
+                ],
+                "network_ipv4_type": "convert",
+                "network_ipv6_disable": true,
+                "proxmox_agent": "1",
+                "proxmox_agent_interfaces": [
+                    {
+                        "ip-addresses": [
+                            "127.0.0.1/8",
+                            "::1/128"
+                        ],
+                        "mac-address": "00:00:00:00:00:00",
+                        "name": "lo"
+                    },
+                    {
+                        "ip-addresses": [
+                            "10.20.1.3/24"
+                        ],
+                        "mac-address": "bc:24:11:40:e8:bb",
+                        "name": "eth0"
+                    }
+                ],
+                "proxmox_balloon": 512,
+                "proxmox_boot": "c",
+                "proxmox_bootdisk": "virtio0",
+                "proxmox_cipassword": "**********",
+                "proxmox_citype": "nocloud",
+                "proxmox_ciupgrade": 0,
+                "proxmox_ciuser": "ansible",
+                "proxmox_cores": 2,
+                "proxmox_cpu": "host",
+                "proxmox_digest": "b40f07c1eb70b7a82c7b07cf7f263e98169f46a9",
+                "proxmox_ide2": {
+                    "disk_image": "local-zfs:vm-106-cloudinit",
+                    "media": "cdrom",
+                    "size": "4M"
+                },
+                "proxmox_ipconfig0": {
+                    "ip": "dhcp"
+                },
+                "proxmox_machine": "q35",
+                "proxmox_memory": "4096",
+                "proxmox_meta": {
+                    "creation-qemu": "8.1.2",
+                    "ctime": "1702233049"
+                },
+                "proxmox_name": "ald-hq-mon1",
+                "proxmox_net0": {
+                    "bridge": "z20vn1",
+                    "mtu": "1",
+                    "virtio": "BC:24:11:40:E8:BB"
+                },
+                "proxmox_node": "r-pve1",
+                "proxmox_numa": 1,
+                "proxmox_ostype": "l26",
+                "proxmox_qmpstatus": "running",
+                "proxmox_scsihw": {
+                    "disk_image": "virtio-scsi-single"
+                },
+                "proxmox_smbios1": {
+                    "uuid": "363b8929-9bb0-43d0-84bc-ac39077909b7"
+                },
+                "proxmox_snapshots": [],
+                "proxmox_sockets": 1,
+                "proxmox_sshkeys": "ssh-rsa%20AAAAB3NzaC1yc2EAAAADAQABAAABgQCr6l0xXU3J2ojC9mAgVKpuyEbb5fYA9RCp1OIUWNDRpXFvqyFQYF%2F6ZrJqD1f4WwsMaUQeYIyAu4MMij1imzJkXiwUc%2BHIyrUwR9Ij28yJBvc37IwKEQ8%2B%2BfID6BeUgYUVDDoYnE7iuMIz4WwmWffgP1V7ysvGNV%2B7BXo79oXLUVm0f3CNNTd2Cr%2Bdq%2BRVlhiaBnKNHJeoFvQjKUcKvUjaCOakRynrUNFTK%2F%2FTKDcYFzUC94dh6ye1ZroGT5PTUnkCL42Muos0kNc9aAHK8gMQ8qIVvswExiwV99RB4l4pZ2Tv9k0Np423qexDk6r2c4PZqwvbvYb%2FHQ6krylYy2EEC1Y3%2F67FlyornHGTmLbphaqoPX725IUKSf4l4b5Cnn2F2V18V%2F2%2FOGDwIYugaaLHQRe%2FwGzUwdWmAbn%2FDatPYWI5rHeHLGFNiXdjkQQYSlDMfA2NZY2Lmm7JhgOjw82%2Bc6fRavAvR0mEZvRghKzC%2F4N2XAAc3Fozw%2F75IbA2PkM%3D%20ansible%40ald.ratners.ru",
+                "proxmox_status": "running",
+                "proxmox_tags": "ald_role_mon;ald_site_hq;project_ald;tmp-alse-1.7.4-max",
+                "proxmox_tags_parsed": [
+                    "ald_role_mon",
+                    "ald_site_hq",
+                    "project_ald",
+                    "tmp-alse-1.7.4-max"
+                ],
+                "proxmox_vga": "qxl,memory=16",
+                "proxmox_virtio0": {
+                    "cache": "writeback",
+                    "disk_image": "local-zfs:base-9014-disk-0/vm-106-disk-0",
+                    "size": "30G"
+                },
+                "proxmox_vmgenid": "89036e92-ef26-42a7-92ee-c34e7df03109",
+                "proxmox_vmid": 106,
+                "proxmox_vmtype": "qemu",
+                "repo_packages": [
+                    "mc",
+                    "astra-update",
+                    "htop",
+                    "sssd-tools"
+                ],
+                "repo_repolist": [
+                    {
+                        "components": "main contrib non-free",
+                        "distribution": "1.7_x86-64",
+                        "type": "deb",
+                        "urlpre": "http://download.astralinux.ru/astra/frozen/1.7_x86-64/1.7.4",
+                        "urlsuf": "repository-main"
+                    },
+                    {
+                        "components": "main contrib non-free",
+                        "distribution": "1.7_x86-64",
+                        "type": "deb",
+                        "urlpre": "http://download.astralinux.ru/astra/frozen/1.7_x86-64/1.7.4",
+                        "urlsuf": "repository-extended"
+                    },
+                    {
+                        "components": "main contrib non-free",
+                        "distribution": "1.7_x86-64",
+                        "type": "deb",
+                        "urlpre": "http://download.astralinux.ru/astra/frozen/1.7_x86-64/1.7.4",
+                        "urlsuf": "repository-update"
+                    },
+                    {
+                        "components": "main contrib non-free",
+                        "distribution": "1.7_x86-64",
+                        "type": "deb",
+                        "urlpre": "http://download.astralinux.ru/astra/frozen/1.7_x86-64/1.7.4",
+                        "urlsuf": "repository-base"
+                    },
+                    {
+                        "components": "main base",
+                        "distribution": "1.7_x86-64",
+                        "type": "deb",
+                        "urlpre": "https://dl.astralinux.ru/aldpro/frozen/01",
+                        "urlsuf": "2.2.0"
+                    }
+                ]
+            },
+            "ald-hq-repo1": {
+                "ansible_become": true,
+                "ansible_become_method": "sudo",
+                "ansible_host": "192.168.126.128",
+                "ansible_password": {
+                    "__ansible_vault": "$ANSIBLE_VAULT;1.1;AES256\n66613561323065373037613133303834303636623030376562663736663533613666316438356337\n3462363266613861316661396135363933653461396531650a353463363563656266393539633939\n63663566343662316130303336636261373830643562666264323631376662623035396231616431\n6638306334623765390a346433666133306465323235366337613537386336633134323039653032\n3061\n"
+                },
+                "ansible_pubkey": "/home/appc/.ssh/ald.ratners.ru_id_rsa.pub",
+                "ansible_python_interpreter": "/usr/bin/python3",
+                "ansible_sudo_pass": {
+                    "__ansible_vault": "$ANSIBLE_VAULT;1.1;AES256\n66613561323065373037613133303834303636623030376562663736663533613666316438356337\n3462363266613861316661396135363933653461396531650a353463363563656266393539633939\n63663566343662316130303336636261373830643562666264323631376662623035396231616431\n6638306334623765390a346433666133306465323235366337613537386336633134323039653032\n3061\n"
+                },
+                "ansible_user": "ansible",
+                "domain_admin": "admin",
+                "domain_firstdc_address": "192.168.126.57",
+                "domain_firstdc_name": "ald-firstdc",
+                "domain_forwarder": "192.168.126.1",
+                "domain_name": "ald.ratners.ru",
+                "domain_packages": [
+                    "aldpro-client"
+                ],
+                "domain_password": {
+                    "__ansible_vault": "$ANSIBLE_VAULT;1.1;AES256\n61303231393331356139363666333265326430346332613333626362626465353664643564613864\n6539303630303530316432396461356463373030383837650a373032383530366336343739393465\n34323763626535386131313635633133326666346536343561626139396366396436646364313130\n3266343334383230660a343733616464366439313261353935353065353038653737366265343332\n3561\n"
+                },
+                "network_dns_nameserver": [
+                    "{{ domain_firstdc_address }}"
+                ],
+                "network_dns_search": [
+                    "{{ domain_name }}",
+                    "r.ratners.ru",
+                    "ratners.ru"
+                ],
+                "network_ipv4_type": "convert",
+                "network_ipv6_disable": true,
+                "proxmox_agent": "1",
+                "proxmox_agent_interfaces": [
+                    {
+                        "ip-addresses": [
+                            "127.0.0.1/8",
+                            "::1/128"
+                        ],
+                        "mac-address": "00:00:00:00:00:00",
+                        "name": "lo"
+                    },
+                    {
+                        "ip-addresses": [
+                            "192.168.126.128/24"
+                        ],
+                        "mac-address": "bc:24:11:31:a0:33",
+                        "name": "eth0"
+                    }
+                ],
+                "proxmox_balloon": 512,
+                "proxmox_boot": "c",
+                "proxmox_bootdisk": "virtio0",
+                "proxmox_cipassword": "**********",
+                "proxmox_citype": "nocloud",
+                "proxmox_ciupgrade": 0,
+                "proxmox_ciuser": "ansible",
+                "proxmox_cores": 2,
+                "proxmox_cpu": "host",
+                "proxmox_digest": "0532e216d1417930109edd27bf2f010b9f100dd1",
+                "proxmox_ide2": {
+                    "disk_image": "local-zfs:vm-103-cloudinit",
+                    "media": "cdrom",
+                    "size": "4M"
+                },
+                "proxmox_ipconfig0": {
+                    "gw": "192.168.126.1",
+                    "ip": "192.168.126.128/24"
+                },
+                "proxmox_machine": "q35",
+                "proxmox_memory": "4096",
+                "proxmox_meta": {
+                    "creation-qemu": "8.1.2",
+                    "ctime": "1702233049"
+                },
+                "proxmox_name": "ald-hq-repo1",
+                "proxmox_nameserver": "192.168.126.57",
+                "proxmox_net0": {
+                    "bridge": "vmbr0",
+                    "mtu": "1",
+                    "virtio": "BC:24:11:31:A0:33"
+                },
+                "proxmox_node": "r-pve1",
+                "proxmox_numa": 1,
+                "proxmox_ostype": "l26",
+                "proxmox_qmpstatus": "running",
+                "proxmox_scsihw": {
+                    "disk_image": "virtio-scsi-single"
+                },
+                "proxmox_searchdomain": "ald.ratners.ru",
+                "proxmox_smbios1": {
+                    "uuid": "9f9e71b7-f1e0-4af0-8c83-146f074966bd"
+                },
+                "proxmox_snapshots": [],
+                "proxmox_sockets": 1,
+                "proxmox_sshkeys": "ssh-rsa%20AAAAB3NzaC1yc2EAAAADAQABAAABgQCr6l0xXU3J2ojC9mAgVKpuyEbb5fYA9RCp1OIUWNDRpXFvqyFQYF%2F6ZrJqD1f4WwsMaUQeYIyAu4MMij1imzJkXiwUc%2BHIyrUwR9Ij28yJBvc37IwKEQ8%2B%2BfID6BeUgYUVDDoYnE7iuMIz4WwmWffgP1V7ysvGNV%2B7BXo79oXLUVm0f3CNNTd2Cr%2Bdq%2BRVlhiaBnKNHJeoFvQjKUcKvUjaCOakRynrUNFTK%2F%2FTKDcYFzUC94dh6ye1ZroGT5PTUnkCL42Muos0kNc9aAHK8gMQ8qIVvswExiwV99RB4l4pZ2Tv9k0Np423qexDk6r2c4PZqwvbvYb%2FHQ6krylYy2EEC1Y3%2F67FlyornHGTmLbphaqoPX725IUKSf4l4b5Cnn2F2V18V%2F2%2FOGDwIYugaaLHQRe%2FwGzUwdWmAbn%2FDatPYWI5rHeHLGFNiXdjkQQYSlDMfA2NZY2Lmm7JhgOjw82%2Bc6fRavAvR0mEZvRghKzC%2F4N2XAAc3Fozw%2F75IbA2PkM%3D%20ansible%40ald.ratners.ru",
+                "proxmox_status": "running",
+                "proxmox_tags": "ald_role_repo;ald_site_hq;project_ald;tmp-alse-1.7.4-max",
+                "proxmox_tags_parsed": [
+                    "ald_role_repo",
+                    "ald_site_hq",
+                    "project_ald",
+                    "tmp-alse-1.7.4-max"
+                ],
+                "proxmox_vga": "qxl,memory=16",
+                "proxmox_virtio0": {
+                    "cache": "writeback",
+                    "disk_image": "local-zfs:base-9014-disk-0/vm-103-disk-0",
+                    "size": "30G"
+                },
+                "proxmox_vmgenid": "7a341c2d-469c-4c3e-a233-ffb0669461a6",
+                "proxmox_vmid": 103,
+                "proxmox_vmtype": "qemu",
+                "repo_packages": [
+                    "mc",
+                    "astra-update",
+                    "htop",
+                    "sssd-tools"
+                ],
+                "repo_repolist": [
+                    {
+                        "components": "main contrib non-free",
+                        "distribution": "1.7_x86-64",
+                        "type": "deb",
+                        "urlpre": "http://download.astralinux.ru/astra/frozen/1.7_x86-64/1.7.4",
+                        "urlsuf": "repository-main"
+                    },
+                    {
+                        "components": "main contrib non-free",
+                        "distribution": "1.7_x86-64",
+                        "type": "deb",
+                        "urlpre": "http://download.astralinux.ru/astra/frozen/1.7_x86-64/1.7.4",
+                        "urlsuf": "repository-extended"
+                    },
+                    {
+                        "components": "main contrib non-free",
+                        "distribution": "1.7_x86-64",
+                        "type": "deb",
+                        "urlpre": "http://download.astralinux.ru/astra/frozen/1.7_x86-64/1.7.4",
+                        "urlsuf": "repository-update"
+                    },
+                    {
+                        "components": "main contrib non-free",
+                        "distribution": "1.7_x86-64",
+                        "type": "deb",
+                        "urlpre": "http://download.astralinux.ru/astra/frozen/1.7_x86-64/1.7.4",
+                        "urlsuf": "repository-base"
+                    },
+                    {
+                        "components": "main base",
+                        "distribution": "1.7_x86-64",
+                        "type": "deb",
+                        "urlpre": "https://dl.astralinux.ru/aldpro/frozen/01",
+                        "urlsuf": "2.2.0"
+                    }
+                ]
+            },
+            "ald-hq-ws1": {
+                "ansible_become": true,
+                "ansible_become_method": "sudo",
+                "ansible_host": "10.20.1.7",
+                "ansible_password": {
+                    "__ansible_vault": "$ANSIBLE_VAULT;1.1;AES256\n66613561323065373037613133303834303636623030376562663736663533613666316438356337\n3462363266613861316661396135363933653461396531650a353463363563656266393539633939\n63663566343662316130303336636261373830643562666264323631376662623035396231616431\n6638306334623765390a346433666133306465323235366337613537386336633134323039653032\n3061\n"
+                },
+                "ansible_pubkey": "/home/appc/.ssh/ald.ratners.ru_id_rsa.pub",
+                "ansible_python_interpreter": "/usr/bin/python3",
+                "ansible_sudo_pass": {
+                    "__ansible_vault": "$ANSIBLE_VAULT;1.1;AES256\n66613561323065373037613133303834303636623030376562663736663533613666316438356337\n3462363266613861316661396135363933653461396531650a353463363563656266393539633939\n63663566343662316130303336636261373830643562666264323631376662623035396231616431\n6638306334623765390a346433666133306465323235366337613537386336633134323039653032\n3061\n"
+                },
+                "ansible_user": "ansible",
+                "domain_admin": "admin",
+                "domain_firstdc_address": "192.168.126.57",
+                "domain_firstdc_name": "ald-firstdc",
+                "domain_forwarder": "192.168.126.1",
+                "domain_name": "ald.ratners.ru",
+                "domain_packages": [
+                    "aldpro-client"
+                ],
+                "domain_password": {
+                    "__ansible_vault": "$ANSIBLE_VAULT;1.1;AES256\n61303231393331356139363666333265326430346332613333626362626465353664643564613864\n6539303630303530316432396461356463373030383837650a373032383530366336343739393465\n34323763626535386131313635633133326666346536343561626139396366396436646364313130\n3266343334383230660a343733616464366439313261353935353065353038653737366265343332\n3561\n"
+                },
+                "network_dns_nameserver": [
+                    "{{ domain_firstdc_address }}"
+                ],
+                "network_dns_search": [
+                    "{{ domain_name }}",
+                    "r.ratners.ru",
+                    "ratners.ru"
+                ],
+                "network_ipv4_type": "dhcp",
+                "network_ipv6_disable": true,
+                "proxmox_agent": "1",
+                "proxmox_agent_interfaces": [
+                    {
+                        "ip-addresses": [
+                            "127.0.0.1/8",
+                            "::1/128"
+                        ],
+                        "mac-address": "00:00:00:00:00:00",
+                        "name": "lo"
+                    },
+                    {
+                        "ip-addresses": [
+                            "10.20.1.7/24"
+                        ],
+                        "mac-address": "bc:24:11:d1:2c:03",
+                        "name": "eth0"
+                    }
+                ],
+                "proxmox_balloon": 512,
+                "proxmox_boot": "c",
+                "proxmox_bootdisk": "virtio0",
+                "proxmox_cipassword": "**********",
+                "proxmox_citype": "nocloud",
+                "proxmox_ciupgrade": 0,
+                "proxmox_ciuser": "ansible",
+                "proxmox_cores": 3,
+                "proxmox_cpu": "host",
+                "proxmox_digest": "bb54e6320af9a167b4ac94c03fdf976aea8c1cce",
+                "proxmox_ide2": {
+                    "disk_image": "local-zfs:vm-110-cloudinit",
+                    "media": "cdrom",
+                    "size": "4M"
+                },
+                "proxmox_ipconfig0": {
+                    "ip": "dhcp"
+                },
+                "proxmox_machine": "q35",
+                "proxmox_memory": "6144",
+                "proxmox_meta": {
+                    "creation-qemu": "8.1.2",
+                    "ctime": "1702233049"
+                },
+                "proxmox_name": "ald-hq-ws1",
+                "proxmox_net0": {
+                    "bridge": "z20vn1",
+                    "mtu": "1",
+                    "virtio": "BC:24:11:D1:2C:03"
+                },
+                "proxmox_node": "r-pve1",
+                "proxmox_numa": 1,
+                "proxmox_ostype": "l26",
+                "proxmox_qmpstatus": "running",
+                "proxmox_scsihw": {
+                    "disk_image": "virtio-scsi-single"
+                },
+                "proxmox_smbios1": {
+                    "uuid": "eedb6330-3f41-42bf-add6-62ac0061639c"
+                },
+                "proxmox_snapshots": [],
+                "proxmox_sockets": 1,
+                "proxmox_spice_enhancements": {
+                    "videostreaming": "all"
+                },
+                "proxmox_sshkeys": "ssh-rsa%20AAAAB3NzaC1yc2EAAAADAQABAAABgQCr6l0xXU3J2ojC9mAgVKpuyEbb5fYA9RCp1OIUWNDRpXFvqyFQYF%2F6ZrJqD1f4WwsMaUQeYIyAu4MMij1imzJkXiwUc%2BHIyrUwR9Ij28yJBvc37IwKEQ8%2B%2BfID6BeUgYUVDDoYnE7iuMIz4WwmWffgP1V7ysvGNV%2B7BXo79oXLUVm0f3CNNTd2Cr%2Bdq%2BRVlhiaBnKNHJeoFvQjKUcKvUjaCOakRynrUNFTK%2F%2FTKDcYFzUC94dh6ye1ZroGT5PTUnkCL42Muos0kNc9aAHK8gMQ8qIVvswExiwV99RB4l4pZ2Tv9k0Np423qexDk6r2c4PZqwvbvYb%2FHQ6krylYy2EEC1Y3%2F67FlyornHGTmLbphaqoPX725IUKSf4l4b5Cnn2F2V18V%2F2%2FOGDwIYugaaLHQRe%2FwGzUwdWmAbn%2FDatPYWI5rHeHLGFNiXdjkQQYSlDMfA2NZY2Lmm7JhgOjw82%2Bc6fRavAvR0mEZvRghKzC%2F4N2XAAc3Fozw%2F75IbA2PkM%3D%20ansible%40ald.ratners.ru",
+                "proxmox_status": "running",
+                "proxmox_tags": "ald_role_ws;ald_site_hq;project_ald;tmp-alse-1.7.4-base-gui",
+                "proxmox_tags_parsed": [
+                    "ald_role_ws",
+                    "ald_site_hq",
+                    "project_ald",
+                    "tmp-alse-1.7.4-base-gui"
+                ],
+                "proxmox_vga": "qxl,memory=16",
+                "proxmox_virtio0": {
+                    "cache": "writeback",
+                    "disk_image": "local-zfs:base-9016-disk-0/vm-110-disk-0",
+                    "size": "30G"
+                },
+                "proxmox_vmgenid": "fa07bc19-b707-481c-a700-0b14aa34cede",
+                "proxmox_vmid": 110,
+                "proxmox_vmtype": "qemu",
+                "repo_packages": [
+                    "mc",
+                    "astra-update",
+                    "htop",
+                    "sssd-tools"
+                ],
+                "repo_repolist": [
+                    {
+                        "components": "main contrib non-free",
+                        "distribution": "1.7_x86-64",
+                        "type": "deb",
+                        "urlpre": "http://download.astralinux.ru/astra/frozen/1.7_x86-64/1.7.4",
+                        "urlsuf": "repository-main"
+                    },
+                    {
+                        "components": "main contrib non-free",
+                        "distribution": "1.7_x86-64",
+                        "type": "deb",
+                        "urlpre": "http://download.astralinux.ru/astra/frozen/1.7_x86-64/1.7.4",
+                        "urlsuf": "repository-extended"
+                    },
+                    {
+                        "components": "main contrib non-free",
+                        "distribution": "1.7_x86-64",
+                        "type": "deb",
+                        "urlpre": "http://download.astralinux.ru/astra/frozen/1.7_x86-64/1.7.4",
+                        "urlsuf": "repository-update"
+                    },
+                    {
+                        "components": "main contrib non-free",
+                        "distribution": "1.7_x86-64",
+                        "type": "deb",
+                        "urlpre": "http://download.astralinux.ru/astra/frozen/1.7_x86-64/1.7.4",
+                        "urlsuf": "repository-base"
+                    },
+                    {
+                        "components": "main base",
+                        "distribution": "1.7_x86-64",
+                        "type": "deb",
+                        "urlpre": "https://dl.astralinux.ru/aldpro/frozen/01",
+                        "urlsuf": "2.2.0"
+                    }
+                ]
+            },
+            "ald-spb-dc1": {
+                "ansible_become": true,
+                "ansible_become_method": "sudo",
+                "ansible_host": "10.20.2.1",
+                "ansible_password": {
+                    "__ansible_vault": "$ANSIBLE_VAULT;1.1;AES256\n66613561323065373037613133303834303636623030376562663736663533613666316438356337\n3462363266613861316661396135363933653461396531650a353463363563656266393539633939\n63663566343662316130303336636261373830643562666264323631376662623035396231616431\n6638306334623765390a346433666133306465323235366337613537386336633134323039653032\n3061\n"
+                },
+                "ansible_pubkey": "/home/appc/.ssh/ald.ratners.ru_id_rsa.pub",
+                "ansible_python_interpreter": "/usr/bin/python3",
+                "ansible_sudo_pass": {
+                    "__ansible_vault": "$ANSIBLE_VAULT;1.1;AES256\n66613561323065373037613133303834303636623030376562663736663533613666316438356337\n3462363266613861316661396135363933653461396531650a353463363563656266393539633939\n63663566343662316130303336636261373830643562666264323631376662623035396231616431\n6638306334623765390a346433666133306465323235366337613537386336633134323039653032\n3061\n"
+                },
+                "ansible_user": "ansible",
+                "domain_admin": "admin",
+                "domain_firstdc_address": "192.168.126.57",
+                "domain_firstdc_name": "ald-firstdc",
+                "domain_forwarder": "192.168.126.1",
+                "domain_name": "ald.ratners.ru",
+                "domain_packages": [
+                    "mc",
+                    "aldpro-mp",
+                    "aldpro-gc",
+                    "aldpro-syncer",
+                    "aldpro-client"
+                ],
+                "domain_password": {
+                    "__ansible_vault": "$ANSIBLE_VAULT;1.1;AES256\n61303231393331356139363666333265326430346332613333626362626465353664643564613864\n6539303630303530316432396461356463373030383837650a373032383530366336343739393465\n34323763626535386131313635633133326666346536343561626139396366396436646364313130\n3266343334383230660a343733616464366439313261353935353065353038653737366265343332\n3561\n"
+                },
+                "network_dns_nameserver": [
+                    "{{ domain_firstdc_address }}"
+                ],
+                "network_dns_search": [
+                    "{{ domain_name }}",
+                    "r.ratners.ru",
+                    "ratners.ru"
+                ],
+                "network_ipv4_type": "convert",
+                "network_ipv6_disable": true,
+                "proxmox_agent": "1",
+                "proxmox_agent_interfaces": [
+                    {
+                        "ip-addresses": [
+                            "127.0.0.1/8",
+                            "::1/128"
+                        ],
+                        "mac-address": "00:00:00:00:00:00",
+                        "name": "lo"
+                    },
+                    {
+                        "ip-addresses": [
+                            "10.20.2.1/24"
+                        ],
+                        "mac-address": "bc:24:11:19:14:93",
+                        "name": "eth0"
+                    }
+                ],
+                "proxmox_balloon": 512,
+                "proxmox_boot": "c",
+                "proxmox_bootdisk": "virtio0",
+                "proxmox_cipassword": "**********",
+                "proxmox_citype": "nocloud",
+                "proxmox_ciupgrade": 0,
+                "proxmox_ciuser": "ansible",
+                "proxmox_cores": 6,
+                "proxmox_cpu": "host",
+                "proxmox_digest": "aacf8fa7f12efba407b8909d394ecb6292b665c2",
+                "proxmox_ide2": {
+                    "disk_image": "local-zfs:vm-111-cloudinit",
+                    "media": "cdrom",
+                    "size": "4M"
+                },
+                "proxmox_ipconfig0": {
+                    "ip": "dhcp"
+                },
+                "proxmox_machine": "q35",
+                "proxmox_memory": "16384",
+                "proxmox_meta": {
+                    "creation-qemu": "8.1.2",
+                    "ctime": "1702233049"
+                },
+                "proxmox_name": "ald-spb-dc1",
+                "proxmox_net0": {
+                    "bridge": "z20vn2",
+                    "mtu": "1",
+                    "virtio": "BC:24:11:19:14:93"
+                },
+                "proxmox_node": "r-pve1",
+                "proxmox_numa": 1,
+                "proxmox_ostype": "l26",
+                "proxmox_qmpstatus": "running",
+                "proxmox_scsihw": {
+                    "disk_image": "virtio-scsi-single"
+                },
+                "proxmox_smbios1": {
+                    "uuid": "54a76ee5-765d-4e57-b5a9-03a9cd44330f"
+                },
+                "proxmox_snapshots": [],
+                "proxmox_sockets": 1,
+                "proxmox_sshkeys": "ssh-rsa%20AAAAB3NzaC1yc2EAAAADAQABAAABgQCr6l0xXU3J2ojC9mAgVKpuyEbb5fYA9RCp1OIUWNDRpXFvqyFQYF%2F6ZrJqD1f4WwsMaUQeYIyAu4MMij1imzJkXiwUc%2BHIyrUwR9Ij28yJBvc37IwKEQ8%2B%2BfID6BeUgYUVDDoYnE7iuMIz4WwmWffgP1V7ysvGNV%2B7BXo79oXLUVm0f3CNNTd2Cr%2Bdq%2BRVlhiaBnKNHJeoFvQjKUcKvUjaCOakRynrUNFTK%2F%2FTKDcYFzUC94dh6ye1ZroGT5PTUnkCL42Muos0kNc9aAHK8gMQ8qIVvswExiwV99RB4l4pZ2Tv9k0Np423qexDk6r2c4PZqwvbvYb%2FHQ6krylYy2EEC1Y3%2F67FlyornHGTmLbphaqoPX725IUKSf4l4b5Cnn2F2V18V%2F2%2FOGDwIYugaaLHQRe%2FwGzUwdWmAbn%2FDatPYWI5rHeHLGFNiXdjkQQYSlDMfA2NZY2Lmm7JhgOjw82%2Bc6fRavAvR0mEZvRghKzC%2F4N2XAAc3Fozw%2F75IbA2PkM%3D%20ansible%40ald.ratners.ru",
+                "proxmox_status": "running",
+                "proxmox_tags": "ald_role_dc;ald_site_spb;project_ald;tmp-alse-1.7.4-max",
+                "proxmox_tags_parsed": [
+                    "ald_role_dc",
+                    "ald_site_spb",
+                    "project_ald",
+                    "tmp-alse-1.7.4-max"
+                ],
+                "proxmox_vga": "qxl,memory=16",
+                "proxmox_virtio0": {
+                    "cache": "writeback",
+                    "disk_image": "local-zfs:base-9014-disk-0/vm-111-disk-0",
+                    "size": "60G"
+                },
+                "proxmox_vmgenid": "a322a2a1-92a5-40fa-9a45-20cd000736bf",
+                "proxmox_vmid": 111,
+                "proxmox_vmtype": "qemu",
+                "repo_packages": [
+                    "mc",
+                    "astra-update",
+                    "htop",
+                    "sssd-tools"
+                ],
+                "repo_repolist": [
+                    {
+                        "components": "main contrib non-free",
+                        "distribution": "1.7_x86-64",
+                        "type": "deb",
+                        "urlpre": "http://download.astralinux.ru/astra/frozen/1.7_x86-64/1.7.4",
+                        "urlsuf": "repository-main"
+                    },
+                    {
+                        "components": "main contrib non-free",
+                        "distribution": "1.7_x86-64",
+                        "type": "deb",
+                        "urlpre": "http://download.astralinux.ru/astra/frozen/1.7_x86-64/1.7.4",
+                        "urlsuf": "repository-extended"
+                    },
+                    {
+                        "components": "main contrib non-free",
+                        "distribution": "1.7_x86-64",
+                        "type": "deb",
+                        "urlpre": "http://download.astralinux.ru/astra/frozen/1.7_x86-64/1.7.4",
+                        "urlsuf": "repository-update"
+                    },
+                    {
+                        "components": "main contrib non-free",
+                        "distribution": "1.7_x86-64",
+                        "type": "deb",
+                        "urlpre": "http://download.astralinux.ru/astra/frozen/1.7_x86-64/1.7.4",
+                        "urlsuf": "repository-base"
+                    },
+                    {
+                        "components": "main base",
+                        "distribution": "1.7_x86-64",
+                        "type": "deb",
+                        "urlpre": "https://dl.astralinux.ru/aldpro/frozen/01",
+                        "urlsuf": "2.2.0"
+                    }
+                ]
+            },
+            "ald-spb-dc2": {
+                "ansible_become": true,
+                "ansible_become_method": "sudo",
+                "ansible_host": "10.20.2.2",
+                "ansible_password": {
+                    "__ansible_vault": "$ANSIBLE_VAULT;1.1;AES256\n66613561323065373037613133303834303636623030376562663736663533613666316438356337\n3462363266613861316661396135363933653461396531650a353463363563656266393539633939\n63663566343662316130303336636261373830643562666264323631376662623035396231616431\n6638306334623765390a346433666133306465323235366337613537386336633134323039653032\n3061\n"
+                },
+                "ansible_pubkey": "/home/appc/.ssh/ald.ratners.ru_id_rsa.pub",
+                "ansible_python_interpreter": "/usr/bin/python3",
+                "ansible_sudo_pass": {
+                    "__ansible_vault": "$ANSIBLE_VAULT;1.1;AES256\n66613561323065373037613133303834303636623030376562663736663533613666316438356337\n3462363266613861316661396135363933653461396531650a353463363563656266393539633939\n63663566343662316130303336636261373830643562666264323631376662623035396231616431\n6638306334623765390a346433666133306465323235366337613537386336633134323039653032\n3061\n"
+                },
+                "ansible_user": "ansible",
+                "domain_admin": "admin",
+                "domain_firstdc_address": "192.168.126.57",
+                "domain_firstdc_name": "ald-firstdc",
+                "domain_forwarder": "192.168.126.1",
+                "domain_name": "ald.ratners.ru",
+                "domain_packages": [
+                    "mc",
+                    "aldpro-mp",
+                    "aldpro-gc",
+                    "aldpro-syncer",
+                    "aldpro-client"
+                ],
+                "domain_password": {
+                    "__ansible_vault": "$ANSIBLE_VAULT;1.1;AES256\n61303231393331356139363666333265326430346332613333626362626465353664643564613864\n6539303630303530316432396461356463373030383837650a373032383530366336343739393465\n34323763626535386131313635633133326666346536343561626139396366396436646364313130\n3266343334383230660a343733616464366439313261353935353065353038653737366265343332\n3561\n"
+                },
+                "network_dns_nameserver": [
+                    "{{ domain_firstdc_address }}"
+                ],
+                "network_dns_search": [
+                    "{{ domain_name }}",
+                    "r.ratners.ru",
+                    "ratners.ru"
+                ],
+                "network_ipv4_type": "convert",
+                "network_ipv6_disable": true,
+                "proxmox_agent": "1",
+                "proxmox_agent_interfaces": [
+                    {
+                        "ip-addresses": [
+                            "127.0.0.1/8",
+                            "::1/128"
+                        ],
+                        "mac-address": "00:00:00:00:00:00",
+                        "name": "lo"
+                    },
+                    {
+                        "ip-addresses": [
+                            "10.20.2.2/24"
+                        ],
+                        "mac-address": "bc:24:11:72:09:70",
+                        "name": "eth0"
+                    }
+                ],
+                "proxmox_balloon": 512,
+                "proxmox_boot": "c",
+                "proxmox_bootdisk": "virtio0",
+                "proxmox_cipassword": "**********",
+                "proxmox_citype": "nocloud",
+                "proxmox_ciupgrade": 0,
+                "proxmox_ciuser": "ansible",
+                "proxmox_cores": 6,
+                "proxmox_cpu": "host",
+                "proxmox_digest": "ad0ee2f475b4255fcbd1672ddf3d8cd8847862be",
+                "proxmox_ide2": {
+                    "disk_image": "local-zfs:vm-112-cloudinit",
+                    "media": "cdrom",
+                    "size": "4M"
+                },
+                "proxmox_ipconfig0": {
+                    "ip": "dhcp"
+                },
+                "proxmox_machine": "q35",
+                "proxmox_memory": "8192",
+                "proxmox_meta": {
+                    "creation-qemu": "8.1.2",
+                    "ctime": "1702233049"
+                },
+                "proxmox_name": "ald-spb-dc2",
+                "proxmox_net0": {
+                    "bridge": "z20vn2",
+                    "mtu": "1",
+                    "virtio": "BC:24:11:72:09:70"
+                },
+                "proxmox_node": "r-pve1",
+                "proxmox_numa": 1,
+                "proxmox_ostype": "l26",
+                "proxmox_qmpstatus": "running",
+                "proxmox_scsihw": {
+                    "disk_image": "virtio-scsi-single"
+                },
+                "proxmox_smbios1": {
+                    "uuid": "e165ef72-f5e5-473f-afef-ddd628ae6d16"
+                },
+                "proxmox_snapshots": [],
+                "proxmox_sockets": 1,
+                "proxmox_sshkeys": "ssh-rsa%20AAAAB3NzaC1yc2EAAAADAQABAAABgQCr6l0xXU3J2ojC9mAgVKpuyEbb5fYA9RCp1OIUWNDRpXFvqyFQYF%2F6ZrJqD1f4WwsMaUQeYIyAu4MMij1imzJkXiwUc%2BHIyrUwR9Ij28yJBvc37IwKEQ8%2B%2BfID6BeUgYUVDDoYnE7iuMIz4WwmWffgP1V7ysvGNV%2B7BXo79oXLUVm0f3CNNTd2Cr%2Bdq%2BRVlhiaBnKNHJeoFvQjKUcKvUjaCOakRynrUNFTK%2F%2FTKDcYFzUC94dh6ye1ZroGT5PTUnkCL42Muos0kNc9aAHK8gMQ8qIVvswExiwV99RB4l4pZ2Tv9k0Np423qexDk6r2c4PZqwvbvYb%2FHQ6krylYy2EEC1Y3%2F67FlyornHGTmLbphaqoPX725IUKSf4l4b5Cnn2F2V18V%2F2%2FOGDwIYugaaLHQRe%2FwGzUwdWmAbn%2FDatPYWI5rHeHLGFNiXdjkQQYSlDMfA2NZY2Lmm7JhgOjw82%2Bc6fRavAvR0mEZvRghKzC%2F4N2XAAc3Fozw%2F75IbA2PkM%3D%20ansible%40ald.ratners.ru",
+                "proxmox_status": "running",
+                "proxmox_tags": "ald_role_dc;ald_site_spb;project_ald;tmp-alse-1.7.4-max",
+                "proxmox_tags_parsed": [
+                    "ald_role_dc",
+                    "ald_site_spb",
+                    "project_ald",
+                    "tmp-alse-1.7.4-max"
+                ],
+                "proxmox_vga": "qxl,memory=16",
+                "proxmox_virtio0": {
+                    "cache": "writeback",
+                    "disk_image": "local-zfs:base-9014-disk-0/vm-112-disk-0",
+                    "size": "60G"
+                },
+                "proxmox_vmgenid": "551fa43e-c277-49ee-afbf-429e5fbd0bfe",
+                "proxmox_vmid": 112,
+                "proxmox_vmtype": "qemu",
+                "repo_packages": [
+                    "mc",
+                    "astra-update",
+                    "htop",
+                    "sssd-tools"
+                ],
+                "repo_repolist": [
+                    {
+                        "components": "main contrib non-free",
+                        "distribution": "1.7_x86-64",
+                        "type": "deb",
+                        "urlpre": "http://download.astralinux.ru/astra/frozen/1.7_x86-64/1.7.4",
+                        "urlsuf": "repository-main"
+                    },
+                    {
+                        "components": "main contrib non-free",
+                        "distribution": "1.7_x86-64",
+                        "type": "deb",
+                        "urlpre": "http://download.astralinux.ru/astra/frozen/1.7_x86-64/1.7.4",
+                        "urlsuf": "repository-extended"
+                    },
+                    {
+                        "components": "main contrib non-free",
+                        "distribution": "1.7_x86-64",
+                        "type": "deb",
+                        "urlpre": "http://download.astralinux.ru/astra/frozen/1.7_x86-64/1.7.4",
+                        "urlsuf": "repository-update"
+                    },
+                    {
+                        "components": "main contrib non-free",
+                        "distribution": "1.7_x86-64",
+                        "type": "deb",
+                        "urlpre": "http://download.astralinux.ru/astra/frozen/1.7_x86-64/1.7.4",
+                        "urlsuf": "repository-base"
+                    },
+                    {
+                        "components": "main base",
+                        "distribution": "1.7_x86-64",
+                        "type": "deb",
+                        "urlpre": "https://dl.astralinux.ru/aldpro/frozen/01",
+                        "urlsuf": "2.2.0"
+                    }
+                ]
+            },
+            "ald-spb-ws1": {
+                "ansible_become": true,
+                "ansible_become_method": "sudo",
+                "ansible_host": "10.20.2.3",
+                "ansible_password": {
+                    "__ansible_vault": "$ANSIBLE_VAULT;1.1;AES256\n66613561323065373037613133303834303636623030376562663736663533613666316438356337\n3462363266613861316661396135363933653461396531650a353463363563656266393539633939\n63663566343662316130303336636261373830643562666264323631376662623035396231616431\n6638306334623765390a346433666133306465323235366337613537386336633134323039653032\n3061\n"
+                },
+                "ansible_pubkey": "/home/appc/.ssh/ald.ratners.ru_id_rsa.pub",
+                "ansible_python_interpreter": "/usr/bin/python3",
+                "ansible_sudo_pass": {
+                    "__ansible_vault": "$ANSIBLE_VAULT;1.1;AES256\n66613561323065373037613133303834303636623030376562663736663533613666316438356337\n3462363266613861316661396135363933653461396531650a353463363563656266393539633939\n63663566343662316130303336636261373830643562666264323631376662623035396231616431\n6638306334623765390a346433666133306465323235366337613537386336633134323039653032\n3061\n"
+                },
+                "ansible_user": "ansible",
+                "domain_admin": "admin",
+                "domain_firstdc_address": "192.168.126.57",
+                "domain_firstdc_name": "ald-firstdc",
+                "domain_forwarder": "192.168.126.1",
+                "domain_name": "ald.ratners.ru",
+                "domain_packages": [
+                    "aldpro-client"
+                ],
+                "domain_password": {
+                    "__ansible_vault": "$ANSIBLE_VAULT;1.1;AES256\n61303231393331356139363666333265326430346332613333626362626465353664643564613864\n6539303630303530316432396461356463373030383837650a373032383530366336343739393465\n34323763626535386131313635633133326666346536343561626139396366396436646364313130\n3266343334383230660a343733616464366439313261353935353065353038653737366265343332\n3561\n"
+                },
+                "network_dns_nameserver": [
+                    "{{ domain_firstdc_address }}"
+                ],
+                "network_dns_search": [
+                    "{{ domain_name }}",
+                    "r.ratners.ru",
+                    "ratners.ru"
+                ],
+                "network_ipv4_type": "dhcp",
+                "network_ipv6_disable": true,
+                "proxmox_agent": "1",
+                "proxmox_agent_interfaces": [
+                    {
+                        "ip-addresses": [
+                            "127.0.0.1/8",
+                            "::1/128"
+                        ],
+                        "mac-address": "00:00:00:00:00:00",
+                        "name": "lo"
+                    },
+                    {
+                        "ip-addresses": [
+                            "10.20.2.3/24"
+                        ],
+                        "mac-address": "bc:24:11:4f:3f:26",
+                        "name": "eth0"
+                    }
+                ],
+                "proxmox_balloon": 512,
+                "proxmox_boot": "c",
+                "proxmox_bootdisk": "virtio0",
+                "proxmox_cipassword": "**********",
+                "proxmox_citype": "nocloud",
+                "proxmox_ciupgrade": 0,
+                "proxmox_ciuser": "ansible",
+                "proxmox_cores": 3,
+                "proxmox_cpu": "host",
+                "proxmox_digest": "77961d7b117457ff1d4480d5a8195aa491bba30e",
+                "proxmox_ide2": {
+                    "disk_image": "local-zfs:vm-113-cloudinit",
+                    "media": "cdrom",
+                    "size": "4M"
+                },
+                "proxmox_ipconfig0": {
+                    "ip": "dhcp"
+                },
+                "proxmox_machine": "q35",
+                "proxmox_memory": "6144",
+                "proxmox_meta": {
+                    "creation-qemu": "8.1.2",
+                    "ctime": "1702233049"
+                },
+                "proxmox_name": "ald-spb-ws1",
+                "proxmox_net0": {
+                    "bridge": "z20vn2",
+                    "mtu": "1",
+                    "virtio": "BC:24:11:4F:3F:26"
+                },
+                "proxmox_node": "r-pve1",
+                "proxmox_numa": 1,
+                "proxmox_ostype": "l26",
+                "proxmox_qmpstatus": "running",
+                "proxmox_scsihw": {
+                    "disk_image": "virtio-scsi-single"
+                },
+                "proxmox_smbios1": {
+                    "uuid": "4a340921-75f5-448c-bf96-2418d62e5d30"
+                },
+                "proxmox_snapshots": [],
+                "proxmox_sockets": 1,
+                "proxmox_spice_enhancements": {
+                    "videostreaming": "all"
+                },
+                "proxmox_sshkeys": "ssh-rsa%20AAAAB3NzaC1yc2EAAAADAQABAAABgQCr6l0xXU3J2ojC9mAgVKpuyEbb5fYA9RCp1OIUWNDRpXFvqyFQYF%2F6ZrJqD1f4WwsMaUQeYIyAu4MMij1imzJkXiwUc%2BHIyrUwR9Ij28yJBvc37IwKEQ8%2B%2BfID6BeUgYUVDDoYnE7iuMIz4WwmWffgP1V7ysvGNV%2B7BXo79oXLUVm0f3CNNTd2Cr%2Bdq%2BRVlhiaBnKNHJeoFvQjKUcKvUjaCOakRynrUNFTK%2F%2FTKDcYFzUC94dh6ye1ZroGT5PTUnkCL42Muos0kNc9aAHK8gMQ8qIVvswExiwV99RB4l4pZ2Tv9k0Np423qexDk6r2c4PZqwvbvYb%2FHQ6krylYy2EEC1Y3%2F67FlyornHGTmLbphaqoPX725IUKSf4l4b5Cnn2F2V18V%2F2%2FOGDwIYugaaLHQRe%2FwGzUwdWmAbn%2FDatPYWI5rHeHLGFNiXdjkQQYSlDMfA2NZY2Lmm7JhgOjw82%2Bc6fRavAvR0mEZvRghKzC%2F4N2XAAc3Fozw%2F75IbA2PkM%3D%20ansible%40ald.ratners.ru",
+                "proxmox_status": "running",
+                "proxmox_tags": "ald_role_ws;ald_site_spb;project_ald;tmp-alse-1.7.4-base-gui",
+                "proxmox_tags_parsed": [
+                    "ald_role_ws",
+                    "ald_site_spb",
+                    "project_ald",
+                    "tmp-alse-1.7.4-base-gui"
+                ],
+                "proxmox_vga": "qxl,memory=16",
+                "proxmox_virtio0": {
+                    "cache": "writeback",
+                    "disk_image": "local-zfs:base-9016-disk-0/vm-113-disk-0",
+                    "size": "30G"
+                },
+                "proxmox_vmgenid": "cbd85776-ef67-4b4a-814c-414560e3a46b",
+                "proxmox_vmid": 113,
+                "proxmox_vmtype": "qemu",
+                "repo_packages": [
+                    "mc",
+                    "astra-update",
+                    "htop",
+                    "sssd-tools"
+                ],
+                "repo_repolist": [
+                    {
+                        "components": "main contrib non-free",
+                        "distribution": "1.7_x86-64",
+                        "type": "deb",
+                        "urlpre": "http://download.astralinux.ru/astra/frozen/1.7_x86-64/1.7.4",
+                        "urlsuf": "repository-main"
+                    },
+                    {
+                        "components": "main contrib non-free",
+                        "distribution": "1.7_x86-64",
+                        "type": "deb",
+                        "urlpre": "http://download.astralinux.ru/astra/frozen/1.7_x86-64/1.7.4",
+                        "urlsuf": "repository-extended"
+                    },
+                    {
+                        "components": "main contrib non-free",
+                        "distribution": "1.7_x86-64",
+                        "type": "deb",
+                        "urlpre": "http://download.astralinux.ru/astra/frozen/1.7_x86-64/1.7.4",
+                        "urlsuf": "repository-update"
+                    },
+                    {
+                        "components": "main contrib non-free",
+                        "distribution": "1.7_x86-64",
+                        "type": "deb",
+                        "urlpre": "http://download.astralinux.ru/astra/frozen/1.7_x86-64/1.7.4",
+                        "urlsuf": "repository-base"
+                    },
+                    {
+                        "components": "main base",
+                        "distribution": "1.7_x86-64",
+                        "type": "deb",
+                        "urlpre": "https://dl.astralinux.ru/aldpro/frozen/01",
+                        "urlsuf": "2.2.0"
+                    }
+                ]
+            },
+            "r-pve1": {
+                "ansible_become": true,
+                "ansible_become_method": "sudo",
+                "ansible_password": {
+                    "__ansible_vault": "$ANSIBLE_VAULT;1.1;AES256\n66613561323065373037613133303834303636623030376562663736663533613666316438356337\n3462363266613861316661396135363933653461396531650a353463363563656266393539633939\n63663566343662316130303336636261373830643562666264323631376662623035396231616431\n6638306334623765390a346433666133306465323235366337613537386336633134323039653032\n3061\n"
+                },
+                "ansible_pubkey": "/home/appc/.ssh/ald.ratners.ru_id_rsa.pub",
+                "ansible_python_interpreter": "/usr/bin/python3",
+                "ansible_sudo_pass": {
+                    "__ansible_vault": "$ANSIBLE_VAULT;1.1;AES256\n66613561323065373037613133303834303636623030376562663736663533613666316438356337\n3462363266613861316661396135363933653461396531650a353463363563656266393539633939\n63663566343662316130303336636261373830643562666264323631376662623035396231616431\n6638306334623765390a346433666133306465323235366337613537386336633134323039653032\n3061\n"
+                },
+                "ansible_user": "ansible",
+                "domain_admin": "admin",
+                "domain_firstdc_address": "192.168.126.57",
+                "domain_firstdc_name": "ald-firstdc",
+                "domain_forwarder": "192.168.126.1",
+                "domain_name": "ald.ratners.ru",
+                "domain_packages": [
+                    "aldpro-client"
+                ],
+                "domain_password": {
+                    "__ansible_vault": "$ANSIBLE_VAULT;1.1;AES256\n61303231393331356139363666333265326430346332613333626362626465353664643564613864\n6539303630303530316432396461356463373030383837650a373032383530366336343739393465\n34323763626535386131313635633133326666346536343561626139396366396436646364313130\n3266343334383230660a343733616464366439313261353935353065353038653737366265343332\n3561\n"
+                },
+                "network_dns_nameserver": [
+                    "{{ domain_firstdc_address }}"
+                ],
+                "network_dns_search": [
+                    "{{ domain_name }}",
+                    "r.ratners.ru",
+                    "ratners.ru"
+                ],
+                "network_ipv4_type": "dhcp",
+                "network_ipv6_disable": true,
+                "repo_packages": [
+                    "mc",
+                    "astra-update",
+                    "htop",
+                    "sssd-tools"
+                ],
+                "repo_repolist": [
+                    {
+                        "components": "main contrib non-free",
+                        "distribution": "1.7_x86-64",
+                        "type": "deb",
+                        "urlpre": "http://download.astralinux.ru/astra/frozen/1.7_x86-64/1.7.4",
+                        "urlsuf": "repository-main"
+                    },
+                    {
+                        "components": "main contrib non-free",
+                        "distribution": "1.7_x86-64",
+                        "type": "deb",
+                        "urlpre": "http://download.astralinux.ru/astra/frozen/1.7_x86-64/1.7.4",
+                        "urlsuf": "repository-extended"
+                    },
+                    {
+                        "components": "main contrib non-free",
+                        "distribution": "1.7_x86-64",
+                        "type": "deb",
+                        "urlpre": "http://download.astralinux.ru/astra/frozen/1.7_x86-64/1.7.4",
+                        "urlsuf": "repository-update"
+                    },
+                    {
+                        "components": "main contrib non-free",
+                        "distribution": "1.7_x86-64",
+                        "type": "deb",
+                        "urlpre": "http://download.astralinux.ru/astra/frozen/1.7_x86-64/1.7.4",
+                        "urlsuf": "repository-base"
+                    },
+                    {
+                        "components": "main base",
+                        "distribution": "1.7_x86-64",
+                        "type": "deb",
+                        "urlpre": "https://dl.astralinux.ru/aldpro/frozen/01",
+                        "urlsuf": "2.2.0"
+                    }
+                ]
+            },
+            "r-vm-dc2": {
+                "ansible_become": true,
+                "ansible_become_method": "sudo",
+                "ansible_host": "::1",
+                "ansible_password": {
+                    "__ansible_vault": "$ANSIBLE_VAULT;1.1;AES256\n66613561323065373037613133303834303636623030376562663736663533613666316438356337\n3462363266613861316661396135363933653461396531650a353463363563656266393539633939\n63663566343662316130303336636261373830643562666264323631376662623035396231616431\n6638306334623765390a346433666133306465323235366337613537386336633134323039653032\n3061\n"
+                },
+                "ansible_pubkey": "/home/appc/.ssh/ald.ratners.ru_id_rsa.pub",
+                "ansible_python_interpreter": "/usr/bin/python3",
+                "ansible_sudo_pass": {
+                    "__ansible_vault": "$ANSIBLE_VAULT;1.1;AES256\n66613561323065373037613133303834303636623030376562663736663533613666316438356337\n3462363266613861316661396135363933653461396531650a353463363563656266393539633939\n63663566343662316130303336636261373830643562666264323631376662623035396231616431\n6638306334623765390a346433666133306465323235366337613537386336633134323039653032\n3061\n"
+                },
+                "ansible_user": "ansible",
+                "domain_admin": "admin",
+                "domain_firstdc_address": "192.168.126.57",
+                "domain_firstdc_name": "ald-firstdc",
+                "domain_forwarder": "192.168.126.1",
+                "domain_name": "ald.ratners.ru",
+                "domain_packages": [
+                    "aldpro-client"
+                ],
+                "domain_password": {
+                    "__ansible_vault": "$ANSIBLE_VAULT;1.1;AES256\n61303231393331356139363666333265326430346332613333626362626465353664643564613864\n6539303630303530316432396461356463373030383837650a373032383530366336343739393465\n34323763626535386131313635633133326666346536343561626139396366396436646364313130\n3266343334383230660a343733616464366439313261353935353065353038653737366265343332\n3561\n"
+                },
+                "network_dns_nameserver": [
+                    "{{ domain_firstdc_address }}"
+                ],
+                "network_dns_search": [
+                    "{{ domain_name }}",
+                    "r.ratners.ru",
+                    "ratners.ru"
+                ],
+                "network_ipv4_type": "dhcp",
+                "network_ipv6_disable": true,
+                "proxmox_agent": "1",
+                "proxmox_agent_interfaces": [
+                    {
+                        "ip-addresses": [
+                            "fe80::64b:edd5:3222:6eb9%5/64",
+                            "192.168.126.3/24"
+                        ],
+                        "mac-address": "bc:24:11:15:07:7f",
+                        "name": "Ethernet"
+                    },
+                    {
+                        "ip-addresses": [
+                            "::1/128",
+                            "127.0.0.1/8"
+                        ],
+                        "mac-address": "",
+                        "name": "Loopback Pseudo-Interface 1"
+                    }
+                ],
+                "proxmox_bios": "ovmf",
+                "proxmox_boot": {
+                    "order": "virtio0"
+                },
+                "proxmox_cipassword": "**********",
+                "proxmox_ciuser": "appc",
+                "proxmox_cores": 3,
+                "proxmox_cpu": "x86-64-v2-AES",
+                "proxmox_digest": "6dccf1711e88f13355f928266bde634ec0e7497b",
+                "proxmox_hotplug": "disk,network,usb",
+                "proxmox_ide2": {
+                    "disk_image": "none",
+                    "media": "cdrom"
+                },
+                "proxmox_ipconfig0": {
+                    "ip": "dhcp"
+                },
+                "proxmox_machine": "pc-q35-8.1",
+                "proxmox_memory": "4096",
+                "proxmox_meta": {
+                    "creation-qemu": "8.0.2",
+                    "ctime": "1700063218"
+                },
+                "proxmox_name": "r-vm-dc2",
+                "proxmox_net0": {
+                    "bridge": "vmbr0",
+                    "firewall": "1",
+                    "virtio": "BC:24:11:15:07:7F"
+                },
+                "proxmox_node": "r-pve1",
+                "proxmox_numa": 0,
+                "proxmox_onboot": 1,
+                "proxmox_ostype": "win11",
+                "proxmox_qmpstatus": "running",
+                "proxmox_scsihw": {
+                    "disk_image": "virtio-scsi-pci"
+                },
+                "proxmox_smbios1": {
+                    "uuid": "51f71a3c-fbf7-43ff-9b3f-2690712667ad"
+                },
+                "proxmox_snapshots": [],
+                "proxmox_sockets": 1,
+                "proxmox_spice_enhancements": {
+                    "videostreaming": "all"
+                },
+                "proxmox_sshkeys": "ssh-rsa%20AAAAB3NzaC1yc2EAAAABJQAAAQEA7YUTXCKAMavLy98%2FKep6eDKK2NyVEc%2FkUklZUbBubg4DfFHDO2KDXtFN7uq8HPcYR7uqFLqkRijhBwJbnPGLpp2mA%2BiOHLpJvD%2FtGpDyNt%2FImM0hQG3%2BdzPLtvzc9Ln5mY2RUfOUTFEx7dqGVuwPQXMhZLCEkpIcGicPTpdG0CIu%2FGdELUtwgrZZ%2BreNXMG82VnFBVDZObL7H1YsmrgyyWBUMAzwf%2BEeUFk9Q4k8qsV8utONo3AvscaESxyt5UDvVuV7PrPxp28a03k9ybMMrXjPzuEaM2P0pxGT0VsIoR%2FfG78MwkSPTveX0QgDU4gBihOAcH2%2F2WHGBE%2B1pr9saw%3D%3D%20appc%40appc-pc",
+                "proxmox_startup": {
+                    "order": "10"
+                },
+                "proxmox_status": "running",
+                "proxmox_vga": "qxl",
+                "proxmox_virtio0": {
+                    "cache": "writeback",
+                    "disk_image": "local-zfs:vm-100-disk-0",
+                    "iothread": "1",
+                    "size": "17754M"
+                },
+                "proxmox_vmgenid": "3501adf5-9daf-477d-9611-621fd280ab3b",
+                "proxmox_vmid": 100,
+                "proxmox_vmtype": "qemu",
+                "repo_packages": [
+                    "mc",
+                    "astra-update",
+                    "htop",
+                    "sssd-tools"
+                ],
+                "repo_repolist": [
+                    {
+                        "components": "main contrib non-free",
+                        "distribution": "1.7_x86-64",
+                        "type": "deb",
+                        "urlpre": "http://download.astralinux.ru/astra/frozen/1.7_x86-64/1.7.4",
+                        "urlsuf": "repository-main"
+                    },
+                    {
+                        "components": "main contrib non-free",
+                        "distribution": "1.7_x86-64",
+                        "type": "deb",
+                        "urlpre": "http://download.astralinux.ru/astra/frozen/1.7_x86-64/1.7.4",
+                        "urlsuf": "repository-extended"
+                    },
+                    {
+                        "components": "main contrib non-free",
+                        "distribution": "1.7_x86-64",
+                        "type": "deb",
+                        "urlpre": "http://download.astralinux.ru/astra/frozen/1.7_x86-64/1.7.4",
+                        "urlsuf": "repository-update"
+                    },
+                    {
+                        "components": "main contrib non-free",
+                        "distribution": "1.7_x86-64",
+                        "type": "deb",
+                        "urlpre": "http://download.astralinux.ru/astra/frozen/1.7_x86-64/1.7.4",
+                        "urlsuf": "repository-base"
+                    },
+                    {
+                        "components": "main base",
+                        "distribution": "1.7_x86-64",
+                        "type": "deb",
+                        "urlpre": "https://dl.astralinux.ru/aldpro/frozen/01",
+                        "urlsuf": "2.2.0"
+                    }
+                ]
+            },
+            "r-vm-ws2": {
+                "ansible_become": true,
+                "ansible_become_method": "sudo",
+                "ansible_host": "::1",
+                "ansible_password": {
+                    "__ansible_vault": "$ANSIBLE_VAULT;1.1;AES256\n66613561323065373037613133303834303636623030376562663736663533613666316438356337\n3462363266613861316661396135363933653461396531650a353463363563656266393539633939\n63663566343662316130303336636261373830643562666264323631376662623035396231616431\n6638306334623765390a346433666133306465323235366337613537386336633134323039653032\n3061\n"
+                },
+                "ansible_pubkey": "/home/appc/.ssh/ald.ratners.ru_id_rsa.pub",
+                "ansible_python_interpreter": "/usr/bin/python3",
+                "ansible_sudo_pass": {
+                    "__ansible_vault": "$ANSIBLE_VAULT;1.1;AES256\n66613561323065373037613133303834303636623030376562663736663533613666316438356337\n3462363266613861316661396135363933653461396531650a353463363563656266393539633939\n63663566343662316130303336636261373830643562666264323631376662623035396231616431\n6638306334623765390a346433666133306465323235366337613537386336633134323039653032\n3061\n"
+                },
+                "ansible_user": "ansible",
+                "domain_admin": "admin",
+                "domain_firstdc_address": "192.168.126.57",
+                "domain_firstdc_name": "ald-firstdc",
+                "domain_forwarder": "192.168.126.1",
+                "domain_name": "ald.ratners.ru",
+                "domain_packages": [
+                    "aldpro-client"
+                ],
+                "domain_password": {
+                    "__ansible_vault": "$ANSIBLE_VAULT;1.1;AES256\n61303231393331356139363666333265326430346332613333626362626465353664643564613864\n6539303630303530316432396461356463373030383837650a373032383530366336343739393465\n34323763626535386131313635633133326666346536343561626139396366396436646364313130\n3266343334383230660a343733616464366439313261353935353065353038653737366265343332\n3561\n"
+                },
+                "network_dns_nameserver": [
+                    "{{ domain_firstdc_address }}"
+                ],
+                "network_dns_search": [
+                    "{{ domain_name }}",
+                    "r.ratners.ru",
+                    "ratners.ru"
+                ],
+                "network_ipv4_type": "dhcp",
+                "network_ipv6_disable": true,
+                "proxmox_agent": "1",
+                "proxmox_agent_interfaces": [
+                    {
+                        "ip-addresses": [
+                            "fe80::e13f:1176:2ab:4bb4%5/64",
+                            "192.168.126.55/24"
+                        ],
+                        "mac-address": "bc:24:11:c6:b2:75",
+                        "name": "Ethernet"
+                    },
+                    {
+                        "ip-addresses": [
+                            "::1/128",
+                            "127.0.0.1/8"
+                        ],
+                        "mac-address": "",
+                        "name": "Loopback Pseudo-Interface 1"
+                    }
+                ],
+                "proxmox_bios": "ovmf",
+                "proxmox_boot": "c",
+                "proxmox_bootdisk": "virtio0",
+                "proxmox_cipassword": "**********",
+                "proxmox_ciupgrade": 0,
+                "proxmox_ciuser": "appc",
+                "proxmox_cores": 3,
+                "proxmox_digest": "e6a5e08176cb415d5dbe21020fccdbbc336a0eb6",
+                "proxmox_ide2": {
+                    "disk_image": "local-zfs:vm-101-cloudinit",
+                    "media": "cdrom",
+                    "size": "4M"
+                },
+                "proxmox_ipconfig0": {
+                    "ip": "dhcp"
+                },
+                "proxmox_machine": "pc-q35-8.1",
+                "proxmox_memory": "4096",
+                "proxmox_meta": {
+                    "creation-qemu": "8.1.2",
+                    "ctime": "1702233049"
+                },
+                "proxmox_name": "r-vm-ws2",
+                "proxmox_net0": {
+                    "bridge": "vmbr0",
+                    "virtio": "BC:24:11:C6:B2:75"
+                },
+                "proxmox_node": "r-pve1",
+                "proxmox_numa": 0,
+                "proxmox_onboot": 1,
+                "proxmox_ostype": "win11",
+                "proxmox_qmpstatus": "running",
+                "proxmox_scsihw": {
+                    "disk_image": "virtio-scsi-pci"
+                },
+                "proxmox_smbios1": {
+                    "uuid": "88e6245b-5ff6-42e9-93f6-8a1d09c762a2"
+                },
+                "proxmox_snapshots": [],
+                "proxmox_sockets": 1,
+                "proxmox_spice_enhancements": {
+                    "videostreaming": "all"
+                },
+                "proxmox_sshkeys": "ssh-rsa%20AAAAB3NzaC1yc2EAAAABJQAAAQEA7YUTXCKAMavLy98%2FKep6eDKK2NyVEc%2FkUklZUbBubg4DfFHDO2KDXtFN7uq8HPcYR7uqFLqkRijhBwJbnPGLpp2mA%2BiOHLpJvD%2FtGpDyNt%2FImM0hQG3%2BdzPLtvzc9Ln5mY2RUfOUTFEx7dqGVuwPQXMhZLCEkpIcGicPTpdG0CIu%2FGdELUtwgrZZ%2BreNXMG82VnFBVDZObL7H1YsmrgyyWBUMAzwf%2BEeUFk9Q4k8qsV8utONo3AvscaESxyt5UDvVuV7PrPxp28a03k9ybMMrXjPzuEaM2P0pxGT0VsIoR%2FfG78MwkSPTveX0QgDU4gBihOAcH2%2F2WHGBE%2B1pr9saw%3D%3D%20appc%40appc-pc",
+                "proxmox_status": "running",
+                "proxmox_vga": "qxl,memory=16",
+                "proxmox_virtio0": {
+                    "cache": "writeback",
+                    "disk_image": "local-zfs:vm-101-disk-0",
+                    "size": "33114M"
+                },
+                "proxmox_vmgenid": "527ca33d-b4a2-4c0b-892e-c8e2d3bfc1bd",
+                "proxmox_vmid": 101,
+                "proxmox_vmtype": "qemu",
+                "repo_packages": [
+                    "mc",
+                    "astra-update",
+                    "htop",
+                    "sssd-tools"
+                ],
+                "repo_repolist": [
+                    {
+                        "components": "main contrib non-free",
+                        "distribution": "1.7_x86-64",
+                        "type": "deb",
+                        "urlpre": "http://download.astralinux.ru/astra/frozen/1.7_x86-64/1.7.4",
+                        "urlsuf": "repository-main"
+                    },
+                    {
+                        "components": "main contrib non-free",
+                        "distribution": "1.7_x86-64",
+                        "type": "deb",
+                        "urlpre": "http://download.astralinux.ru/astra/frozen/1.7_x86-64/1.7.4",
+                        "urlsuf": "repository-extended"
+                    },
+                    {
+                        "components": "main contrib non-free",
+                        "distribution": "1.7_x86-64",
+                        "type": "deb",
+                        "urlpre": "http://download.astralinux.ru/astra/frozen/1.7_x86-64/1.7.4",
+                        "urlsuf": "repository-update"
+                    },
+                    {
+                        "components": "main contrib non-free",
+                        "distribution": "1.7_x86-64",
+                        "type": "deb",
+                        "urlpre": "http://download.astralinux.ru/astra/frozen/1.7_x86-64/1.7.4",
+                        "urlsuf": "repository-base"
+                    },
+                    {
+                        "components": "main base",
+                        "distribution": "1.7_x86-64",
+                        "type": "deb",
+                        "urlpre": "https://dl.astralinux.ru/aldpro/frozen/01",
+                        "urlsuf": "2.2.0"
+                    }
+                ]
+            },
+            "r-vm-ws3": {
+                "ansible_become": true,
+                "ansible_become_method": "sudo",
+                "ansible_host": "::1",
+                "ansible_password": {
+                    "__ansible_vault": "$ANSIBLE_VAULT;1.1;AES256\n66613561323065373037613133303834303636623030376562663736663533613666316438356337\n3462363266613861316661396135363933653461396531650a353463363563656266393539633939\n63663566343662316130303336636261373830643562666264323631376662623035396231616431\n6638306334623765390a346433666133306465323235366337613537386336633134323039653032\n3061\n"
+                },
+                "ansible_pubkey": "/home/appc/.ssh/ald.ratners.ru_id_rsa.pub",
+                "ansible_python_interpreter": "/usr/bin/python3",
+                "ansible_sudo_pass": {
+                    "__ansible_vault": "$ANSIBLE_VAULT;1.1;AES256\n66613561323065373037613133303834303636623030376562663736663533613666316438356337\n3462363266613861316661396135363933653461396531650a353463363563656266393539633939\n63663566343662316130303336636261373830643562666264323631376662623035396231616431\n6638306334623765390a346433666133306465323235366337613537386336633134323039653032\n3061\n"
+                },
+                "ansible_user": "ansible",
+                "domain_admin": "admin",
+                "domain_firstdc_address": "192.168.126.57",
+                "domain_firstdc_name": "ald-firstdc",
+                "domain_forwarder": "192.168.126.1",
+                "domain_name": "ald.ratners.ru",
+                "domain_packages": [
+                    "aldpro-client"
+                ],
+                "domain_password": {
+                    "__ansible_vault": "$ANSIBLE_VAULT;1.1;AES256\n61303231393331356139363666333265326430346332613333626362626465353664643564613864\n6539303630303530316432396461356463373030383837650a373032383530366336343739393465\n34323763626535386131313635633133326666346536343561626139396366396436646364313130\n3266343334383230660a343733616464366439313261353935353065353038653737366265343332\n3561\n"
+                },
+                "network_dns_nameserver": [
+                    "{{ domain_firstdc_address }}"
+                ],
+                "network_dns_search": [
+                    "{{ domain_name }}",
+                    "r.ratners.ru",
+                    "ratners.ru"
+                ],
+                "network_ipv4_type": "dhcp",
+                "network_ipv6_disable": true,
+                "proxmox_agent": "1",
+                "proxmox_agent_interfaces": [
+                    {
+                        "ip-addresses": [
+                            "192.168.126.56/24"
+                        ],
+                        "mac-address": "bc:24:11:36:e2:75",
+                        "name": "Ethernet"
+                    },
+                    {
+                        "ip-addresses": [
+                            "::1/128",
+                            "127.0.0.1/8"
+                        ],
+                        "mac-address": "",
+                        "name": "Loopback Pseudo-Interface 1"
+                    }
+                ],
+                "proxmox_bios": "ovmf",
+                "proxmox_boot": "c",
+                "proxmox_bootdisk": "virtio0",
+                "proxmox_cipassword": "**********",
+                "proxmox_ciupgrade": 0,
+                "proxmox_ciuser": "appc",
+                "proxmox_cores": 3,
+                "proxmox_digest": "372ff145c5b80aaf7c80463c301889fe72fb50e5",
+                "proxmox_ide2": {
+                    "disk_image": "local-zfs:vm-102-cloudinit",
+                    "media": "cdrom",
+                    "size": "4M"
+                },
+                "proxmox_ipconfig0": {
+                    "ip": "dhcp"
+                },
+                "proxmox_machine": "q35",
+                "proxmox_memory": "4096",
+                "proxmox_meta": {
+                    "creation-qemu": "8.1.2",
+                    "ctime": "1702233049"
+                },
+                "proxmox_name": "r-vm-ws3",
+                "proxmox_net0": {
+                    "bridge": "vmbr1",
+                    "virtio": "BC:24:11:36:E2:75"
+                },
+                "proxmox_node": "r-pve1",
+                "proxmox_numa": 0,
+                "proxmox_onboot": 1,
+                "proxmox_ostype": "win10",
+                "proxmox_qmpstatus": "running",
+                "proxmox_scsihw": {
+                    "disk_image": "virtio-scsi-pci"
+                },
+                "proxmox_smbios1": {
+                    "uuid": "82d11f40-e7ef-458d-8bae-74d525470dcb"
+                },
+                "proxmox_snapshots": [],
+                "proxmox_sockets": 1,
+                "proxmox_spice_enhancements": {
+                    "videostreaming": "all"
+                },
+                "proxmox_sshkeys": "ssh-rsa%20AAAAB3NzaC1yc2EAAAABJQAAAQEA7YUTXCKAMavLy98%2FKep6eDKK2NyVEc%2FkUklZUbBubg4DfFHDO2KDXtFN7uq8HPcYR7uqFLqkRijhBwJbnPGLpp2mA%2BiOHLpJvD%2FtGpDyNt%2FImM0hQG3%2BdzPLtvzc9Ln5mY2RUfOUTFEx7dqGVuwPQXMhZLCEkpIcGicPTpdG0CIu%2FGdELUtwgrZZ%2BreNXMG82VnFBVDZObL7H1YsmrgyyWBUMAzwf%2BEeUFk9Q4k8qsV8utONo3AvscaESxyt5UDvVuV7PrPxp28a03k9ybMMrXjPzuEaM2P0pxGT0VsIoR%2FfG78MwkSPTveX0QgDU4gBihOAcH2%2F2WHGBE%2B1pr9saw%3D%3D%20appc%40appc-pc",
+                "proxmox_status": "running",
+                "proxmox_vga": "qxl,memory=16",
+                "proxmox_virtio0": {
+                    "cache": "writeback",
+                    "disk_image": "local-zfs:vm-102-disk-0",
+                    "size": "32090M"
+                },
+                "proxmox_vmgenid": "fd5de1d5-407f-47e9-ae25-fb2b52a067c6",
+                "proxmox_vmid": 102,
+                "proxmox_vmtype": "qemu",
+                "repo_packages": [
+                    "mc",
+                    "astra-update",
+                    "htop",
+                    "sssd-tools"
+                ],
+                "repo_repolist": [
+                    {
+                        "components": "main contrib non-free",
+                        "distribution": "1.7_x86-64",
+                        "type": "deb",
+                        "urlpre": "http://download.astralinux.ru/astra/frozen/1.7_x86-64/1.7.4",
+                        "urlsuf": "repository-main"
+                    },
+                    {
+                        "components": "main contrib non-free",
+                        "distribution": "1.7_x86-64",
+                        "type": "deb",
+                        "urlpre": "http://download.astralinux.ru/astra/frozen/1.7_x86-64/1.7.4",
+                        "urlsuf": "repository-extended"
+                    },
+                    {
+                        "components": "main contrib non-free",
+                        "distribution": "1.7_x86-64",
+                        "type": "deb",
+                        "urlpre": "http://download.astralinux.ru/astra/frozen/1.7_x86-64/1.7.4",
+                        "urlsuf": "repository-update"
+                    },
+                    {
+                        "components": "main contrib non-free",
+                        "distribution": "1.7_x86-64",
+                        "type": "deb",
+                        "urlpre": "http://download.astralinux.ru/astra/frozen/1.7_x86-64/1.7.4",
+                        "urlsuf": "repository-base"
+                    },
+                    {
+                        "components": "main base",
+                        "distribution": "1.7_x86-64",
+                        "type": "deb",
+                        "urlpre": "https://dl.astralinux.ru/aldpro/frozen/01",
+                        "urlsuf": "2.2.0"
+                    }
+                ]
+            }
+        }
+    },
+    "ald_group_convertip": {
+        "children": [
+            "ald_role_audit",
+            "ald_role_cups",
+            "ald_role_dc",
+            "ald_role_dhcp",
+            "ald_role_fs",
+            "ald_role_mon",
+            "ald_role_repo"
+        ]
+    },
+    "ald_group_dhcpip": {
+        "children": [
+            "ald_role_ws"
+        ]
+    },
+    "ald_role_audit": {
+        "hosts": [
+            "ald-hq-audit1"
+        ]
+    },
+    "ald_role_cups": {
+        "hosts": [
+            "ald-hq-cups1"
+        ]
+    },
+    "ald_role_dc": {
+        "hosts": [
+            "ald-hq-dc1",
+            "ald-spb-dc1",
+            "ald-ekb-dc2",
+            "ald-spb-dc2",
+            "ald-hq-dc2",
+            "ald-ekb-dc1"
+        ]
+    },
+    "ald_role_dhcp": {
+        "hosts": [
+            "ald-ekb-dhcp1"
+        ]
+    },
+    "ald_role_fs": {
+        "hosts": [
+            "ald-hq-fs1"
+        ]
+    },
+    "ald_role_mon": {
+        "hosts": [
+            "ald-hq-mon1"
+        ]
+    },
+    "ald_role_repo": {
+        "hosts": [
+            "ald-hq-repo1"
+        ]
+    },
+    "ald_role_ws": {
+        "hosts": [
+            "ald-ekb-ws1",
+            "ald-spb-ws1",
+            "ald-hq-ws1"
+        ]
+    },
+    "ald_site_ekb": {
+        "hosts": [
+            "ald-ekb-ws1",
+            "ald-ekb-dc2",
+            "ald-ekb-dhcp1",
+            "ald-ekb-dc1"
+        ]
+    },
+    "ald_site_hq": {
+        "hosts": [
+            "ald-hq-dc1",
+            "ald-hq-mon1",
+            "ald-hq-fs1",
+            "ald-hq-cups1",
+            "ald-hq-dc2",
+            "ald-hq-repo1",
+            "ald-hq-ws1",
+            "ald-hq-audit1"
+        ]
+    },
+    "ald_site_spb": {
+        "hosts": [
+            "ald-spb-dc1",
+            "ald-spb-ws1",
+            "ald-spb-dc2"
+        ]
+    },
+    "all": {
+        "children": [
+            "ungrouped",
+            "ald_group_convertip",
+            "ald_group_dhcpip",
+            "domain_firstdc_true",
+            "proxmox_all_lxc",
+            "proxmox_all_qemu",
+            "proxmox_all_running",
+            "proxmox_all_stopped",
+            "proxmox_nodes",
+            "proxmox_r_pve1_lxc",
+            "proxmox_r_pve1_qemu",
+            "ald_site_hq",
+            "project_ald",
+            "tmp_alse_1_7_4_max",
+            "ald_site_spb",
+            "ald_site_ekb",
+            "tmp_alse_1_7_4_base_gui",
+            "proxmox_pool_pool1"
+        ]
+    },
+    "domain_firstdc_true": {
+        "hosts": [
+            "ald-firstdc"
+        ]
+    },
+    "project_ald": {
+        "hosts": [
+            "ald-hq-dc1",
+            "ald-spb-dc1",
+            "ald-hq-mon1",
+            "ald-ekb-ws1",
+            "ald-hq-fs1",
+            "ald-hq-cups1",
+            "ald-ekb-dc2",
+            "ald-spb-ws1",
+            "ald-spb-dc2",
+            "ald-hq-dc2",
+            "ald-hq-repo1",
+            "ald-ekb-dhcp1",
+            "ald-hq-ws1",
+            "ald-hq-audit1",
+            "ald-ekb-dc1"
+        ]
+    },
+    "proxmox_all_qemu": {
+        "hosts": [
+            "ald-hq-dc1",
+            "ald-spb-dc1",
+            "ald-hq-mon1",
+            "r-vm-dc2",
+            "ald-ekb-ws1",
+            "ald-hq-fs1",
+            "ald-hq-cups1",
+            "r-vm-ws3",
+            "ald-ekb-dc2",
+            "ald-spb-ws1",
+            "ald-spb-dc2",
+            "ald-hq-dc2",
+            "ald-hq-repo1",
+            "ald-ekb-dhcp1",
+            "ald-hq-ws1",
+            "ald-hq-audit1",
+            "ald-ekb-dc1",
+            "r-vm-ws2"
+        ]
+    },
+    "proxmox_all_running": {
+        "hosts": [
+            "ald-hq-dc1",
+            "ald-spb-dc1",
+            "ald-hq-mon1",
+            "r-vm-dc2",
+            "ald-ekb-ws1",
+            "ald-hq-fs1",
+            "ald-hq-cups1",
+            "r-vm-ws3",
+            "ald-ekb-dc2",
+            "ald-spb-ws1",
+            "ald-spb-dc2",
+            "ald-hq-dc2",
+            "ald-hq-repo1",
+            "ald-ekb-dhcp1",
+            "ald-hq-ws1",
+            "ald-hq-audit1",
+            "ald-ekb-dc1",
+            "r-vm-ws2"
+        ]
+    },
+    "proxmox_nodes": {
+        "hosts": [
+            "r-pve1"
+        ]
+    },
+    "proxmox_r_pve1_qemu": {
+        "hosts": [
+            "ald-hq-dc1",
+            "ald-spb-dc1",
+            "ald-hq-mon1",
+            "r-vm-dc2",
+            "ald-ekb-ws1",
+            "ald-hq-fs1",
+            "ald-hq-cups1",
+            "r-vm-ws3",
+            "ald-ekb-dc2",
+            "ald-spb-ws1",
+            "ald-spb-dc2",
+            "ald-hq-dc2",
+            "ald-hq-repo1",
+            "ald-ekb-dhcp1",
+            "ald-hq-ws1",
+            "ald-hq-audit1",
+            "ald-ekb-dc1",
+            "r-vm-ws2"
+        ]
+    },
+    "tmp_alse_1_7_4_base_gui": {
+        "hosts": [
+            "ald-ekb-ws1",
+            "ald-spb-ws1",
+            "ald-hq-ws1"
+        ]
+    },
+    "tmp_alse_1_7_4_max": {
+        "hosts": [
+            "ald-hq-dc1",
+            "ald-spb-dc1",
+            "ald-hq-mon1",
+            "ald-hq-fs1",
+            "ald-hq-cups1",
+            "ald-ekb-dc2",
+            "ald-spb-dc2",
+            "ald-hq-dc2",
+            "ald-hq-repo1",
+            "ald-ekb-dhcp1",
+            "ald-hq-audit1",
+            "ald-ekb-dc1"
+        ]
+    }
+}

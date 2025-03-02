@@ -1,0 +1,16 @@
+---
+- name: prepare file server
+  hosts: role_dhcp,&site_red
+  vars:
+    preconfig_repo_deleteoldfiles: false
+  vars_files: 
+    - "vars/site_{{ site_name }}_dhcpd.yml"
+  roles:
+   - preconfig
+   - dhcpd
+  # tasks:
+  #   - name: Install dhcpd server
+  #     ansible.builtin.import_role:
+  #       name: dhcpd
+  #       vars_files: 
+  #         vars/{{ site_name }}_dhcpd.yml

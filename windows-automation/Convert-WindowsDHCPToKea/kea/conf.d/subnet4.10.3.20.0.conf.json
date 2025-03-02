@@ -1,0 +1,72 @@
+{
+  "reservations": <?include "/etc/kea/conf.d/subnet4.10.3.20.0.reservations.conf.json"?>,
+  "subnet": "10.3.20.0/24",
+  "pools": [
+    {
+      "pool": "10.3.20.1 - 10.3.20.21"
+    },
+    {
+      "pool": "10.3.20.23 - 10.3.20.36"
+    },
+    {
+      "pool": "10.3.20.39 - 10.3.20.40"
+    },
+    {
+      "pool": "10.3.20.42 - 10.3.20.101"
+    },
+    {
+      "pool": "10.3.20.105 - 10.3.20.119"
+    },
+    {
+      "pool": "10.3.20.121 - 10.3.20.123"
+    },
+    {
+      "pool": "10.3.20.125 - 10.3.20.130"
+    },
+    {
+      "pool": "10.3.20.132 - 10.3.20.159"
+    },
+    {
+      "pool": "10.3.20.161 - 10.3.20.250"
+    }
+  ],
+  "id": 200,
+  "user-context": {
+    "name": "WIN Servers",
+    "description": "WIN Servers"
+  },
+  "option-data": [
+    {
+      "csv-format": true,
+      "name": "routers",
+      "code": 3,
+      "data": "10.3.20.254",
+      "space": "dhcp4",
+      "always-send": true
+    },
+    {
+      "csv-format": true,
+      "name": "domain-name-servers",
+      "code": 6,
+      "data": "10.3.77.112,10.3.77.113",
+      "space": "dhcp4",
+      "always-send": true
+    },
+    {
+      "csv-format": true,
+      "name": "domain-name",
+      "code": 15,
+      "data": "gtm.gazprom.ru",
+      "space": "dhcp4",
+      "always-send": true
+    },
+    {
+      "csv-format": true,
+      "name": "dhcp-lease-time",
+      "code": 51,
+      "data": "5184000",
+      "space": "dhcp4",
+      "always-send": true
+    }
+  ]
+}

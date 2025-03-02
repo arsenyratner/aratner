@@ -1,0 +1,10 @@
+---
+# handlers file for repository
+- name: Repo reboot
+  ansible.builtin.reboot:
+    pre_reboot_delay: 15
+    post_reboot_delay: 15
+    reboot_timeout: 100
+    msg: "Rebooting after update insatll"
+  ignore_errors: true
+  when: repo_rebootafterupdate is true

@@ -1,0 +1,53 @@
+---
+- name: Apply cfg to aratner_project_red,&vyos,&aratner_role_rt
+  hosts: aratner_project_red,&vyos,&aratner_role_rt
+  connection: network_cli
+  gather_facts: false
+
+  tasks:
+    - name: Create simple ospf config
+      vyos.vyos.vyos_ospfv2:
+        config:
+          log_adjacency_changes: detail
+          parameters:
+            router_id: "{{ ansible_host }}"
+            rfc1583_compatibility: false
+          areas:
+            - area_id: "0"
+              network:
+                - address: 172.26.71.0/24
+          redistribute:
+            - route_type: connected
+              metric_type: 2
+              metric: 111
+          passive_interface:
+            - "eth1"
+
+    - name: Setup LAN ip
+      vyos.vyos.vyos_config:
+        save: true
+        lines:
+          - set interfaces ethernet {{ lanif }} mtu '{{ lanmtu }}'
+          - set interfaces ethernet {{ lanif }} address '{{ lanaddress}}'
+          - set interfaces ethernet {{ lanif }} description 'LAN'
+
+    - name: Create NAT rules
+      vyos.vyos.vyos_config:
+        save: true
+        lines:
+          - set system domain-name '{{ domname }}'
+          - set firewall all-ping enable
+          - set nat source rule 110
+          - set nat source rule 110 destination address 172.28.0.0/16
+          - set nat source rule 110 outbound-interface eth0
+          - set nat source rule 110 exclude
+          - set nat source rule 111
+          - set nat source rule 111 destination address 172.26.71.0/24
+          - set nat source rule 111 outbound-interface eth0
+          - set nat source rule 111 exclude
+          - set nat source rule 119
+          - set nat source rule 119 outbound-interface eth0
+          - set nat source rule 119 translation address masquerade
+          - set system login user ansible authentication encrypted-password '$6$7Nlgg00uwfcFkmxt$GIV4xeTE9zYsey3GBVU78Qsj09T37ZXtV0Th23Yf6o80S0Omcug9y5TpVua4XmO8SYzeulFrcpHlbFxzw47TB1'
+          - set system login user ansible authentication public-keys vyos@localhost key 'AAAAB3NzaC1yc2EAAAADAQABAAABgQCpQkBnt94BCEMKm3g36fCSnW6xLwFJcpgw03847uWr7j1R58aXyLxn/SZk2sy7kBipozthpfhxHqlnIazCXxHNqR3IFNNvvcmkNmVmupYC2RCz24jMLVLwDfCcAroA0qHMGYxq/zt6JBqtXaeDfeH4eSNxlFTL7qNVwAZeQh/zkZ4TE+UOMtPSJT7ZOAKecUM0yAs1zp4iYPTY0pme5+bzZFvu6rGW7twdJQ4oTo840fP1J/aR7hxNQoJARUF6ld/UL/BeQTG8RigINMEe9j4Hza+tCln6MH0RlcMnoZScSvzZzhscWfffwvWnelPDjFEHsG77h+YiFXQ/+mq+25UTe//jOgJR3siQyMpA4fLXb9v7f5/yRBJKQdo5Z032MZ+cSeKd4gfi6gnDHGH77BCs8MCwxCz+xge8xSsrGQWhDVVMJxWH9VFoXXy5rdP/g6uqrwrJjs8patmndt0ZTDN8haeuPPtbju0cXk++11Gg87Na8LJ3gUBB4iSUsuafL9c='
+          - set system login user ansible authentication public-keys vyos@localhost type 'ssh-rsa'

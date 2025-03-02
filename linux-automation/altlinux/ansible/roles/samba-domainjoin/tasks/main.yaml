@@ -1,0 +1,78 @@
+---
+- name: Check if already domain joined
+  shell: timeout 5s net ads testjoin
+  register: testjoin_result
+  ignore_errors: true
+  changed_when: testjoin_result.stdout != "Join is OK"
+# - debug:
+#     var: testjoin_result
+
+- name: DEBUG alredy joined
+  debug:
+    msg: "{{ testjoin_result.stdout }}"
+
+- name: domainjoin install packages
+  yum:
+    name:
+      - realmd
+      - sssd
+      - oddjob
+      - oddjob-mkhomedir
+      - adcli
+      - join-to-domain
+      - samba-client
+      - samba-common.noarch
+      - samba-common
+      - samba-libs
+      - samba-winbind
+      - krb5-workstation
+    state: present
+
+# custom join script
+- name: doimainjoin copy join script
+  ansible.builtin.copy:
+    src: join-to-domain.sh
+    dest: /usr/local/bin/join-to-domain.sh
+    owner: root
+    group: root
+    mode: "0755"
+    force: yes
+
+- debug: 
+    msg: "{{ domainjoin_script }} -d {{ domainjoin_domname }} -n {{ ansible_hostname }} -u {{ domainjoin_user }} -p {{ domainjoin_password }} -y"
+
+- name: doimainjoin sssd
+  when:
+    - domainjoin_type == "sssd"
+    - '"Join is OK" not in testjoin_result.stdout'
+  command:
+    cmd: "{{ domainjoin_script }} -d {{ domainjoin_domname }} -n {{ ansible_hostname }} -u {{ domainjoin_user }} -p {{ domainjoin_password }} -y"
+
+- name: doimainjoin winbind
+  block:
+    - name: Copy template smb.conf
+      when:
+        - domainjoin_type == "winbind"
+        - domainjoin_replacesmbconf is true
+      ansible.builtin.template:
+        src: smb.conf.j2
+        dest: "/tmp/smb-conf"
+        owner: "root"
+        group: "root"
+        mode: "0644"
+    - debug: 
+        msg: "{{ domainjoin_script }} -d {{ domainjoin_domname }} -n {{ ansible_hostname }} -u {{ domainjoin_user}} -p {{ domainjoin_password }} -w -y"
+    - name: Join winbind
+      when:
+        - domainjoin_type == "winbind"
+        - '"Join is OK" not in testjoin_result.stdout'
+      command:
+        cmd: "{{ domainjoin_script }} -d {{ domainjoin_domname }} -n {{ ansible_hostname }} -u {{ domainjoin_user}} -p {{ domainjoin_password }} -w -y"
+
+- name: add sudoers.d
+  ansible.builtin.template:
+    src: sudoers-red.j2
+    dest: /etc/sudoers.d/red
+    owner: "root"
+    group: "root"
+    mode: "0440"

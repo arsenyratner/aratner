@@ -1,0 +1,12 @@
+
+option pxegrub code 150 = text;
+option architecture code 93 = unsigned integer 16;
+if option architecture = 00:07 { 
+    filename "BOOTX64.EFI"; 
+} elsif option architecture = 00:08 { 
+    filename "BOOTX64.EFI"; 
+} elsif option architecture = 00:09 { 
+    filename "BOOTX64.EFI"; 
+} else { 
+    filename "pxelinux.0"; 
+}

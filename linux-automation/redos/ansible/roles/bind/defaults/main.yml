@@ -1,0 +1,25 @@
+# bind_conf_file: /etc/named.conf
+# bind_confd_dir: /etc/named
+# bind_zones_dir: /var/named
+# bind_user: named
+# bind_group: named
+# bind_acl_trusted: trusted
+# bind_acl_nottrusted: nottrusted
+# bind_packages:
+#   - bind
+#   - bind-dnssec-utils
+#   - bind-libs
+#   - bind-license.noarch
+#   - bind-utils       
+
+# bind:
+#   acls:
+#     - name: "{{ bind_acl_trusted }}"
+#       members:
+#         - localhost
+#         - 127.0.0.0/8
+#         - 10.252.0.0/16
+#   forwarders:
+#     - 10.252.190.10
+#     - 10.252.190.11
+#   namedca_file: "{{bind_zones_dir}}/named.ca.gtnn"

@@ -1,0 +1,33 @@
+---
+# handlers file for preconfig
+- name: Preconfig reboot
+  ansible.builtin.reboot:
+    pre_reboot_delay: 15
+    post_reboot_delay: 15
+    reboot_timeout: 100
+    msg: "Rebooting after network config"
+  when: preconfig_reboot is true
+  ignore_errors: true
+
+- name: Preconfig sssd restart
+  systemd:
+    name: sssd
+    enabled: yes
+    state: reloaded
+
+- name: Preconfig winbind restart
+  systemd:
+    name: winbind
+    enabled: yes
+    state: reloaded
+
+- name: Preconfig NM restart
+  systemd:
+    name: NetworkManager
+    enabled: yes
+    state: reloaded
+
+- name: Preocnfig chronyd restart
+  ansible.builtin.service:
+    name: chronyd
+    state: restarted

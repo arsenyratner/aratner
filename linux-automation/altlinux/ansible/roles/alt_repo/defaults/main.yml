@@ -1,0 +1,9 @@
+---
+repo_upgrade_kernel: false
+repo_rm_all: true
+repo_list:
+  - "http://mirror.yandex.ru/altlinux/p10/branch"
+  - "rpm [p10] http://mirror.yandex.ru/altlinux p10/branch/x86_64-i586 classic"
+repo_packages:
+  - mc
+  - tmux

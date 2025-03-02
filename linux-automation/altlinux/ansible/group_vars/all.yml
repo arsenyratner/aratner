@@ -1,0 +1,19 @@
+ansible_user: ansible
+ansible_password: NeadfedEd2
+ansible_pubkey: /home/appc/.ssh/ald.ratners.ru_id_rsa.pub
+
+r_alt_domain_name: alt.ratners.ru
+r_alt_domain_shortname: alt 
+r_alt_domain_admin: administrator
+r_alt_domain_password: QAZxsw123
+r_alt_domain_forwarder: 192.168.126.1
+r_alt_domain_firstdc_address: 10.20.5.1
+r_alt_domain_firstdc_name: r-alt-dc1
+
+network_ipv4_method: convert
+
+preconfig_packages:
+  - tmux
+  - ansible
+  - chrony
+  - python3-libselinux

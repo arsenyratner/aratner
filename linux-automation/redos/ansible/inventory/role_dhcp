@@ -1,0 +1,9 @@
+[role_dhcp_primary]
+red-dc1
+
+[role_dhcp_secondary]
+red-dc2
+
+[role_dhcp:children]
+role_dhcp_primary
+role_dhcp_secondary

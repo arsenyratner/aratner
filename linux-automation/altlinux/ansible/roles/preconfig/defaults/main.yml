@@ -1,0 +1,39 @@
+---
+# defaults file for preconfig
+preconfig_disabled_services:
+  - cloud-config.service
+  - cloud-final.service
+  - cloud-init-local.service
+  - cloud-init.service
+
+preconfig_selinux: disabled
+preconfig_installpackages: true
+preconfig_graphicaltarget: false
+
+preconfig_packages:
+  - tmux
+  - ansible
+  - chrony
+  - python3-libselinux
+  - realmd
+  - sssd
+  - oddjob
+  - oddjob-mkhomedir
+  - adcli
+  - join-to-domain
+  - samba-client
+  - samba-common.noarch
+  - samba-common
+  - samba-libs
+  - samba-winbind
+  - krb5-workstation
+  - samba-winbind-krb5-locator
+
+preconfig_time:
+  packagelist:
+    - chrony
+  timezone: Europe/Moscow
+  ntp_pools:
+    - red.aratner.ru
+  ntp_servers:
+    - 172.26.71.216

@@ -1,0 +1,7 @@
+export ANSIBLE_CONFIG="/home/appc/git/croc/aratner/projects/ald.ratners.ru/ansible/ansible.cfg"
+export ANSIBLE_HOST_KEY_CHECKING=False
+export DEFAULT_VAULT_PASSWORD_FILE="/home/appc/vaultpass-ald.ratners.ru"
+export PROXMOX_URL=https://192.168.126.50:8006/
+export PROXMOX_USERNAME=root
+export PROXMOX_PASSWORD=Rr19871979
+export PROXMOX_INVALID_CERT=True

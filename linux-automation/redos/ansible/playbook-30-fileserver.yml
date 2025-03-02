@@ -1,0 +1,8 @@
+---
+- name: prepare file server
+  hosts: role_fs
+  vars_files:
+    - vars/passwords
+  roles:
+    - preconfig
+    - samba-fileserver

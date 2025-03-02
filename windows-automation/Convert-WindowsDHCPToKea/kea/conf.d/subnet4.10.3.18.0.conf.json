@@ -1,0 +1,43 @@
+{
+  "reservations": <?include "/etc/kea/conf.d/subnet4.10.3.18.0.reservations.conf.json"?>,
+  "subnet": "10.3.18.0/23",
+  "pools": [
+    {
+      "pool": "10.3.18.1 - 10.3.19.133"
+    },
+    {
+      "pool": "10.3.19.135 - 10.3.19.250"
+    }
+  ],
+  "id": 180,
+  "user-context": {
+    "name": "UEDC",
+    "description": "UEDC"
+  },
+  "option-data": [
+    {
+      "csv-format": true,
+      "name": "routers",
+      "code": 3,
+      "data": "10.3.19.254",
+      "space": "dhcp4",
+      "always-send": true
+    },
+    {
+      "csv-format": true,
+      "name": "domain-name-servers",
+      "code": 6,
+      "data": "10.3.19.251,10.3.77.112",
+      "space": "dhcp4",
+      "always-send": true
+    },
+    {
+      "csv-format": true,
+      "name": "dhcp-lease-time",
+      "code": 51,
+      "data": "7776000",
+      "space": "dhcp4",
+      "always-send": true
+    }
+  ]
+}

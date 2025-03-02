@@ -1,0 +1,57 @@
+---
+- name: Setup repos
+  hosts: project_ald,&os_astra
+  # vars:
+  #   repo:
+  #     - deb http://dl.astralinux.ru/astra/frozen/1.7_x86-64/1.7.4/repository-main 1.7_x86-64 main non-free contrib 
+  #     - deb http://dl.astralinux.ru/astra/frozen/1.7_x86-64/1.7.4/repository-update 1.7_x86-64 main contrib non-free
+  #     - deb http://dl.astralinux.ru/astra/frozen/1.7_x86-64/1.7.4/repository-base 1.7_x86-64 main non-free contrib 
+  #     - deb http://dl.astralinux.ru/astra/frozen/1.7_x86-64/1.7.4/repository-extended 1.7_x86-64 main contrib non-free
+  #     - deb https://dl.astralinux.ru/aldpro/frozen/01/2.2.0 1.7_x86-64 main base 
+
+  handlers:
+    - name: Repo reboot
+      ansible.builtin.reboot:
+        pre_reboot_delay: 15
+        post_reboot_delay: 15
+        reboot_timeout: 100
+        msg: "Rebooting after update insatll"
+      # ignore_errors: true
+      # when: repo_rebootafterupdate is true
+  
+  tasks:
+    - name: Add repo
+      ansible.builtin.apt_repository:
+        repo: "{{ item }}"
+        state: present
+      loop: "{{ repo }}"
+
+    - name: Upgrade the OS
+      ansible.builtin.apt:
+        upgrade: dist
+      notify: Repo reboot
+
+    - debug:
+        var: repo_packages
+
+    - name: Repo install packages
+      apt:
+        name: "{{ repo_packages }}"
+        state: latest
+        update_cache: yes
+      notify: Repo reboot
+
+    # - name: Repo systemd default target
+    #   ansible.builtin.file:
+    #     src: /usr/lib/systemd/system/graphical.target
+    #     dest: /etc/systemd/system/default.target
+    #     state: link
+    #   when: preconfig_graphicaltarget is true
+
+    - name: Repo reboot
+      ansible.builtin.reboot:
+        pre_reboot_delay: 15
+        post_reboot_delay: 15
+        reboot_timeout: 100
+        msg: "Rebooting after update insatll"
+      when: repo_reboot is true

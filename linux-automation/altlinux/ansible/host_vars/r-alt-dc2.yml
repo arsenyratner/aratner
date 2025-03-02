@@ -1,0 +1,17 @@
+preconfig_time:
+  server: true
+  packagelist:
+    - chrony
+  timezone: Europe/Moscow
+  # ntp_pools:
+  #   - gtnn.gazprom.ru
+  ntp_servers:
+    - 192.168.126.1
+
+network_ipv4_method: convert
+network_ipv4_dns:
+  servers:
+    - 127.0.0.1
+    - 10.20.4.5
+  search:
+    - "{{ gtnn_domain_name }}"

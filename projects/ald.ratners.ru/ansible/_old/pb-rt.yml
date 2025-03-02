@@ -1,0 +1,154 @@
+---
+- name: RouterOS 
+  hosts: routeros,&role_rt
+  gather_facts: false
+  vars:
+    proj: ald
+    site: z20vn1
+    role: rt
+    suff: 1
+    # wanip:
+    # wangw:
+    wanif: ether1
+    waniflist: WAN
+    lanif: ether2
+    lanip: 10.20.1.254/24
+    laniflist: LAN
+    trustedlist:
+      - 192.168.126.0/24
+      - 10.20.1.0/24
+      - 127.0.0.0/8
+    dhcpleases:
+      - mac: 00:00:00:00:00:10
+        ip: 10
+        comment: ws10 
+      - mac: 00:00:00:00:00:11
+        ip: 11
+        comment: ws11 
+      - mac: 00:00:00:00:00:12
+        ip: 12
+        comment: ws12 
+    dhcpoptions:
+      - name: opt_1_name
+        code: 1
+        value: '192.168.1.1'
+      - name: opt_2_name
+        code: 2
+        value: 'opt2value'
+
+  tasks:
+    - name: Set ID
+      community.routeros.command:
+        commands:
+          - /system/identity/set name={{ proj }}-{{ site }}-{{ role }}{{ suff }}
+
+    - name: Set wan ip
+      community.routeros.command:
+        commands:
+          - /ip/dhcp-client/disable {{ wanif }}
+          - /ip/address/add address={{ wanip }} interface={{ wanif }}
+          - /ip/route/add dst-address=0.0.0.0 gateway={{ wangw }}
+      when: wanip is defined
+
+    - name: Set lan ip
+      community.routeros.command:
+        commands:
+          - /ip/address/add address={{ lanip }} interface={{ lanif }}
+
+    - name: Create WAN if list
+      community.routeros.command:
+        commands:
+          - /interface list add name={{ waniflist }}
+          - /interface list member add interface={{ wanif }} list={{ waniflist }}
+
+    - name: Create LAN if list
+      community.routeros.command:
+        commands:
+          - /interface list add name={{ laniflist }}
+          - /interface list member add interface={{ lanif }} list={{ laniflist }}
+
+    - name: Create trusted list
+      community.routeros.command:
+        commands:
+          - /ip firewall address-list add address={{ item }} list=trusted
+      loop: "{{ trustedlist }}"
+
+    - name: Create FW input rules
+      community.routeros.command:
+        commands:
+          - /ip firewall filter add action=accept chain=input comment="E, R" connection-state=established,related
+          - /ip firewall filter add action=accept chain=input protocol=icmp
+          - /ip firewall filter add action=accept chain=input connection-state=new src-address-list=trusted
+          - /ip firewall filter add action=drop chain=input log-prefix=_IN_D_
+
+    - name: Create FW forward rules
+      community.routeros.command:
+        commands:
+          - /ip firewall filter add action=accept chain=forward comment="E, R" connection-state=established,related
+          - /ip firewall filter add action=accept chain=forward connection-state=new out-interface-list=WAN
+          - /ip firewall filter add action=accept chain=forward connection-state=new dst-address-list=trusted src-address-list=trusted
+          - /ip firewall filter add action=accept chain=forward comment="Allow DNATed" connection-nat-state=dstnat connection-state=new log-prefix=_DNAT_
+          - /ip firewall filter add action=drop chain=forward log=yes log-prefix=_FW_D_
+
+    - name: Create FW output rules
+      community.routeros.command:
+        commands:
+          - /ip firewall filter add action=accept chain=output comment="E, R" connection-state=established,related
+          - /ip firewall filter add action=accept chain=output connection-state=new
+          - /ip firewall filter add action=accept chain=output log=yes log-prefix=_OUT_D_
+
+    - name: Create FW forward rules
+      community.routeros.command:
+        commands:
+          - /ip firewall nat add action=masquerade chain=srcnat out-interface-list=WAN
+
+    - name: Create NTP settings
+      community.routeros.command:
+        commands:
+          - /system clock set time-zone-name=Europe/Moscow
+          - /system ntp client set enabled=yes
+          - /system ntp server set enabled=yes
+          - /system ntp client servers add address=ru.pool.ntp.org
+
+    - name: Disable services
+      community.routeros.command:
+        commands:
+          - /ip service set telnet disabled=yes
+          - /ip service set ftp disabled=yes
+          - /ip service set www disabled=yes
+          - /ip service set api disabled=yes
+          - /ip service set api-ssl disabled=yes
+
+    - name: Allow ssh forwarding
+      community.routeros.command:
+        commands:
+          - /ip ssh set forwarding-enabled=both
+
+    - name: Serve DNS requests
+      community.routeros.command:
+        commands:
+          - /ip dns set allow-remote-requests=yes servers=192.168.126.1
+
+    - name: Setup DHCP server
+      community.routeros.command:
+        commands:
+          - /ip pool add name=pool-{{ site }} ranges="{{ lanip | ansible.utils.ipaddr('last_usable') | ansible.utils.ipmath(-55) }}-{{ lanip | ansible.utils.ipaddr('last_usable') | ansible.utils.ipmath(-154) }}"
+          - /ip dhcp-server network add address={{ lanip | ansible.utils.ipaddr('network/prefix') }} dns-server={{ lanip }} domain={{ domname }} gateway={{ lanip }} netmask={{ lanip | ansible.utils.ipaddr('prefix') }} ntp-server={{ lanip }}
+          - /ip dhcp-server add address-pool=pool-{{ site }} disabled=no interface={{ lanif }} name=dhcp-server-{{ site }}
+
+    - name: Create dhcp options
+      community.routeros.command:
+        commands:
+          - /ip dhcp-server option add code={{ item.code }} name={{ item.name }} value="'{{ item.value }}'"
+      loop: "{{ dhcpoptions }}"
+
+    - name: Settingup DHCP leases
+      community.routeros.command:
+        commands:
+          - /ip dhcp-server lease add address={{ lanip | ansible.utils.ipaddr('network') | ansible.utils.ipmath(item.ip) }} comment={{ item.comment}} mac-address={{ item.mac }}
+      loop: "{{ dhcpleases }}"
+
+    - name: Setup DHCP network
+      community.routeros.command:
+        commands:
+          - /ip dhcp-server network add address={{ lanip | ansible.utils.ipaddr('network/prefix') }} dhcp-option-set=set1 dns-server={{ lanip }} domain=ald.ratners.ru gateway={{ lanip }} netmask={{ lanip | ansible.utils.ipaddr('prefix') }} ntp-server={{ lanip }}

@@ -1,0 +1,29 @@
+lang en_US
+keyboard --xlayouts='us'
+timezone Europe/Moscow
+rootpw $2b$10$CB7jkAJ7l8yn2YVTAv.sw.tbqQeyZ6.5uP9vwORdM1krxbf60V.7K --iscrypted
+text
+url --url=http://tftp.r.ratners.ru
+reqpart
+bootloader --location=boot --append="rhgb quiet"
+zerombr
+clearpart --all --initlabel
+volgroup vg0-sys --pesize=4096 pv.0
+part pv.0 --fstype=lvmpv --ondisk=sde --size=8192
+part /boot --fstype=ext4 --ondisk=sda --size=1024 --asprimary
+logvol / --vgname=vg0-sys --name=lv_root --fstype=xfs --size=4096 --grow --maxsize=102400
+logvol swap --vgname=vg0-sys --name=lv_swap --fstype=swap --size=1024
+network --bootproto=dhcp
+firstboot --disable
+selinux --permissive
+firewall --enabled --ssh --port=9090
+%pre --interpreter=/bin/bash
+echo pre
+%end
+%post
+echo post
+%end
+%packages
+@^minimal-environment
+kexec-tools
+%end

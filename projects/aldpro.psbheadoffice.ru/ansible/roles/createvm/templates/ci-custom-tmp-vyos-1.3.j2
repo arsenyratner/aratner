@@ -1,0 +1,24 @@
+vyos_config_commands:
+  - set system option ctrl-alt-delete 'reboot'
+  - set system ipv6 disable
+  - set service ssh disable-host-validation
+  - commit
+  - save
+
+write_files:
+  - path: /opt/vyatta/etc/config/scripts/my.script
+    content: |
+      #!/bin/vbash
+      source /opt/vyatta/etc/functions/script-template
+      configure
+      set system name-server 8.8.8.8
+      commit
+      save
+      exit
+
+power_state:
+  delay: "now"
+  mode: reboot
+  message: Bye Bye
+  timeout: 30
+  condition: True

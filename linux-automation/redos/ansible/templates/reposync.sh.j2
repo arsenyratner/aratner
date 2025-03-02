@@ -1,0 +1,28 @@
+#!/bin/bash
+#DESTDIR=/mnt/repo/redos/7.3/x86_64
+#REPOIDS="base updates kernels kernels6 extra"
+#REPOIDS="kernels kernels6"
+REPOIDS="{{ rep_repolist }}"
+DESTDIR="{{ rep_destdir }}"
+
+logger "reposync script started $REPOIDS"
+if [ ! -d $DESTDIR ]; then mkdir -p $DESTDIR; fi
+#dnf install dnf-utils createrepo
+dnf makecache
+for REPOID in $REPOIDS; do
+  if [[ -f "$DESTDIR/$REPOID/.repodata" ]];
+  then
+    rm -rf $DESTDIR/$REPOID/.repodata
+  fi
+  logger "reposync $REPOID"
+  #reposync --repo $REPOID --newest-only --downloadcomps -p $DESTDIR
+  reposync --repo $REPOID --downloadcomps -p $DESTDIR
+  logger "reposync $REPOID done"
+  if [[ -f "$DESTDIR/$REPOID/comps.xlm" ]];
+  then
+    createrepo --update $DESTDIR/$REPOID -g comps.xlm
+  else
+    createrepo --update $DESTDIR/$REPOID
+  fi
+done
+logger "reposync script done $REPOIDS"

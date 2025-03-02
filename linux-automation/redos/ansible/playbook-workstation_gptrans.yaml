@@ -1,0 +1,778 @@
+---
+- hosts: all
+  become: yes
+  become_user: root
+  tasks:
+
+  - name: Set NTP config
+    ansible.builtin.copy:
+      dest: /etc/chrony.conf
+      content: |
+        driftfile /var/lib/chrony/drift
+        makestep 1.0 3
+        rtcsync
+        keyfile /etc/chrony.keys
+        ntsdumpdir /var/lib/chrony
+        leapsectz right/UTC
+        logdir /var/log/chrony
+        server vsrv-aup-dc-01.gtnn.gazprom.ru iburst
+        server vsrv-aup-dc-02.gtnn.gazprom.ru iburst
+
+  - name: Restart NTP daemon
+    ansible.builtin.service:
+      name: chronyd
+      enabled: yes
+      state: restarted
+
+  - name: dnf clean all
+    ansible.builtin.command: dnf clean all
+
+  - name: delete /etc/yum.repos.d/
+    ansible.builtin.file: 
+      path: /etc/yum.repos.d/
+      state: absent
+
+  - name: create /etc/yum.repos.d/
+    ansible.builtin.file: 
+      path: /etc/yum.repos.d/
+      state: directory
+      mode: 0755
+
+  - name: RedOS-Base.repo
+    copy:
+      dest: /etc/yum.repos.d/RedOS-Base.repo
+      mode: 0644
+      content: |
+        [base]
+        baseurl = http://10.252.190.100/repo/redos/7.3/$basearch/os
+        enabled = 1
+        gpgcheck = 1
+        gpgkey = file:///etc/pki/rpm-gpg/RPM-GPG-KEY-RED-SOFT
+        name = RedOS - Base
+
+  - name: RedOS-kernels.repo
+    ansible.builtin.copy:
+      dest: /etc/yum.repos.d/RedOS-kernels.repo
+      mode: 0644
+      content: |
+        [kernels]
+        baseurl = http://10.252.190.100/redos/7.3/$basearch/kernels
+        enabled = 1
+        gpgcheck = 1
+        gpgkey = file:///etc/pki/rpm-gpg/RPM-GPG-KEY-RED-SOFT
+        name = Repositories for kernels
+
+  - name: RedOS-Updates.repo
+    ansible.builtin.copy:
+      dest: /etc/yum.repos.d/RedOS-Updates.repo
+      mode: 0644
+      content: |
+        [updates]
+        baseurl = http://10.252.190.100/repo/redos/7.3/$basearch/updates
+        enabled = 1
+        gpgcheck = 1
+        gpgkey = file:///etc/pki/rpm-gpg/RPM-GPG-KEY-RED-SOFT
+        name = RedOS - Updates
+
+  - name: RedOS-kernels6.repo
+    ansible.builtin.copy:
+      dest: /etc/yum.repos.d/RedOS-kernels6.repo
+      mode: 0644
+      content: |
+        [kernels6]
+        baseurl = http://10.252.190.100/redos/7.3/$basearch/extras/kernels6-73
+        enabled = 1
+        gpgcheck = 1
+        gpgkey = file:///etc/pki/rpm-gpg/RPM-GPG-KEY-RED-SOFT
+        name = Repositories for kernels6
+
+  - name: RedOS-extra.repo
+    ansible.builtin.copy:
+      dest: /etc/yum.repos.d/RedOS-extra.repo
+      mode: 0644
+      content: |
+        [extra]
+        baseurl=http://10.252.190.100/repo/gtnn/redos/7.3/$basearch/base
+        failovermethod=priority
+        gpgcheck=0
+        enabled=1
+        gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-RED-SOFT
+
+  - name: Add Alladin Key
+    ansible.builtin.rpm_key: 
+      state: present
+      key: http://10.252.190.100/repo/gtnn/redos/7.3/x86_64/base/RPM-GPG-KEY-ALADDIN_RD-ZAO.public
+
+  - name: Remove office-suite
+    ansible.builtin.dnf:
+      name: office-suite
+      state: absent
+
+  - name: Remove internet-applications
+    ansible.builtin.dnf:
+      name: internet-applications
+      state: absent
+
+  - name: Remove yandex-browser-release
+    ansible.builtin.dnf:
+      name: yandex-browser-release
+      state: absent
+
+  - name: install firefox
+    ansible.builtin.dnf:
+      name: firefox
+      state: present
+
+  - name: install stunnel
+    ansible.builtin.dnf:
+      name: stunnel
+      state: present
+
+  - name: install realmd
+    ansible.builtin.dnf:
+      name: realmd
+      state: present
+
+  - name: install oddjob-mkhomedir
+    ansible.builtin.dnf:
+      name: oddjob-mkhomedir
+      state: present
+
+  - name: install oddjob
+    ansible.builtin.dnf:
+      name: oddjob
+      state: present
+
+  - name: install samba-winbind-clients
+    ansible.builtin.dnf:
+      name: samba-winbind-clients
+      state: present
+
+  - name: install samba-winbind
+    ansible.builtin.dnf:
+      name: samba-winbind
+      state: present
+
+  - name: install samba-common-tools 
+    ansible.builtin.dnf:
+      name: samba-common-tools 
+      state: present
+
+  - name: install samba-winbind-krb5-locator
+    ansible.builtin.dnf:
+      name: samba-winbind-krb5-locator
+      state: present
+
+  - name: install samba
+    ansible.builtin.dnf:
+      name: samba
+      state: present
+
+  - name: install pidgin
+    ansible.builtin.dnf:
+      name: pidgin
+      state: present
+
+  - name: install pidgin-sipe
+    ansible.builtin.dnf:
+      name: pidgin-sipe
+      state: present
+
+  - name: install evolution-ews
+    ansible.builtin.dnf:
+      name: evolution-ews
+      state: present
+
+  - name: install evolution-ews-langpacks
+    ansible.builtin.dnf:
+      name: evolution-ews-langpacks
+      state: present
+
+  - name: install evolution-help
+    ansible.builtin.dnf:
+      name: evolution-help
+      state: present
+
+  - name: install freerdp
+    ansible.builtin.dnf:
+      name: freerdp
+      state: present
+
+  - name: install freerdp-server 
+    ansible.builtin.dnf:
+      name: freerdp-server 
+      state: present
+
+  - name: install x264
+    ansible.builtin.dnf:
+      name: x264
+      state: present
+
+  - name: install guvcview
+    ansible.builtin.dnf:
+      name: guvcview
+      state: present
+
+  - name: install gstreamer1-libav
+    ansible.builtin.dnf:
+      name: gstreamer1-libav
+      state: present
+
+  - name: install jcpkcs11-2
+    ansible.builtin.dnf:
+      name: jcpkcs11-2
+      state: present
+
+  - name: install jacartauc
+    ansible.builtin.dnf:
+      name: jacartauc
+      state: present
+
+  - name: install ICAClient
+    ansible.builtin.dnf:
+      name: ICAClient
+      state: present
+
+  - name: install ctxusb
+    ansible.builtin.dnf:
+      name: ctxusb
+      state: present
+
+  - name: install lsb-cprocsp-kc1-64
+    ansible.builtin.dnf:
+      name: lsb-cprocsp-kc1-64
+      state: present
+
+  - name: install lsb-cprocsp-base
+    ansible.builtin.dnf:
+      name: lsb-cprocsp-base
+      state: present
+
+  - name: install lsb-cprocsp-ca-certs
+    ansible.builtin.dnf:
+      name: lsb-cprocsp-ca-certs
+      state: present
+
+  - name: install lsb-cprocsp-pkcs11-64
+    ansible.builtin.dnf:
+      name: lsb-cprocsp-pkcs11-64
+      state: present
+
+  - name: install lsb-cprocsp-rdr-64
+    ansible.builtin.dnf:
+      name: lsb-cprocsp-rdr-64
+      state: present
+
+  - name: install cprocsp-curl-64
+    ansible.builtin.dnf:
+      name: cprocsp-curl-64
+      state: present
+
+  - name: install cprocsp-rdr-gui-gtk-64
+    ansible.builtin.dnf:
+      name: cprocsp-rdr-gui-gtk-64
+      state: present
+
+  - name: install cprocsp-rdr-jacarta-64
+    ansible.builtin.dnf:
+      name: cprocsp-rdr-jacarta-64
+      state: present
+
+  - name: install cprocsp-rdr-pcsc-64
+    ansible.builtin.dnf:
+      name: cprocsp-rdr-pcsc-64
+      state: present
+
+  - name: install cprocsp-rdr-rutoken-64
+    ansible.builtin.dnf:
+      name: cprocsp-rdr-rutoken-64
+      state: present
+
+  - name: install cprocsp-rsa-64
+    ansible.builtin.dnf:
+      name: cprocsp-rsa-64
+      state: present
+
+  - name: install cprocsp-stunnel-64
+    ansible.builtin.dnf:
+      name: cprocsp-stunnel-64
+      state: present
+
+  - name: install lsb-cprocsp-capilite-64 
+    ansible.builtin.dnf:
+      name: lsb-cprocsp-capilite-64 
+      state: present
+
+  - name: install cifs-utils
+    ansible.builtin.dnf:
+      name: cifs-utils
+      state: present
+
+  - name: install jacartauc
+    ansible.builtin.dnf:
+      name: jacartauc
+      state: present
+
+  - name: install autofs
+    ansible.builtin.dnf:
+      name: autofs
+      state: present
+
+  - name: install perl
+    ansible.builtin.dnf:
+      name: perl
+      state: present
+
+  - name: Install RED ADM client
+    ansible.builtin.dnf:
+      name: redadm-client
+      state: present
+
+  - name: Unpack CICAClient
+    ansible.builtin.unarchive:
+      src: http://10.252.190.100/repo/gtnn/collection/files/citrix/ICAClient.tar.gz
+      dest: /
+      remote_src: yes
+
+  - name: Unpack /usr/_custom_files
+    ansible.builtin.unarchive:
+      src: http://10.252.190.100/repo/gtnn/collection/files/usr.tar.gz
+      dest: /
+      remote_src: yes
+
+  - name: Unpack /etc/_custom_files
+    ansible.builtin.unarchive:
+      src: http://10.252.190.100/repo/gtnn/collection/files/etc.tar.gz
+      dest: /
+      remote_src: yes
+
+  - name: create /opt/postinstall
+    ansible.builtin.file: 
+      path: /opt/postinstall
+      state: directory
+      mode: 0777
+
+  - name: create /opt/postinstall/certs
+    ansible.builtin.file: 
+      path: /opt/postinstall/certs
+      state: directory
+      mode: 0775
+
+  - name: create /opt/postinstall/certs
+    ansible.builtin.file: 
+      path: /opt/postinstall/certs/csp_certs
+      state: directory
+      mode: 0775
+
+  - name: create /opt/postinstall/scripts
+    ansible.builtin.file: 
+      path: /opt/postinstall/scripts
+      state: directory
+      mode: 0775
+
+  - name: Unpack CSP CA
+    ansible.builtin.unarchive:
+      src: http://10.252.190.100/repo/gtnn/collection/certs/csp_certs.tar.gz
+      dest: /opt/postinstall/certs/csp_certs
+      remote_src: yes
+
+  - name: chmod 0775 dirs in /opt/postinstall/
+    ansible.builtin.command: find /opt/postinstall/ -type d -exec chmod 0775 {} \;
+
+  - name: chmod 0664 dirs in /opt/postinstall/
+    ansible.builtin.command: find /opt/postinstall/ -type f -exec chmod 0664 {} \;
+
+  - name: chown root:root all in /opt/postinstall/
+    ansible.builtin.command: chown -R root:root /opt/postinstall
+
+  - name: Install CSP CA - root
+    ansible.builtin.command: find /opt/postinstall/certs/csp_certs/root/ -xtype f -exec /opt/cprocsp/bin/amd64/certmgr -install -store mROOT -file '{}' ';'
+
+  - name: Install CSP CA - ca
+    ansible.builtin.command: find //opt/postinstall/certs/csp_certs/ca/ -xtype f -exec /opt/cprocsp/bin/amd64/certmgr -install -store mCA -file '{}' ';'
+
+  - name: Install CSP CA - ca_crt
+    ansible.builtin.command: find /opt/postinstall/certs/csp_certs/ca_crt/ -xtype f -exec /opt/cprocsp/bin/amd64/certmgr -install -store mCA -file '{}' ';'
+
+  - name: Install CSP CA - crl
+    ansible.builtin.command: find /opt/postinstall/certs/csp_certs/crl/ -xtype f -exec /opt/cprocsp/bin/amd64/certmgr -install -crl -file '{}' ';'
+  
+  - name: Generate /opt/Citrix/ICAClient/keystore/cacerts/localhost.crt
+    ansible.builtin.command: openssl req -x509 -newkey rsa:4096 -keyout /opt/Citrix/ICAClient/localhost.key -nodes -days 1500 -out /opt/Citrix/ICAClient/keystore/cacerts/localhost.crt -subj "/C=RU/ST=52/L=NN/O=GTNN Ltd/OU=Penza LPUMG/CN=127.0.0.1/emailAddress=root@localhost"
+
+  - name: Create Fonts install script
+    ansible.builtin.copy:
+      dest: /opt/postinstall/scripts/fonts_install.sh
+      mode: 0775
+      content: |
+        #!/bin/sh
+        find ./etc ./opt ./usr  -xtype d | sed -e 's/.//' | xargs -n 1 mkdir -p $1
+        find ./etc ./opt ./usr  -xtype f | sed -e p  -e s/.// | xargs -n 2 cp -v $1 $2
+        fc-cache -f -v
+
+  - name: Run Fonts install script
+    ansible.builtin.command: /opt/postinstall/scripts/fonts_install.sh
+
+  - name: ctx_rehash
+    ansible.builtin.command: /opt/Citrix/ICAClient/util/ctx_rehash
+
+  - name: chmod +x modify_ica.sh
+    ansible.builtin.command: chmod +x /opt/Citrix/ICAClient/modify_ica.sh
+
+  - name: Set GTNN CA chain
+    ansible.builtin.copy:
+      dest: /etc/pki/ca-trust/source/anchors/gtnncachain.crt
+      mode: 0644
+      content: |
+        # GTNN Root CA
+        -----BEGIN CERTIFICATE-----
+        MIIDsTCCApmgAwIBAgIBATANBgkqhkiG9w0BAQsFADBFMRAwDgYDVQQKDAdHUFRS
+        QU5TMQ8wDQYDVQQLDAZyb290Y2ExIDAeBgNVBAMMF3Jvb3QtY2EuZ3Rubi5nYXpw
+        cm9tLnJ1MB4XDTI0MDIwNjEyMjgyOFoXDTQ0MDIwNjEyMjgyOFowRTEQMA4GA1UE
+        CgwHR1BUUkFOUzEPMA0GA1UECwwGcm9vdGNhMSAwHgYDVQQDDBdyb290LWNhLmd0
+        bm4uZ2F6cHJvbS5ydTCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEBAMuO
+        AAS6PSEadCvpFVymyl0jnECuUVjRiNw5/bbIzc7mJkm0SspmhYLOfisQSwaPwlPs
+        1GhVY4AcB2lUDQnVfqKkPUfAf8tauYE1QuN9YJDGxpT9kDhtQKC0r3x2pRfqpNle
+        T/P+GEWN3KvzUGLHyphvO/RfdNYfhLX7OeW8gm+HDb8IJw9KbN+xJ8LJCtlIaWoQ
+        8EgHY1kNsD8m3z/++5mqfzxXcLa6vC3SF0gt4HrSN//XiP878lM6ZbNKPynCYLIU
+        f5z/wUurct3SKB2CnbsyLq8TLr2UO9wLnsUv17cWAKL22WowlMvsXJyfHau45Y33
+        SscNT5ZcUcdt8ukldHkCAwEAAaOBqzCBqDAfBgNVHSMEGDAWgBSuafS/PGEv0ut3
+        dHODsafP7PHTEDAPBgNVHRMBAf8EBTADAQH/MA4GA1UdDwEB/wQEAwIBxjAdBgNV
+        HQ4EFgQUrmn0vzxhL9Lrd3Rzg7Gnz+zx0xAwRQYIKwYBBQUHAQEEOTA3MDUGCCsG
+        AQUFBzABhilodHRwOi8vcm9vdC1jYS5ndG5uLmdhenByb20ucnU6ODAvY2Evb2Nz
+        cDANBgkqhkiG9w0BAQsFAAOCAQEAfcCt0o3YCGGAS6cbbHjmfcjGzZmTkU4SpG0H
+        ApcT8icfnh+hjhCGbuEYm4D2QUsHfl1AcrPHltu8C9Y3AqTcph5hxsPO9o7q86+v
+        +A6+MJB3zP9EUTG1fRPJrEOfSTjacopnWq/cPYzu2E5Hlr9bbmkEoYIeWxgfrvDw
+        wLkIzSOITmY2CAtpIvYkUxnoF9DGsLa+EhykGbpgxnXIqS6VgUSHhuznfQzqmmVr
+        d553aM1SrH4OYHozSeL9WB2oSJHKQp1nkI5e+rvOfc0nKbixSDs/IdCJT4LQPfze
+        wzFRbTy0gfebI55IeHq/Dk0cgEabGajgU1rS6fcEIc0N1ibJ1g==
+        -----END CERTIFICATE-----
+
+  - name: Set SPS CA chain
+    ansible.builtin.copy:
+      dest: /etc/pki/ca-trust/source/anchors/spsca.crt
+      mode: 0644
+      content: |
+        # SPS Root CA
+        -----BEGIN CERTIFICATE-----
+        MIIDcjCCAlqgAwIBAgIQOrfiXzmAib1DNnbZpaMbYjANBgkqhkiG9w0BAQUFADBB
+        MRUwEwYKCZImiZPyLGQBGRYFbG9jYWwxGzAZBgoJkiaJk/IsZAEZFgtrcmFzZ2F6
+        cHJvbTELMAkGA1UEAxMCQ0EwHhcNMTAwMzEwMDkwOTI4WhcNMzUwMzEwMDkxOTI3
+        WjBBMRUwEwYKCZImiZPyLGQBGRYFbG9jYWwxGzAZBgoJkiaJk/IsZAEZFgtrcmFz
+        Z2F6cHJvbTELMAkGA1UEAxMCQ0EwggEiMA0GCSqGSIb3DQEBAQUAA4IBDwAwggEK
+        AoIBAQDA51v4d1AIzucE6ZW9PTSxKhWvZYDePaReXdsH4DQiiR1EKIKOKV8UorcU
+        7ERvYYTQLkaRE+xVeDDHSDVM4U9MBBMlo32p9Vo8vlIuHgGUShX8XUfLO+OpoTjz
+        s3DJZ3q8kr41wF09ipCIpSVF/rAPLUY+NlCpml3bxVU+ZZHCYXcuqHskgDPBppVS
+        ZZSEQIJVARvonMMgvfPMCSuFSlALNaHs3bRwge+tvhCNG7eo7OE65R5cqLB/r5gH
+        M87nWLIg0K3iJDVmJ1sLWyW+5AtB/V3J1IMqU48LepVFrKbZqYVelDv4aVM0ICVq
+        6thCjN6//E9G+4R+MZf4bQlseywlAgMBAAGjZjBkMBMGCSsGAQQBgjcUAgQGHgQA
+        QwBBMAsGA1UdDwQEAwIBhjAPBgNVHRMBAf8EBTADAQH/MB0GA1UdDgQWBBSy8bLs
+        I/AN8x3UOoHe91xroWHpsDAQBgkrBgEEAYI3FQEEAwIBADANBgkqhkiG9w0BAQUF
+        AAOCAQEAelIVWf34CRK0lt3wcJsSVQg1PCW6zpHmydwENxWNb0f3uOH8GeVr9jr6
+        X7HRBXACW+pe3PUoPTSSyJ9FYfx1phqbS3jzbKsnCSOL5BkreZhgn9G6pmvPiIXR
+        HfOS/qopCmL6rfHDwqVVtJ8nDD1BWFG2+seoyuEPRmt0lX0XrjoHC9tHeYKlN+gk
+        UleFXARjwJp6Q1dpnFYle6pM0XpsmbNZgf2VNhVYAjnirLC9/lplCwjILgIiF/4f
+        n0qn1ZSEeJ5PCM6GLub4xFvk0g4Kk5xnrfznQyELZpaulCkB9TQ8Nbb0XgatMkDi
+        +tgZAY8u3s/XL53VtsCAjKQO8ZGFFw==
+        -----END CERTIFICATE-----
+
+  - name: create /etc/sssd/pki/
+    ansible.builtin.file: 
+      path: /etc/sssd/pki/
+      state: directory
+      mode: 0755
+
+  - name: sssd_auth_ca_db.pem
+    ansible.builtin.copy:
+      remote_src: true
+      src: /etc/pki/ca-trust/source/anchors/gtnncachain.crt
+      dest: /etc/sssd/pki/sssd_auth_ca_db.pem
+
+  - name: TLS 1 support
+    ansible.builtin.command: update-crypto-policies  --set LEGACY
+
+  - name: Update ca trust
+    ansible.builtin.command: update-ca-trust extract
+
+  - name: delete /etc/pki/tls/certs/ca-bundle.crt
+    ansible.builtin.file: 
+      path: /etc/pki/tls/certs/ca-bundle.crt
+      state: absent
+
+  - name: link ca-bundle to tls-ca-bundle.pem
+    ansible.builtin.file: 
+      src: /etc/pki/ca-trust/extracted/pem/tls-ca-bundle.pem
+      dest: /etc/pki/tls/certs/ca-bundle.crt
+      state: link
+
+  - name: Set RED ADM client config
+    ansible.builtin.copy:
+      dest: /opt/redclient/client.conf
+      content: |
+        IP=redadm.gtnn.gazprom.ru
+        PORT=443
+        ENABLED_SECURE=True
+        SECURE_CERTIFICATE=/etc/pki/tls/certs/ca-bundle.crt
+
+  - name: Set RED ADM gpupdate cron
+    copy:
+      dest: /etc/cron.d/redadmgpupdate
+      content: |
+        # installed by redclient_cachain_pc
+        SHELL=/bin/bash
+        PATH=/sbin:/bin:/usr/sbin:/usr/bin
+        MAILTO=root
+        */30 * * * * root /bin/gpupdate > /dev/null 2>&1
+        #
+
+  - name: RED ADM gpupdate
+    ansible.builtin.command: /bin/gpupdate > /dev/null 2>&1
+
+  - name: Add Domain Group to SUDOers
+    copy:
+      dest: /etc/sudoers.d/w-aup-admins
+      content: |
+        ##  Allows users from group wheel to run various commands as
+        ## the root user, without needing the root password.
+        %w-aup-admins@gtnn.gazprom.ru	ALL=(ALL)	NOPASSWD: ALL
+        %w-aup-admins	ALL=(ALL)	NOPASSWD: ALL
+
+  - name: bkp sssd
+    ansible.builtin.copy:
+      remote_src: true
+      src: /etc/sssd/sssd.conf
+      dest: /etc/sssd/sssd.conf.{{ansible_date_time.date}}.bak
+
+  - name: bkp pam
+    ansible.builtin.copy:
+      remote_src: true
+      src: /etc/pam.d/
+      dest: /etc/pam.default/
+
+  - name: bkp krb5.conf
+    ansible.builtin.copy:
+      remote_src: true
+      src: /etc/krb5.conf
+      dest: /etc/krb5.conf.{{ansible_date_time.date}}.bak
+
+  - name: sssd.conf.autofs_smartcard
+    ansible.builtin.copy:
+      mode: 0600
+      dest: /etc/sssd/sssd.conf.autofs_smartcard
+      content: |
+        [sssd]
+        domains = gtnn.gazprom.ru
+        config_file_version = 2
+        services = nss, pam, autofs
+
+        [domain/gtnn.gazprom.ru]
+        ad_domain = gtnn.gazprom.ru
+        ad_server = vsrv-aup-dc-01.gtnn.gazprom.ru, vsrv-aup-dc-02.gtnn.gazprom.ru, _srv_
+        ad_enabled_domains = lpu.ds.vtg.gazprom.ru, aup.ds.vtg.gazprom.ru
+        krb5_realm = GTNN.GAZPROM.RU
+        case_sensitive = False
+        realmd_tags = manages-system joined-with-samba
+        cache_credentials = True
+        ad_update_samba_machine_account_password = true
+        id_provider = ad
+        access_provider = ad
+        krb5_store_password_if_offline = True
+        default_shell = /bin/bash
+        ldap_id_mapping = True
+        ad_gpo_access_control = disabled
+        dns_resolver_timeout = 10
+        use_fully_qualified_names = True
+        fallback_homedir = /home/%u@%d
+        enumerate = false
+        ldap_referrals = false
+        dyndns_update = true
+        dyndns_refresh_interval = 43200
+        dyndns_update_ptr = true
+        dyndns_ttl = 3600
+        dyndns_auth = GSS-TSIG
+        krb5_lifetime = 24h
+        krb5_renewable_lifetime = 7d
+        krb5_renew_interval = 300s
+        
+        ### smartcard
+        #krb5_auth_timeout = 45
+
+        autofs_provider = ad 
+        ldap_autofs_search_base = OU=aup_mount,OU=aup,OU=gptrans,DC=gtnn,DC=gazprom,DC=ru
+        ldap_autofs_map_object_class = nisMap 
+        ldap_autofs_entry_object_class = nisObject 
+        ldap_autofs_map_name = nisMapName 
+        ldap_autofs_entry_key = cn 
+        ldap_autofs_entry_value = nisMapEntry
+
+        # Включает/Отключает динамические обновления DNS, если в статусе sssd ошибка "TSIG error with server: tsig verify failure", то установите dyndns_update = false
+        dyndns_update = true
+        dyndns_refresh_interval = 43200
+        dyndns_update_ptr = true
+        dyndns_ttl = 3600
+
+        [domain/gtnn.gazprom.ru/aup.ds.vtg.gazprom.ru]
+        debug_level = 5
+        ad_server = dc-aup-2.aup.ds.vtg.gazprom.ru
+        use_fully_qualified_names = True
+
+        [domain/gtnn.gazprom.ru/lpu.ds.vtg.gazprom.ru]
+        debug_level = 5
+        ad_server = dc-lpu.lpu.ds.vtg.gazprom.ru
+        use_fully_qualified_names = True
+
+        ### smartcard
+        #[certmap/gtnn.gazprom.ru/smartcard]
+        #maprule = (samAccountName={subject_principal.short_name})
+        #matchrule = <EKU>msScLogin,clientAuth<KU>digitalSignature
+
+        [pam]
+        ##debug_level = 5
+        ### smartcard
+        #pam_cert_auth = True
+        #p11_child_timeout = 45
+        #pam_cert_db_path = /etc/sssd/pki/sssd_auth_ca_db.pem
+        #pam_p11_allowed_services = +mate-screensaver
+
+        [nss]
+        # Сколько секунд nss_sss должен кэшировать перечисления (запросы информации обо всех пользователях) Default: 120
+        #entry_cache_timeout = 15
+        # Задает время в секундах, в течение которого список поддоменов будет считаться действительным. Default: 60
+        #get_domains_timeout = 10
+
+        [autofs]
+        #debug_level = 5
+
+  - name: krb5.conf.autofs_smartcard
+    ansible.builtin.copy:
+      dest: /etc/krb5.conf.autofs_smartcard
+      content: |
+        includedir /etc/krb5.conf.d/
+
+        [libdefaults]
+            dns_lookup_realm = false  # Отключить поиск kerberos-имени домена через DNS
+            dns_lookup_kdc = true  # Включить поиск kerberos-настроек домена через DNS
+            ticket_lifetime = 24h
+            renew_lifetime = 7d
+            forwardable = true
+            rdns = false
+
+            spake_preauth_groups = edwards25519
+            default_ccache_name = FILE:/tmp/krb5cc_%{uid}
+            default_realm = GTNN.GAZPROM.RU
+
+            default_tgs_enctypes = aes256-cts-hmac-sha1-96 aes128-cts-hmac-sha1-96 RC4-HMAC DES-CBC-CRC DES3-CBC-SHA1 DES-CBC-MD5
+            default_tkt_enctypes = aes256-cts-hmac-sha1-96 aes128-cts-hmac-sha1-96 RC4-HMAC DES-CBC-CRC DES3-CBC-SHA1 DES-CBC-MD5
+            preferred_enctypes = aes256-cts-hmac-sha1-96 aes128-cts-hmac-sha1-96 RC4-HMAC DES-CBC-CRC DES3-CBC-SHA1 DES-CBC-MD5
+            
+            ### smartcard
+            #pkinit_identities = PKCS11:/usr/lib64/libjcPKCS11-2.so
+            #pkinit_anchors = FILE:/etc/pki/tls/certs/ca-bundle.crt
+            #pkinit_kdc_hostname = gtnn.gazprom.ru
+
+        [realms]
+        GTNN.GAZPROM.RU = {
+        #    debug = true
+            kdc = vsrv-aup-dc-01.gtnn.gazprom.ru
+            kdc = srv-aup-dc-02.gtnn.gazprom.ru
+            admin_server = vsrv-aup-dc-01.gtnn.gazprom.ru
+            default_domain = gtnn.gazprom.ru
+            ### smartcard
+            #pkinit_cert_match = <EKU>msScLogin,clientAuth<KU>digitalSignature
+            #default_principal_flags = +preauth
+        }
+
+        LPU.DS.VTG.GAZPROM.RU = {
+        #    debug = true
+            kdc = dc-lpu.lpu.ds.vtg.gazprom.ru
+            admin_server = dc-lpu.lpu.ds.vtg.gazprom.ru
+        }
+
+        AUP.DS.VTG.GAZPROM.RU = {
+        #    debug = true
+            kdc = dc-aup-2.aup.ds.vtg.gazprom.ru
+            admin_server = dc-aup-2.aup.ds.vtg.gazprom.ru
+        }
+
+        [domain_realm]
+        .gtnn.gazprom.ru = GTNN.GAZPROM.RU
+        gtnn.gazprom.ru = GTNN.GAZPROM.RU
+
+        .lpu.ds.vtg.gazprom.ru = LPU.DS.VTG.GAZPROM.RU
+        lpu.ds.vtg.gazprom.ru = LPU.DS.VTG.GAZPROM.RU
+
+        .aup.ds.vtg.gazprom.ru = AUP.DS.VTG.GAZPROM.RU
+        aup.ds.vtg.gazprom.ru = AUP.DS.VTG.GAZPROM.RU
+
+  - name: autofs.conf
+    ansible.builtin.copy:
+      dest: /etc/autofs.conf
+      content: |
+        [ autofs ]
+        master_map_name = auto.master
+        timeout = 300
+        browse_mode = yes
+        mount_nfs_default_protocol = 4
+        #logging = none
+        #ldap_uri = "ldap://gtnn.gazprom.ru"
+        search_base = "OU=aup_mount,OU=aup,OU=gptrans,DC=gtnn,DC=gazprom,DC=ru"
+        #
+        map_object_class = nisMap
+        entry_object_class = nisObject
+        map_attribute = nisMapName
+        entry_attribute = cn
+        value_attribute= nisMapEntry
+        #
+        auth_conf_file = /etc/autofs_ldap_auth.conf
+        [ amd ]
+        dismount_interval = 30
+
+  - name: configure autofs and smartcard in sssd
+    copy:
+      remote_src: true
+      src: /etc/sssd/sssd.conf.autofs_smartcard
+      dest: /etc/sssd/sssd.conf
+
+  - name: configure krb5.conf to use smartcard
+    copy:
+      remote_src: true
+      src: /etc/krb5.conf.autofs_smartcard
+      dest: /etc/krb5.conf
+
+  - name: sssd service start
+    ansible.builtin.systemd:
+      name: sssd.service
+      state: restarted
+      enabled: true
+
+  - name: oddjobd  service start
+    ansible.builtin.systemd:
+      name: oddjobd.service
+      state: started
+      enabled: true
+
+  - name: autofs  service start
+    ansible.builtin.systemd:
+      name: autofs.service
+      state: restarted
+      enabled: true
+
+  - name: Restart RED ADM client daemon
+    ansible.builtin.service:
+      name: redclient-daemon
+      state: restarted
+      enabled: true
+
+  - name: iuspt_out-st service
+    ansible.builtin.systemd:
+      name: iuspt_out-st.service
+      state: restarted
+      enabled: true
+      daemon_reload: true
+
+  - name: iuspt_in-st service
+    ansible.builtin.systemd:
+      name: iuspt_in-st.service
+      state: restarted
+      enabled: true
+      daemon_reload: true

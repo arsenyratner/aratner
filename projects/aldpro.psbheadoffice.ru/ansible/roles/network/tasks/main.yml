@@ -1,0 +1,159 @@
+---
+# tasks:
+# - debug: 
+#     var: network_ipv4_type
+#   when: network_ipv4_type is defined
+
+# - debug: 
+#     var: network_ipv4
+#   when: network_ipv4 is defined
+
+- name: Disable ipv6
+  block:
+    - name: Disable ipv6 
+      ansible.posix.sysctl:
+        name: net.ipv6.conf.all.disable_ipv6
+        value: '1'
+        sysctl_set: true
+        state: present
+        reload: true
+
+    - name: Enable ipv6 on lo interface
+      ansible.posix.sysctl:
+        name: net.ipv6.conf.lo.disable_ipv6
+        value: '0'
+        sysctl_set: true
+        state: present
+        reload: true
+  when: network_ipv6_disable is true
+
+- name: Add 127.0.1.1 shortname to /etc/hosts
+  ansible.builtin.lineinfile:
+    path: /etc/hosts
+    regexp: '^127\.0\.1\.1'
+    line: "127.0.1.1 {{ ansible_hostname }}"
+    # state: absent
+
+- name: Add localhost to /etc/hosts
+  ansible.builtin.lineinfile:
+    path: /etc/hosts
+    # regexp: '^127\.0\.0\.1'
+    search_string: '127.0.0.1'
+    line: 127.0.0.1 localhost.localdomain localhost 
+
+- name: Add localhost v6 to /etc/hosts
+  ansible.builtin.lineinfile:
+    path: /etc/hosts
+    regexp: '^::1'
+    # search_string: '::1' 
+    # line: '::1 localhost ip6-localhost ip6-loopback {{ ansible_hostname }}.{{ domain_name }} {{ ansible_hostname }}'
+    line: '::1 localhost ip6-localhost ip6-loopback'
+
+- name: Add self name to /etc/hosts
+  ansible.builtin.lineinfile:
+    path: /etc/hosts
+    search_string: '{{ ansible_default_ipv4.address }}'
+    line: "{{ ansible_default_ipv4.address }} {{ ansible_hostname }}.{{ domain_name }} {{ ansible_hostname }}"
+
+- name: Set a hostname
+  ansible.builtin.hostname:
+    name: "{{ ansible_hostname }}.{{ domain_name }}"
+    use: debian
+
+- name: Replace /etc/network/interfaces
+  ansible.builtin.template:
+    src: interfaces.j2
+    dest: /etc/network/interfaces
+  notify: Restart networking service
+
+- name: Convert to static
+  block:
+    - debug:
+        var: network_dns_nameservers
+    - name: Converting set network_dns_search
+      set_fact:
+        network_dns_search: "{{ ansible_dns.search }}"
+      when: network_dns_search is undefined
+    - name: Converting set network_dns_nameservers
+      set_fact:
+        network_dns_nameservers: "{{ ansible_dns.nameservers }}"
+      when: network_dns_nameservers is undefined
+    - name: Converting get current ip settings
+      set_fact:
+        network_ipv4:
+          type: static
+          address: "{{ ansible_default_ipv4.address }}"
+          netmask: "{{ ansible_default_ipv4.netmask }}"
+          gateway: "{{ ansible_default_ipv4.gateway }}"
+    - name: Converting interfaces.d 
+      ansible.builtin.template:
+        src: interfaces.d.j2
+        dest: /etc/network/interfaces.d/{{ ansible_default_ipv4.interface }}
+    - debug:
+        var: network_dns_nameservers
+    - name: Converting resolv.conf
+      ansible.builtin.template:
+        dest: /etc/resolv.conf
+        src: templates/resolv.conf.j2
+        mode: '0644'
+        owner: root
+        group: root
+  notify: Restart networking service
+  when: network_ipv4_type == "convert"
+
+- name: Static
+  block:
+    - name: Static interfaces.d
+      ansible.builtin.template:
+        src: templates/interfaces.d.j2
+        dest: /etc/network/interfaces.d/{{ ansible_default_ipv4.interface }}
+      notify: Restart networking service
+    - name: Static resolv.conf
+      ansible.builtin.template:
+        dest: /etc/resolv.conf
+        src: templates/resolv.conf.j2
+        mode: '0644'
+        owner: root
+        group: root
+  when: 
+    - network_ipv4_type == "static"
+    - network_ipv4 is defined
+
+- name: DHCP
+  block:
+    - name: DHCP define variables
+      set_fact:
+        network_ipv4:
+          type: dhcp
+    - name: DHCP interfaces.d
+      ansible.builtin.template:
+        src: templates/interfaces.d.j2
+        dest: /etc/network/interfaces.d/{{ ansible_default_ipv4.interface }}
+      notify: Restart networking service
+  when: network_ipv4_type == "dhcp"
+
+- name: IPv4 /etc/issue
+  ansible.builtin.lineinfile:
+    path: /etc/issue
+    regexp: '^\\4'
+    line: \4
+
+- name: IPv6 /etc/issue
+  ansible.builtin.lineinfile:
+    path: /etc/issue
+    regexp: '^\\6'
+    line: \6
+  when: network_ipv6_disable is false
+
+# - name: Populate service facts
+#   service_facts:
+
+- name: Disable and mask NetworkManager
+  ansible.builtin.systemd_service:
+    name: NetworkManager.service
+    enabled: false
+    masked: true
+  when: ansible_facts.services['NetworkManager.service'] is defined
+
+# - name: Flush handlers
+#     meta: flush_handlers

@@ -1,0 +1,48 @@
+{
+  "reservations": <?include "/etc/kea/conf.d/subnet4.10.3.16.0.reservations.conf.json"?>,
+  "subnet": "10.3.16.0/24",
+  "pools": [
+    {
+      "pool": "10.3.16.1 - 10.3.16.150"
+    }
+  ],
+  "id": 160,
+  "user-context": {
+    "name": "DISP",
+    "description": "DISP"
+  },
+  "option-data": [
+    {
+      "csv-format": true,
+      "name": "routers",
+      "code": 3,
+      "data": "10.3.16.254",
+      "space": "dhcp4",
+      "always-send": true
+    },
+    {
+      "csv-format": true,
+      "name": "domain-name-servers",
+      "code": 6,
+      "data": "10.3.77.112,10.3.77.113",
+      "space": "dhcp4",
+      "always-send": true
+    },
+    {
+      "csv-format": true,
+      "name": "domain-name",
+      "code": 15,
+      "data": "gtm.gazprom.ru",
+      "space": "dhcp4",
+      "always-send": true
+    },
+    {
+      "csv-format": true,
+      "name": "dhcp-lease-time",
+      "code": 51,
+      "data": "7776000",
+      "space": "dhcp4",
+      "always-send": true
+    }
+  ]
+}

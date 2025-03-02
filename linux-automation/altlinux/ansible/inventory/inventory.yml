@@ -1,0 +1,14 @@
+first_dc:
+  hosts:
+    alt-dc1:
+
+os_alt:
+  children:
+    tmp_alt_p10:
+    tmp_alt_p10_srv:
+    tmp_alt_p10_ws:
+
+os_windows:
+  children:
+    tmp_w2019std:
+

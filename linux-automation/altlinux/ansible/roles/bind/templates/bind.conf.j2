@@ -1,0 +1,24 @@
+#config for site {{ site_name }}
+logging {
+  channel default_debug {
+    file "data/named.run";
+    severity dynamic;
+  };
+};
+
+include "/etc/named.rfc1912.zones";
+include "/etc/named.root.key";
+{% if bind_sambaincludefile is defined %}
+include "{{ bind_sambaincludefile }}";
+{% endif %}
+#icludes
+include "{{bind_confd_dir}}/options.conf";
+#zones
+{% if bind.namedca_file is defined %}
+zone "." IN { type hint; file "{{bind.namedca_file}}"; };
+{% endif %}
+{% if bind.zones is defined %}
+{% for zone in bind.zones %}
+include "{{ bind_confd_dir }}/zone-{{ zone.name }}.conf";
+{% endfor %}
+{% endif %}

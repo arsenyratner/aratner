@@ -1,0 +1,177 @@
+---
+- name: Create VMs proxmox
+  hosts: localhost
+  become: false
+  gather_facts: false
+  vars_files:
+    - vars/proxmox.yml
+    - vars/newvms.yml
+
+  tasks:
+    - name: Clone new vm
+      community.general.proxmox_kvm:
+        api_user: "{{ proxmox.api_user }}"
+        api_password: "{{ proxmox.api_password }}"
+        api_token_id: "{{ proxmox.api_token_id }}"
+        api_token_secret: "{{ proxmox.api_token_secret }}"
+        api_host: "{{ proxmox.api_host }}"
+        node: "{{ proxmox.node }}"
+        full: false
+        # storage: "{{ proxmox.storage }}"
+        # format: "qcow2"
+        timeout: 90
+        state: present
+        name: "{{ item.newvm_pr}}-{{ item.newvm_site }}-{{ item.newvm_role }}{{ item.newvm_suf }}"
+        clone: "{{ item.newvm_template }}"
+      loop: "{{ newvms }}"
+
+    - name: Grow existing disk
+      community.general.proxmox_disk:
+        api_user: "{{ proxmox.api_user }}"
+        api_password: "{{ proxmox.api_password }}"
+        api_token_id: "{{ proxmox.api_token_id }}"
+        api_token_secret: "{{ proxmox.api_token_secret }}"
+        api_host: "{{ proxmox.api_host }}"
+        state: resized
+        name: "{{ item.newvm_pr}}-{{ item.newvm_site }}-{{ item.newvm_role }}{{ item.newvm_suf }}"
+        disk: virtio0
+        size: "{{ item.disksize }}"
+      when: item.disksize is defined
+      loop: "{{ newvms }}"
+
+    # - debug:
+    #     msg: "{{ lookup( 'file', ansible_pubkey ) }}"
+
+    - name: Set vm CI
+      community.general.proxmox_kvm:
+        api_user: "{{ proxmox.api_user }}"
+        api_password: "{{ proxmox.api_password }}"
+        api_token_id: "{{ proxmox.api_token_id }}"
+        api_token_secret: "{{ proxmox.api_token_secret }}"
+        api_host: "{{ proxmox.api_host }}"
+        name: "{{ item.newvm_pr}}-{{ item.newvm_site }}-{{ item.newvm_role }}{{ item.newvm_suf }}"
+        node: "{{ proxmox.node }}"
+        update: true
+        agent: enabled=1
+        citype: nocloud
+        ciuser: "{{ ansible_user }}"
+        cipassword: "{{ ansible_password | string }}"
+        sshkeys: "{{ lookup( 'file', ansible_pubkey ) }}"
+        # cicustom: "{{ lookup('file','templates/ci-custom-'+item.newvm_template+'.j2') }}"
+      loop: "{{ newvms }}"
+
+    - name: Set vm cores
+      community.general.proxmox_kvm:
+        api_user: "{{ proxmox.api_user }}"
+        api_password: "{{ proxmox.api_password }}"
+        api_token_id: "{{ proxmox.api_token_id }}"
+        api_token_secret: "{{ proxmox.api_token_secret }}"
+        api_host: "{{ proxmox.api_host }}"
+        node: "{{ proxmox.node }}"
+        update: true
+        name: "{{ item.newvm_pr}}-{{ item.newvm_site }}-{{ item.newvm_role }}{{ item.newvm_suf }}"
+        cores: "{{ item.cores }}"
+      when: item.cores is defined
+      loop: "{{ newvms }}"
+
+    - name: Set vm memory
+      community.general.proxmox_kvm:
+        api_user: "{{ proxmox.api_user }}"
+        api_password: "{{ proxmox.api_password }}"
+        api_token_id: "{{ proxmox.api_token_id }}"
+        api_token_secret: "{{ proxmox.api_token_secret }}"
+        api_host: "{{ proxmox.api_host }}"
+        node: "{{ proxmox.node }}"
+        update: true
+        name: "{{ item.newvm_pr}}-{{ item.newvm_site }}-{{ item.newvm_role }}{{ item.newvm_suf }}"
+        memory: "{{ item.memory }}"
+      when: item.memory is defined
+      loop: "{{ newvms }}"
+
+    - name: Set vm balloon
+      community.general.proxmox_kvm:
+        api_user: "{{ proxmox.api_user }}"
+        api_password: "{{ proxmox.api_password }}"
+        api_token_id: "{{ proxmox.api_token_id }}"
+        api_token_secret: "{{ proxmox.api_token_secret }}"
+        api_host: "{{ proxmox.api_host }}"
+        node: "{{ proxmox.node }}"
+        update: true
+        name: "{{ item.newvm_pr}}-{{ item.newvm_site }}-{{ item.newvm_role }}{{ item.newvm_suf }}"
+        balloon: "{{ item.balloon }}"
+      when: item.balloon is defined
+      loop: "{{ newvms }}"
+
+    - name: Set MTU
+      community.general.proxmox_nic:
+        api_user: "{{ proxmox.api_user }}"
+        api_password: "{{ proxmox.api_password }}"
+        api_token_id: "{{ proxmox.api_token_id }}"
+        api_token_secret: "{{ proxmox.api_token_secret }}"
+        api_host: "{{ proxmox.api_host }}"
+        name: "{{ item.0.newvm_pr}}-{{ item.0.newvm_site }}-{{ item.0.newvm_role }}{{ item.0.newvm_suf }}"
+        interface: "{{ item.1.newnic_name }}"
+        bridge: "{{ item.1.newnic_bridge }}"
+        model: "{{ item.1.newnic_model }}"
+        mtu: 1
+      loop: "{{ newvms | ansible.builtin.subelements('newvm_nics') }}"
+
+    - name: Set MAC
+      community.general.proxmox_nic:
+        api_user: "{{ proxmox.api_user }}"
+        api_password: "{{ proxmox.api_password }}"
+        api_token_id: "{{ proxmox.api_token_id }}"
+        api_token_secret: "{{ proxmox.api_token_secret }}"
+        api_host: "{{ proxmox.api_host }}"
+        name: "{{ item.0.newvm_pr}}-{{ item.0.newvm_site }}-{{ item.0.newvm_role }}{{ item.0.newvm_suf }}"
+        interface: "{{item.1.newnic_name}}"
+        mac: "{{item.1.newnic_mac}}"
+      when: item.1.newnic_mac is defined
+      loop: "{{ newvms | ansible.builtin.subelements('newvm_nics') }}"
+
+    - name: Set tags
+      community.general.proxmox_kvm:
+        api_user: "{{ proxmox.api_user }}"
+        api_password: "{{ proxmox.api_password }}"
+        api_token_id: "{{ proxmox.api_token_id }}"
+        api_token_secret: "{{ proxmox.api_token_secret }}"
+        api_host: "{{ proxmox.api_host }}"
+        node: "{{ proxmox.node }}"
+        update: true
+        name: "{{ item.newvm_pr}}-{{ item.newvm_site }}-{{ item.newvm_role }}{{ item.newvm_suf }}"
+        tags: 
+          - "project_{{ item.newvm_pr }}" 
+          - "{{ item.newvm_pr }}_site_{{ item.newvm_site }}" 
+          - "{{ item.newvm_pr }}_role_{{ item.newvm_role }}" 
+          - "{{ item.newvm_template }}" 
+      loop: "{{ newvms }}"
+
+    # - name: Retrieve information about specific VM by name
+    #   community.general.proxmox_vm_info:
+    #     api_user: "{{ proxmox.api_user }}"
+    #     api_password: "{{ proxmox.api_password }}"
+    #     api_token_id: "{{ proxmox.api_token_id }}"
+    #     api_token_secret: "{{ proxmox.api_token_secret }}"
+    #     api_host: "{{ proxmox.api_host }}"
+    #     node: "{{ proxmox.node }}"
+    #     type: qemu
+    #     name: "{{ item.newvm_pr}}-{{ item.newvm_site }}-{{ item.newvm_role }}{{ item.newvm_suf }}"
+    #   loop: "{{ newvms }}"
+    #   register: vminfo
+
+    # - debug:
+    #     msg: "{{ item.0.newvm_role }} {{ item.1.proxmox_vms[0]['vmid'] }} .vmid"
+    #   loop: "{{ newvms | zip(vminfo.results) | list }}"
+
+    - name: Start VMs
+      proxmox_kvm:
+        api_user: "{{ proxmox.api_user }}"
+        api_password: "{{ proxmox.api_password }}"
+        api_token_id: "{{ proxmox.api_token_id }}"
+        api_token_secret: "{{ proxmox.api_token_secret }}"
+        api_host: "{{ proxmox.api_host }}"
+        node: "{{ proxmox.node }}"
+        state: started
+        name: "{{ item.newvm_pr}}-{{ item.newvm_site }}-{{ item.newvm_role }}{{ item.newvm_suf }}"
+      loop: "{{ newvms }}"
+      # when: startvm is true

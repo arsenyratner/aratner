@@ -1,0 +1,9 @@
+zone "{{ item.name }}" in {
+  type {{ item.type }};
+  forwarders {
+  {% for forwarder in item.forwarders %}
+    {{ forwarder }}; 
+  {% endfor %}
+  #end
+  };
+};

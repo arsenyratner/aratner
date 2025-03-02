@@ -1,0 +1,13 @@
+---
+# tasks file for snmp
+- name: Enable SNMPv3
+  routeros_command:
+    commands:
+      - /snmp set contact="{{ snmp['contact'] }}" location="{{ snmp['location'] }}"
+      - /snmp community set 0 name="{{ snmp['user'] }}" 
+      - /snmp community set 0 encryption-protocol="AES" encryption-password="{{ snmp['priv_key'] }}" 
+      - /snmp community set 0 authentication-protocol="SHA1" authentication-password="{{ snmp['auth_key'] }}" 
+      - /snmp community set 0 security=privacy
+      - /snmp set enabled=yes
+  tags:
+    - snmp

@@ -1,0 +1,45 @@
+---
+- name: Delete VMs proxmox
+  hosts: localhost
+  become: false
+  gather_facts: false
+  vars_files:
+    - vars/proxmox.yml
+    - vars/newvms.yml
+  pre_tasks:
+    - debug:
+        var: deletevms
+
+  tasks:
+    - name: Delete VMs
+      block: 
+        - name: Stop VMs
+          proxmox_kvm:
+            state: stopped
+            force: true
+            api_user: "{{ proxmox.api_user }}"
+            api_password: "{{ proxmox.api_password }}"
+            api_token_id: "{{ proxmox.api_token_id }}"
+            api_token_secret: "{{ proxmox.api_token_secret }}"
+            api_host: "{{ proxmox.api_host }}"
+            name: "{{ newvm.pr }}-{{ newvm.site }}-{{ newvm.role }}{{ newvm.suf }}"
+            node: "{{ newvm.node | default(proxmox.node) }}"
+          loop: "{{ newvms }}"
+          loop_control:
+            loop_var: newvm
+          ignore_errors: true
+        - name: Delete VMs
+          proxmox_kvm:
+            force: true
+            state: absent
+            api_user: "{{ proxmox.api_user }}"
+            api_password: "{{ proxmox.api_password }}"
+            api_token_id: "{{ proxmox.api_token_id }}"
+            api_token_secret: "{{ proxmox.api_token_secret }}"
+            api_host: "{{ proxmox.api_host }}"
+            name: "{{ newvm.pr }}-{{ newvm.site }}-{{ newvm.role }}{{ newvm.suf }}"
+            node: "{{ newvm.node | default(proxmox.node) }}"
+          loop: "{{ newvms }}"
+          loop_control:
+            loop_var: newvm
+      when: deletevms is true

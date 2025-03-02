@@ -1,0 +1,16 @@
+---
+- name: Preconfig all exept DC
+  hosts: project_ald,&ald_role_ws,&ald_site_ekb
+  become: true
+  roles:
+    - general
+
+  tasks: 
+    - name: Network config nameserver firstdc
+      vars:
+        network_ipv4_type: dhcp
+        network_dns_nameservers:
+          - 10.20.3.1
+          - 10.20.3.2
+      ansible.builtin.include_role:
+        name: network

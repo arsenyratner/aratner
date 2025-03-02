@@ -1,0 +1,109 @@
+---
+- name: Configure network for static IP address
+  hosts: project_ald,&os_astra
+  become: true
+
+  handlers:
+    - name: Restart networking service
+      service:
+        name: networking
+        state: restarted
+
+  tasks:
+    - name: Disable ipv6
+      block:
+        - name: Disable ipv6 
+          ansible.posix.sysctl:
+            name: net.ipv6.conf.all.disable_ipv6
+            value: '1'
+            sysctl_set: true
+            state: present
+            reload: true
+
+        - name: Enable ipv6 on lo interface
+          ansible.posix.sysctl:
+            name: net.ipv6.conf.lo.disable_ipv6
+            value: '0'
+            sysctl_set: true
+            state: present
+            reload: true
+      when: network_ipv6_disable is true
+
+    - name: Set a hostname
+      ansible.builtin.hostname:
+        name: "{{ ansible_hostname }}.{{ domain_name }}"
+        use: debian
+
+    - name: Replace /etc/network/interfaces
+      ansible.builtin.template:
+        src: templates/interfaces.j2
+        dest: /etc/network/interfaces
+      notify: Restart networking service
+    
+    - name: Convert to static
+      block:
+        - name: Converting get current ip settings
+          set_fact:
+            network_ipv4:
+              type: static
+              address: "{{ ansible_default_ipv4.address }}"
+              netmask: "{{ ansible_default_ipv4.netmask }}"
+              gateway: "{{ ansible_default_ipv4.gateway }}"
+            network_dns_search: "{{ ansible_dns.search }}"
+            network_dns_nameserver: "{{ ansible_dns.nameservers }}"
+        - name: Converting dynamic to static ip settings
+          ansible.builtin.template:
+            src: templates/interfaces.d.j2
+            dest: /etc/network/interfaces.d/{{ ansible_default_ipv4.interface }}
+        - name: Converting dynamic to static DNS settings
+          ansible.builtin.template:
+            dest: /etc/resolv.conf
+            src: templates/resolv.conf.j2
+            mode: '0644'
+            owner: root
+            group: root
+      notify: Restart networking service
+      when: network_ipv4_type == "convert"
+
+    - name: Static
+      block:
+        - name: Seting static IP interfaces.d
+          ansible.builtin.template:
+            src: templates/interfaces.d.j2
+            dest: /etc/network/interfaces.d/{{ ansible_default_ipv4.interface }}
+          notify: Restart networking service
+        - name: Setting static DNS settings
+          ansible.builtin.template:
+            dest: /etc/resolv.conf
+            src: templates/resolv.conf.j2
+            mode: '0644'
+            owner: root
+            group: root
+      when: network_ipv4_type == "static"
+
+    - name: DHCP
+      block:
+        - name: Seting dynamic IP configuration
+          set_fact:
+            network_ipv4:
+              type: dhcp
+        - name: Seting dynamic interfaces.d
+          ansible.builtin.template:
+            src: templates/interfaces.d.j2
+            dest: /etc/network/interfaces.d/{{ ansible_default_ipv4.interface }}
+          notify: Restart networking service
+      when: network_ipv4_type == "dhcp"
+
+    - name: Add ip address to start screen
+      block:
+        - name: IPv4 /etc/issue
+          ansible.builtin.lineinfile:
+            path: /etc/issue
+            regexp: '^\\4'
+            line: \4
+
+        - name: IPv6 /etc/issue
+          ansible.builtin.lineinfile:
+            path: /etc/issue
+            regexp: '^\\6'
+            line: \6

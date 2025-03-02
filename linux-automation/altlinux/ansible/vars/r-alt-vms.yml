@@ -1,0 +1,5 @@
+newvms:
+  - { pr: "r", site: "alt",  role: "dc", suf: 1, template: "tmp-alt-p10-srv", disksize: 40G, cores: 3, memory: 6144, balloon: 512, nic: { bridge: z20vn5}, citype: nocloud }
+  - { pr: "r", site: "alt",  role: "dc", suf: 2, template: "tmp-alt-p10-srv", disksize: 40G, cores: 3, memory: 6144, balloon: 512, nic: { bridge: z20vn5}, citype: nocloud }
+  - { pr: "r", site: "alt",  role: "ws", suf: 1, template: "tmp-w2019std", disksize: 60G, cores: 3, memory: 6144, balloon: 512, nic: { bridge: z20vn5}, citype: configdrive2 }
+  - { pr: "r", site: "alt",  role: "ws", suf: 2, template: "tmp-alt-p10-ws", disksize: 40G, cores: 3, memory: 6144, balloon: 512, nic: { bridge: z20vn5}, citype: nocloud }

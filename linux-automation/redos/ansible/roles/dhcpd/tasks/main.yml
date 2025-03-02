@@ -1,0 +1,101 @@
+---
+- name: Disable SELinux инчае не запустится OMAPI и не будет работать failover
+  ansible.builtin.selinux:
+    state: disabled
+
+- name: Install dhcp-server
+  ansible.builtin.dnf:
+    name: dhcp-server
+    state: latest
+    update_cache: yes
+
+- name: create conf dir
+  ansible.builtin.file:
+    path: "{{ dhcpd_confd_dir }}"
+    state: directory
+    mode: '0755'
+    owner: "{{ dhcpd_user }}"
+    group: "{{ dhcpd_group }}"
+
+- name: Copy template pxe.conf
+  ansible.builtin.template:
+    src: pxe.conf.j2
+    dest: "{{ dhcpd_confd_dir }}/pxe.conf"
+    owner: "{{ dhcpd_user }}"
+    group: "{{ dhcpd_group }}"
+    mode: '0644'
+
+- name: Copy template failover.conf
+  ansible.builtin.template:
+    src: failover.conf.j2
+    dest: "{{ dhcpd_confd_dir }}/failover-{{ dhcpd_failover.role }}.conf"
+    owner: "{{ dhcpd_user }}"
+    group: "{{ dhcpd_group }}"
+    mode: '0644'
+  when: dhcpd_failover is defined
+
+- name: Copy template subnet.conf
+  ansible.builtin.template:
+    src: subnet.conf.j2
+    dest: "{{ dhcpd_confd_dir }}/subnet-{{ item.address }}.conf"
+    owner: "{{ dhcpd_user }}"
+    group: "{{ dhcpd_group }}"
+    mode: '0644'
+  loop: "{{ dhcpd_subnets }}"
+
+- name: Copy template hosts.conf
+  ansible.builtin.template:
+    src: hosts.conf.j2
+    dest: "{{ dhcpd_confd_dir }}/hosts.conf"
+    owner: "{{ dhcpd_user }}"
+    group: "{{ dhcpd_group }}"
+    mode: '0644'
+  when: dhcpd_hosts is defined
+
+- name: Copy template omapi.conf
+  ansible.builtin.template:
+    src: omapi.conf.j2
+    dest: "{{ dhcpd_confd_dir }}/omapi.conf"
+    owner: "{{ dhcpd_user }}"
+    group: "{{ dhcpd_group }}"
+    mode: '0644'
+
+- name: Copy template dhcpd.conf
+  ansible.builtin.template:
+    src: dhcpd.conf.j2
+    dest: "{{ dhcpd_conf_dir }}/dhcpd.conf"
+    owner: "{{ dhcpd_user }}"
+    group: "{{ dhcpd_group }}"
+    mode: '0644'
+    validate: "/usr/sbin/dhcpd -cf %s"
+  notify: Restart dhcpd
+
+- name: dhcpd.leases present
+  file: 
+    path: "{{ dhcpd_leases_file }}"
+    state: touch
+    mode: '0644'
+    owner: "{{ dhcpd_user }}"
+    group: "{{ dhcpd_group }}"
+
+- name: Copy template dhcpd.conf
+  ansible.builtin.template:
+    src: dhcpd-leases.pl.j2
+    dest: "/usr/local/bin/dhcpd-leases.pl"
+    owner: "{{ dhcpd_user }}"
+    group: "{{ dhcpd_group }}"
+    mode: '0755'
+
+- name: Copy template dhcpd.conf
+  ansible.builtin.template:
+    src: dhcpd-leases.py.j2
+    dest: "/usr/local/bin/dhcpd-leases.py"
+    owner: "{{ dhcpd_user }}"
+    group: "{{ dhcpd_group }}"
+    mode: '0755'
+
+# - name: Ensure dhcpd is STOPPED, не запускаем пока не получим добро
+#   systemd:
+#     name: dhcpd
+#     state: stopped
+#     enabled: false

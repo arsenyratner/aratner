@@ -1,0 +1,94 @@
+---
+# defaults file for preconfig
+preconfig_reboot: true
+preconfig_selinux: disabled
+preconfig_installupdates: false
+preconfig_installpackages: true
+preconfig_graphicaltarget: false
+preconfig_packages:
+  - tmux
+  - ansible
+  - chrony
+  - python3-libselinux
+  - realmd
+  - sssd
+  - oddjob
+  - oddjob-mkhomedir
+  - adcli
+  - join-to-domain
+  - samba-client
+  - samba-common.noarch
+  - samba-common
+  - samba-libs
+  - samba-winbind
+  - krb5-workstation
+  - samba-winbind-krb5-locator
+
+preconfig_domainjoin:
+  joinuser: "{{ join_user }}"
+  joinpassword: "{{ join_password }}"
+  domname: "{{ join_domain }}"
+  shortname: "{{ join_shorname }}"
+  replacesmbconf: true
+  backend: "{{ join_backend }}"
+  joinscript: /usr/bin/join-to-domain.sh
+
+# preconfig_ipv4_method: auto
+preconfig_ipv4_method: manual
+preconfig_ipv4:
+  # address: 10.20.30.14/24
+  # gw: 10.20.30.254
+  dns:
+    servers:
+      - 10.20.30.11
+      - 10.20.30.12
+    search:
+      - red.aratner.ru
+      - ad.aratner.ru
+
+preconfig_time: 
+  packagelist:
+    - chrony
+  timezone: Europe/Moscow
+  ntp_pools:
+    - ru.pool.ntp.org
+    - red.aratner.ru
+  ntp_servers:
+    - red-dc1.red.aratner.ru
+    - red-dc2.red.aratner.ru
+    - time.windows.com
+
+preconfig_repo_deleteoldfiles: false
+preconfig_repo:
+  - name: base
+    description: RedOS - Base
+    baseurl: http://10.20.30.253/pub/repo/red_base
+    file: RedOS-Base
+    gpgkey: file:///etc/pki/rpm-gpg/RPM-GPG-KEY-RED-SOFT
+    gpgcheck: true
+    enabled: true
+    state: "present"
+  - name: updates
+    description: RedOS - Updates
+    baseurl: http://10.20.30.253/pub/repo/red_updates
+    file: RedOS-Updates
+    gpgkey: file:///etc/pki/rpm-gpg/RPM-GPG-KEY-RED-SOFT
+    gpgcheck: true
+    enabled: true
+    state: "present"
+  - name: kernels
+    description: RedOS - Kernels
+    baseurl: http://10.20.30.253/pub/repo/red_kernels
+    file: RedOS-kernels
+    gpgkey: file:///etc/pki/rpm-gpg/RPM-GPG-KEY-RED-SOFT
+    gpgcheck: true
+    enabled: true
+    state: "present"
+  - name: kernels6
+    description: RedOS - Kernels6
+    baseurl: http://10.20.30.253/pub/repo/red_kernels6
+    file: RedOS-kernels6
+    gpgkey: file:///etc/pki/rpm-gpg/RPM-GPG-KEY-RED-SOFT
+    gpgcheck: true
+    enabled: true
+    state: "present"

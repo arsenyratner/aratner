@@ -1,0 +1,36 @@
+---
+- name: Preconfig firstdc
+  become: true
+  hosts: first_dc
+  roles:
+    - general
+
+  tasks: 
+    - name: Firstdc network convert with dns forwarder
+      vars:
+        network_ipv6_disable: false
+        network_ipv4_type: convert
+        network_dns_search:
+          - "{{ domain_name }}"
+        network_dns_nameservers:
+          - "{{ domain_forwarder }}"
+      ansible.builtin.include_role:
+        name: network
+
+    - name: Firstdc disable cloud-init
+      ansible.builtin.include_role:
+        name: cidisable
+
+    - name: Firstdc repo
+      # vars:
+      #   repo_dpkg_options: 'force-confnew'
+      ansible.builtin.include_role:
+        name: repo
+
+# sudo apt update
+# sudo apt list --upgradable
+# sudo apt dist-upgrade -y -o Dpkg::Options::=--force-confnew
+
+# cat /etc/astra/build_version
+# sudo astra-modeswitch getname
+# sudo pdp-id

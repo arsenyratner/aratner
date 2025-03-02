@@ -1,0 +1,27 @@
+---
+- name: Create VMs proxmox
+  hosts: localhost
+  become: false
+  gather_facts: false
+  vars_files:
+    - vars/proxmox.yml
+    - vars/newvms.yml
+
+  tasks:
+    - name: Retrieve information about VM by name
+      community.general.proxmox_vm_info:
+        api_user: "{{ proxmox.api_user }}"
+        api_password: "{{ proxmox.api_password }}"
+        api_token_id: "{{ proxmox.api_token_id }}"
+        api_token_secret: "{{ proxmox.api_token_secret }}"
+        api_host: "{{ proxmox.api_host }}"
+        node: "{{ proxmox.node }}"
+        type: qemu
+        name: "{{ item.newvm_pr}}-{{ item.newvm_site }}-{{ item.newvm_role }}{{ item.newvm_suf }}"
+      loop: "{{ newvms }}"
+      register: vminfo
+
+    - debug:
+        var: vminfo
+      #   msg: "{{ item.0.newvm_role }} {{ item.1.proxmox_vms[0]['vmid'] }} .vmid"
+      # loop: "{{ newvms | zip(vminfo.results) | list }}"

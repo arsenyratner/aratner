@@ -1,0 +1,25 @@
+{% if preconfig_time.ntp_pools is defined %}
+{% for ntppool in preconfig_time.ntp_pools %}
+pool {{ ntppool }} iburst prefer
+{% endfor %}
+{% endif %}
+
+{% if preconfig_time.ntp_servers is defined %}
+{% for ntpsrv in preconfig_time.ntp_servers %}
+server {{ ntpsrv }} iburst
+{% endfor %}
+{% endif %}
+
+driftfile /var/lib/chrony/drift
+makestep 1.0 3
+rtcsync
+keyfile /etc/chrony.keys
+ntsdumpdir /var/lib/chrony
+leapsectz right/UTC
+logdir /var/log/chrony
+
+{% if preconfig_time.server is true %}
+local stratum 8
+manual
+allow 0.0.0.0/0
+{% endif %}

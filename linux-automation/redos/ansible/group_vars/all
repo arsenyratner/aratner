@@ -1,0 +1,116 @@
+ansible_python_interpreter: /usr/bin/python3
+ansible_ssh_private_key_file: /home/appc/.ssh/ansible-key
+ansible_ssh_public_key_file: /home/appc/.ssh/ansible-key.pub
+ansible_user: ansible01
+new_ansible_user: ansible01
+
+sambadc_sitename: red
+sambadc_domname: red.aratner.ru
+sambadc_domshortname: red
+sambadc_adminuser: administrator
+sambadc_adminpass: NenDilvUn6
+
+join_user: "{{sambadc_adminpass}}"
+join_password: "{{sambadc_adminpass}}"
+join_domain: "{{sambadc_domname}}"
+join_shorname: "{{sambadc_domshortname}}"
+join_backend: sssd
+
+redadm_ip: 10.20.30.14
+redadm_remote_password: 1234qwerasdfZXCV!2024
+redadm_remote_user: z-redadm
+
+cloud_init_services:
+  - 'cloud-config.service'
+  - 'cloud-final.service'
+  - 'cloud-init-local.service'
+  - 'cloud-init.service'
+
+preconfig_reboot: true
+preconfig_selinux: disabled
+preconfig_installupdates: true
+preconfig_installpackages: true
+preconfig_graphicaltarget: false
+preconfig_repo_deleteoldfiles: true
+preconfig_packages:
+  - tmux
+  - ansible
+  - chrony
+  - python3-libselinux
+  - realmd
+  - sssd
+  - oddjob
+  - oddjob-mkhomedir
+  - adcli
+  - join-to-domain
+  - samba-client
+  - samba-common.noarch
+  - samba-common
+  - samba-libs
+  - samba-winbind
+  - krb5-workstation
+  - samba-winbind-krb5-locator
+
+preconfig_domainjoin:
+  joinuser: "{{ join_user }}"
+  joinpassword: "{{ join_password }}"
+  domname: "{{ join_domain }}"
+  shortname: "{{ join_shorname }}"
+  replacesmbconf: true
+  backend: "{{ join_backend }}"
+  joinscript: /usr/bin/join-to-domain.sh
+
+preconfig_ipv4:
+  # address: 10.20.30.14/24
+  # gw: 10.20.30.254
+  dns:
+    servers:
+      - 10.20.30.11
+      - 10.20.30.12
+    search:
+      - red.aratner.ru
+      - ad.aratner.ru
+
+preconfig_time: 
+  timezone: Europe/Moscow
+  ntp_pools:
+    - ru.pool.ntp.org
+    - red.aratner.ru
+  ntp_servers:
+    - red-dc1.red.aratner.ru
+    - red-dc2.red.aratner.ru
+    - time.windows.com
+
+preconfig_repo:
+  - name: base
+    description: RedOS - Base
+    baseurl: http://10.20.30.254/pub/repo/red_base
+    file: RedOS-Base
+    gpgkey: file:///etc/pki/rpm-gpg/RPM-GPG-KEY-RED-SOFT
+    gpgcheck: true
+    enabled: true
+    state: "present"
+  - name: updates
+    description: RedOS - Updates
+    baseurl: http://10.20.30.254/pub/repo/red_updates
+    file: RedOS-Updates
+    gpgkey: file:///etc/pki/rpm-gpg/RPM-GPG-KEY-RED-SOFT
+    gpgcheck: true
+    enabled: true
+    state: "present"
+  - name: kernels
+    description: RedOS - Kernels
+    baseurl: http://10.20.30.254/pub/repo/red_kernels
+    file: RedOS-kernels
+    gpgkey: file:///etc/pki/rpm-gpg/RPM-GPG-KEY-RED-SOFT
+    gpgcheck: true
+    enabled: true
+    state: "present"
+  - name: kernels6
+    description: RedOS - Kernels6
+    baseurl: http://10.20.30.254/pub/repo/red_kernels6
+    file: RedOS-kernels6
+    gpgkey: file:///etc/pki/rpm-gpg/RPM-GPG-KEY-RED-SOFT
+    gpgcheck: true
+    enabled: true
+    state: "present"

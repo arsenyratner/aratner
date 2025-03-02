@@ -1,0 +1,22 @@
+---
+#handlers
+- name: domainjoin sssd restart
+  systemd:
+    name: sssd
+    enabled: yes
+    state: reloaded
+
+- name: domainjoin winbind restart
+  systemd:
+    name: winbind
+    enabled: yes
+    state: reloaded
+
+- name: domainjoin reboot
+  ansible.builtin.reboot:
+    pre_reboot_delay: 15
+    post_reboot_delay: 15
+    reboot_timeout: 100
+    msg: "Rebooting after domain join"
+  ignore_errors: true
+  when: domainjoin_reboot is true

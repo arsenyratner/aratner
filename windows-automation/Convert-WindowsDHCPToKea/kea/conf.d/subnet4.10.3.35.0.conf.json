@@ -1,0 +1,24 @@
+{
+  "reservations": <?include "/etc/kea/conf.d/subnet4.10.3.35.0.reservations.conf.json"?>,
+  "subnet": "10.3.35.0/24",
+  "pools": [
+    {
+      "pool": "10.3.35.1 - 10.3.35.254"
+    }
+  ],
+  "id": 350,
+  "user-context": {
+    "name": "testnet",
+    "description": "testnet"
+  },
+  "option-data": [
+    {
+      "csv-format": true,
+      "name": "dhcp-lease-time",
+      "code": 51,
+      "data": "691200",
+      "space": "dhcp4",
+      "always-send": true
+    }
+  ]
+}

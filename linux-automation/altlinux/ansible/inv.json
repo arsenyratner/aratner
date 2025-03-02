@@ -1,0 +1,2937 @@
+{
+    "_meta": {
+        "hostvars": {
+            "ald-ekb-dc1": {
+                "ansible_password": "NeadfedEd2",
+                "ansible_pubkey": "/home/appc/.ssh/ald.ratners.ru_id_rsa.pub",
+                "ansible_user": "ansible",
+                "network_ipv4_method": "convert",
+                "preconfig_packages": [
+                    "tmux",
+                    "ansible",
+                    "chrony",
+                    "python3-libselinux"
+                ],
+                "proxmox_agent": "1",
+                "proxmox_balloon": 512,
+                "proxmox_boot": "c",
+                "proxmox_bootdisk": "virtio0",
+                "proxmox_cipassword": "**********",
+                "proxmox_citype": "nocloud",
+                "proxmox_ciupgrade": 0,
+                "proxmox_ciuser": "ansible",
+                "proxmox_cores": 6,
+                "proxmox_cpu": "host",
+                "proxmox_digest": "1fc3280a0b665d3ff9e84af1332c8e973989e990",
+                "proxmox_ide2": {
+                    "disk_image": "local-zfs:vm-114-cloudinit",
+                    "media": "cdrom",
+                    "size": "4M"
+                },
+                "proxmox_ipconfig0": {
+                    "gw": "10.20.3.254",
+                    "ip": "10.20.3.1/24"
+                },
+                "proxmox_machine": "q35",
+                "proxmox_memory": "8192",
+                "proxmox_meta": {
+                    "creation-qemu": "8.1.2",
+                    "ctime": "1702233049"
+                },
+                "proxmox_name": "ald-ekb-dc1",
+                "proxmox_nameserver": "192.168.126.57",
+                "proxmox_net0": {
+                    "bridge": "z20vn3",
+                    "mtu": "1",
+                    "virtio": "BC:24:11:F7:BD:E0"
+                },
+                "proxmox_node": "r-pve1",
+                "proxmox_numa": 1,
+                "proxmox_ostype": "l26",
+                "proxmox_qmpstatus": "stopped",
+                "proxmox_scsihw": {
+                    "disk_image": "virtio-scsi-single"
+                },
+                "proxmox_searchdomain": "ald.ratners.ru",
+                "proxmox_smbios1": {
+                    "uuid": "2cdd0e94-2b57-41d8-8d06-cf5d430dd827"
+                },
+                "proxmox_snapshots": [],
+                "proxmox_sockets": 1,
+                "proxmox_sshkeys": "ssh-rsa%20AAAAB3NzaC1yc2EAAAADAQABAAABgQCr6l0xXU3J2ojC9mAgVKpuyEbb5fYA9RCp1OIUWNDRpXFvqyFQYF%2F6ZrJqD1f4WwsMaUQeYIyAu4MMij1imzJkXiwUc%2BHIyrUwR9Ij28yJBvc37IwKEQ8%2B%2BfID6BeUgYUVDDoYnE7iuMIz4WwmWffgP1V7ysvGNV%2B7BXo79oXLUVm0f3CNNTd2Cr%2Bdq%2BRVlhiaBnKNHJeoFvQjKUcKvUjaCOakRynrUNFTK%2F%2FTKDcYFzUC94dh6ye1ZroGT5PTUnkCL42Muos0kNc9aAHK8gMQ8qIVvswExiwV99RB4l4pZ2Tv9k0Np423qexDk6r2c4PZqwvbvYb%2FHQ6krylYy2EEC1Y3%2F67FlyornHGTmLbphaqoPX725IUKSf4l4b5Cnn2F2V18V%2F2%2FOGDwIYugaaLHQRe%2FwGzUwdWmAbn%2FDatPYWI5rHeHLGFNiXdjkQQYSlDMfA2NZY2Lmm7JhgOjw82%2Bc6fRavAvR0mEZvRghKzC%2F4N2XAAc3Fozw%2F75IbA2PkM%3D%20ansible%40ald.ratners.ru",
+                "proxmox_status": "stopped",
+                "proxmox_tags": "ald_role_dc;ald_site_ekb;project_ald;tmp-alse-1.7.4-max",
+                "proxmox_tags_parsed": [
+                    "ald_role_dc",
+                    "ald_site_ekb",
+                    "project_ald",
+                    "tmp-alse-1.7.4-max"
+                ],
+                "proxmox_vga": "qxl,memory=16",
+                "proxmox_virtio0": {
+                    "cache": "writeback",
+                    "disk_image": "local-zfs:base-9014-disk-0/vm-114-disk-0",
+                    "size": "60G"
+                },
+                "proxmox_vmgenid": "f4f20fb8-1223-4d7a-9057-9595cc7a0916",
+                "proxmox_vmid": 114,
+                "proxmox_vmtype": "qemu",
+                "r_alt_domain_admin": "administrator",
+                "r_alt_domain_firstdc_address": "10.20.5.1",
+                "r_alt_domain_firstdc_name": "r-alt-dc1",
+                "r_alt_domain_forwarder": "192.168.126.1",
+                "r_alt_domain_name": "alt.ratners.ru",
+                "r_alt_domain_password": "QAZxsw123",
+                "r_alt_domain_shortname": "alt"
+            },
+            "ald-ekb-dc2": {
+                "ansible_password": "NeadfedEd2",
+                "ansible_pubkey": "/home/appc/.ssh/ald.ratners.ru_id_rsa.pub",
+                "ansible_user": "ansible",
+                "network_ipv4_method": "convert",
+                "preconfig_packages": [
+                    "tmux",
+                    "ansible",
+                    "chrony",
+                    "python3-libselinux"
+                ],
+                "proxmox_agent": "1",
+                "proxmox_balloon": 512,
+                "proxmox_boot": "c",
+                "proxmox_bootdisk": "virtio0",
+                "proxmox_cipassword": "**********",
+                "proxmox_citype": "nocloud",
+                "proxmox_ciupgrade": 0,
+                "proxmox_ciuser": "ansible",
+                "proxmox_cores": 6,
+                "proxmox_cpu": "host",
+                "proxmox_digest": "a8337114072c67d7b8ce40b9ae09c2d9a577eb3a",
+                "proxmox_ide2": {
+                    "disk_image": "local-zfs:vm-115-cloudinit",
+                    "media": "cdrom",
+                    "size": "4M"
+                },
+                "proxmox_ipconfig0": {
+                    "gw": "10.20.3.254",
+                    "ip": "10.20.3.2/24"
+                },
+                "proxmox_machine": "q35",
+                "proxmox_memory": "8192",
+                "proxmox_meta": {
+                    "creation-qemu": "8.1.2",
+                    "ctime": "1702233049"
+                },
+                "proxmox_name": "ald-ekb-dc2",
+                "proxmox_nameserver": "192.168.126.57",
+                "proxmox_net0": {
+                    "bridge": "z20vn3",
+                    "mtu": "1",
+                    "virtio": "BC:24:11:14:C2:AE"
+                },
+                "proxmox_node": "r-pve1",
+                "proxmox_numa": 1,
+                "proxmox_ostype": "l26",
+                "proxmox_qmpstatus": "stopped",
+                "proxmox_scsihw": {
+                    "disk_image": "virtio-scsi-single"
+                },
+                "proxmox_searchdomain": "ald.ratners.ru",
+                "proxmox_smbios1": {
+                    "uuid": "6c18f94b-dcaf-4fd7-aea1-7d3f82c05c5e"
+                },
+                "proxmox_snapshots": [],
+                "proxmox_sockets": 1,
+                "proxmox_sshkeys": "ssh-rsa%20AAAAB3NzaC1yc2EAAAADAQABAAABgQCr6l0xXU3J2ojC9mAgVKpuyEbb5fYA9RCp1OIUWNDRpXFvqyFQYF%2F6ZrJqD1f4WwsMaUQeYIyAu4MMij1imzJkXiwUc%2BHIyrUwR9Ij28yJBvc37IwKEQ8%2B%2BfID6BeUgYUVDDoYnE7iuMIz4WwmWffgP1V7ysvGNV%2B7BXo79oXLUVm0f3CNNTd2Cr%2Bdq%2BRVlhiaBnKNHJeoFvQjKUcKvUjaCOakRynrUNFTK%2F%2FTKDcYFzUC94dh6ye1ZroGT5PTUnkCL42Muos0kNc9aAHK8gMQ8qIVvswExiwV99RB4l4pZ2Tv9k0Np423qexDk6r2c4PZqwvbvYb%2FHQ6krylYy2EEC1Y3%2F67FlyornHGTmLbphaqoPX725IUKSf4l4b5Cnn2F2V18V%2F2%2FOGDwIYugaaLHQRe%2FwGzUwdWmAbn%2FDatPYWI5rHeHLGFNiXdjkQQYSlDMfA2NZY2Lmm7JhgOjw82%2Bc6fRavAvR0mEZvRghKzC%2F4N2XAAc3Fozw%2F75IbA2PkM%3D%20ansible%40ald.ratners.ru",
+                "proxmox_status": "stopped",
+                "proxmox_tags": "ald_role_dc;ald_site_ekb;project_ald;tmp-alse-1.7.4-max",
+                "proxmox_tags_parsed": [
+                    "ald_role_dc",
+                    "ald_site_ekb",
+                    "project_ald",
+                    "tmp-alse-1.7.4-max"
+                ],
+                "proxmox_vga": "qxl,memory=16",
+                "proxmox_virtio0": {
+                    "cache": "writeback",
+                    "disk_image": "local-zfs:base-9014-disk-0/vm-115-disk-0",
+                    "size": "60G"
+                },
+                "proxmox_vmgenid": "e6a0fd5f-2322-4e23-aaf4-a63acd4d056b",
+                "proxmox_vmid": 115,
+                "proxmox_vmtype": "qemu",
+                "r_alt_domain_admin": "administrator",
+                "r_alt_domain_firstdc_address": "10.20.5.1",
+                "r_alt_domain_firstdc_name": "r-alt-dc1",
+                "r_alt_domain_forwarder": "192.168.126.1",
+                "r_alt_domain_name": "alt.ratners.ru",
+                "r_alt_domain_password": "QAZxsw123",
+                "r_alt_domain_shortname": "alt"
+            },
+            "ald-ekb-dhcp1": {
+                "ansible_password": "NeadfedEd2",
+                "ansible_pubkey": "/home/appc/.ssh/ald.ratners.ru_id_rsa.pub",
+                "ansible_user": "ansible",
+                "network_ipv4_method": "convert",
+                "preconfig_packages": [
+                    "tmux",
+                    "ansible",
+                    "chrony",
+                    "python3-libselinux"
+                ],
+                "proxmox_agent": "1",
+                "proxmox_balloon": 512,
+                "proxmox_boot": "c",
+                "proxmox_bootdisk": "virtio0",
+                "proxmox_cipassword": "**********",
+                "proxmox_citype": "nocloud",
+                "proxmox_ciupgrade": 0,
+                "proxmox_ciuser": "ansible",
+                "proxmox_cores": 6,
+                "proxmox_cpu": "host",
+                "proxmox_digest": "233f6af6060c96a76885c912eed3e33e8f055e0d",
+                "proxmox_ide2": {
+                    "disk_image": "local-zfs:vm-116-cloudinit",
+                    "media": "cdrom",
+                    "size": "4M"
+                },
+                "proxmox_ipconfig0": {
+                    "gw": "10.20.3.254",
+                    "ip": "10.20.3.3/24"
+                },
+                "proxmox_machine": "q35",
+                "proxmox_memory": "8192",
+                "proxmox_meta": {
+                    "creation-qemu": "8.1.2",
+                    "ctime": "1702233049"
+                },
+                "proxmox_name": "ald-ekb-dhcp1",
+                "proxmox_nameserver": "192.168.126.57",
+                "proxmox_net0": {
+                    "bridge": "z20vn3",
+                    "mtu": "1",
+                    "virtio": "BC:24:11:C2:78:0D"
+                },
+                "proxmox_node": "r-pve1",
+                "proxmox_numa": 1,
+                "proxmox_ostype": "l26",
+                "proxmox_qmpstatus": "stopped",
+                "proxmox_scsihw": {
+                    "disk_image": "virtio-scsi-single"
+                },
+                "proxmox_searchdomain": "ald.ratners.ru",
+                "proxmox_smbios1": {
+                    "uuid": "03c45446-d698-4e81-b5fe-ccd7257345fc"
+                },
+                "proxmox_snapshots": [],
+                "proxmox_sockets": 1,
+                "proxmox_sshkeys": "ssh-rsa%20AAAAB3NzaC1yc2EAAAADAQABAAABgQCr6l0xXU3J2ojC9mAgVKpuyEbb5fYA9RCp1OIUWNDRpXFvqyFQYF%2F6ZrJqD1f4WwsMaUQeYIyAu4MMij1imzJkXiwUc%2BHIyrUwR9Ij28yJBvc37IwKEQ8%2B%2BfID6BeUgYUVDDoYnE7iuMIz4WwmWffgP1V7ysvGNV%2B7BXo79oXLUVm0f3CNNTd2Cr%2Bdq%2BRVlhiaBnKNHJeoFvQjKUcKvUjaCOakRynrUNFTK%2F%2FTKDcYFzUC94dh6ye1ZroGT5PTUnkCL42Muos0kNc9aAHK8gMQ8qIVvswExiwV99RB4l4pZ2Tv9k0Np423qexDk6r2c4PZqwvbvYb%2FHQ6krylYy2EEC1Y3%2F67FlyornHGTmLbphaqoPX725IUKSf4l4b5Cnn2F2V18V%2F2%2FOGDwIYugaaLHQRe%2FwGzUwdWmAbn%2FDatPYWI5rHeHLGFNiXdjkQQYSlDMfA2NZY2Lmm7JhgOjw82%2Bc6fRavAvR0mEZvRghKzC%2F4N2XAAc3Fozw%2F75IbA2PkM%3D%20ansible%40ald.ratners.ru",
+                "proxmox_status": "stopped",
+                "proxmox_tags": "ald_role_dhcp;ald_site_ekb;project_ald;tmp-alse-1.7.4-max",
+                "proxmox_tags_parsed": [
+                    "ald_role_dhcp",
+                    "ald_site_ekb",
+                    "project_ald",
+                    "tmp-alse-1.7.4-max"
+                ],
+                "proxmox_vga": "qxl,memory=16",
+                "proxmox_virtio0": {
+                    "cache": "writeback",
+                    "disk_image": "local-zfs:base-9014-disk-0/vm-116-disk-0",
+                    "size": "60G"
+                },
+                "proxmox_vmgenid": "755693e5-c2e7-4c21-abcf-6d6f46b3833d",
+                "proxmox_vmid": 116,
+                "proxmox_vmtype": "qemu",
+                "r_alt_domain_admin": "administrator",
+                "r_alt_domain_firstdc_address": "10.20.5.1",
+                "r_alt_domain_firstdc_name": "r-alt-dc1",
+                "r_alt_domain_forwarder": "192.168.126.1",
+                "r_alt_domain_name": "alt.ratners.ru",
+                "r_alt_domain_password": "QAZxsw123",
+                "r_alt_domain_shortname": "alt"
+            },
+            "ald-ekb-ws1": {
+                "ansible_password": "NeadfedEd2",
+                "ansible_pubkey": "/home/appc/.ssh/ald.ratners.ru_id_rsa.pub",
+                "ansible_user": "ansible",
+                "network_ipv4_method": "convert",
+                "preconfig_packages": [
+                    "tmux",
+                    "ansible",
+                    "chrony",
+                    "python3-libselinux"
+                ],
+                "proxmox_agent": "1",
+                "proxmox_balloon": 512,
+                "proxmox_boot": "c",
+                "proxmox_bootdisk": "virtio0",
+                "proxmox_cipassword": "**********",
+                "proxmox_citype": "nocloud",
+                "proxmox_ciupgrade": 0,
+                "proxmox_ciuser": "ansible",
+                "proxmox_cores": 3,
+                "proxmox_cpu": "host",
+                "proxmox_digest": "ea42c39ed33ad3f2677e8ee820bf5585649a179f",
+                "proxmox_ide2": {
+                    "disk_image": "local-zfs:vm-117-cloudinit",
+                    "media": "cdrom",
+                    "size": "4M"
+                },
+                "proxmox_ipconfig0": {
+                    "gw": "10.20.3.254",
+                    "ip": "10.20.3.99/24"
+                },
+                "proxmox_machine": "q35",
+                "proxmox_memory": "6144",
+                "proxmox_meta": {
+                    "creation-qemu": "8.1.2",
+                    "ctime": "1702233049"
+                },
+                "proxmox_name": "ald-ekb-ws1",
+                "proxmox_nameserver": "192.168.126.57",
+                "proxmox_net0": {
+                    "bridge": "z20vn3",
+                    "mtu": "1",
+                    "virtio": "BC:24:11:AD:E7:77"
+                },
+                "proxmox_node": "r-pve1",
+                "proxmox_numa": 1,
+                "proxmox_ostype": "l26",
+                "proxmox_qmpstatus": "stopped",
+                "proxmox_scsihw": {
+                    "disk_image": "virtio-scsi-single"
+                },
+                "proxmox_searchdomain": "ald.ratners.ru",
+                "proxmox_smbios1": {
+                    "uuid": "390665be-4e6c-4573-a64c-80232d84f89e"
+                },
+                "proxmox_snapshots": [],
+                "proxmox_sockets": 1,
+                "proxmox_spice_enhancements": {
+                    "videostreaming": "all"
+                },
+                "proxmox_sshkeys": "ssh-rsa%20AAAAB3NzaC1yc2EAAAADAQABAAABgQCr6l0xXU3J2ojC9mAgVKpuyEbb5fYA9RCp1OIUWNDRpXFvqyFQYF%2F6ZrJqD1f4WwsMaUQeYIyAu4MMij1imzJkXiwUc%2BHIyrUwR9Ij28yJBvc37IwKEQ8%2B%2BfID6BeUgYUVDDoYnE7iuMIz4WwmWffgP1V7ysvGNV%2B7BXo79oXLUVm0f3CNNTd2Cr%2Bdq%2BRVlhiaBnKNHJeoFvQjKUcKvUjaCOakRynrUNFTK%2F%2FTKDcYFzUC94dh6ye1ZroGT5PTUnkCL42Muos0kNc9aAHK8gMQ8qIVvswExiwV99RB4l4pZ2Tv9k0Np423qexDk6r2c4PZqwvbvYb%2FHQ6krylYy2EEC1Y3%2F67FlyornHGTmLbphaqoPX725IUKSf4l4b5Cnn2F2V18V%2F2%2FOGDwIYugaaLHQRe%2FwGzUwdWmAbn%2FDatPYWI5rHeHLGFNiXdjkQQYSlDMfA2NZY2Lmm7JhgOjw82%2Bc6fRavAvR0mEZvRghKzC%2F4N2XAAc3Fozw%2F75IbA2PkM%3D%20ansible%40ald.ratners.ru",
+                "proxmox_status": "stopped",
+                "proxmox_tags": "ald_role_ws;ald_site_ekb;project_ald;tmp-alse-1.7.4-base-gui",
+                "proxmox_tags_parsed": [
+                    "ald_role_ws",
+                    "ald_site_ekb",
+                    "project_ald",
+                    "tmp-alse-1.7.4-base-gui"
+                ],
+                "proxmox_vga": "qxl,memory=16",
+                "proxmox_virtio0": {
+                    "cache": "writeback",
+                    "disk_image": "local-zfs:base-9016-disk-0/vm-117-disk-0",
+                    "size": "30G"
+                },
+                "proxmox_vmgenid": "2d637147-e946-4d9c-9aae-cfcb7f14285e",
+                "proxmox_vmid": 117,
+                "proxmox_vmtype": "qemu",
+                "r_alt_domain_admin": "administrator",
+                "r_alt_domain_firstdc_address": "10.20.5.1",
+                "r_alt_domain_firstdc_name": "r-alt-dc1",
+                "r_alt_domain_forwarder": "192.168.126.1",
+                "r_alt_domain_name": "alt.ratners.ru",
+                "r_alt_domain_password": "QAZxsw123",
+                "r_alt_domain_shortname": "alt"
+            },
+            "ald-hq-audit1": {
+                "ansible_password": "NeadfedEd2",
+                "ansible_pubkey": "/home/appc/.ssh/ald.ratners.ru_id_rsa.pub",
+                "ansible_user": "ansible",
+                "network_ipv4_method": "convert",
+                "preconfig_packages": [
+                    "tmux",
+                    "ansible",
+                    "chrony",
+                    "python3-libselinux"
+                ],
+                "proxmox_agent": "1",
+                "proxmox_balloon": 512,
+                "proxmox_boot": "c",
+                "proxmox_bootdisk": "virtio0",
+                "proxmox_cipassword": "**********",
+                "proxmox_citype": "nocloud",
+                "proxmox_ciupgrade": 0,
+                "proxmox_ciuser": "ansible",
+                "proxmox_cores": 2,
+                "proxmox_cpu": "host",
+                "proxmox_digest": "bc2fcc2930ef979c0b98950a1d6d2134aad49cd4",
+                "proxmox_ide2": {
+                    "disk_image": "local-zfs:vm-107-cloudinit",
+                    "media": "cdrom",
+                    "size": "4M"
+                },
+                "proxmox_ipconfig0": {
+                    "ip": "dhcp"
+                },
+                "proxmox_machine": "q35",
+                "proxmox_memory": "4096",
+                "proxmox_meta": {
+                    "creation-qemu": "8.1.2",
+                    "ctime": "1702233049"
+                },
+                "proxmox_name": "ald-hq-audit1",
+                "proxmox_net0": {
+                    "bridge": "z20vn1",
+                    "mtu": "1",
+                    "virtio": "BC:24:11:41:B5:AC"
+                },
+                "proxmox_node": "r-pve1",
+                "proxmox_numa": 1,
+                "proxmox_ostype": "l26",
+                "proxmox_qmpstatus": "stopped",
+                "proxmox_scsihw": {
+                    "disk_image": "virtio-scsi-single"
+                },
+                "proxmox_smbios1": {
+                    "uuid": "eab3bafb-262c-4784-8a5d-3b0897151d43"
+                },
+                "proxmox_snapshots": [],
+                "proxmox_sockets": 1,
+                "proxmox_sshkeys": "ssh-rsa%20AAAAB3NzaC1yc2EAAAADAQABAAABgQCr6l0xXU3J2ojC9mAgVKpuyEbb5fYA9RCp1OIUWNDRpXFvqyFQYF%2F6ZrJqD1f4WwsMaUQeYIyAu4MMij1imzJkXiwUc%2BHIyrUwR9Ij28yJBvc37IwKEQ8%2B%2BfID6BeUgYUVDDoYnE7iuMIz4WwmWffgP1V7ysvGNV%2B7BXo79oXLUVm0f3CNNTd2Cr%2Bdq%2BRVlhiaBnKNHJeoFvQjKUcKvUjaCOakRynrUNFTK%2F%2FTKDcYFzUC94dh6ye1ZroGT5PTUnkCL42Muos0kNc9aAHK8gMQ8qIVvswExiwV99RB4l4pZ2Tv9k0Np423qexDk6r2c4PZqwvbvYb%2FHQ6krylYy2EEC1Y3%2F67FlyornHGTmLbphaqoPX725IUKSf4l4b5Cnn2F2V18V%2F2%2FOGDwIYugaaLHQRe%2FwGzUwdWmAbn%2FDatPYWI5rHeHLGFNiXdjkQQYSlDMfA2NZY2Lmm7JhgOjw82%2Bc6fRavAvR0mEZvRghKzC%2F4N2XAAc3Fozw%2F75IbA2PkM%3D%20ansible%40ald.ratners.ru",
+                "proxmox_status": "stopped",
+                "proxmox_tags": "ald_role_audit;ald_site_hq;project_ald;tmp-alse-1.7.4-max",
+                "proxmox_tags_parsed": [
+                    "ald_role_audit",
+                    "ald_site_hq",
+                    "project_ald",
+                    "tmp-alse-1.7.4-max"
+                ],
+                "proxmox_vga": "qxl,memory=16",
+                "proxmox_virtio0": {
+                    "cache": "writeback",
+                    "disk_image": "local-zfs:base-9014-disk-0/vm-107-disk-0",
+                    "size": "30G"
+                },
+                "proxmox_vmgenid": "7f8e3fcb-767b-4572-835f-08f85f6dd642",
+                "proxmox_vmid": 107,
+                "proxmox_vmtype": "qemu",
+                "r_alt_domain_admin": "administrator",
+                "r_alt_domain_firstdc_address": "10.20.5.1",
+                "r_alt_domain_firstdc_name": "r-alt-dc1",
+                "r_alt_domain_forwarder": "192.168.126.1",
+                "r_alt_domain_name": "alt.ratners.ru",
+                "r_alt_domain_password": "QAZxsw123",
+                "r_alt_domain_shortname": "alt"
+            },
+            "ald-hq-cups1": {
+                "ansible_password": "NeadfedEd2",
+                "ansible_pubkey": "/home/appc/.ssh/ald.ratners.ru_id_rsa.pub",
+                "ansible_user": "ansible",
+                "network_ipv4_method": "convert",
+                "preconfig_packages": [
+                    "tmux",
+                    "ansible",
+                    "chrony",
+                    "python3-libselinux"
+                ],
+                "proxmox_agent": "1",
+                "proxmox_balloon": 512,
+                "proxmox_boot": "c",
+                "proxmox_bootdisk": "virtio0",
+                "proxmox_cipassword": "**********",
+                "proxmox_citype": "nocloud",
+                "proxmox_ciupgrade": 0,
+                "proxmox_ciuser": "ansible",
+                "proxmox_cores": 2,
+                "proxmox_cpu": "host",
+                "proxmox_digest": "e84f7500f1dcf9a5735495ab7f60c5bcbea46697",
+                "proxmox_ide2": {
+                    "disk_image": "local-zfs:vm-108-cloudinit",
+                    "media": "cdrom",
+                    "size": "4M"
+                },
+                "proxmox_ipconfig0": {
+                    "ip": "dhcp"
+                },
+                "proxmox_machine": "q35",
+                "proxmox_memory": "4096",
+                "proxmox_meta": {
+                    "creation-qemu": "8.1.2",
+                    "ctime": "1702233049"
+                },
+                "proxmox_name": "ald-hq-cups1",
+                "proxmox_net0": {
+                    "bridge": "z20vn1",
+                    "mtu": "1",
+                    "virtio": "BC:24:11:DA:DD:62"
+                },
+                "proxmox_node": "r-pve1",
+                "proxmox_numa": 1,
+                "proxmox_ostype": "l26",
+                "proxmox_qmpstatus": "stopped",
+                "proxmox_scsihw": {
+                    "disk_image": "virtio-scsi-single"
+                },
+                "proxmox_smbios1": {
+                    "uuid": "5156069a-f4e9-48a0-8482-bdd6dc5f4b1a"
+                },
+                "proxmox_snapshots": [],
+                "proxmox_sockets": 1,
+                "proxmox_sshkeys": "ssh-rsa%20AAAAB3NzaC1yc2EAAAADAQABAAABgQCr6l0xXU3J2ojC9mAgVKpuyEbb5fYA9RCp1OIUWNDRpXFvqyFQYF%2F6ZrJqD1f4WwsMaUQeYIyAu4MMij1imzJkXiwUc%2BHIyrUwR9Ij28yJBvc37IwKEQ8%2B%2BfID6BeUgYUVDDoYnE7iuMIz4WwmWffgP1V7ysvGNV%2B7BXo79oXLUVm0f3CNNTd2Cr%2Bdq%2BRVlhiaBnKNHJeoFvQjKUcKvUjaCOakRynrUNFTK%2F%2FTKDcYFzUC94dh6ye1ZroGT5PTUnkCL42Muos0kNc9aAHK8gMQ8qIVvswExiwV99RB4l4pZ2Tv9k0Np423qexDk6r2c4PZqwvbvYb%2FHQ6krylYy2EEC1Y3%2F67FlyornHGTmLbphaqoPX725IUKSf4l4b5Cnn2F2V18V%2F2%2FOGDwIYugaaLHQRe%2FwGzUwdWmAbn%2FDatPYWI5rHeHLGFNiXdjkQQYSlDMfA2NZY2Lmm7JhgOjw82%2Bc6fRavAvR0mEZvRghKzC%2F4N2XAAc3Fozw%2F75IbA2PkM%3D%20ansible%40ald.ratners.ru",
+                "proxmox_status": "stopped",
+                "proxmox_tags": "ald_role_cups;ald_site_hq;project_ald;tmp-alse-1.7.4-max",
+                "proxmox_tags_parsed": [
+                    "ald_role_cups",
+                    "ald_site_hq",
+                    "project_ald",
+                    "tmp-alse-1.7.4-max"
+                ],
+                "proxmox_vga": "qxl,memory=16",
+                "proxmox_virtio0": {
+                    "cache": "writeback",
+                    "disk_image": "local-zfs:base-9014-disk-0/vm-108-disk-0",
+                    "size": "30G"
+                },
+                "proxmox_vmgenid": "0027c8b1-5b66-4e9a-b051-0a73c1467588",
+                "proxmox_vmid": 108,
+                "proxmox_vmtype": "qemu",
+                "r_alt_domain_admin": "administrator",
+                "r_alt_domain_firstdc_address": "10.20.5.1",
+                "r_alt_domain_firstdc_name": "r-alt-dc1",
+                "r_alt_domain_forwarder": "192.168.126.1",
+                "r_alt_domain_name": "alt.ratners.ru",
+                "r_alt_domain_password": "QAZxsw123",
+                "r_alt_domain_shortname": "alt"
+            },
+            "ald-hq-dc1": {
+                "ansible_password": "NeadfedEd2",
+                "ansible_pubkey": "/home/appc/.ssh/ald.ratners.ru_id_rsa.pub",
+                "ansible_user": "ansible",
+                "network_ipv4_method": "convert",
+                "preconfig_packages": [
+                    "tmux",
+                    "ansible",
+                    "chrony",
+                    "python3-libselinux"
+                ],
+                "proxmox_agent": "1",
+                "proxmox_balloon": 512,
+                "proxmox_boot": "c",
+                "proxmox_bootdisk": "virtio0",
+                "proxmox_cipassword": "**********",
+                "proxmox_citype": "nocloud",
+                "proxmox_ciupgrade": 0,
+                "proxmox_ciuser": "ansible",
+                "proxmox_cores": 6,
+                "proxmox_cpu": "host",
+                "proxmox_digest": "eb4e4e67e787aa463d16410113d156d47c7a0517",
+                "proxmox_ide2": {
+                    "disk_image": "local-zfs:vm-104-cloudinit",
+                    "media": "cdrom",
+                    "size": "4M"
+                },
+                "proxmox_ipconfig0": {
+                    "ip": "dhcp"
+                },
+                "proxmox_machine": "q35",
+                "proxmox_memory": "16384",
+                "proxmox_meta": {
+                    "creation-qemu": "8.1.2",
+                    "ctime": "1702233049"
+                },
+                "proxmox_name": "ald-hq-dc1",
+                "proxmox_net0": {
+                    "bridge": "z20vn1",
+                    "mtu": "1",
+                    "virtio": "BC:24:11:9C:2F:17"
+                },
+                "proxmox_node": "r-pve1",
+                "proxmox_numa": 1,
+                "proxmox_ostype": "l26",
+                "proxmox_qmpstatus": "stopped",
+                "proxmox_scsihw": {
+                    "disk_image": "virtio-scsi-single"
+                },
+                "proxmox_smbios1": {
+                    "uuid": "3b04ee7a-78ac-4964-a6a6-cfb43ae5c010"
+                },
+                "proxmox_snapshots": [],
+                "proxmox_sockets": 1,
+                "proxmox_sshkeys": "ssh-rsa%20AAAAB3NzaC1yc2EAAAADAQABAAABgQCr6l0xXU3J2ojC9mAgVKpuyEbb5fYA9RCp1OIUWNDRpXFvqyFQYF%2F6ZrJqD1f4WwsMaUQeYIyAu4MMij1imzJkXiwUc%2BHIyrUwR9Ij28yJBvc37IwKEQ8%2B%2BfID6BeUgYUVDDoYnE7iuMIz4WwmWffgP1V7ysvGNV%2B7BXo79oXLUVm0f3CNNTd2Cr%2Bdq%2BRVlhiaBnKNHJeoFvQjKUcKvUjaCOakRynrUNFTK%2F%2FTKDcYFzUC94dh6ye1ZroGT5PTUnkCL42Muos0kNc9aAHK8gMQ8qIVvswExiwV99RB4l4pZ2Tv9k0Np423qexDk6r2c4PZqwvbvYb%2FHQ6krylYy2EEC1Y3%2F67FlyornHGTmLbphaqoPX725IUKSf4l4b5Cnn2F2V18V%2F2%2FOGDwIYugaaLHQRe%2FwGzUwdWmAbn%2FDatPYWI5rHeHLGFNiXdjkQQYSlDMfA2NZY2Lmm7JhgOjw82%2Bc6fRavAvR0mEZvRghKzC%2F4N2XAAc3Fozw%2F75IbA2PkM%3D%20ansible%40ald.ratners.ru",
+                "proxmox_status": "stopped",
+                "proxmox_tags": "ald_role_dc;ald_site_hq;project_ald;tmp-alse-1.7.4-max",
+                "proxmox_tags_parsed": [
+                    "ald_role_dc",
+                    "ald_site_hq",
+                    "project_ald",
+                    "tmp-alse-1.7.4-max"
+                ],
+                "proxmox_vga": "qxl,memory=16",
+                "proxmox_virtio0": {
+                    "cache": "writeback",
+                    "disk_image": "local-zfs:base-9014-disk-0/vm-104-disk-0",
+                    "size": "60G"
+                },
+                "proxmox_vmgenid": "1a3df9a1-c18c-415c-9eae-6c85d6bb1ee9",
+                "proxmox_vmid": 104,
+                "proxmox_vmtype": "qemu",
+                "r_alt_domain_admin": "administrator",
+                "r_alt_domain_firstdc_address": "10.20.5.1",
+                "r_alt_domain_firstdc_name": "r-alt-dc1",
+                "r_alt_domain_forwarder": "192.168.126.1",
+                "r_alt_domain_name": "alt.ratners.ru",
+                "r_alt_domain_password": "QAZxsw123",
+                "r_alt_domain_shortname": "alt"
+            },
+            "ald-hq-dc2": {
+                "ansible_password": "NeadfedEd2",
+                "ansible_pubkey": "/home/appc/.ssh/ald.ratners.ru_id_rsa.pub",
+                "ansible_user": "ansible",
+                "network_ipv4_method": "convert",
+                "preconfig_packages": [
+                    "tmux",
+                    "ansible",
+                    "chrony",
+                    "python3-libselinux"
+                ],
+                "proxmox_agent": "1",
+                "proxmox_balloon": 512,
+                "proxmox_boot": "c",
+                "proxmox_bootdisk": "virtio0",
+                "proxmox_cipassword": "**********",
+                "proxmox_citype": "nocloud",
+                "proxmox_ciupgrade": 0,
+                "proxmox_ciuser": "ansible",
+                "proxmox_cores": 6,
+                "proxmox_cpu": "host",
+                "proxmox_digest": "9e9baf0090e2b8ebbf871d07afe1dc068b80a942",
+                "proxmox_ide2": {
+                    "disk_image": "local-zfs:vm-105-cloudinit",
+                    "media": "cdrom",
+                    "size": "4M"
+                },
+                "proxmox_ipconfig0": {
+                    "ip": "dhcp"
+                },
+                "proxmox_machine": "q35",
+                "proxmox_memory": "8192",
+                "proxmox_meta": {
+                    "creation-qemu": "8.1.2",
+                    "ctime": "1702233049"
+                },
+                "proxmox_name": "ald-hq-dc2",
+                "proxmox_net0": {
+                    "bridge": "z20vn1",
+                    "mtu": "1",
+                    "virtio": "BC:24:11:27:1F:A1"
+                },
+                "proxmox_node": "r-pve1",
+                "proxmox_numa": 1,
+                "proxmox_ostype": "l26",
+                "proxmox_qmpstatus": "stopped",
+                "proxmox_scsihw": {
+                    "disk_image": "virtio-scsi-single"
+                },
+                "proxmox_smbios1": {
+                    "uuid": "e9648e1e-5447-435e-b8ec-24672f74cec6"
+                },
+                "proxmox_snapshots": [],
+                "proxmox_sockets": 1,
+                "proxmox_sshkeys": "ssh-rsa%20AAAAB3NzaC1yc2EAAAADAQABAAABgQCr6l0xXU3J2ojC9mAgVKpuyEbb5fYA9RCp1OIUWNDRpXFvqyFQYF%2F6ZrJqD1f4WwsMaUQeYIyAu4MMij1imzJkXiwUc%2BHIyrUwR9Ij28yJBvc37IwKEQ8%2B%2BfID6BeUgYUVDDoYnE7iuMIz4WwmWffgP1V7ysvGNV%2B7BXo79oXLUVm0f3CNNTd2Cr%2Bdq%2BRVlhiaBnKNHJeoFvQjKUcKvUjaCOakRynrUNFTK%2F%2FTKDcYFzUC94dh6ye1ZroGT5PTUnkCL42Muos0kNc9aAHK8gMQ8qIVvswExiwV99RB4l4pZ2Tv9k0Np423qexDk6r2c4PZqwvbvYb%2FHQ6krylYy2EEC1Y3%2F67FlyornHGTmLbphaqoPX725IUKSf4l4b5Cnn2F2V18V%2F2%2FOGDwIYugaaLHQRe%2FwGzUwdWmAbn%2FDatPYWI5rHeHLGFNiXdjkQQYSlDMfA2NZY2Lmm7JhgOjw82%2Bc6fRavAvR0mEZvRghKzC%2F4N2XAAc3Fozw%2F75IbA2PkM%3D%20ansible%40ald.ratners.ru",
+                "proxmox_status": "stopped",
+                "proxmox_tags": "ald_role_dc;ald_site_hq;project_ald;tmp-alse-1.7.4-max",
+                "proxmox_tags_parsed": [
+                    "ald_role_dc",
+                    "ald_site_hq",
+                    "project_ald",
+                    "tmp-alse-1.7.4-max"
+                ],
+                "proxmox_vga": "qxl,memory=16",
+                "proxmox_virtio0": {
+                    "cache": "writeback",
+                    "disk_image": "local-zfs:base-9014-disk-0/vm-105-disk-0",
+                    "size": "60G"
+                },
+                "proxmox_vmgenid": "653b1f3f-2285-433c-82ff-91a0ab237c2d",
+                "proxmox_vmid": 105,
+                "proxmox_vmtype": "qemu",
+                "r_alt_domain_admin": "administrator",
+                "r_alt_domain_firstdc_address": "10.20.5.1",
+                "r_alt_domain_firstdc_name": "r-alt-dc1",
+                "r_alt_domain_forwarder": "192.168.126.1",
+                "r_alt_domain_name": "alt.ratners.ru",
+                "r_alt_domain_password": "QAZxsw123",
+                "r_alt_domain_shortname": "alt"
+            },
+            "ald-hq-fs1": {
+                "ansible_password": "NeadfedEd2",
+                "ansible_pubkey": "/home/appc/.ssh/ald.ratners.ru_id_rsa.pub",
+                "ansible_user": "ansible",
+                "network_ipv4_method": "convert",
+                "preconfig_packages": [
+                    "tmux",
+                    "ansible",
+                    "chrony",
+                    "python3-libselinux"
+                ],
+                "proxmox_agent": "1",
+                "proxmox_balloon": 512,
+                "proxmox_boot": "c",
+                "proxmox_bootdisk": "virtio0",
+                "proxmox_cipassword": "**********",
+                "proxmox_citype": "nocloud",
+                "proxmox_ciupgrade": 0,
+                "proxmox_ciuser": "ansible",
+                "proxmox_cores": 2,
+                "proxmox_cpu": "host",
+                "proxmox_digest": "9cc81aefde29cadaa8b3465245dde29bc1667673",
+                "proxmox_ide2": {
+                    "disk_image": "local-zfs:vm-109-cloudinit",
+                    "media": "cdrom",
+                    "size": "4M"
+                },
+                "proxmox_ipconfig0": {
+                    "ip": "dhcp"
+                },
+                "proxmox_machine": "q35",
+                "proxmox_memory": "4096",
+                "proxmox_meta": {
+                    "creation-qemu": "8.1.2",
+                    "ctime": "1702233049"
+                },
+                "proxmox_name": "ald-hq-fs1",
+                "proxmox_net0": {
+                    "bridge": "z20vn1",
+                    "mtu": "1",
+                    "virtio": "BC:24:11:F8:CE:7A"
+                },
+                "proxmox_node": "r-pve1",
+                "proxmox_numa": 1,
+                "proxmox_ostype": "l26",
+                "proxmox_qmpstatus": "stopped",
+                "proxmox_scsihw": {
+                    "disk_image": "virtio-scsi-single"
+                },
+                "proxmox_smbios1": {
+                    "uuid": "9d356fd3-8488-4f04-9490-5f02d5c38c09"
+                },
+                "proxmox_snapshots": [],
+                "proxmox_sockets": 1,
+                "proxmox_sshkeys": "ssh-rsa%20AAAAB3NzaC1yc2EAAAADAQABAAABgQCr6l0xXU3J2ojC9mAgVKpuyEbb5fYA9RCp1OIUWNDRpXFvqyFQYF%2F6ZrJqD1f4WwsMaUQeYIyAu4MMij1imzJkXiwUc%2BHIyrUwR9Ij28yJBvc37IwKEQ8%2B%2BfID6BeUgYUVDDoYnE7iuMIz4WwmWffgP1V7ysvGNV%2B7BXo79oXLUVm0f3CNNTd2Cr%2Bdq%2BRVlhiaBnKNHJeoFvQjKUcKvUjaCOakRynrUNFTK%2F%2FTKDcYFzUC94dh6ye1ZroGT5PTUnkCL42Muos0kNc9aAHK8gMQ8qIVvswExiwV99RB4l4pZ2Tv9k0Np423qexDk6r2c4PZqwvbvYb%2FHQ6krylYy2EEC1Y3%2F67FlyornHGTmLbphaqoPX725IUKSf4l4b5Cnn2F2V18V%2F2%2FOGDwIYugaaLHQRe%2FwGzUwdWmAbn%2FDatPYWI5rHeHLGFNiXdjkQQYSlDMfA2NZY2Lmm7JhgOjw82%2Bc6fRavAvR0mEZvRghKzC%2F4N2XAAc3Fozw%2F75IbA2PkM%3D%20ansible%40ald.ratners.ru",
+                "proxmox_status": "stopped",
+                "proxmox_tags": "ald_role_fs;ald_site_hq;project_ald;tmp-alse-1.7.4-max",
+                "proxmox_tags_parsed": [
+                    "ald_role_fs",
+                    "ald_site_hq",
+                    "project_ald",
+                    "tmp-alse-1.7.4-max"
+                ],
+                "proxmox_vga": "qxl,memory=16",
+                "proxmox_virtio0": {
+                    "cache": "writeback",
+                    "disk_image": "local-zfs:base-9014-disk-0/vm-109-disk-0",
+                    "size": "30G"
+                },
+                "proxmox_vmgenid": "dfe4f12b-5728-4614-ae94-9a1c14b0ceb2",
+                "proxmox_vmid": 109,
+                "proxmox_vmtype": "qemu",
+                "r_alt_domain_admin": "administrator",
+                "r_alt_domain_firstdc_address": "10.20.5.1",
+                "r_alt_domain_firstdc_name": "r-alt-dc1",
+                "r_alt_domain_forwarder": "192.168.126.1",
+                "r_alt_domain_name": "alt.ratners.ru",
+                "r_alt_domain_password": "QAZxsw123",
+                "r_alt_domain_shortname": "alt"
+            },
+            "ald-hq-mon1": {
+                "ansible_password": "NeadfedEd2",
+                "ansible_pubkey": "/home/appc/.ssh/ald.ratners.ru_id_rsa.pub",
+                "ansible_user": "ansible",
+                "network_ipv4_method": "convert",
+                "preconfig_packages": [
+                    "tmux",
+                    "ansible",
+                    "chrony",
+                    "python3-libselinux"
+                ],
+                "proxmox_agent": "1",
+                "proxmox_balloon": 512,
+                "proxmox_boot": "c",
+                "proxmox_bootdisk": "virtio0",
+                "proxmox_cipassword": "**********",
+                "proxmox_citype": "nocloud",
+                "proxmox_ciupgrade": 0,
+                "proxmox_ciuser": "ansible",
+                "proxmox_cores": 2,
+                "proxmox_cpu": "host",
+                "proxmox_digest": "b45a0c7d0e80f11d701f44070f963ff739fd6748",
+                "proxmox_ide2": {
+                    "disk_image": "local-zfs:vm-106-cloudinit",
+                    "media": "cdrom",
+                    "size": "4M"
+                },
+                "proxmox_ipconfig0": {
+                    "ip": "dhcp"
+                },
+                "proxmox_machine": "q35",
+                "proxmox_memory": "4096",
+                "proxmox_meta": {
+                    "creation-qemu": "8.1.2",
+                    "ctime": "1702233049"
+                },
+                "proxmox_name": "ald-hq-mon1",
+                "proxmox_net0": {
+                    "bridge": "z20vn1",
+                    "mtu": "1",
+                    "virtio": "BC:24:11:40:E8:BB"
+                },
+                "proxmox_node": "r-pve1",
+                "proxmox_numa": 1,
+                "proxmox_ostype": "l26",
+                "proxmox_qmpstatus": "stopped",
+                "proxmox_scsihw": {
+                    "disk_image": "virtio-scsi-single"
+                },
+                "proxmox_smbios1": {
+                    "uuid": "363b8929-9bb0-43d0-84bc-ac39077909b7"
+                },
+                "proxmox_snapshots": [],
+                "proxmox_sockets": 1,
+                "proxmox_sshkeys": "ssh-rsa%20AAAAB3NzaC1yc2EAAAADAQABAAABgQCr6l0xXU3J2ojC9mAgVKpuyEbb5fYA9RCp1OIUWNDRpXFvqyFQYF%2F6ZrJqD1f4WwsMaUQeYIyAu4MMij1imzJkXiwUc%2BHIyrUwR9Ij28yJBvc37IwKEQ8%2B%2BfID6BeUgYUVDDoYnE7iuMIz4WwmWffgP1V7ysvGNV%2B7BXo79oXLUVm0f3CNNTd2Cr%2Bdq%2BRVlhiaBnKNHJeoFvQjKUcKvUjaCOakRynrUNFTK%2F%2FTKDcYFzUC94dh6ye1ZroGT5PTUnkCL42Muos0kNc9aAHK8gMQ8qIVvswExiwV99RB4l4pZ2Tv9k0Np423qexDk6r2c4PZqwvbvYb%2FHQ6krylYy2EEC1Y3%2F67FlyornHGTmLbphaqoPX725IUKSf4l4b5Cnn2F2V18V%2F2%2FOGDwIYugaaLHQRe%2FwGzUwdWmAbn%2FDatPYWI5rHeHLGFNiXdjkQQYSlDMfA2NZY2Lmm7JhgOjw82%2Bc6fRavAvR0mEZvRghKzC%2F4N2XAAc3Fozw%2F75IbA2PkM%3D%20ansible%40ald.ratners.ru",
+                "proxmox_status": "stopped",
+                "proxmox_tags": "ald_role_mon;ald_site_hq;project_ald;tmp-alse-1.7.4-max",
+                "proxmox_tags_parsed": [
+                    "ald_role_mon",
+                    "ald_site_hq",
+                    "project_ald",
+                    "tmp-alse-1.7.4-max"
+                ],
+                "proxmox_vga": "qxl,memory=16",
+                "proxmox_virtio0": {
+                    "cache": "writeback",
+                    "disk_image": "local-zfs:base-9014-disk-0/vm-106-disk-0",
+                    "size": "30G"
+                },
+                "proxmox_vmgenid": "89036e92-ef26-42a7-92ee-c34e7df03109",
+                "proxmox_vmid": 106,
+                "proxmox_vmtype": "qemu",
+                "r_alt_domain_admin": "administrator",
+                "r_alt_domain_firstdc_address": "10.20.5.1",
+                "r_alt_domain_firstdc_name": "r-alt-dc1",
+                "r_alt_domain_forwarder": "192.168.126.1",
+                "r_alt_domain_name": "alt.ratners.ru",
+                "r_alt_domain_password": "QAZxsw123",
+                "r_alt_domain_shortname": "alt"
+            },
+            "ald-hq-repo1": {
+                "ansible_password": "NeadfedEd2",
+                "ansible_pubkey": "/home/appc/.ssh/ald.ratners.ru_id_rsa.pub",
+                "ansible_user": "ansible",
+                "network_ipv4_method": "convert",
+                "preconfig_packages": [
+                    "tmux",
+                    "ansible",
+                    "chrony",
+                    "python3-libselinux"
+                ],
+                "proxmox_agent": "1",
+                "proxmox_balloon": 512,
+                "proxmox_boot": "c",
+                "proxmox_bootdisk": "virtio0",
+                "proxmox_cipassword": "**********",
+                "proxmox_citype": "nocloud",
+                "proxmox_ciupgrade": 0,
+                "proxmox_ciuser": "ansible",
+                "proxmox_cores": 2,
+                "proxmox_cpu": "host",
+                "proxmox_digest": "0f2b96af0e65c92ea3185105112b12f611358414",
+                "proxmox_ide2": {
+                    "disk_image": "local-zfs:vm-103-cloudinit",
+                    "media": "cdrom",
+                    "size": "4M"
+                },
+                "proxmox_ipconfig0": {
+                    "gw": "192.168.126.1",
+                    "ip": "192.168.126.128/24"
+                },
+                "proxmox_machine": "q35",
+                "proxmox_memory": "4096",
+                "proxmox_meta": {
+                    "creation-qemu": "8.1.2",
+                    "ctime": "1702233049"
+                },
+                "proxmox_name": "ald-hq-repo1",
+                "proxmox_nameserver": "192.168.126.57",
+                "proxmox_net0": {
+                    "bridge": "vmbr0",
+                    "mtu": "1",
+                    "virtio": "BC:24:11:31:A0:33"
+                },
+                "proxmox_node": "r-pve1",
+                "proxmox_numa": 1,
+                "proxmox_ostype": "l26",
+                "proxmox_qmpstatus": "stopped",
+                "proxmox_scsihw": {
+                    "disk_image": "virtio-scsi-single"
+                },
+                "proxmox_searchdomain": "ald.ratners.ru",
+                "proxmox_smbios1": {
+                    "uuid": "9df73d22-6b2b-4f1e-8c6e-a14e50cdc358"
+                },
+                "proxmox_snapshots": [],
+                "proxmox_sockets": 1,
+                "proxmox_sshkeys": "ssh-rsa%20AAAAB3NzaC1yc2EAAAADAQABAAABgQCr6l0xXU3J2ojC9mAgVKpuyEbb5fYA9RCp1OIUWNDRpXFvqyFQYF%2F6ZrJqD1f4WwsMaUQeYIyAu4MMij1imzJkXiwUc%2BHIyrUwR9Ij28yJBvc37IwKEQ8%2B%2BfID6BeUgYUVDDoYnE7iuMIz4WwmWffgP1V7ysvGNV%2B7BXo79oXLUVm0f3CNNTd2Cr%2Bdq%2BRVlhiaBnKNHJeoFvQjKUcKvUjaCOakRynrUNFTK%2F%2FTKDcYFzUC94dh6ye1ZroGT5PTUnkCL42Muos0kNc9aAHK8gMQ8qIVvswExiwV99RB4l4pZ2Tv9k0Np423qexDk6r2c4PZqwvbvYb%2FHQ6krylYy2EEC1Y3%2F67FlyornHGTmLbphaqoPX725IUKSf4l4b5Cnn2F2V18V%2F2%2FOGDwIYugaaLHQRe%2FwGzUwdWmAbn%2FDatPYWI5rHeHLGFNiXdjkQQYSlDMfA2NZY2Lmm7JhgOjw82%2Bc6fRavAvR0mEZvRghKzC%2F4N2XAAc3Fozw%2F75IbA2PkM%3D%20ansible%40ald.ratners.ru",
+                "proxmox_status": "stopped",
+                "proxmox_tags": "ald_role_repo;ald_site_hq;project_ald;tmp-alse-1.7.4-max",
+                "proxmox_tags_parsed": [
+                    "ald_role_repo",
+                    "ald_site_hq",
+                    "project_ald",
+                    "tmp-alse-1.7.4-max"
+                ],
+                "proxmox_vga": "qxl,memory=16",
+                "proxmox_virtio0": {
+                    "cache": "writeback",
+                    "disk_image": "local-zfs:base-9014-disk-0/vm-103-disk-0",
+                    "size": "30G"
+                },
+                "proxmox_vmgenid": "3bc9ada0-bbdc-4502-b012-3c0ea4f6d44d",
+                "proxmox_vmid": 103,
+                "proxmox_vmtype": "qemu",
+                "r_alt_domain_admin": "administrator",
+                "r_alt_domain_firstdc_address": "10.20.5.1",
+                "r_alt_domain_firstdc_name": "r-alt-dc1",
+                "r_alt_domain_forwarder": "192.168.126.1",
+                "r_alt_domain_name": "alt.ratners.ru",
+                "r_alt_domain_password": "QAZxsw123",
+                "r_alt_domain_shortname": "alt"
+            },
+            "ald-hq-ws1": {
+                "ansible_password": "NeadfedEd2",
+                "ansible_pubkey": "/home/appc/.ssh/ald.ratners.ru_id_rsa.pub",
+                "ansible_user": "ansible",
+                "network_ipv4_method": "convert",
+                "preconfig_packages": [
+                    "tmux",
+                    "ansible",
+                    "chrony",
+                    "python3-libselinux"
+                ],
+                "proxmox_agent": "1",
+                "proxmox_balloon": 512,
+                "proxmox_boot": "c",
+                "proxmox_bootdisk": "virtio0",
+                "proxmox_cipassword": "**********",
+                "proxmox_citype": "nocloud",
+                "proxmox_ciupgrade": 0,
+                "proxmox_ciuser": "ansible",
+                "proxmox_cores": 3,
+                "proxmox_cpu": "host",
+                "proxmox_digest": "3abd4d3421f40ad904fa0655628cf4294b7f0278",
+                "proxmox_ide2": {
+                    "disk_image": "local-zfs:vm-110-cloudinit",
+                    "media": "cdrom",
+                    "size": "4M"
+                },
+                "proxmox_ipconfig0": {
+                    "ip": "dhcp"
+                },
+                "proxmox_machine": "q35",
+                "proxmox_memory": "6144",
+                "proxmox_meta": {
+                    "creation-qemu": "8.1.2",
+                    "ctime": "1702233049"
+                },
+                "proxmox_name": "ald-hq-ws1",
+                "proxmox_net0": {
+                    "bridge": "z20vn1",
+                    "mtu": "1",
+                    "virtio": "BC:24:11:D1:2C:03"
+                },
+                "proxmox_node": "r-pve1",
+                "proxmox_numa": 1,
+                "proxmox_ostype": "l26",
+                "proxmox_qmpstatus": "stopped",
+                "proxmox_scsihw": {
+                    "disk_image": "virtio-scsi-single"
+                },
+                "proxmox_smbios1": {
+                    "uuid": "eedb6330-3f41-42bf-add6-62ac0061639c"
+                },
+                "proxmox_snapshots": [],
+                "proxmox_sockets": 1,
+                "proxmox_spice_enhancements": {
+                    "videostreaming": "all"
+                },
+                "proxmox_sshkeys": "ssh-rsa%20AAAAB3NzaC1yc2EAAAADAQABAAABgQCr6l0xXU3J2ojC9mAgVKpuyEbb5fYA9RCp1OIUWNDRpXFvqyFQYF%2F6ZrJqD1f4WwsMaUQeYIyAu4MMij1imzJkXiwUc%2BHIyrUwR9Ij28yJBvc37IwKEQ8%2B%2BfID6BeUgYUVDDoYnE7iuMIz4WwmWffgP1V7ysvGNV%2B7BXo79oXLUVm0f3CNNTd2Cr%2Bdq%2BRVlhiaBnKNHJeoFvQjKUcKvUjaCOakRynrUNFTK%2F%2FTKDcYFzUC94dh6ye1ZroGT5PTUnkCL42Muos0kNc9aAHK8gMQ8qIVvswExiwV99RB4l4pZ2Tv9k0Np423qexDk6r2c4PZqwvbvYb%2FHQ6krylYy2EEC1Y3%2F67FlyornHGTmLbphaqoPX725IUKSf4l4b5Cnn2F2V18V%2F2%2FOGDwIYugaaLHQRe%2FwGzUwdWmAbn%2FDatPYWI5rHeHLGFNiXdjkQQYSlDMfA2NZY2Lmm7JhgOjw82%2Bc6fRavAvR0mEZvRghKzC%2F4N2XAAc3Fozw%2F75IbA2PkM%3D%20ansible%40ald.ratners.ru",
+                "proxmox_status": "stopped",
+                "proxmox_tags": "ald_role_ws;ald_site_hq;project_ald;tmp-alse-1.7.4-base-gui",
+                "proxmox_tags_parsed": [
+                    "ald_role_ws",
+                    "ald_site_hq",
+                    "project_ald",
+                    "tmp-alse-1.7.4-base-gui"
+                ],
+                "proxmox_vga": "qxl,memory=16",
+                "proxmox_virtio0": {
+                    "cache": "writeback",
+                    "disk_image": "local-zfs:base-9016-disk-0/vm-110-disk-0",
+                    "size": "30G"
+                },
+                "proxmox_vmgenid": "fa07bc19-b707-481c-a700-0b14aa34cede",
+                "proxmox_vmid": 110,
+                "proxmox_vmtype": "qemu",
+                "r_alt_domain_admin": "administrator",
+                "r_alt_domain_firstdc_address": "10.20.5.1",
+                "r_alt_domain_firstdc_name": "r-alt-dc1",
+                "r_alt_domain_forwarder": "192.168.126.1",
+                "r_alt_domain_name": "alt.ratners.ru",
+                "r_alt_domain_password": "QAZxsw123",
+                "r_alt_domain_shortname": "alt"
+            },
+            "ald-spb-dc1": {
+                "ansible_password": "NeadfedEd2",
+                "ansible_pubkey": "/home/appc/.ssh/ald.ratners.ru_id_rsa.pub",
+                "ansible_user": "ansible",
+                "network_ipv4_method": "convert",
+                "preconfig_packages": [
+                    "tmux",
+                    "ansible",
+                    "chrony",
+                    "python3-libselinux"
+                ],
+                "proxmox_agent": "1",
+                "proxmox_balloon": 512,
+                "proxmox_boot": "c",
+                "proxmox_bootdisk": "virtio0",
+                "proxmox_cipassword": "**********",
+                "proxmox_citype": "nocloud",
+                "proxmox_ciupgrade": 0,
+                "proxmox_ciuser": "ansible",
+                "proxmox_cores": 6,
+                "proxmox_cpu": "host",
+                "proxmox_digest": "9624777a1671187fb0f4ca047dd54f9e42da3747",
+                "proxmox_ide2": {
+                    "disk_image": "local-zfs:vm-111-cloudinit",
+                    "media": "cdrom",
+                    "size": "4M"
+                },
+                "proxmox_ipconfig0": {
+                    "ip": "dhcp"
+                },
+                "proxmox_machine": "q35",
+                "proxmox_memory": "16384",
+                "proxmox_meta": {
+                    "creation-qemu": "8.1.2",
+                    "ctime": "1702233049"
+                },
+                "proxmox_name": "ald-spb-dc1",
+                "proxmox_net0": {
+                    "bridge": "z20vn2",
+                    "mtu": "1",
+                    "virtio": "BC:24:11:19:14:93"
+                },
+                "proxmox_node": "r-pve1",
+                "proxmox_numa": 1,
+                "proxmox_ostype": "l26",
+                "proxmox_qmpstatus": "stopped",
+                "proxmox_scsihw": {
+                    "disk_image": "virtio-scsi-single"
+                },
+                "proxmox_smbios1": {
+                    "uuid": "54a76ee5-765d-4e57-b5a9-03a9cd44330f"
+                },
+                "proxmox_snapshots": [],
+                "proxmox_sockets": 1,
+                "proxmox_sshkeys": "ssh-rsa%20AAAAB3NzaC1yc2EAAAADAQABAAABgQCr6l0xXU3J2ojC9mAgVKpuyEbb5fYA9RCp1OIUWNDRpXFvqyFQYF%2F6ZrJqD1f4WwsMaUQeYIyAu4MMij1imzJkXiwUc%2BHIyrUwR9Ij28yJBvc37IwKEQ8%2B%2BfID6BeUgYUVDDoYnE7iuMIz4WwmWffgP1V7ysvGNV%2B7BXo79oXLUVm0f3CNNTd2Cr%2Bdq%2BRVlhiaBnKNHJeoFvQjKUcKvUjaCOakRynrUNFTK%2F%2FTKDcYFzUC94dh6ye1ZroGT5PTUnkCL42Muos0kNc9aAHK8gMQ8qIVvswExiwV99RB4l4pZ2Tv9k0Np423qexDk6r2c4PZqwvbvYb%2FHQ6krylYy2EEC1Y3%2F67FlyornHGTmLbphaqoPX725IUKSf4l4b5Cnn2F2V18V%2F2%2FOGDwIYugaaLHQRe%2FwGzUwdWmAbn%2FDatPYWI5rHeHLGFNiXdjkQQYSlDMfA2NZY2Lmm7JhgOjw82%2Bc6fRavAvR0mEZvRghKzC%2F4N2XAAc3Fozw%2F75IbA2PkM%3D%20ansible%40ald.ratners.ru",
+                "proxmox_status": "stopped",
+                "proxmox_tags": "ald_role_dc;ald_site_spb;project_ald;tmp-alse-1.7.4-max",
+                "proxmox_tags_parsed": [
+                    "ald_role_dc",
+                    "ald_site_spb",
+                    "project_ald",
+                    "tmp-alse-1.7.4-max"
+                ],
+                "proxmox_vga": "qxl,memory=16",
+                "proxmox_virtio0": {
+                    "cache": "writeback",
+                    "disk_image": "local-zfs:base-9014-disk-0/vm-111-disk-0",
+                    "size": "60G"
+                },
+                "proxmox_vmgenid": "a322a2a1-92a5-40fa-9a45-20cd000736bf",
+                "proxmox_vmid": 111,
+                "proxmox_vmtype": "qemu",
+                "r_alt_domain_admin": "administrator",
+                "r_alt_domain_firstdc_address": "10.20.5.1",
+                "r_alt_domain_firstdc_name": "r-alt-dc1",
+                "r_alt_domain_forwarder": "192.168.126.1",
+                "r_alt_domain_name": "alt.ratners.ru",
+                "r_alt_domain_password": "QAZxsw123",
+                "r_alt_domain_shortname": "alt"
+            },
+            "ald-spb-dc2": {
+                "ansible_password": "NeadfedEd2",
+                "ansible_pubkey": "/home/appc/.ssh/ald.ratners.ru_id_rsa.pub",
+                "ansible_user": "ansible",
+                "network_ipv4_method": "convert",
+                "preconfig_packages": [
+                    "tmux",
+                    "ansible",
+                    "chrony",
+                    "python3-libselinux"
+                ],
+                "proxmox_agent": "1",
+                "proxmox_balloon": 512,
+                "proxmox_boot": "c",
+                "proxmox_bootdisk": "virtio0",
+                "proxmox_cipassword": "**********",
+                "proxmox_citype": "nocloud",
+                "proxmox_ciupgrade": 0,
+                "proxmox_ciuser": "ansible",
+                "proxmox_cores": 6,
+                "proxmox_cpu": "host",
+                "proxmox_digest": "3d9e36ecc1b34b8d9b49641056245ddd787803e8",
+                "proxmox_ide2": {
+                    "disk_image": "local-zfs:vm-112-cloudinit",
+                    "media": "cdrom",
+                    "size": "4M"
+                },
+                "proxmox_ipconfig0": {
+                    "ip": "dhcp"
+                },
+                "proxmox_machine": "q35",
+                "proxmox_memory": "8192",
+                "proxmox_meta": {
+                    "creation-qemu": "8.1.2",
+                    "ctime": "1702233049"
+                },
+                "proxmox_name": "ald-spb-dc2",
+                "proxmox_net0": {
+                    "bridge": "z20vn2",
+                    "mtu": "1",
+                    "virtio": "BC:24:11:72:09:70"
+                },
+                "proxmox_node": "r-pve1",
+                "proxmox_numa": 1,
+                "proxmox_ostype": "l26",
+                "proxmox_qmpstatus": "stopped",
+                "proxmox_scsihw": {
+                    "disk_image": "virtio-scsi-single"
+                },
+                "proxmox_smbios1": {
+                    "uuid": "e165ef72-f5e5-473f-afef-ddd628ae6d16"
+                },
+                "proxmox_snapshots": [],
+                "proxmox_sockets": 1,
+                "proxmox_sshkeys": "ssh-rsa%20AAAAB3NzaC1yc2EAAAADAQABAAABgQCr6l0xXU3J2ojC9mAgVKpuyEbb5fYA9RCp1OIUWNDRpXFvqyFQYF%2F6ZrJqD1f4WwsMaUQeYIyAu4MMij1imzJkXiwUc%2BHIyrUwR9Ij28yJBvc37IwKEQ8%2B%2BfID6BeUgYUVDDoYnE7iuMIz4WwmWffgP1V7ysvGNV%2B7BXo79oXLUVm0f3CNNTd2Cr%2Bdq%2BRVlhiaBnKNHJeoFvQjKUcKvUjaCOakRynrUNFTK%2F%2FTKDcYFzUC94dh6ye1ZroGT5PTUnkCL42Muos0kNc9aAHK8gMQ8qIVvswExiwV99RB4l4pZ2Tv9k0Np423qexDk6r2c4PZqwvbvYb%2FHQ6krylYy2EEC1Y3%2F67FlyornHGTmLbphaqoPX725IUKSf4l4b5Cnn2F2V18V%2F2%2FOGDwIYugaaLHQRe%2FwGzUwdWmAbn%2FDatPYWI5rHeHLGFNiXdjkQQYSlDMfA2NZY2Lmm7JhgOjw82%2Bc6fRavAvR0mEZvRghKzC%2F4N2XAAc3Fozw%2F75IbA2PkM%3D%20ansible%40ald.ratners.ru",
+                "proxmox_status": "stopped",
+                "proxmox_tags": "ald_role_dc;ald_site_spb;project_ald;tmp-alse-1.7.4-max",
+                "proxmox_tags_parsed": [
+                    "ald_role_dc",
+                    "ald_site_spb",
+                    "project_ald",
+                    "tmp-alse-1.7.4-max"
+                ],
+                "proxmox_vga": "qxl,memory=16",
+                "proxmox_virtio0": {
+                    "cache": "writeback",
+                    "disk_image": "local-zfs:base-9014-disk-0/vm-112-disk-0",
+                    "size": "60G"
+                },
+                "proxmox_vmgenid": "551fa43e-c277-49ee-afbf-429e5fbd0bfe",
+                "proxmox_vmid": 112,
+                "proxmox_vmtype": "qemu",
+                "r_alt_domain_admin": "administrator",
+                "r_alt_domain_firstdc_address": "10.20.5.1",
+                "r_alt_domain_firstdc_name": "r-alt-dc1",
+                "r_alt_domain_forwarder": "192.168.126.1",
+                "r_alt_domain_name": "alt.ratners.ru",
+                "r_alt_domain_password": "QAZxsw123",
+                "r_alt_domain_shortname": "alt"
+            },
+            "ald-spb-ws1": {
+                "ansible_password": "NeadfedEd2",
+                "ansible_pubkey": "/home/appc/.ssh/ald.ratners.ru_id_rsa.pub",
+                "ansible_user": "ansible",
+                "network_ipv4_method": "convert",
+                "preconfig_packages": [
+                    "tmux",
+                    "ansible",
+                    "chrony",
+                    "python3-libselinux"
+                ],
+                "proxmox_agent": "1",
+                "proxmox_balloon": 512,
+                "proxmox_boot": "c",
+                "proxmox_bootdisk": "virtio0",
+                "proxmox_cipassword": "**********",
+                "proxmox_citype": "nocloud",
+                "proxmox_ciupgrade": 0,
+                "proxmox_ciuser": "ansible",
+                "proxmox_cores": 3,
+                "proxmox_cpu": "host",
+                "proxmox_digest": "c0964fc147c13379538b34a77843256447331554",
+                "proxmox_ide2": {
+                    "disk_image": "local-zfs:vm-113-cloudinit",
+                    "media": "cdrom",
+                    "size": "4M"
+                },
+                "proxmox_ipconfig0": {
+                    "ip": "dhcp"
+                },
+                "proxmox_machine": "q35",
+                "proxmox_memory": "6144",
+                "proxmox_meta": {
+                    "creation-qemu": "8.1.2",
+                    "ctime": "1702233049"
+                },
+                "proxmox_name": "ald-spb-ws1",
+                "proxmox_net0": {
+                    "bridge": "z20vn2",
+                    "mtu": "1",
+                    "virtio": "BC:24:11:4F:3F:26"
+                },
+                "proxmox_node": "r-pve1",
+                "proxmox_numa": 1,
+                "proxmox_ostype": "l26",
+                "proxmox_qmpstatus": "stopped",
+                "proxmox_scsihw": {
+                    "disk_image": "virtio-scsi-single"
+                },
+                "proxmox_smbios1": {
+                    "uuid": "4a340921-75f5-448c-bf96-2418d62e5d30"
+                },
+                "proxmox_snapshots": [],
+                "proxmox_sockets": 1,
+                "proxmox_spice_enhancements": {
+                    "videostreaming": "all"
+                },
+                "proxmox_sshkeys": "ssh-rsa%20AAAAB3NzaC1yc2EAAAADAQABAAABgQCr6l0xXU3J2ojC9mAgVKpuyEbb5fYA9RCp1OIUWNDRpXFvqyFQYF%2F6ZrJqD1f4WwsMaUQeYIyAu4MMij1imzJkXiwUc%2BHIyrUwR9Ij28yJBvc37IwKEQ8%2B%2BfID6BeUgYUVDDoYnE7iuMIz4WwmWffgP1V7ysvGNV%2B7BXo79oXLUVm0f3CNNTd2Cr%2Bdq%2BRVlhiaBnKNHJeoFvQjKUcKvUjaCOakRynrUNFTK%2F%2FTKDcYFzUC94dh6ye1ZroGT5PTUnkCL42Muos0kNc9aAHK8gMQ8qIVvswExiwV99RB4l4pZ2Tv9k0Np423qexDk6r2c4PZqwvbvYb%2FHQ6krylYy2EEC1Y3%2F67FlyornHGTmLbphaqoPX725IUKSf4l4b5Cnn2F2V18V%2F2%2FOGDwIYugaaLHQRe%2FwGzUwdWmAbn%2FDatPYWI5rHeHLGFNiXdjkQQYSlDMfA2NZY2Lmm7JhgOjw82%2Bc6fRavAvR0mEZvRghKzC%2F4N2XAAc3Fozw%2F75IbA2PkM%3D%20ansible%40ald.ratners.ru",
+                "proxmox_status": "stopped",
+                "proxmox_tags": "ald_role_ws;ald_site_spb;project_ald;tmp-alse-1.7.4-base-gui",
+                "proxmox_tags_parsed": [
+                    "ald_role_ws",
+                    "ald_site_spb",
+                    "project_ald",
+                    "tmp-alse-1.7.4-base-gui"
+                ],
+                "proxmox_vga": "qxl,memory=16",
+                "proxmox_virtio0": {
+                    "cache": "writeback",
+                    "disk_image": "local-zfs:base-9016-disk-0/vm-113-disk-0",
+                    "size": "30G"
+                },
+                "proxmox_vmgenid": "cbd85776-ef67-4b4a-814c-414560e3a46b",
+                "proxmox_vmid": 113,
+                "proxmox_vmtype": "qemu",
+                "r_alt_domain_admin": "administrator",
+                "r_alt_domain_firstdc_address": "10.20.5.1",
+                "r_alt_domain_firstdc_name": "r-alt-dc1",
+                "r_alt_domain_forwarder": "192.168.126.1",
+                "r_alt_domain_name": "alt.ratners.ru",
+                "r_alt_domain_password": "QAZxsw123",
+                "r_alt_domain_shortname": "alt"
+            },
+            "alt-dc1": {
+                "ansible_password": "NeadfedEd2",
+                "ansible_pubkey": "/home/appc/.ssh/ald.ratners.ru_id_rsa.pub",
+                "ansible_user": "ansible",
+                "network_ipv4_method": "convert",
+                "preconfig_packages": [
+                    "tmux",
+                    "ansible",
+                    "chrony",
+                    "python3-libselinux"
+                ],
+                "proxmox_agent": "1",
+                "proxmox_balloon": 512,
+                "proxmox_boot": "c",
+                "proxmox_bootdisk": "virtio0",
+                "proxmox_cipassword": "**********",
+                "proxmox_citype": "nocloud",
+                "proxmox_ciupgrade": 0,
+                "proxmox_ciuser": "ansible",
+                "proxmox_cores": 3,
+                "proxmox_cpu": "host",
+                "proxmox_digest": "f22ad0849d907a8b5d6712335e88f465618e432c",
+                "proxmox_ide2": {
+                    "disk_image": "local-zfs:vm-126-cloudinit",
+                    "media": "cdrom",
+                    "size": "4M"
+                },
+                "proxmox_ipconfig0": {
+                    "ip": "dhcp"
+                },
+                "proxmox_machine": "q35",
+                "proxmox_memory": "6144",
+                "proxmox_meta": {
+                    "creation-qemu": "8.1.2",
+                    "ctime": "1702233049"
+                },
+                "proxmox_name": "alt-dc1",
+                "proxmox_net0": {
+                    "bridge": "z20vn5",
+                    "mtu": "1",
+                    "virtio": "BC:24:11:F9:58:26"
+                },
+                "proxmox_node": "r-pve1",
+                "proxmox_numa": 1,
+                "proxmox_ostype": "l26",
+                "proxmox_qmpstatus": "stopped",
+                "proxmox_scsihw": {
+                    "disk_image": "virtio-scsi-single"
+                },
+                "proxmox_smbios1": {
+                    "uuid": "a52a4dd9-b9da-4dae-b513-43ac1fe43c93"
+                },
+                "proxmox_snapshots": [],
+                "proxmox_sockets": 1,
+                "proxmox_sshkeys": "ssh-rsa%20AAAAB3NzaC1yc2EAAAADAQABAAABgQCr6l0xXU3J2ojC9mAgVKpuyEbb5fYA9RCp1OIUWNDRpXFvqyFQYF%2F6ZrJqD1f4WwsMaUQeYIyAu4MMij1imzJkXiwUc%2BHIyrUwR9Ij28yJBvc37IwKEQ8%2B%2BfID6BeUgYUVDDoYnE7iuMIz4WwmWffgP1V7ysvGNV%2B7BXo79oXLUVm0f3CNNTd2Cr%2Bdq%2BRVlhiaBnKNHJeoFvQjKUcKvUjaCOakRynrUNFTK%2F%2FTKDcYFzUC94dh6ye1ZroGT5PTUnkCL42Muos0kNc9aAHK8gMQ8qIVvswExiwV99RB4l4pZ2Tv9k0Np423qexDk6r2c4PZqwvbvYb%2FHQ6krylYy2EEC1Y3%2F67FlyornHGTmLbphaqoPX725IUKSf4l4b5Cnn2F2V18V%2F2%2FOGDwIYugaaLHQRe%2FwGzUwdWmAbn%2FDatPYWI5rHeHLGFNiXdjkQQYSlDMfA2NZY2Lmm7JhgOjw82%2Bc6fRavAvR0mEZvRghKzC%2F4N2XAAc3Fozw%2F75IbA2PkM%3D%20ansible%40ald.ratners.ru",
+                "proxmox_status": "stopped",
+                "proxmox_tags": "project_r;r_role_dc;r_site_alt;tmp-alt-p10-srv",
+                "proxmox_tags_parsed": [
+                    "project_r",
+                    "r_role_dc",
+                    "r_site_alt",
+                    "tmp-alt-p10-srv"
+                ],
+                "proxmox_vga": "qxl,memory=16",
+                "proxmox_virtio0": {
+                    "cache": "writeback",
+                    "disk_image": "local-zfs:base-9002-disk-0/vm-126-disk-0",
+                    "size": "40G"
+                },
+                "proxmox_vmgenid": "fa408355-6e89-4d92-87cc-81a21ad7277e",
+                "proxmox_vmid": 126,
+                "proxmox_vmtype": "qemu",
+                "r_alt_domain_admin": "administrator",
+                "r_alt_domain_firstdc_address": "10.20.5.1",
+                "r_alt_domain_firstdc_name": "r-alt-dc1",
+                "r_alt_domain_forwarder": "192.168.126.1",
+                "r_alt_domain_name": "alt.ratners.ru",
+                "r_alt_domain_password": "QAZxsw123",
+                "r_alt_domain_shortname": "alt"
+            },
+            "alt-dc2": {
+                "ansible_password": "NeadfedEd2",
+                "ansible_pubkey": "/home/appc/.ssh/ald.ratners.ru_id_rsa.pub",
+                "ansible_user": "ansible",
+                "network_ipv4_method": "convert",
+                "preconfig_packages": [
+                    "tmux",
+                    "ansible",
+                    "chrony",
+                    "python3-libselinux"
+                ],
+                "proxmox_agent": "1",
+                "proxmox_balloon": 512,
+                "proxmox_boot": "c",
+                "proxmox_bootdisk": "virtio0",
+                "proxmox_cipassword": "**********",
+                "proxmox_citype": "nocloud",
+                "proxmox_ciupgrade": 0,
+                "proxmox_ciuser": "ansible",
+                "proxmox_cores": 3,
+                "proxmox_cpu": "host",
+                "proxmox_digest": "c1e7449d31e61d0d1056f2616371bcc2c95e9154",
+                "proxmox_ide2": {
+                    "disk_image": "local-zfs:vm-127-cloudinit",
+                    "media": "cdrom",
+                    "size": "4M"
+                },
+                "proxmox_ipconfig0": {
+                    "ip": "dhcp"
+                },
+                "proxmox_machine": "q35",
+                "proxmox_memory": "6144",
+                "proxmox_meta": {
+                    "creation-qemu": "8.1.2",
+                    "ctime": "1702233049"
+                },
+                "proxmox_name": "alt-dc2",
+                "proxmox_net0": {
+                    "bridge": "z20vn5",
+                    "mtu": "1",
+                    "virtio": "BC:24:11:51:7D:8B"
+                },
+                "proxmox_node": "r-pve1",
+                "proxmox_numa": 1,
+                "proxmox_ostype": "l26",
+                "proxmox_qmpstatus": "stopped",
+                "proxmox_scsihw": {
+                    "disk_image": "virtio-scsi-single"
+                },
+                "proxmox_smbios1": {
+                    "uuid": "7c243c35-37bc-4953-a9a8-d09c36f9e09a"
+                },
+                "proxmox_snapshots": [],
+                "proxmox_sockets": 1,
+                "proxmox_sshkeys": "ssh-rsa%20AAAAB3NzaC1yc2EAAAADAQABAAABgQCr6l0xXU3J2ojC9mAgVKpuyEbb5fYA9RCp1OIUWNDRpXFvqyFQYF%2F6ZrJqD1f4WwsMaUQeYIyAu4MMij1imzJkXiwUc%2BHIyrUwR9Ij28yJBvc37IwKEQ8%2B%2BfID6BeUgYUVDDoYnE7iuMIz4WwmWffgP1V7ysvGNV%2B7BXo79oXLUVm0f3CNNTd2Cr%2Bdq%2BRVlhiaBnKNHJeoFvQjKUcKvUjaCOakRynrUNFTK%2F%2FTKDcYFzUC94dh6ye1ZroGT5PTUnkCL42Muos0kNc9aAHK8gMQ8qIVvswExiwV99RB4l4pZ2Tv9k0Np423qexDk6r2c4PZqwvbvYb%2FHQ6krylYy2EEC1Y3%2F67FlyornHGTmLbphaqoPX725IUKSf4l4b5Cnn2F2V18V%2F2%2FOGDwIYugaaLHQRe%2FwGzUwdWmAbn%2FDatPYWI5rHeHLGFNiXdjkQQYSlDMfA2NZY2Lmm7JhgOjw82%2Bc6fRavAvR0mEZvRghKzC%2F4N2XAAc3Fozw%2F75IbA2PkM%3D%20ansible%40ald.ratners.ru",
+                "proxmox_status": "stopped",
+                "proxmox_tags": "project_r;r_role_dc;r_site_alt;tmp-alt-p10-srv",
+                "proxmox_tags_parsed": [
+                    "project_r",
+                    "r_role_dc",
+                    "r_site_alt",
+                    "tmp-alt-p10-srv"
+                ],
+                "proxmox_vga": "qxl,memory=16",
+                "proxmox_virtio0": {
+                    "cache": "writeback",
+                    "disk_image": "local-zfs:base-9002-disk-0/vm-127-disk-0",
+                    "size": "40G"
+                },
+                "proxmox_vmgenid": "50caba10-61f1-445f-be55-dfd04572ef77",
+                "proxmox_vmid": 127,
+                "proxmox_vmtype": "qemu",
+                "r_alt_domain_admin": "administrator",
+                "r_alt_domain_firstdc_address": "10.20.5.1",
+                "r_alt_domain_firstdc_name": "r-alt-dc1",
+                "r_alt_domain_forwarder": "192.168.126.1",
+                "r_alt_domain_name": "alt.ratners.ru",
+                "r_alt_domain_password": "QAZxsw123",
+                "r_alt_domain_shortname": "alt"
+            },
+            "alt-ws1": {
+                "ansible_password": "NeadfedEd2",
+                "ansible_pubkey": "/home/appc/.ssh/ald.ratners.ru_id_rsa.pub",
+                "ansible_user": "ansible",
+                "network_ipv4_method": "convert",
+                "preconfig_packages": [
+                    "tmux",
+                    "ansible",
+                    "chrony",
+                    "python3-libselinux"
+                ],
+                "proxmox_agent": "1",
+                "proxmox_balloon": 512,
+                "proxmox_bios": "ovmf",
+                "proxmox_boot": "c",
+                "proxmox_bootdisk": "virtio0",
+                "proxmox_cipassword": "**********",
+                "proxmox_citype": "configdrive2",
+                "proxmox_ciupgrade": 0,
+                "proxmox_ciuser": "ansible",
+                "proxmox_cores": 3,
+                "proxmox_digest": "e6a05c6ba4fded9364902c1512b346c0cd1e37ff",
+                "proxmox_ide2": {
+                    "disk_image": "local-zfs:vm-128-cloudinit",
+                    "media": "cdrom",
+                    "size": "4M"
+                },
+                "proxmox_ipconfig0": {
+                    "ip": "dhcp"
+                },
+                "proxmox_machine": "pc-q35-8.1",
+                "proxmox_memory": "6144",
+                "proxmox_meta": {
+                    "creation-qemu": "8.1.2",
+                    "ctime": "1702233049"
+                },
+                "proxmox_name": "alt-ws1",
+                "proxmox_net0": {
+                    "bridge": "z20vn5",
+                    "mtu": "1",
+                    "virtio": "BC:24:11:68:D9:BA"
+                },
+                "proxmox_node": "r-pve1",
+                "proxmox_numa": 0,
+                "proxmox_ostype": "win10",
+                "proxmox_qmpstatus": "stopped",
+                "proxmox_scsihw": {
+                    "disk_image": "virtio-scsi-pci"
+                },
+                "proxmox_smbios1": {
+                    "uuid": "b3fbc016-9af6-47e6-82d9-52b929c51eb9"
+                },
+                "proxmox_snapshots": [],
+                "proxmox_sockets": 1,
+                "proxmox_spice_enhancements": {
+                    "videostreaming": "all"
+                },
+                "proxmox_sshkeys": "ssh-rsa%20AAAAB3NzaC1yc2EAAAADAQABAAABgQCr6l0xXU3J2ojC9mAgVKpuyEbb5fYA9RCp1OIUWNDRpXFvqyFQYF%2F6ZrJqD1f4WwsMaUQeYIyAu4MMij1imzJkXiwUc%2BHIyrUwR9Ij28yJBvc37IwKEQ8%2B%2BfID6BeUgYUVDDoYnE7iuMIz4WwmWffgP1V7ysvGNV%2B7BXo79oXLUVm0f3CNNTd2Cr%2Bdq%2BRVlhiaBnKNHJeoFvQjKUcKvUjaCOakRynrUNFTK%2F%2FTKDcYFzUC94dh6ye1ZroGT5PTUnkCL42Muos0kNc9aAHK8gMQ8qIVvswExiwV99RB4l4pZ2Tv9k0Np423qexDk6r2c4PZqwvbvYb%2FHQ6krylYy2EEC1Y3%2F67FlyornHGTmLbphaqoPX725IUKSf4l4b5Cnn2F2V18V%2F2%2FOGDwIYugaaLHQRe%2FwGzUwdWmAbn%2FDatPYWI5rHeHLGFNiXdjkQQYSlDMfA2NZY2Lmm7JhgOjw82%2Bc6fRavAvR0mEZvRghKzC%2F4N2XAAc3Fozw%2F75IbA2PkM%3D%20ansible%40ald.ratners.ru",
+                "proxmox_status": "stopped",
+                "proxmox_tags": "project_r;r_role_ws;r_site_alt;tmp-w2019std",
+                "proxmox_tags_parsed": [
+                    "project_r",
+                    "r_role_ws",
+                    "r_site_alt",
+                    "tmp-w2019std"
+                ],
+                "proxmox_vga": "qxl,memory=16",
+                "proxmox_virtio0": {
+                    "cache": "writeback",
+                    "disk_image": "local-zfs:base-9102-disk-0/vm-128-disk-0",
+                    "size": "60G"
+                },
+                "proxmox_vmgenid": "cc5140df-c3c9-42a8-89dc-36502a8fa059",
+                "proxmox_vmid": 128,
+                "proxmox_vmtype": "qemu",
+                "r_alt_domain_admin": "administrator",
+                "r_alt_domain_firstdc_address": "10.20.5.1",
+                "r_alt_domain_firstdc_name": "r-alt-dc1",
+                "r_alt_domain_forwarder": "192.168.126.1",
+                "r_alt_domain_name": "alt.ratners.ru",
+                "r_alt_domain_password": "QAZxsw123",
+                "r_alt_domain_shortname": "alt"
+            },
+            "alt-ws2": {
+                "ansible_password": "NeadfedEd2",
+                "ansible_pubkey": "/home/appc/.ssh/ald.ratners.ru_id_rsa.pub",
+                "ansible_user": "ansible",
+                "network_ipv4_method": "convert",
+                "preconfig_packages": [
+                    "tmux",
+                    "ansible",
+                    "chrony",
+                    "python3-libselinux"
+                ],
+                "proxmox_agent": "1",
+                "proxmox_balloon": 512,
+                "proxmox_boot": "c",
+                "proxmox_bootdisk": "virtio0",
+                "proxmox_cipassword": "**********",
+                "proxmox_citype": "nocloud",
+                "proxmox_ciupgrade": 0,
+                "proxmox_ciuser": "ansible",
+                "proxmox_cores": 3,
+                "proxmox_cpu": "host",
+                "proxmox_digest": "9537a1ef8e4a41fc4199dc61f7364b97eb1a01b4",
+                "proxmox_ide2": {
+                    "disk_image": "local-zfs:vm-129-cloudinit",
+                    "media": "cdrom",
+                    "size": "4M"
+                },
+                "proxmox_ipconfig0": {
+                    "ip": "dhcp"
+                },
+                "proxmox_machine": "q35",
+                "proxmox_memory": "6144",
+                "proxmox_meta": {
+                    "creation-qemu": "8.1.2",
+                    "ctime": "1702233049"
+                },
+                "proxmox_name": "alt-ws2",
+                "proxmox_net0": {
+                    "bridge": "z20vn5",
+                    "mtu": "1",
+                    "virtio": "BC:24:11:F1:5F:F6"
+                },
+                "proxmox_node": "r-pve1",
+                "proxmox_numa": 1,
+                "proxmox_ostype": "l26",
+                "proxmox_qmpstatus": "stopped",
+                "proxmox_scsihw": {
+                    "disk_image": "virtio-scsi-single"
+                },
+                "proxmox_smbios1": {
+                    "uuid": "a7254688-8067-416f-8893-a71b26dd5926"
+                },
+                "proxmox_snapshots": [],
+                "proxmox_sockets": 1,
+                "proxmox_sshkeys": "ssh-rsa%20AAAAB3NzaC1yc2EAAAADAQABAAABgQCr6l0xXU3J2ojC9mAgVKpuyEbb5fYA9RCp1OIUWNDRpXFvqyFQYF%2F6ZrJqD1f4WwsMaUQeYIyAu4MMij1imzJkXiwUc%2BHIyrUwR9Ij28yJBvc37IwKEQ8%2B%2BfID6BeUgYUVDDoYnE7iuMIz4WwmWffgP1V7ysvGNV%2B7BXo79oXLUVm0f3CNNTd2Cr%2Bdq%2BRVlhiaBnKNHJeoFvQjKUcKvUjaCOakRynrUNFTK%2F%2FTKDcYFzUC94dh6ye1ZroGT5PTUnkCL42Muos0kNc9aAHK8gMQ8qIVvswExiwV99RB4l4pZ2Tv9k0Np423qexDk6r2c4PZqwvbvYb%2FHQ6krylYy2EEC1Y3%2F67FlyornHGTmLbphaqoPX725IUKSf4l4b5Cnn2F2V18V%2F2%2FOGDwIYugaaLHQRe%2FwGzUwdWmAbn%2FDatPYWI5rHeHLGFNiXdjkQQYSlDMfA2NZY2Lmm7JhgOjw82%2Bc6fRavAvR0mEZvRghKzC%2F4N2XAAc3Fozw%2F75IbA2PkM%3D%20ansible%40ald.ratners.ru",
+                "proxmox_status": "stopped",
+                "proxmox_tags": "project_r;r_role_ws;r_site_alt;tmp-alt-p10-ws",
+                "proxmox_tags_parsed": [
+                    "project_r",
+                    "r_role_ws",
+                    "r_site_alt",
+                    "tmp-alt-p10-ws"
+                ],
+                "proxmox_vga": "qxl,memory=16",
+                "proxmox_virtio0": {
+                    "cache": "writeback",
+                    "disk_image": "local-zfs:base-9003-disk-0/vm-129-disk-0",
+                    "size": "40G"
+                },
+                "proxmox_vmgenid": "b91c03e7-6664-4b2d-bb01-0d8aae6cbb8f",
+                "proxmox_vmid": 129,
+                "proxmox_vmtype": "qemu",
+                "r_alt_domain_admin": "administrator",
+                "r_alt_domain_firstdc_address": "10.20.5.1",
+                "r_alt_domain_firstdc_name": "r-alt-dc1",
+                "r_alt_domain_forwarder": "192.168.126.1",
+                "r_alt_domain_name": "alt.ratners.ru",
+                "r_alt_domain_password": "QAZxsw123",
+                "r_alt_domain_shortname": "alt"
+            },
+            "aup-dc1": {
+                "ansible_password": "NeadfedEd2",
+                "ansible_pubkey": "/home/appc/.ssh/ald.ratners.ru_id_rsa.pub",
+                "ansible_user": "ansible",
+                "network_ipv4_method": "convert",
+                "preconfig_packages": [
+                    "tmux",
+                    "ansible",
+                    "chrony",
+                    "python3-libselinux"
+                ],
+                "proxmox_agent": "1",
+                "proxmox_balloon": 512,
+                "proxmox_bios": "ovmf",
+                "proxmox_boot": "c",
+                "proxmox_bootdisk": "virtio0",
+                "proxmox_cipassword": "**********",
+                "proxmox_citype": "configdrive2",
+                "proxmox_ciupgrade": 0,
+                "proxmox_ciuser": "ansible",
+                "proxmox_cores": 3,
+                "proxmox_digest": "edcc71fcab7299641692285a3e08a76fb32521d7",
+                "proxmox_ide2": {
+                    "disk_image": "local-zfs:vm-118-cloudinit",
+                    "media": "cdrom",
+                    "size": "4M"
+                },
+                "proxmox_ipconfig0": {
+                    "gw": "10.20.4.254",
+                    "ip": "10.20.4.1/24"
+                },
+                "proxmox_machine": "pc-q35-8.1",
+                "proxmox_memory": "6144",
+                "proxmox_meta": {
+                    "creation-qemu": "8.1.2",
+                    "ctime": "1702233049"
+                },
+                "proxmox_name": "aup-dc1",
+                "proxmox_net0": {
+                    "bridge": "z20vn4",
+                    "mtu": "1",
+                    "virtio": "BC:24:11:43:16:D8"
+                },
+                "proxmox_node": "r-pve1",
+                "proxmox_numa": 0,
+                "proxmox_ostype": "win10",
+                "proxmox_qmpstatus": "stopped",
+                "proxmox_scsihw": {
+                    "disk_image": "virtio-scsi-pci"
+                },
+                "proxmox_smbios1": {
+                    "uuid": "6ebc8a6c-bc3b-49d0-b34b-d64840cde756"
+                },
+                "proxmox_snapshots": [],
+                "proxmox_sockets": 1,
+                "proxmox_spice_enhancements": {
+                    "videostreaming": "all"
+                },
+                "proxmox_sshkeys": "ssh-rsa%20AAAAB3NzaC1yc2EAAAADAQABAAABgQCr6l0xXU3J2ojC9mAgVKpuyEbb5fYA9RCp1OIUWNDRpXFvqyFQYF%2F6ZrJqD1f4WwsMaUQeYIyAu4MMij1imzJkXiwUc%2BHIyrUwR9Ij28yJBvc37IwKEQ8%2B%2BfID6BeUgYUVDDoYnE7iuMIz4WwmWffgP1V7ysvGNV%2B7BXo79oXLUVm0f3CNNTd2Cr%2Bdq%2BRVlhiaBnKNHJeoFvQjKUcKvUjaCOakRynrUNFTK%2F%2FTKDcYFzUC94dh6ye1ZroGT5PTUnkCL42Muos0kNc9aAHK8gMQ8qIVvswExiwV99RB4l4pZ2Tv9k0Np423qexDk6r2c4PZqwvbvYb%2FHQ6krylYy2EEC1Y3%2F67FlyornHGTmLbphaqoPX725IUKSf4l4b5Cnn2F2V18V%2F2%2FOGDwIYugaaLHQRe%2FwGzUwdWmAbn%2FDatPYWI5rHeHLGFNiXdjkQQYSlDMfA2NZY2Lmm7JhgOjw82%2Bc6fRavAvR0mEZvRghKzC%2F4N2XAAc3Fozw%2F75IbA2PkM%3D%20ansible%40ald.ratners.ru",
+                "proxmox_status": "stopped",
+                "proxmox_tags": "project_stand1;stand1_role_dc;stand1_site_aup;tmp-w2019std",
+                "proxmox_tags_parsed": [
+                    "project_stand1",
+                    "stand1_role_dc",
+                    "stand1_site_aup",
+                    "tmp-w2019std"
+                ],
+                "proxmox_vga": "qxl,memory=16",
+                "proxmox_virtio0": {
+                    "cache": "writeback",
+                    "disk_image": "local-zfs:base-9102-disk-0/vm-118-disk-0",
+                    "size": "60G"
+                },
+                "proxmox_vmgenid": "c4b9a289-06ae-4755-9ba3-39a8609ca8fd",
+                "proxmox_vmid": 118,
+                "proxmox_vmtype": "qemu",
+                "r_alt_domain_admin": "administrator",
+                "r_alt_domain_firstdc_address": "10.20.5.1",
+                "r_alt_domain_firstdc_name": "r-alt-dc1",
+                "r_alt_domain_forwarder": "192.168.126.1",
+                "r_alt_domain_name": "alt.ratners.ru",
+                "r_alt_domain_password": "QAZxsw123",
+                "r_alt_domain_shortname": "alt"
+            },
+            "aup-dc2": {
+                "ansible_password": "NeadfedEd2",
+                "ansible_pubkey": "/home/appc/.ssh/ald.ratners.ru_id_rsa.pub",
+                "ansible_user": "ansible",
+                "network_ipv4_method": "convert",
+                "preconfig_packages": [
+                    "tmux",
+                    "ansible",
+                    "chrony",
+                    "python3-libselinux"
+                ],
+                "proxmox_agent": "1",
+                "proxmox_balloon": 512,
+                "proxmox_bios": "ovmf",
+                "proxmox_boot": "c",
+                "proxmox_bootdisk": "virtio0",
+                "proxmox_cipassword": "**********",
+                "proxmox_citype": "configdrive2",
+                "proxmox_ciupgrade": 0,
+                "proxmox_ciuser": "ansible",
+                "proxmox_cores": 3,
+                "proxmox_digest": "f9afbff9803646819a5f03f2cdcb8b41987df734",
+                "proxmox_ide2": {
+                    "disk_image": "local-zfs:vm-119-cloudinit",
+                    "media": "cdrom",
+                    "size": "4M"
+                },
+                "proxmox_ipconfig0": {
+                    "gw": "10.20.4.254",
+                    "ip": "10.20.4.2/24"
+                },
+                "proxmox_machine": "pc-q35-8.1",
+                "proxmox_memory": "6144",
+                "proxmox_meta": {
+                    "creation-qemu": "8.1.2",
+                    "ctime": "1702233049"
+                },
+                "proxmox_name": "aup-dc2",
+                "proxmox_net0": {
+                    "bridge": "z20vn4",
+                    "mtu": "1",
+                    "virtio": "BC:24:11:BC:8A:95"
+                },
+                "proxmox_node": "r-pve1",
+                "proxmox_numa": 0,
+                "proxmox_ostype": "win10",
+                "proxmox_qmpstatus": "stopped",
+                "proxmox_scsihw": {
+                    "disk_image": "virtio-scsi-pci"
+                },
+                "proxmox_smbios1": {
+                    "uuid": "4f2d512e-3187-4ff4-8be0-d64204b1e74c"
+                },
+                "proxmox_snapshots": [],
+                "proxmox_sockets": 1,
+                "proxmox_spice_enhancements": {
+                    "videostreaming": "all"
+                },
+                "proxmox_sshkeys": "ssh-rsa%20AAAAB3NzaC1yc2EAAAADAQABAAABgQCr6l0xXU3J2ojC9mAgVKpuyEbb5fYA9RCp1OIUWNDRpXFvqyFQYF%2F6ZrJqD1f4WwsMaUQeYIyAu4MMij1imzJkXiwUc%2BHIyrUwR9Ij28yJBvc37IwKEQ8%2B%2BfID6BeUgYUVDDoYnE7iuMIz4WwmWffgP1V7ysvGNV%2B7BXo79oXLUVm0f3CNNTd2Cr%2Bdq%2BRVlhiaBnKNHJeoFvQjKUcKvUjaCOakRynrUNFTK%2F%2FTKDcYFzUC94dh6ye1ZroGT5PTUnkCL42Muos0kNc9aAHK8gMQ8qIVvswExiwV99RB4l4pZ2Tv9k0Np423qexDk6r2c4PZqwvbvYb%2FHQ6krylYy2EEC1Y3%2F67FlyornHGTmLbphaqoPX725IUKSf4l4b5Cnn2F2V18V%2F2%2FOGDwIYugaaLHQRe%2FwGzUwdWmAbn%2FDatPYWI5rHeHLGFNiXdjkQQYSlDMfA2NZY2Lmm7JhgOjw82%2Bc6fRavAvR0mEZvRghKzC%2F4N2XAAc3Fozw%2F75IbA2PkM%3D%20ansible%40ald.ratners.ru",
+                "proxmox_status": "stopped",
+                "proxmox_tags": "project_stand1;stand1_role_dc;stand1_site_aup;tmp-w2019std",
+                "proxmox_tags_parsed": [
+                    "project_stand1",
+                    "stand1_role_dc",
+                    "stand1_site_aup",
+                    "tmp-w2019std"
+                ],
+                "proxmox_vga": "qxl,memory=16",
+                "proxmox_virtio0": {
+                    "cache": "writeback",
+                    "disk_image": "local-zfs:base-9102-disk-0/vm-119-disk-0",
+                    "size": "60G"
+                },
+                "proxmox_vmgenid": "f6a2810f-7429-4345-850e-7daa3c223345",
+                "proxmox_vmid": 119,
+                "proxmox_vmtype": "qemu",
+                "r_alt_domain_admin": "administrator",
+                "r_alt_domain_firstdc_address": "10.20.5.1",
+                "r_alt_domain_firstdc_name": "r-alt-dc1",
+                "r_alt_domain_forwarder": "192.168.126.1",
+                "r_alt_domain_name": "alt.ratners.ru",
+                "r_alt_domain_password": "QAZxsw123",
+                "r_alt_domain_shortname": "alt"
+            },
+            "aup-ws3": {
+                "ansible_password": "NeadfedEd2",
+                "ansible_pubkey": "/home/appc/.ssh/ald.ratners.ru_id_rsa.pub",
+                "ansible_user": "ansible",
+                "network_ipv4_method": "convert",
+                "preconfig_packages": [
+                    "tmux",
+                    "ansible",
+                    "chrony",
+                    "python3-libselinux"
+                ],
+                "proxmox_agent": "1",
+                "proxmox_balloon": 512,
+                "proxmox_bios": "ovmf",
+                "proxmox_boot": "c",
+                "proxmox_bootdisk": "virtio0",
+                "proxmox_cipassword": "**********",
+                "proxmox_citype": "configdrive2",
+                "proxmox_ciupgrade": 0,
+                "proxmox_ciuser": "ansible",
+                "proxmox_cores": 3,
+                "proxmox_digest": "edf03fa2998d2f92e961eefb84ad9c0632195fb0",
+                "proxmox_ide2": {
+                    "disk_image": "local-zfs:vm-120-cloudinit",
+                    "media": "cdrom",
+                    "size": "4M"
+                },
+                "proxmox_ipconfig0": {
+                    "gw": "10.20.4.254",
+                    "ip": "10.20.4.3/24"
+                },
+                "proxmox_machine": "pc-q35-8.1",
+                "proxmox_memory": "6144",
+                "proxmox_meta": {
+                    "creation-qemu": "8.1.2",
+                    "ctime": "1702233049"
+                },
+                "proxmox_name": "aup-ws3",
+                "proxmox_net0": {
+                    "bridge": "z20vn4",
+                    "mtu": "1",
+                    "virtio": "BC:24:11:84:BB:B3"
+                },
+                "proxmox_node": "r-pve1",
+                "proxmox_numa": 0,
+                "proxmox_ostype": "win10",
+                "proxmox_qmpstatus": "stopped",
+                "proxmox_scsihw": {
+                    "disk_image": "virtio-scsi-pci"
+                },
+                "proxmox_smbios1": {
+                    "uuid": "fa0e8cc0-204a-4181-a819-5e83dee1667a"
+                },
+                "proxmox_snapshots": [],
+                "proxmox_sockets": 1,
+                "proxmox_spice_enhancements": {
+                    "videostreaming": "all"
+                },
+                "proxmox_sshkeys": "ssh-rsa%20AAAAB3NzaC1yc2EAAAADAQABAAABgQCr6l0xXU3J2ojC9mAgVKpuyEbb5fYA9RCp1OIUWNDRpXFvqyFQYF%2F6ZrJqD1f4WwsMaUQeYIyAu4MMij1imzJkXiwUc%2BHIyrUwR9Ij28yJBvc37IwKEQ8%2B%2BfID6BeUgYUVDDoYnE7iuMIz4WwmWffgP1V7ysvGNV%2B7BXo79oXLUVm0f3CNNTd2Cr%2Bdq%2BRVlhiaBnKNHJeoFvQjKUcKvUjaCOakRynrUNFTK%2F%2FTKDcYFzUC94dh6ye1ZroGT5PTUnkCL42Muos0kNc9aAHK8gMQ8qIVvswExiwV99RB4l4pZ2Tv9k0Np423qexDk6r2c4PZqwvbvYb%2FHQ6krylYy2EEC1Y3%2F67FlyornHGTmLbphaqoPX725IUKSf4l4b5Cnn2F2V18V%2F2%2FOGDwIYugaaLHQRe%2FwGzUwdWmAbn%2FDatPYWI5rHeHLGFNiXdjkQQYSlDMfA2NZY2Lmm7JhgOjw82%2Bc6fRavAvR0mEZvRghKzC%2F4N2XAAc3Fozw%2F75IbA2PkM%3D%20ansible%40ald.ratners.ru",
+                "proxmox_status": "stopped",
+                "proxmox_tags": "project_stand1;stand1_role_ws;stand1_site_aup;tmp-w2019std",
+                "proxmox_tags_parsed": [
+                    "project_stand1",
+                    "stand1_role_ws",
+                    "stand1_site_aup",
+                    "tmp-w2019std"
+                ],
+                "proxmox_vga": "qxl,memory=16",
+                "proxmox_virtio0": {
+                    "cache": "writeback",
+                    "disk_image": "local-zfs:base-9102-disk-0/vm-120-disk-0",
+                    "size": "60G"
+                },
+                "proxmox_vmgenid": "0b28d8a3-3b23-4541-b566-32faecc3530b",
+                "proxmox_vmid": 120,
+                "proxmox_vmtype": "qemu",
+                "r_alt_domain_admin": "administrator",
+                "r_alt_domain_firstdc_address": "10.20.5.1",
+                "r_alt_domain_firstdc_name": "r-alt-dc1",
+                "r_alt_domain_forwarder": "192.168.126.1",
+                "r_alt_domain_name": "alt.ratners.ru",
+                "r_alt_domain_password": "QAZxsw123",
+                "r_alt_domain_shortname": "alt"
+            },
+            "aup-ws4": {
+                "ansible_password": "NeadfedEd2",
+                "ansible_pubkey": "/home/appc/.ssh/ald.ratners.ru_id_rsa.pub",
+                "ansible_user": "ansible",
+                "network_ipv4_method": "convert",
+                "preconfig_packages": [
+                    "tmux",
+                    "ansible",
+                    "chrony",
+                    "python3-libselinux"
+                ],
+                "proxmox_agent": "1",
+                "proxmox_balloon": 512,
+                "proxmox_boot": {
+                    "order": "virtio0"
+                },
+                "proxmox_cipassword": "**********",
+                "proxmox_citype": "nocloud",
+                "proxmox_ciupgrade": 0,
+                "proxmox_ciuser": "ansible",
+                "proxmox_cores": 3,
+                "proxmox_cpu": "host",
+                "proxmox_digest": "f27cf1eb586f57e4e45c65c974916155845426cc",
+                "proxmox_ide2": {
+                    "disk_image": "local-zfs:vm-121-cloudinit",
+                    "media": "cdrom",
+                    "size": "4M"
+                },
+                "proxmox_ipconfig0": {
+                    "gw": "10.20.4.254",
+                    "ip": "10.20.4.4/24"
+                },
+                "proxmox_machine": "q35",
+                "proxmox_memory": "6144",
+                "proxmox_meta": {
+                    "creation-qemu": "8.1.2",
+                    "ctime": "1702233049"
+                },
+                "proxmox_name": "aup-ws4",
+                "proxmox_net0": {
+                    "bridge": "z20vn4",
+                    "mtu": "1",
+                    "virtio": "BC:24:11:9B:F7:0F"
+                },
+                "proxmox_node": "r-pve1",
+                "proxmox_numa": 1,
+                "proxmox_ostype": "l26",
+                "proxmox_qmpstatus": "stopped",
+                "proxmox_scsihw": {
+                    "disk_image": "virtio-scsi-single"
+                },
+                "proxmox_smbios1": {
+                    "uuid": "7cfa1db0-f35a-45bb-97d7-8d089b90c872"
+                },
+                "proxmox_snapshots": [],
+                "proxmox_sockets": 1,
+                "proxmox_sshkeys": "ssh-rsa%20AAAAB3NzaC1yc2EAAAADAQABAAABgQCr6l0xXU3J2ojC9mAgVKpuyEbb5fYA9RCp1OIUWNDRpXFvqyFQYF%2F6ZrJqD1f4WwsMaUQeYIyAu4MMij1imzJkXiwUc%2BHIyrUwR9Ij28yJBvc37IwKEQ8%2B%2BfID6BeUgYUVDDoYnE7iuMIz4WwmWffgP1V7ysvGNV%2B7BXo79oXLUVm0f3CNNTd2Cr%2Bdq%2BRVlhiaBnKNHJeoFvQjKUcKvUjaCOakRynrUNFTK%2F%2FTKDcYFzUC94dh6ye1ZroGT5PTUnkCL42Muos0kNc9aAHK8gMQ8qIVvswExiwV99RB4l4pZ2Tv9k0Np423qexDk6r2c4PZqwvbvYb%2FHQ6krylYy2EEC1Y3%2F67FlyornHGTmLbphaqoPX725IUKSf4l4b5Cnn2F2V18V%2F2%2FOGDwIYugaaLHQRe%2FwGzUwdWmAbn%2FDatPYWI5rHeHLGFNiXdjkQQYSlDMfA2NZY2Lmm7JhgOjw82%2Bc6fRavAvR0mEZvRghKzC%2F4N2XAAc3Fozw%2F75IbA2PkM%3D%20ansible%40ald.ratners.ru",
+                "proxmox_status": "stopped",
+                "proxmox_tags": "project_stand1;stand1_role_ws;stand1_site_aup;tmp-redos73",
+                "proxmox_tags_parsed": [
+                    "project_stand1",
+                    "stand1_role_ws",
+                    "stand1_site_aup",
+                    "tmp-redos73"
+                ],
+                "proxmox_vga": "qxl,memory=16",
+                "proxmox_virtio0": {
+                    "disk_image": "local-zfs:base-9012-disk-0/vm-121-disk-0",
+                    "iothread": "1",
+                    "size": "30G"
+                },
+                "proxmox_vmgenid": "9900c87d-2add-461b-bc51-83a435d6c8be",
+                "proxmox_vmid": 121,
+                "proxmox_vmtype": "qemu",
+                "r_alt_domain_admin": "administrator",
+                "r_alt_domain_firstdc_address": "10.20.5.1",
+                "r_alt_domain_firstdc_name": "r-alt-dc1",
+                "r_alt_domain_forwarder": "192.168.126.1",
+                "r_alt_domain_name": "alt.ratners.ru",
+                "r_alt_domain_password": "QAZxsw123",
+                "r_alt_domain_shortname": "alt"
+            },
+            "gtnn-dc11": {
+                "ansible_password": "NeadfedEd2",
+                "ansible_pubkey": "/home/appc/.ssh/ald.ratners.ru_id_rsa.pub",
+                "ansible_user": "ansible",
+                "network_ipv4_method": "convert",
+                "preconfig_packages": [
+                    "tmux",
+                    "ansible",
+                    "chrony",
+                    "python3-libselinux"
+                ],
+                "proxmox_agent": "1",
+                "proxmox_balloon": 512,
+                "proxmox_boot": {
+                    "order": "virtio0"
+                },
+                "proxmox_cipassword": "**********",
+                "proxmox_citype": "nocloud",
+                "proxmox_ciupgrade": 0,
+                "proxmox_ciuser": "ansible",
+                "proxmox_cores": 3,
+                "proxmox_cpu": "host",
+                "proxmox_digest": "cabbb99e495a31eebcef2f774af4673c9cc84930",
+                "proxmox_ide2": {
+                    "disk_image": "local-zfs:vm-122-cloudinit",
+                    "media": "cdrom",
+                    "size": "4M"
+                },
+                "proxmox_ipconfig0": {
+                    "gw": "10.20.4.254",
+                    "ip": "10.20.4.5/24"
+                },
+                "proxmox_machine": "q35",
+                "proxmox_memory": "6144",
+                "proxmox_meta": {
+                    "creation-qemu": "8.1.2",
+                    "ctime": "1702233049"
+                },
+                "proxmox_name": "gtnn-dc11",
+                "proxmox_net0": {
+                    "bridge": "z20vn4",
+                    "mtu": "1",
+                    "virtio": "BC:24:11:CE:4D:2D"
+                },
+                "proxmox_node": "r-pve1",
+                "proxmox_numa": 1,
+                "proxmox_ostype": "l26",
+                "proxmox_qmpstatus": "stopped",
+                "proxmox_scsihw": {
+                    "disk_image": "virtio-scsi-single"
+                },
+                "proxmox_smbios1": {
+                    "uuid": "fc035056-1543-41e5-83ff-930f26e78989"
+                },
+                "proxmox_snapshots": [],
+                "proxmox_sockets": 1,
+                "proxmox_sshkeys": "ssh-rsa%20AAAAB3NzaC1yc2EAAAADAQABAAABgQCr6l0xXU3J2ojC9mAgVKpuyEbb5fYA9RCp1OIUWNDRpXFvqyFQYF%2F6ZrJqD1f4WwsMaUQeYIyAu4MMij1imzJkXiwUc%2BHIyrUwR9Ij28yJBvc37IwKEQ8%2B%2BfID6BeUgYUVDDoYnE7iuMIz4WwmWffgP1V7ysvGNV%2B7BXo79oXLUVm0f3CNNTd2Cr%2Bdq%2BRVlhiaBnKNHJeoFvQjKUcKvUjaCOakRynrUNFTK%2F%2FTKDcYFzUC94dh6ye1ZroGT5PTUnkCL42Muos0kNc9aAHK8gMQ8qIVvswExiwV99RB4l4pZ2Tv9k0Np423qexDk6r2c4PZqwvbvYb%2FHQ6krylYy2EEC1Y3%2F67FlyornHGTmLbphaqoPX725IUKSf4l4b5Cnn2F2V18V%2F2%2FOGDwIYugaaLHQRe%2FwGzUwdWmAbn%2FDatPYWI5rHeHLGFNiXdjkQQYSlDMfA2NZY2Lmm7JhgOjw82%2Bc6fRavAvR0mEZvRghKzC%2F4N2XAAc3Fozw%2F75IbA2PkM%3D%20ansible%40ald.ratners.ru",
+                "proxmox_status": "stopped",
+                "proxmox_tags": "project_stand1;stand1_role_dc;stand1_site_gtnn;tmp-redos73",
+                "proxmox_tags_parsed": [
+                    "project_stand1",
+                    "stand1_role_dc",
+                    "stand1_site_gtnn",
+                    "tmp-redos73"
+                ],
+                "proxmox_vga": "qxl,memory=16",
+                "proxmox_virtio0": {
+                    "disk_image": "local-zfs:base-9012-disk-0/vm-122-disk-0",
+                    "iothread": "1",
+                    "size": "30G"
+                },
+                "proxmox_vmgenid": "75991ae2-c80a-4775-b42d-54926f3ff5f6",
+                "proxmox_vmid": 122,
+                "proxmox_vmtype": "qemu",
+                "r_alt_domain_admin": "administrator",
+                "r_alt_domain_firstdc_address": "10.20.5.1",
+                "r_alt_domain_firstdc_name": "r-alt-dc1",
+                "r_alt_domain_forwarder": "192.168.126.1",
+                "r_alt_domain_name": "alt.ratners.ru",
+                "r_alt_domain_password": "QAZxsw123",
+                "r_alt_domain_shortname": "alt"
+            },
+            "gtnn-dc12": {
+                "ansible_password": "NeadfedEd2",
+                "ansible_pubkey": "/home/appc/.ssh/ald.ratners.ru_id_rsa.pub",
+                "ansible_user": "ansible",
+                "network_ipv4_method": "convert",
+                "preconfig_packages": [
+                    "tmux",
+                    "ansible",
+                    "chrony",
+                    "python3-libselinux"
+                ],
+                "proxmox_agent": "1",
+                "proxmox_balloon": 512,
+                "proxmox_boot": {
+                    "order": "virtio0"
+                },
+                "proxmox_cipassword": "**********",
+                "proxmox_citype": "nocloud",
+                "proxmox_ciupgrade": 0,
+                "proxmox_ciuser": "ansible",
+                "proxmox_cores": 3,
+                "proxmox_cpu": "host",
+                "proxmox_digest": "09ef785e9e8fc0ff12c9053c0a78399f173b76b9",
+                "proxmox_ide2": {
+                    "disk_image": "local-zfs:vm-123-cloudinit",
+                    "media": "cdrom",
+                    "size": "4M"
+                },
+                "proxmox_ipconfig0": {
+                    "gw": "10.20.4.254",
+                    "ip": "10.20.4.6/24"
+                },
+                "proxmox_machine": "q35",
+                "proxmox_memory": "6144",
+                "proxmox_meta": {
+                    "creation-qemu": "8.1.2",
+                    "ctime": "1702233049"
+                },
+                "proxmox_name": "gtnn-dc12",
+                "proxmox_net0": {
+                    "bridge": "z20vn4",
+                    "mtu": "1",
+                    "virtio": "BC:24:11:3F:B1:6E"
+                },
+                "proxmox_node": "r-pve1",
+                "proxmox_numa": 1,
+                "proxmox_ostype": "l26",
+                "proxmox_qmpstatus": "stopped",
+                "proxmox_scsihw": {
+                    "disk_image": "virtio-scsi-single"
+                },
+                "proxmox_smbios1": {
+                    "uuid": "6b49c08c-d57d-48ca-b2fa-dd316738cc15"
+                },
+                "proxmox_snapshots": [],
+                "proxmox_sockets": 1,
+                "proxmox_sshkeys": "ssh-rsa%20AAAAB3NzaC1yc2EAAAADAQABAAABgQCr6l0xXU3J2ojC9mAgVKpuyEbb5fYA9RCp1OIUWNDRpXFvqyFQYF%2F6ZrJqD1f4WwsMaUQeYIyAu4MMij1imzJkXiwUc%2BHIyrUwR9Ij28yJBvc37IwKEQ8%2B%2BfID6BeUgYUVDDoYnE7iuMIz4WwmWffgP1V7ysvGNV%2B7BXo79oXLUVm0f3CNNTd2Cr%2Bdq%2BRVlhiaBnKNHJeoFvQjKUcKvUjaCOakRynrUNFTK%2F%2FTKDcYFzUC94dh6ye1ZroGT5PTUnkCL42Muos0kNc9aAHK8gMQ8qIVvswExiwV99RB4l4pZ2Tv9k0Np423qexDk6r2c4PZqwvbvYb%2FHQ6krylYy2EEC1Y3%2F67FlyornHGTmLbphaqoPX725IUKSf4l4b5Cnn2F2V18V%2F2%2FOGDwIYugaaLHQRe%2FwGzUwdWmAbn%2FDatPYWI5rHeHLGFNiXdjkQQYSlDMfA2NZY2Lmm7JhgOjw82%2Bc6fRavAvR0mEZvRghKzC%2F4N2XAAc3Fozw%2F75IbA2PkM%3D%20ansible%40ald.ratners.ru",
+                "proxmox_status": "stopped",
+                "proxmox_tags": "project_stand1;stand1_role_dc;stand1_site_gtnn;tmp-redos73",
+                "proxmox_tags_parsed": [
+                    "project_stand1",
+                    "stand1_role_dc",
+                    "stand1_site_gtnn",
+                    "tmp-redos73"
+                ],
+                "proxmox_vga": "qxl,memory=16",
+                "proxmox_virtio0": {
+                    "disk_image": "local-zfs:base-9012-disk-0/vm-123-disk-0",
+                    "iothread": "1",
+                    "size": "30G"
+                },
+                "proxmox_vmgenid": "409de312-4552-4d8f-87eb-3fdb87628734",
+                "proxmox_vmid": 123,
+                "proxmox_vmtype": "qemu",
+                "r_alt_domain_admin": "administrator",
+                "r_alt_domain_firstdc_address": "10.20.5.1",
+                "r_alt_domain_firstdc_name": "r-alt-dc1",
+                "r_alt_domain_forwarder": "192.168.126.1",
+                "r_alt_domain_name": "alt.ratners.ru",
+                "r_alt_domain_password": "QAZxsw123",
+                "r_alt_domain_shortname": "alt"
+            },
+            "gtnn-ws13": {
+                "ansible_password": "NeadfedEd2",
+                "ansible_pubkey": "/home/appc/.ssh/ald.ratners.ru_id_rsa.pub",
+                "ansible_user": "ansible",
+                "network_ipv4_method": "convert",
+                "preconfig_packages": [
+                    "tmux",
+                    "ansible",
+                    "chrony",
+                    "python3-libselinux"
+                ],
+                "proxmox_agent": "1",
+                "proxmox_balloon": 512,
+                "proxmox_bios": "ovmf",
+                "proxmox_boot": "c",
+                "proxmox_bootdisk": "virtio0",
+                "proxmox_cipassword": "**********",
+                "proxmox_citype": "configdrive2",
+                "proxmox_ciupgrade": 0,
+                "proxmox_ciuser": "ansible",
+                "proxmox_cores": 3,
+                "proxmox_digest": "5747dc37bf0b5400b70f2c95136c42e1c7e233e3",
+                "proxmox_ide2": {
+                    "disk_image": "local-zfs:vm-124-cloudinit",
+                    "media": "cdrom",
+                    "size": "4M"
+                },
+                "proxmox_ipconfig0": {
+                    "gw": "10.20.4.254",
+                    "ip": "10.20.4.7/24"
+                },
+                "proxmox_machine": "pc-q35-8.1",
+                "proxmox_memory": "6144",
+                "proxmox_meta": {
+                    "creation-qemu": "8.1.2",
+                    "ctime": "1702233049"
+                },
+                "proxmox_name": "gtnn-ws13",
+                "proxmox_net0": {
+                    "bridge": "z20vn4",
+                    "mtu": "1",
+                    "virtio": "BC:24:11:58:7D:72"
+                },
+                "proxmox_node": "r-pve1",
+                "proxmox_numa": 0,
+                "proxmox_ostype": "win10",
+                "proxmox_qmpstatus": "stopped",
+                "proxmox_scsihw": {
+                    "disk_image": "virtio-scsi-pci"
+                },
+                "proxmox_smbios1": {
+                    "uuid": "8b169a13-2ad6-45d0-befb-15c8af0cb0aa"
+                },
+                "proxmox_snapshots": [],
+                "proxmox_sockets": 1,
+                "proxmox_spice_enhancements": {
+                    "videostreaming": "all"
+                },
+                "proxmox_sshkeys": "ssh-rsa%20AAAAB3NzaC1yc2EAAAADAQABAAABgQCr6l0xXU3J2ojC9mAgVKpuyEbb5fYA9RCp1OIUWNDRpXFvqyFQYF%2F6ZrJqD1f4WwsMaUQeYIyAu4MMij1imzJkXiwUc%2BHIyrUwR9Ij28yJBvc37IwKEQ8%2B%2BfID6BeUgYUVDDoYnE7iuMIz4WwmWffgP1V7ysvGNV%2B7BXo79oXLUVm0f3CNNTd2Cr%2Bdq%2BRVlhiaBnKNHJeoFvQjKUcKvUjaCOakRynrUNFTK%2F%2FTKDcYFzUC94dh6ye1ZroGT5PTUnkCL42Muos0kNc9aAHK8gMQ8qIVvswExiwV99RB4l4pZ2Tv9k0Np423qexDk6r2c4PZqwvbvYb%2FHQ6krylYy2EEC1Y3%2F67FlyornHGTmLbphaqoPX725IUKSf4l4b5Cnn2F2V18V%2F2%2FOGDwIYugaaLHQRe%2FwGzUwdWmAbn%2FDatPYWI5rHeHLGFNiXdjkQQYSlDMfA2NZY2Lmm7JhgOjw82%2Bc6fRavAvR0mEZvRghKzC%2F4N2XAAc3Fozw%2F75IbA2PkM%3D%20ansible%40ald.ratners.ru",
+                "proxmox_status": "stopped",
+                "proxmox_tags": "project_stand1;stand1_role_ws;stand1_site_gtnn;tmp-w2019std",
+                "proxmox_tags_parsed": [
+                    "project_stand1",
+                    "stand1_role_ws",
+                    "stand1_site_gtnn",
+                    "tmp-w2019std"
+                ],
+                "proxmox_vga": "qxl,memory=16",
+                "proxmox_virtio0": {
+                    "cache": "writeback",
+                    "disk_image": "local-zfs:base-9102-disk-0/vm-124-disk-0",
+                    "size": "60G"
+                },
+                "proxmox_vmgenid": "f6a0eea2-fca4-474b-94f0-2803a7446fdd",
+                "proxmox_vmid": 124,
+                "proxmox_vmtype": "qemu",
+                "r_alt_domain_admin": "administrator",
+                "r_alt_domain_firstdc_address": "10.20.5.1",
+                "r_alt_domain_firstdc_name": "r-alt-dc1",
+                "r_alt_domain_forwarder": "192.168.126.1",
+                "r_alt_domain_name": "alt.ratners.ru",
+                "r_alt_domain_password": "QAZxsw123",
+                "r_alt_domain_shortname": "alt"
+            },
+            "gtnn-ws14": {
+                "ansible_password": "NeadfedEd2",
+                "ansible_pubkey": "/home/appc/.ssh/ald.ratners.ru_id_rsa.pub",
+                "ansible_user": "ansible",
+                "network_ipv4_method": "convert",
+                "preconfig_packages": [
+                    "tmux",
+                    "ansible",
+                    "chrony",
+                    "python3-libselinux"
+                ],
+                "proxmox_agent": "1",
+                "proxmox_balloon": 512,
+                "proxmox_boot": {
+                    "order": "virtio0"
+                },
+                "proxmox_cipassword": "**********",
+                "proxmox_citype": "nocloud",
+                "proxmox_ciupgrade": 0,
+                "proxmox_ciuser": "ansible",
+                "proxmox_cores": 3,
+                "proxmox_cpu": "host",
+                "proxmox_digest": "54ae4902db0c332962910837ccbb8dbc7354729c",
+                "proxmox_ide2": {
+                    "disk_image": "local-zfs:vm-125-cloudinit",
+                    "media": "cdrom",
+                    "size": "4M"
+                },
+                "proxmox_ipconfig0": {
+                    "gw": "10.20.4.254",
+                    "ip": "10.20.4.8/24"
+                },
+                "proxmox_machine": "q35",
+                "proxmox_memory": "6144",
+                "proxmox_meta": {
+                    "creation-qemu": "8.1.2",
+                    "ctime": "1702233049"
+                },
+                "proxmox_name": "gtnn-ws14",
+                "proxmox_net0": {
+                    "bridge": "z20vn4",
+                    "mtu": "1",
+                    "virtio": "BC:24:11:61:20:22"
+                },
+                "proxmox_node": "r-pve1",
+                "proxmox_numa": 1,
+                "proxmox_ostype": "l26",
+                "proxmox_qmpstatus": "stopped",
+                "proxmox_scsihw": {
+                    "disk_image": "virtio-scsi-single"
+                },
+                "proxmox_smbios1": {
+                    "uuid": "1520a62f-3419-4f4b-8fbe-6d55f6d2e438"
+                },
+                "proxmox_snapshots": [],
+                "proxmox_sockets": 1,
+                "proxmox_sshkeys": "ssh-rsa%20AAAAB3NzaC1yc2EAAAADAQABAAABgQCr6l0xXU3J2ojC9mAgVKpuyEbb5fYA9RCp1OIUWNDRpXFvqyFQYF%2F6ZrJqD1f4WwsMaUQeYIyAu4MMij1imzJkXiwUc%2BHIyrUwR9Ij28yJBvc37IwKEQ8%2B%2BfID6BeUgYUVDDoYnE7iuMIz4WwmWffgP1V7ysvGNV%2B7BXo79oXLUVm0f3CNNTd2Cr%2Bdq%2BRVlhiaBnKNHJeoFvQjKUcKvUjaCOakRynrUNFTK%2F%2FTKDcYFzUC94dh6ye1ZroGT5PTUnkCL42Muos0kNc9aAHK8gMQ8qIVvswExiwV99RB4l4pZ2Tv9k0Np423qexDk6r2c4PZqwvbvYb%2FHQ6krylYy2EEC1Y3%2F67FlyornHGTmLbphaqoPX725IUKSf4l4b5Cnn2F2V18V%2F2%2FOGDwIYugaaLHQRe%2FwGzUwdWmAbn%2FDatPYWI5rHeHLGFNiXdjkQQYSlDMfA2NZY2Lmm7JhgOjw82%2Bc6fRavAvR0mEZvRghKzC%2F4N2XAAc3Fozw%2F75IbA2PkM%3D%20ansible%40ald.ratners.ru",
+                "proxmox_status": "stopped",
+                "proxmox_tags": "project_stand1;stand1_role_ws;stand1_site_gtnn;tmp-redos73",
+                "proxmox_tags_parsed": [
+                    "project_stand1",
+                    "stand1_role_ws",
+                    "stand1_site_gtnn",
+                    "tmp-redos73"
+                ],
+                "proxmox_vga": "qxl,memory=16",
+                "proxmox_virtio0": {
+                    "disk_image": "local-zfs:base-9012-disk-0/vm-125-disk-0",
+                    "iothread": "1",
+                    "size": "30G"
+                },
+                "proxmox_vmgenid": "c48b9e73-35bc-48da-ab6b-09f5aad81cad",
+                "proxmox_vmid": 125,
+                "proxmox_vmtype": "qemu",
+                "r_alt_domain_admin": "administrator",
+                "r_alt_domain_firstdc_address": "10.20.5.1",
+                "r_alt_domain_firstdc_name": "r-alt-dc1",
+                "r_alt_domain_forwarder": "192.168.126.1",
+                "r_alt_domain_name": "alt.ratners.ru",
+                "r_alt_domain_password": "QAZxsw123",
+                "r_alt_domain_shortname": "alt"
+            },
+            "r-alt-dc1": {
+                "ansible_password": "NeadfedEd2",
+                "ansible_pubkey": "/home/appc/.ssh/ald.ratners.ru_id_rsa.pub",
+                "ansible_user": "ansible",
+                "network_ipv4_dns": {
+                    "search": [
+                        "{{ gtnn_domain_name }}"
+                    ],
+                    "servers": [
+                        "127.0.0.1",
+                        "10.20.4.6"
+                    ]
+                },
+                "network_ipv4_method": "convert",
+                "preconfig_packages": [
+                    "tmux",
+                    "ansible",
+                    "chrony",
+                    "python3-libselinux"
+                ],
+                "preconfig_time": {
+                    "ntp_servers": [
+                        "192.168.126.1"
+                    ],
+                    "packagelist": [
+                        "chrony"
+                    ],
+                    "server": true,
+                    "timezone": "Europe/Moscow"
+                },
+                "r_alt_domain_admin": "administrator",
+                "r_alt_domain_firstdc_address": "10.20.5.1",
+                "r_alt_domain_firstdc_name": "r-alt-dc1",
+                "r_alt_domain_forwarder": "192.168.126.1",
+                "r_alt_domain_name": "alt.ratners.ru",
+                "r_alt_domain_password": "QAZxsw123",
+                "r_alt_domain_shortname": "alt"
+            },
+            "r-pve1": {
+                "ansible_password": "NeadfedEd2",
+                "ansible_pubkey": "/home/appc/.ssh/ald.ratners.ru_id_rsa.pub",
+                "ansible_user": "ansible",
+                "network_ipv4_method": "convert",
+                "preconfig_packages": [
+                    "tmux",
+                    "ansible",
+                    "chrony",
+                    "python3-libselinux"
+                ],
+                "r_alt_domain_admin": "administrator",
+                "r_alt_domain_firstdc_address": "10.20.5.1",
+                "r_alt_domain_firstdc_name": "r-alt-dc1",
+                "r_alt_domain_forwarder": "192.168.126.1",
+                "r_alt_domain_name": "alt.ratners.ru",
+                "r_alt_domain_password": "QAZxsw123",
+                "r_alt_domain_shortname": "alt"
+            },
+            "r-vm-dc2": {
+                "ansible_host": "::1",
+                "ansible_password": "NeadfedEd2",
+                "ansible_pubkey": "/home/appc/.ssh/ald.ratners.ru_id_rsa.pub",
+                "ansible_user": "ansible",
+                "network_ipv4_method": "convert",
+                "preconfig_packages": [
+                    "tmux",
+                    "ansible",
+                    "chrony",
+                    "python3-libselinux"
+                ],
+                "proxmox_agent": "1",
+                "proxmox_agent_interfaces": [
+                    {
+                        "ip-addresses": [
+                            "fe80::64b:edd5:3222:6eb9%5/64",
+                            "192.168.126.3/24"
+                        ],
+                        "mac-address": "bc:24:11:15:07:7f",
+                        "name": "Ethernet"
+                    },
+                    {
+                        "ip-addresses": [
+                            "::1/128",
+                            "127.0.0.1/8"
+                        ],
+                        "mac-address": "",
+                        "name": "Loopback Pseudo-Interface 1"
+                    }
+                ],
+                "proxmox_bios": "ovmf",
+                "proxmox_boot": {
+                    "order": "virtio0"
+                },
+                "proxmox_cipassword": "**********",
+                "proxmox_ciuser": "appc",
+                "proxmox_cores": 3,
+                "proxmox_cpu": "x86-64-v2-AES",
+                "proxmox_digest": "6dccf1711e88f13355f928266bde634ec0e7497b",
+                "proxmox_hotplug": "disk,network,usb",
+                "proxmox_ide2": {
+                    "disk_image": "none",
+                    "media": "cdrom"
+                },
+                "proxmox_ipconfig0": {
+                    "ip": "dhcp"
+                },
+                "proxmox_machine": "pc-q35-8.1",
+                "proxmox_memory": "4096",
+                "proxmox_meta": {
+                    "creation-qemu": "8.0.2",
+                    "ctime": "1700063218"
+                },
+                "proxmox_name": "r-vm-dc2",
+                "proxmox_net0": {
+                    "bridge": "vmbr0",
+                    "firewall": "1",
+                    "virtio": "BC:24:11:15:07:7F"
+                },
+                "proxmox_node": "r-pve1",
+                "proxmox_numa": 0,
+                "proxmox_onboot": 1,
+                "proxmox_ostype": "win11",
+                "proxmox_qmpstatus": "running",
+                "proxmox_scsihw": {
+                    "disk_image": "virtio-scsi-pci"
+                },
+                "proxmox_smbios1": {
+                    "uuid": "51f71a3c-fbf7-43ff-9b3f-2690712667ad"
+                },
+                "proxmox_snapshots": [],
+                "proxmox_sockets": 1,
+                "proxmox_spice_enhancements": {
+                    "videostreaming": "all"
+                },
+                "proxmox_sshkeys": "ssh-rsa%20AAAAB3NzaC1yc2EAAAABJQAAAQEA7YUTXCKAMavLy98%2FKep6eDKK2NyVEc%2FkUklZUbBubg4DfFHDO2KDXtFN7uq8HPcYR7uqFLqkRijhBwJbnPGLpp2mA%2BiOHLpJvD%2FtGpDyNt%2FImM0hQG3%2BdzPLtvzc9Ln5mY2RUfOUTFEx7dqGVuwPQXMhZLCEkpIcGicPTpdG0CIu%2FGdELUtwgrZZ%2BreNXMG82VnFBVDZObL7H1YsmrgyyWBUMAzwf%2BEeUFk9Q4k8qsV8utONo3AvscaESxyt5UDvVuV7PrPxp28a03k9ybMMrXjPzuEaM2P0pxGT0VsIoR%2FfG78MwkSPTveX0QgDU4gBihOAcH2%2F2WHGBE%2B1pr9saw%3D%3D%20appc%40appc-pc",
+                "proxmox_startup": {
+                    "order": "10"
+                },
+                "proxmox_status": "running",
+                "proxmox_vga": "qxl",
+                "proxmox_virtio0": {
+                    "cache": "writeback",
+                    "disk_image": "local-zfs:vm-100-disk-0",
+                    "iothread": "1",
+                    "size": "17754M"
+                },
+                "proxmox_vmgenid": "3501adf5-9daf-477d-9611-621fd280ab3b",
+                "proxmox_vmid": 100,
+                "proxmox_vmtype": "qemu",
+                "r_alt_domain_admin": "administrator",
+                "r_alt_domain_firstdc_address": "10.20.5.1",
+                "r_alt_domain_firstdc_name": "r-alt-dc1",
+                "r_alt_domain_forwarder": "192.168.126.1",
+                "r_alt_domain_name": "alt.ratners.ru",
+                "r_alt_domain_password": "QAZxsw123",
+                "r_alt_domain_shortname": "alt"
+            },
+            "r-vm-ws2": {
+                "ansible_host": "::1",
+                "ansible_password": "NeadfedEd2",
+                "ansible_pubkey": "/home/appc/.ssh/ald.ratners.ru_id_rsa.pub",
+                "ansible_user": "ansible",
+                "network_ipv4_method": "convert",
+                "preconfig_packages": [
+                    "tmux",
+                    "ansible",
+                    "chrony",
+                    "python3-libselinux"
+                ],
+                "proxmox_agent": "1",
+                "proxmox_agent_interfaces": [
+                    {
+                        "ip-addresses": [
+                            "fe80::e13f:1176:2ab:4bb4%5/64",
+                            "192.168.126.55/24"
+                        ],
+                        "mac-address": "bc:24:11:c6:b2:75",
+                        "name": "Ethernet"
+                    },
+                    {
+                        "ip-addresses": [
+                            "::1/128",
+                            "127.0.0.1/8"
+                        ],
+                        "mac-address": "",
+                        "name": "Loopback Pseudo-Interface 1"
+                    }
+                ],
+                "proxmox_bios": "ovmf",
+                "proxmox_boot": "c",
+                "proxmox_bootdisk": "virtio0",
+                "proxmox_cipassword": "**********",
+                "proxmox_ciupgrade": 0,
+                "proxmox_ciuser": "appc",
+                "proxmox_cores": 3,
+                "proxmox_digest": "e6a5e08176cb415d5dbe21020fccdbbc336a0eb6",
+                "proxmox_ide2": {
+                    "disk_image": "local-zfs:vm-101-cloudinit",
+                    "media": "cdrom",
+                    "size": "4M"
+                },
+                "proxmox_ipconfig0": {
+                    "ip": "dhcp"
+                },
+                "proxmox_machine": "pc-q35-8.1",
+                "proxmox_memory": "4096",
+                "proxmox_meta": {
+                    "creation-qemu": "8.1.2",
+                    "ctime": "1702233049"
+                },
+                "proxmox_name": "r-vm-ws2",
+                "proxmox_net0": {
+                    "bridge": "vmbr0",
+                    "virtio": "BC:24:11:C6:B2:75"
+                },
+                "proxmox_node": "r-pve1",
+                "proxmox_numa": 0,
+                "proxmox_onboot": 1,
+                "proxmox_ostype": "win11",
+                "proxmox_qmpstatus": "running",
+                "proxmox_scsihw": {
+                    "disk_image": "virtio-scsi-pci"
+                },
+                "proxmox_smbios1": {
+                    "uuid": "88e6245b-5ff6-42e9-93f6-8a1d09c762a2"
+                },
+                "proxmox_snapshots": [],
+                "proxmox_sockets": 1,
+                "proxmox_spice_enhancements": {
+                    "videostreaming": "all"
+                },
+                "proxmox_sshkeys": "ssh-rsa%20AAAAB3NzaC1yc2EAAAABJQAAAQEA7YUTXCKAMavLy98%2FKep6eDKK2NyVEc%2FkUklZUbBubg4DfFHDO2KDXtFN7uq8HPcYR7uqFLqkRijhBwJbnPGLpp2mA%2BiOHLpJvD%2FtGpDyNt%2FImM0hQG3%2BdzPLtvzc9Ln5mY2RUfOUTFEx7dqGVuwPQXMhZLCEkpIcGicPTpdG0CIu%2FGdELUtwgrZZ%2BreNXMG82VnFBVDZObL7H1YsmrgyyWBUMAzwf%2BEeUFk9Q4k8qsV8utONo3AvscaESxyt5UDvVuV7PrPxp28a03k9ybMMrXjPzuEaM2P0pxGT0VsIoR%2FfG78MwkSPTveX0QgDU4gBihOAcH2%2F2WHGBE%2B1pr9saw%3D%3D%20appc%40appc-pc",
+                "proxmox_status": "running",
+                "proxmox_vga": "qxl,memory=16",
+                "proxmox_virtio0": {
+                    "cache": "writeback",
+                    "disk_image": "local-zfs:vm-101-disk-0",
+                    "size": "33114M"
+                },
+                "proxmox_vmgenid": "527ca33d-b4a2-4c0b-892e-c8e2d3bfc1bd",
+                "proxmox_vmid": 101,
+                "proxmox_vmtype": "qemu",
+                "r_alt_domain_admin": "administrator",
+                "r_alt_domain_firstdc_address": "10.20.5.1",
+                "r_alt_domain_firstdc_name": "r-alt-dc1",
+                "r_alt_domain_forwarder": "192.168.126.1",
+                "r_alt_domain_name": "alt.ratners.ru",
+                "r_alt_domain_password": "QAZxsw123",
+                "r_alt_domain_shortname": "alt"
+            },
+            "r-vm-ws3": {
+                "ansible_host": "::1",
+                "ansible_password": "NeadfedEd2",
+                "ansible_pubkey": "/home/appc/.ssh/ald.ratners.ru_id_rsa.pub",
+                "ansible_user": "ansible",
+                "network_ipv4_method": "convert",
+                "preconfig_packages": [
+                    "tmux",
+                    "ansible",
+                    "chrony",
+                    "python3-libselinux"
+                ],
+                "proxmox_agent": "1",
+                "proxmox_agent_interfaces": [
+                    {
+                        "ip-addresses": [
+                            "192.168.126.56/24"
+                        ],
+                        "mac-address": "bc:24:11:36:e2:75",
+                        "name": "Ethernet"
+                    },
+                    {
+                        "ip-addresses": [
+                            "::1/128",
+                            "127.0.0.1/8"
+                        ],
+                        "mac-address": "",
+                        "name": "Loopback Pseudo-Interface 1"
+                    }
+                ],
+                "proxmox_bios": "ovmf",
+                "proxmox_boot": "c",
+                "proxmox_bootdisk": "virtio0",
+                "proxmox_cipassword": "**********",
+                "proxmox_ciupgrade": 0,
+                "proxmox_ciuser": "appc",
+                "proxmox_cores": 3,
+                "proxmox_digest": "372ff145c5b80aaf7c80463c301889fe72fb50e5",
+                "proxmox_ide2": {
+                    "disk_image": "local-zfs:vm-102-cloudinit",
+                    "media": "cdrom",
+                    "size": "4M"
+                },
+                "proxmox_ipconfig0": {
+                    "ip": "dhcp"
+                },
+                "proxmox_machine": "q35",
+                "proxmox_memory": "4096",
+                "proxmox_meta": {
+                    "creation-qemu": "8.1.2",
+                    "ctime": "1702233049"
+                },
+                "proxmox_name": "r-vm-ws3",
+                "proxmox_net0": {
+                    "bridge": "vmbr1",
+                    "virtio": "BC:24:11:36:E2:75"
+                },
+                "proxmox_node": "r-pve1",
+                "proxmox_numa": 0,
+                "proxmox_onboot": 1,
+                "proxmox_ostype": "win10",
+                "proxmox_qmpstatus": "running",
+                "proxmox_scsihw": {
+                    "disk_image": "virtio-scsi-pci"
+                },
+                "proxmox_smbios1": {
+                    "uuid": "82d11f40-e7ef-458d-8bae-74d525470dcb"
+                },
+                "proxmox_snapshots": [],
+                "proxmox_sockets": 1,
+                "proxmox_spice_enhancements": {
+                    "videostreaming": "all"
+                },
+                "proxmox_sshkeys": "ssh-rsa%20AAAAB3NzaC1yc2EAAAABJQAAAQEA7YUTXCKAMavLy98%2FKep6eDKK2NyVEc%2FkUklZUbBubg4DfFHDO2KDXtFN7uq8HPcYR7uqFLqkRijhBwJbnPGLpp2mA%2BiOHLpJvD%2FtGpDyNt%2FImM0hQG3%2BdzPLtvzc9Ln5mY2RUfOUTFEx7dqGVuwPQXMhZLCEkpIcGicPTpdG0CIu%2FGdELUtwgrZZ%2BreNXMG82VnFBVDZObL7H1YsmrgyyWBUMAzwf%2BEeUFk9Q4k8qsV8utONo3AvscaESxyt5UDvVuV7PrPxp28a03k9ybMMrXjPzuEaM2P0pxGT0VsIoR%2FfG78MwkSPTveX0QgDU4gBihOAcH2%2F2WHGBE%2B1pr9saw%3D%3D%20appc%40appc-pc",
+                "proxmox_status": "running",
+                "proxmox_vga": "qxl,memory=16",
+                "proxmox_virtio0": {
+                    "cache": "writeback",
+                    "disk_image": "local-zfs:vm-102-disk-0",
+                    "size": "32090M"
+                },
+                "proxmox_vmgenid": "fd5de1d5-407f-47e9-ae25-fb2b52a067c6",
+                "proxmox_vmid": 102,
+                "proxmox_vmtype": "qemu",
+                "r_alt_domain_admin": "administrator",
+                "r_alt_domain_firstdc_address": "10.20.5.1",
+                "r_alt_domain_firstdc_name": "r-alt-dc1",
+                "r_alt_domain_forwarder": "192.168.126.1",
+                "r_alt_domain_name": "alt.ratners.ru",
+                "r_alt_domain_password": "QAZxsw123",
+                "r_alt_domain_shortname": "alt"
+            }
+        }
+    },
+    "ald_role_audit": {
+        "hosts": [
+            "ald-hq-audit1"
+        ]
+    },
+    "ald_role_cups": {
+        "hosts": [
+            "ald-hq-cups1"
+        ]
+    },
+    "ald_role_dc": {
+        "hosts": [
+            "ald-spb-dc1",
+            "ald-ekb-dc1",
+            "ald-hq-dc2",
+            "ald-spb-dc2",
+            "ald-hq-dc1",
+            "ald-ekb-dc2"
+        ]
+    },
+    "ald_role_dhcp": {
+        "hosts": [
+            "ald-ekb-dhcp1"
+        ]
+    },
+    "ald_role_fs": {
+        "hosts": [
+            "ald-hq-fs1"
+        ]
+    },
+    "ald_role_mon": {
+        "hosts": [
+            "ald-hq-mon1"
+        ]
+    },
+    "ald_role_repo": {
+        "hosts": [
+            "ald-hq-repo1"
+        ]
+    },
+    "ald_role_ws": {
+        "hosts": [
+            "ald-ekb-ws1",
+            "ald-hq-ws1",
+            "ald-spb-ws1"
+        ]
+    },
+    "ald_site_ekb": {
+        "hosts": [
+            "ald-ekb-ws1",
+            "ald-ekb-dc1",
+            "ald-ekb-dc2",
+            "ald-ekb-dhcp1"
+        ]
+    },
+    "ald_site_hq": {
+        "hosts": [
+            "ald-hq-mon1",
+            "ald-hq-cups1",
+            "ald-hq-dc2",
+            "ald-hq-repo1",
+            "ald-hq-ws1",
+            "ald-hq-fs1",
+            "ald-hq-dc1",
+            "ald-hq-audit1"
+        ]
+    },
+    "ald_site_spb": {
+        "hosts": [
+            "ald-spb-dc1",
+            "ald-spb-dc2",
+            "ald-spb-ws1"
+        ]
+    },
+    "all": {
+        "children": [
+            "ungrouped",
+            "first_dc",
+            "os_alt",
+            "proxmox_all_lxc",
+            "proxmox_all_qemu",
+            "proxmox_all_running",
+            "proxmox_all_stopped",
+            "proxmox_nodes",
+            "proxmox_r_pve1_lxc",
+            "proxmox_r_pve1_qemu",
+            "ald_role_dc",
+            "ald_site_spb",
+            "project_ald",
+            "tmp_alse_1_7_4_max",
+            "project_stand1",
+            "stand1_role_ws",
+            "stand1_site_aup",
+            "tmp_w2019std",
+            "stand1_role_dc",
+            "stand1_site_gtnn",
+            "tmp_redos73",
+            "project_r",
+            "r_role_dc",
+            "r_site_alt",
+            "ald_role_mon",
+            "ald_site_hq",
+            "ald_role_ws",
+            "ald_site_ekb",
+            "tmp_alse_1_7_4_base_gui",
+            "ald_role_cups",
+            "ald_role_repo",
+            "ald_role_fs",
+            "ald_role_audit",
+            "r_role_ws",
+            "ald_role_dhcp",
+            "proxmox_pool_pool1"
+        ]
+    },
+    "first_dc": {
+        "hosts": [
+            "r-alt-dc1"
+        ]
+    },
+    "os_alt": {
+        "children": [
+            "tmp_alt_p10",
+            "tmp_alt_p10_srv",
+            "tmp_alt_p10_ws"
+        ]
+    },
+    "project_ald": {
+        "hosts": [
+            "ald-spb-dc1",
+            "ald-hq-mon1",
+            "ald-ekb-ws1",
+            "ald-ekb-dc1",
+            "ald-hq-cups1",
+            "ald-hq-dc2",
+            "ald-spb-dc2",
+            "ald-hq-repo1",
+            "ald-hq-ws1",
+            "ald-hq-fs1",
+            "ald-spb-ws1",
+            "ald-hq-dc1",
+            "ald-hq-audit1",
+            "ald-ekb-dc2",
+            "ald-ekb-dhcp1"
+        ]
+    },
+    "project_r": {
+        "hosts": [
+            "alt-dc2",
+            "alt-dc1",
+            "alt-ws1",
+            "alt-ws2"
+        ]
+    },
+    "project_stand1": {
+        "hosts": [
+            "aup-ws3",
+            "gtnn-dc11",
+            "gtnn-ws13",
+            "aup-ws4",
+            "aup-dc2",
+            "aup-dc1",
+            "gtnn-ws14",
+            "gtnn-dc12"
+        ]
+    },
+    "proxmox_all_qemu": {
+        "hosts": [
+            "ald-spb-dc1",
+            "aup-ws3",
+            "gtnn-dc11",
+            "gtnn-ws13",
+            "alt-dc2",
+            "ald-hq-mon1",
+            "ald-ekb-ws1",
+            "ald-ekb-dc1",
+            "ald-hq-cups1",
+            "ald-hq-dc2",
+            "aup-ws4",
+            "ald-spb-dc2",
+            "ald-hq-repo1",
+            "ald-hq-ws1",
+            "ald-hq-fs1",
+            "aup-dc2",
+            "ald-spb-ws1",
+            "r-vm-dc2",
+            "r-vm-ws3",
+            "aup-dc1",
+            "ald-hq-dc1",
+            "ald-hq-audit1",
+            "ald-ekb-dc2",
+            "alt-dc1",
+            "alt-ws1",
+            "gtnn-ws14",
+            "ald-ekb-dhcp1",
+            "r-vm-ws2",
+            "gtnn-dc12",
+            "alt-ws2"
+        ]
+    },
+    "proxmox_all_running": {
+        "hosts": [
+            "r-vm-dc2",
+            "r-vm-ws3",
+            "r-vm-ws2"
+        ]
+    },
+    "proxmox_all_stopped": {
+        "hosts": [
+            "ald-spb-dc1",
+            "aup-ws3",
+            "gtnn-dc11",
+            "gtnn-ws13",
+            "alt-dc2",
+            "ald-hq-mon1",
+            "ald-ekb-ws1",
+            "ald-ekb-dc1",
+            "ald-hq-cups1",
+            "ald-hq-dc2",
+            "aup-ws4",
+            "ald-spb-dc2",
+            "ald-hq-repo1",
+            "ald-hq-ws1",
+            "ald-hq-fs1",
+            "aup-dc2",
+            "ald-spb-ws1",
+            "aup-dc1",
+            "ald-hq-dc1",
+            "ald-hq-audit1",
+            "ald-ekb-dc2",
+            "alt-dc1",
+            "alt-ws1",
+            "gtnn-ws14",
+            "ald-ekb-dhcp1",
+            "gtnn-dc12",
+            "alt-ws2"
+        ]
+    },
+    "proxmox_nodes": {
+        "hosts": [
+            "r-pve1"
+        ]
+    },
+    "proxmox_r_pve1_qemu": {
+        "hosts": [
+            "ald-spb-dc1",
+            "aup-ws3",
+            "gtnn-dc11",
+            "gtnn-ws13",
+            "alt-dc2",
+            "ald-hq-mon1",
+            "ald-ekb-ws1",
+            "ald-ekb-dc1",
+            "ald-hq-cups1",
+            "ald-hq-dc2",
+            "aup-ws4",
+            "ald-spb-dc2",
+            "ald-hq-repo1",
+            "ald-hq-ws1",
+            "ald-hq-fs1",
+            "aup-dc2",
+            "ald-spb-ws1",
+            "r-vm-dc2",
+            "r-vm-ws3",
+            "aup-dc1",
+            "ald-hq-dc1",
+            "ald-hq-audit1",
+            "ald-ekb-dc2",
+            "alt-dc1",
+            "alt-ws1",
+            "gtnn-ws14",
+            "ald-ekb-dhcp1",
+            "r-vm-ws2",
+            "gtnn-dc12",
+            "alt-ws2"
+        ]
+    },
+    "r_role_dc": {
+        "hosts": [
+            "alt-dc2",
+            "alt-dc1"
+        ]
+    },
+    "r_role_ws": {
+        "hosts": [
+            "alt-ws1",
+            "alt-ws2"
+        ]
+    },
+    "r_site_alt": {
+        "hosts": [
+            "alt-dc2",
+            "alt-dc1",
+            "alt-ws1",
+            "alt-ws2"
+        ]
+    },
+    "stand1_role_dc": {
+        "hosts": [
+            "gtnn-dc11",
+            "aup-dc2",
+            "aup-dc1",
+            "gtnn-dc12"
+        ]
+    },
+    "stand1_role_ws": {
+        "hosts": [
+            "aup-ws3",
+            "gtnn-ws13",
+            "aup-ws4",
+            "gtnn-ws14"
+        ]
+    },
+    "stand1_site_aup": {
+        "hosts": [
+            "aup-ws3",
+            "aup-ws4",
+            "aup-dc2",
+            "aup-dc1"
+        ]
+    },
+    "stand1_site_gtnn": {
+        "hosts": [
+            "gtnn-dc11",
+            "gtnn-ws13",
+            "gtnn-ws14",
+            "gtnn-dc12"
+        ]
+    },
+    "tmp_alse_1_7_4_base_gui": {
+        "hosts": [
+            "ald-ekb-ws1",
+            "ald-hq-ws1",
+            "ald-spb-ws1"
+        ]
+    },
+    "tmp_alse_1_7_4_max": {
+        "hosts": [
+            "ald-spb-dc1",
+            "ald-hq-mon1",
+            "ald-ekb-dc1",
+            "ald-hq-cups1",
+            "ald-hq-dc2",
+            "ald-spb-dc2",
+            "ald-hq-repo1",
+            "ald-hq-fs1",
+            "ald-hq-dc1",
+            "ald-hq-audit1",
+            "ald-ekb-dc2",
+            "ald-ekb-dhcp1"
+        ]
+    },
+    "tmp_alt_p10_srv": {
+        "hosts": [
+            "alt-dc2",
+            "alt-dc1"
+        ]
+    },
+    "tmp_alt_p10_ws": {
+        "hosts": [
+            "alt-ws2"
+        ]
+    },
+    "tmp_redos73": {
+        "hosts": [
+            "gtnn-dc11",
+            "aup-ws4",
+            "gtnn-ws14",
+            "gtnn-dc12"
+        ]
+    },
+    "tmp_w2019std": {
+        "hosts": [
+            "aup-ws3",
+            "gtnn-ws13",
+            "aup-dc2",
+            "aup-dc1",
+            "alt-ws1"
+        ]
+    }
+}

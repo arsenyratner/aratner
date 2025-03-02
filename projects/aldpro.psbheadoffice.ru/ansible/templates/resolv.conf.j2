@@ -1,0 +1,8 @@
+# {{ ansible_managed }}
+
+{% if network_dns_search is defined %}
+search {{ network_dns_search | join(' ') }}
+{% endif %}
+{% for nameserver in network_dns_nameserver %}
+nameserver {{ nameserver }}
+{% endfor %}

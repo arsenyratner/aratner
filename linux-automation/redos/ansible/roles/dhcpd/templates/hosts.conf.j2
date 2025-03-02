@@ -1,0 +1,28 @@
+#all hosts in one file
+{% for host in dhcpd_hosts %}
+host {{ host.name }} {
+  hardware ethernet {{ host.hardwareethernet }};
+  fixed-address {{ host.fixedaddress }};
+  {% if host.routers is defined %}
+  option routers {{ host.routers }};
+  {% endif %}
+  {% if host.domainname is defined %}
+  option domain-name "{{ host.domainname }}";
+  {% endif %}
+  {% if host.domainsearch is defined %}
+  option domain-search "{{ host.domainsearch|join(', ') }}";
+  {% endif %}
+  {% if host.domainnameservers is defined %}
+  option domain-name-servers {{ host.domainnameservers|join(', ') }};
+  {% endif %}
+  {% if host.timeservers is defined %}
+  option ntp-servers {{ host.timeservers|join(', ') }};
+  {% endif %}
+  {% if host.nextserver is defined %}
+  next-server {{ host.nextserver }};
+  {% endif %}
+  {% if host.filename is defined %}
+  filename "{{ host.filename }}";
+  {% endif %}
+}
+{% endfor %}

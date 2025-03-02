@@ -1,0 +1,31 @@
+{
+  "Dhcp4": {
+    "subnet4": [
+      <?include "/etc/kea/conf.d/subnet4.10.3.79.0.conf.json"?>,
+      <?include "/etc/kea/conf.d/subnet4.10.3.3.0.conf.json"?>,
+      <?include "/etc/kea/conf.d/subnet4.10.3.11.0.conf.json"?>,
+      <?include "/etc/kea/conf.d/subnet4.10.3.16.0.conf.json"?>,
+      <?include "/etc/kea/conf.d/subnet4.10.3.18.0.conf.json"?>,
+      <?include "/etc/kea/conf.d/subnet4.10.3.20.0.conf.json"?>,
+      <?include "/etc/kea/conf.d/subnet4.10.3.22.0.conf.json"?>,
+      <?include "/etc/kea/conf.d/subnet4.10.3.28.0.conf.json"?>,
+      <?include "/etc/kea/conf.d/subnet4.10.3.29.0.conf.json"?>,
+      <?include "/etc/kea/conf.d/subnet4.10.3.31.0.conf.json"?>,
+      <?include "/etc/kea/conf.d/subnet4.10.3.32.0.conf.json"?>,
+      <?include "/etc/kea/conf.d/subnet4.10.3.33.0.conf.json"?>,
+      <?include "/etc/kea/conf.d/subnet4.10.3.35.0.conf.json"?>,
+      <?include "/etc/kea/conf.d/subnet4.10.3.42.0.conf.json"?>,
+      <?include "/etc/kea/conf.d/subnet4.10.3.44.0.conf.json"?>,
+      <?include "/etc/kea/conf.d/subnet4.10.3.45.0.conf.json"?>,
+      <?include "/etc/kea/conf.d/subnet4.10.3.46.0.conf.json"?>,
+      <?include "/etc/kea/conf.d/subnet4.10.3.47.0.conf.json"?>,
+      <?include "/etc/kea/conf.d/subnet4.10.3.48.0.conf.json"?>,
+      <?include "/etc/kea/conf.d/subnet4.10.3.50.0.conf.json"?>,
+      <?include "/etc/kea/conf.d/subnet4.10.3.53.0.conf.json"?>,
+      <?include "/etc/kea/conf.d/subnet4.10.3.54.0.conf.json"?>,
+      <?include "/etc/kea/conf.d/subnet4.10.3.112.0.conf.json"?>,
+      <?include "/etc/kea/conf.d/subnet4.10.3.183.32.conf.json"?>
+    ],
+    "option-data": <?include "/etc/kea/conf.d/option-data.conf.json"?>
+  }
+}

@@ -1,0 +1,49 @@
+---
+- name: RouterOS 
+  hosts: routeros,&role_rt
+  gather_facts: false
+  vars:
+    routeros_ansible_user: ansible
+    routeros_ansible_password: !vault |
+      $ANSIBLE_VAULT;1.1;AES256
+      66613561323065373037613133303834303636623030376562663736663533613666316438356337
+      3462363266613861316661396135363933653461396531650a353463363563656266393539633939
+      63663566343662316130303336636261373830643562666264323631376662623035396231616431
+      6638306334623765390a346433666133306465323235366337613537386336633134323039653032
+      3061
+    ansible_user: admin
+    # ansible-vault encrypt_string --stdin-name 'ansible_ssh_pass'
+    ansible_ssh_pass: !vault |
+      $ANSIBLE_VAULT;1.1;AES256
+      32383762626333643562613032313361326662663430356566636332316637663834653432616665
+      3062373031306432636632383264333565646666623036390a393332336138313236326638376132
+      61613766336164343762386532383266353635323662343137646161316566666332383263623237
+      3364343336643535640a623435626562616237633638393333616536376434373935316461643239
+      3861
+
+  tasks:
+    # - name: Get version
+    #   community.routeros.command:
+    #     commands:
+    #       - /system/package/print
+    #   register: getversion
+    
+    # - name: Debug version
+    #   ansible.builtin.debug:
+    #     var: getversion
+
+    - name: Create user for ansible_user
+      community.routeros.command:
+        commands:
+          - /user/add name={{ routeros_ansible_user }} group=full disabled=no password={{ routeros_ansible_password | string }}
+
+    - name: Create keyfile for ansible_user
+      community.routeros.command:
+        commands:
+          - /file print file="{{ routeros_ansible_user }}-key"
+          - /file set "{{ routeros_ansible_user }}-key.txt" contents="{{ lookup( 'file', ansible_private_key_file+'.pub' ) }}"
+
+    - name: Add ssh key to ansible_user
+      community.routeros.command:
+        commands:
+          - /user ssh-keys import user={{ routeros_ansible_user }} public-key-file="{{ routeros_ansible_user }}-key.txt"

@@ -1,0 +1,31 @@
+---
+- name: Preconfig all redos except DC
+  hosts: site_gtnn,&os_redos,!role_dc
+  tasks:
+    - name: Role network
+      ansible.builtin.include_role:
+        name: network
+
+    - name: Role repo
+      ansible.builtin.include_role:
+        name: repo
+      vars:
+        repo_deleteoldrepofiles: false
+        repo_installupdates: true
+        repo_rebootafterupdate: true
+
+    - name: Role preconfig
+      ansible.builtin.include_role:
+        name: preconfig
+      vars:
+        preconfig_selinux: disabled
+        preconfig_installpackages: true
+
+    - name: Role samba-domainjoin
+      ansible.builtin.include_role:
+        name: samba-domainjoin
+      vars:
+        domainjoin_user: "{{ gtnn_domain_admin }}"
+        domainjoin_password: "{{ gtnn_domain_password }}"
+        domainjoin_domname: "{{ gtnn_domain_name }}"
+        domainjoin_shortname: "{{ gtnn_domain_shortname }}"

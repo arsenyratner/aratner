@@ -1,0 +1,14 @@
+ansible_host: 10.20.30.11
+
+sambadc_hostname: red-dc1
+
+preconfig_ipv4:
+  address: 10.20.30.11/24
+  gw: 10.20.30.254
+  dns:
+    servers:
+      - 127.0.0.1
+      - 10.20.30.12
+    search:
+      - red.aratner.ru
+      - ad.aratner.ru

@@ -1,0 +1,14 @@
+---
+- name: prepare file server
+  hosts: role_ps
+  vars:
+    role_repo_deletereposd: false
+    role_repo_installupdate: true
+    role_repo_rebootafterupdate: false
+    domain_name: red.aratner.ru
+  vars_files:
+    - vars/passwords
+
+  roles:
+    - preconfig
+    - cups

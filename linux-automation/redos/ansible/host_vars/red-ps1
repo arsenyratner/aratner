@@ -1,0 +1,3 @@
+ansible_host: 10.20.30.14
+sssd_join: true
+sambadc_hostname: red-ps1

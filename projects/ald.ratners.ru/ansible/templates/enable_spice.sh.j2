@@ -1,0 +1,16 @@
+#/bin/bash
+set -e
+if systemd-detect-virt | egrep -q "^(kvm|qemu)$" ; then
+    sudo apt -y install spice-vdagent
+fi
+ 
+if egrep -q "^\s*Hidden\s*=" /etc/xdg/autostart/kscreen.desktop ; then
+    sudo sed -i "s/^\s*Hidden\s*=.*/Hidden=true/" /etc/xdg/autostart/kscreen.desktop
+else
+    echo "Hidden=true" | sudo tee -a /etc/xdg/autostart/kscreen.desktop > /dev/null
+fi
+ 
+if ! ls -l /usr/share/fly-dm/autostart/greeter | egrep -q -- "->\s+/etc/xdg/autostart/spice-vdagent.desktop" ; then
+    sudo ln -s /etc/xdg/autostart/spice-vdagent.desktop /usr/share/fly-dm/autostart/greeter/spice-vdagent.desktop
+fi
+echo "Выполнено успешно. Пожалуйста, перезагрузите компьютер."

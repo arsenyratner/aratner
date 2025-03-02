@@ -1,0 +1,45 @@
+---
+- name: First DC group
+  hosts: project_ald
+  tasks:
+    - name: Group firstdc
+      ansible.builtin.group_by:
+        key: domain_firstdc_{{ domain_firstdc | string }}
+      when: domain_firstdc is defined
+
+- name: Setup first dc
+  hosts:  domain_firstdc_true
+  become: true
+  vars:
+    domain_packages:
+      - aldpro-mp
+      - aldpro-gc
+      - aldpro-syncer
+  tasks:
+    - name: Add localhost to /etc/hosts
+      ansible.builtin.lineinfile:
+        path: /etc/hosts
+        regexp: '^127\.0\.0\.1'
+        line: 127.0.0.1 localhost.localdomain localhost 
+
+    - name: Add self name to /etc/hosts
+      ansible.builtin.lineinfile:
+        path: /etc/hosts
+        search_string: '{{ ansible_default_ipv4.address }}'
+        line: "{{ ansible_default_ipv4.address }} {{ ansible_hostname }}.{{ ansible_domain }} {{ ansible_hostname }}"
+
+    - name: Install packages
+      apt:
+        name: "{{ domain_packages }}"
+        state: latest
+        update_cache: yes
+
+    - name: ALD setup command line
+      ansible.builtin.copy:
+        dest: /usr/local/bin/install_ald.sh
+        content: |
+          #!/bin/bash
+          aldpro-server-install -d {{ domain_name }} -n {{ ansible_hostname }} -p '{{ domain_password | string }}' --ip {{ ansible_default_ipv4.address }} --no-reboot
+        mode: '0755'
+        owner: root
+        group: root

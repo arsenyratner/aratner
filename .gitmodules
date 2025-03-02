@@ -1,0 +1,4 @@
+[submodule "windows-automation/cloudimage/windows-imaging-tools"]
+	path = windows-automation/cloudimage/windows-imaging-tools
+	url = https://github.com/cloudbase/windows-imaging-tools
+	branch = master

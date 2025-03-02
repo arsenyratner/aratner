@@ -1,0 +1,89 @@
+---
+- name: Disable SELinux
+  ansible.builtin.selinux:
+    state: disabled
+
+- name: Install bind
+  ansible.builtin.dnf:
+    name: "{{ bind_packages }}"
+    state: latest
+    update_cache: yes
+
+- name: Create conf dir
+  ansible.builtin.file:
+    path: "{{ bind_confd_dir }}"
+    state: directory
+    mode: "0755"
+    owner: "{{ bind_user }}"
+    group: "{{ bind_group }}"
+
+- name: Create zones dir
+  ansible.builtin.file:
+    path: "{{ bind_zones_dir }}"
+    state: directory
+    mode: "0755"
+    owner: "{{ bind_user }}"
+    group: "{{ bind_group }}"
+
+- name: Copy options.conf
+  ansible.builtin.template:
+    src: options.conf.j2
+    dest: "{{ bind_confd_dir }}/options.conf"
+    owner: "{{ bind_user }}"
+    group: "{{ bind_group }}"
+    mode: "0640"
+  notify: Restart bind
+
+- name: Copy zones config
+  ansible.builtin.template:
+    src: zone.conf.j2
+    dest: "{{ bind_confd_dir }}/zone-{{ item.name }}.conf"
+    owner: "{{ bind_user }}"
+    group: "{{ bind_group }}"
+    mode: "0644"
+  loop: "{{ bind.zones }}"
+  when: bind.zones is defined
+  notify: Restart bind
+
+- name: Copy hint zone file
+  ansible.builtin.template:
+    src: named.ca.j2
+    dest: "{{ bind.namedca_file }}"
+    owner: "{{ bind_user }}"
+    group: "{{ bind_group }}"
+    mode: "0644"
+  when: bind.namedca_file is defined
+  notify: Restart bind
+
+- name: check file permissions
+  block:
+    - name: samba named conf dir
+      ansible.builtin.file:
+        path: /var/lib/samba/bind-dns
+        owner: "{{ bind_user }}"
+        group: "{{ bind_group }}"
+        mode: "0750"
+        state: directory
+    - name: dns config
+      ansible.builtin.file:
+        path: /var/lib/samba/bind-dns/named.conf
+        owner: "{{ bind_user }}"
+        group: "{{ bind_group }}"
+        mode: "0640"
+    - name: dns keytab
+      ansible.builtin.file:
+        path: /var/lib/samba/bind-dns/dns.keytab
+        owner: root
+        group: "{{ bind_group }}"
+        mode: "0640"
+  when: bind_sambaincludefile is defined
+
+- name: Copy bind config file
+  ansible.builtin.template:
+    src: bind.conf.j2
+    dest: "{{ bind_conf_file }}"
+    owner: "{{ bind_user }}"
+    group: "{{ bind_group }}"
+    mode: "0640"
+    validate: "/usr/sbin/named-checkconf %s"
+  notify: Restart bind

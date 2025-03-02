@@ -1,0 +1,18 @@
+site_name: alt
+network_ipv4_dns:
+  servers:
+    - 10.20.5.1
+    - 10.20.5.2
+  search:
+    - "{{ r_alt_domain_name }}"
+
+win_network_dnsservers:
+  - 10.20.5.1
+  - 10.20.5.2
+
+preconfig_time:
+  packagelist:
+    - chrony
+  timezone: Europe/Moscow
+  ntp_pools:
+    - "{{ r_alt_domain_name }}"

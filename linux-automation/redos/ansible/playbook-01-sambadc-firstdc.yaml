@@ -1,0 +1,11 @@
+---
+- name: prepare file server
+  hosts: red-dc1
+  
+  vars_files:
+    - vars/passwords
+
+  roles:
+   - preconfig
+   - samba-dc
+   - bind

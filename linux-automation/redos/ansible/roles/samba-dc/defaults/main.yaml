@@ -1,0 +1,22 @@
+---
+# sambadc_removeoldconfig: false
+# sambadc_firstdc: false
+# sambadc_adddc: false
+# sambadc_configurebind: false
+# sambadc_hostname: temp-dc
+# sambadc_sitename: Default-First-Site-Name
+# sambadc_domname: red.aratner.ru
+# sambadc_domshortname: red
+# sambadc_adminuser: administrator
+# sambadc_adminpass: NenDilvUn6
+# sambadc_dnsbackend: BIND9_DLZ
+# sambadc_dnsbackend: SAMBA_INTERNAL
+
+# sambadc_bind_conf: /etc/named.conf
+# sambadc_bind_confd: /etc/named
+# sambadc_bind_owner: named
+# sambadc_bind_group: named
+# sambadc_bind_forwarders:
+#   - 10.20.30.254
+# sambadc_bind_acl_trusted:
+#   - 10.20.30.0/24

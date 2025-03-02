@@ -1,0 +1,11 @@
+---
+- name: Add DC
+  hosts: site_gtnn,&role_dc
+  tasks:
+    - name: Role network
+      ansible.builtin.include_role:
+        name: network
+
+    - name: Role preconfig
+      ansible.builtin.include_role:
+        name: preconfig

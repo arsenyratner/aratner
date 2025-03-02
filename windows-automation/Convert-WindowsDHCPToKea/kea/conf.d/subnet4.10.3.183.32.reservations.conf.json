@@ -1,0 +1,55 @@
+[
+  {
+    "hw-address": "4c:ed:fb:c9:05:8b",
+    "ip-address": "10.3.183.51",
+    "hostname": "1-1319-PRF-1.gtm.gazprom.ru"
+  },
+  {
+    "hw-address": "30:9c:23:01:9e:6e",
+    "ip-address": "10.3.183.52",
+    "hostname": "1-1319-PRF-2.gtm.gazprom.ru"
+  },
+  {
+    "hw-address": "4c:ed:fb:c9:05:72",
+    "ip-address": "10.3.183.49",
+    "hostname": "1-1317A-PRF-1.gtm.gazprom.ru"
+  },
+  {
+    "hw-address": "4c:ed:fb:c9:01:9f",
+    "ip-address": "10.3.183.47",
+    "hostname": "1-1320-PRF-2.gtm.gazprom.ru"
+  },
+  {
+    "hw-address": "18:31:bf:69:1c:a4",
+    "ip-address": "10.3.183.45",
+    "hostname": "1-1319-PRF-6.gtm.gazprom.ru",
+    "option-data": []
+  },
+  {
+    "hw-address": "78:84:3c:cd:4e:82",
+    "ip-address": "10.3.183.44",
+    "hostname": "1-1318-PRF-2.gtm.gazprom.ru",
+    "option-data": []
+  },
+  {
+    "hw-address": "00:0f:fe:cb:c7:80",
+    "ip-address": "10.3.183.42",
+    "hostname": "1-1321-PRF-1.gtm.gazprom.ru",
+    "option-data": []
+  },
+  {
+    "hw-address": "4c:ed:fb:c8:fc:82",
+    "ip-address": "10.3.183.41",
+    "hostname": "1-1319-PRF-5.gtm.gazprom.ru"
+  },
+  {
+    "hw-address": "08:62:66:9d:a0:0d",
+    "ip-address": "10.3.183.48",
+    "hostname": "1-1317-PRF-1.gtm.gazprom.ru"
+  },
+  {
+    "hw-address": "00:16:35:83:91:b4",
+    "ip-address": "10.3.183.46",
+    "hostname": "D-207-12-BFOND.gtm.gazprom.ru"
+  }
+]

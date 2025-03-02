@@ -1,0 +1,239 @@
+---
+- name: SELinux
+  ansible.builtin.selinux:
+    state: "{{ preconfig_selinux }}"
+
+- name: Disable cloud-init
+  block:
+  - name: 'Populate service facts'
+    ansible.builtin.service_facts:
+
+  - name: 'Disable and stop all cloud-init services'
+    ansible.builtin.service:
+      name: "{{ service }}"
+      state: 'stopped'
+      enabled: 'false'
+    loop: "{{ cloud_init_services }}"
+    loop_control:
+      loop_var: service
+    when:
+      - 'ansible_facts.services[service] is defined'
+      - 'ansible_facts.services[service].status == "enabled"'
+
+  - name: 'Check if /etc/cloud/ exists'
+    ansible.builtin.stat:
+      path: '/etc/cloud/'
+    register: etc_cloud_folder
+
+  - name: 'Generate /etc/cloud/cloud-init.disabled'
+    ansible.builtin.copy:
+      dest: '/etc/cloud/cloud-init.disabled'
+      content: 'disabled by ansible\n'
+      owner: 'root'
+      group: 'root'
+      mode: '0644'
+    when:
+      - 'etc_cloud_folder.stat.exists'  
+
+- name: NetworkManager setup
+  block:
+  - name: NM detect UUID connection and device names
+    block:
+    - name: delete NM connections
+      ansible.builtin.shell: |
+        rm -rf /etc/NetworkManager/system-connections/*
+      args:
+        warn: false
+    - name: Get NM connection UUID
+      ansible.builtin.shell: | 
+        nmcli -g uuid con | head -n1
+      register: nmconuuid
+    - name: Get NM connection name
+      ansible.builtin.shell: | 
+        nmcli -g name con | head -n1
+      register: nmconname
+    - name: Get NM device name
+      ansible.builtin.shell: | 
+        ip -br addr show to "$(nmcli -g ip4.address con show {{ nmconname.stdout }})" | cut -d ' ' -f 1
+      register: nmdevname
+    - name: print nmdevname
+      debug:
+        msg: |
+          "conUUID: {{ nmconuuid.stdout }}"
+          "conName: {{ nmconname.stdout }}"
+          "devName: {{ nmdevname.stdout }}"
+      when: nmdevname is defined
+
+  - name: Debug NM ipv4 address
+    debug:
+      msg: "{{preconfig_ipv4}}"
+    when: preconfig_debug is defined
+  
+  - name: Setup NM ipv4 manual
+    community.general.nmcli:
+      conn_name: "{{ nmconname.stdout }}"
+      ifname: "{{ nmdevname.stdout }}"
+      type: ethernet
+      # ipv4.method: "{{ preconfig_ipv4_method }}"
+      ip4: "{{ preconfig_ipv4.address }}"
+      gw4: "{{ preconfig_ipv4.gw }}"
+      state: present
+    when: 
+      - preconfig_ipv4_method == "manual"
+      - preconfig_ipv4.address is defined
+      - preconfig_ipv4.gw is defined
+
+  - name: Setup NM dns
+    community.general.nmcli:
+      conn_name: "{{ nmconname.stdout }}"
+      type: ethernet
+      dns4_search: "{{ preconfig_ipv4.dns.search }}"
+      dns4: "{{ preconfig_ipv4.dns.servers }}"
+      state: present
+    notify: Preconfig NM restart
+    when: 
+      - preconfig_ipv4.dns.search
+      - preconfig_ipv4.dns.servers
+
+- name: Running handlers
+  meta: flush_handlers
+
+- name: Repo setup
+  block:
+  - name: Delete old repo files
+    shell: rm -rf /etc/yum.repos.d/*
+    args:
+      warn: false
+    when: preconfig_repo_deleteoldfiles is true
+
+  - name: Add new repo files
+    ansible.builtin.yum_repository:
+      name: "{{item.name}}"
+      description: "{{item.description}}"
+      baseurl: "{{item.baseurl}}"
+      file: "{{item.file}}"
+      gpgkey: "{{item.gpgkey}}"
+      gpgcheck: "{{item.gpgcheck}}"
+      enabled: "{{item.enabled}}"
+      state: "{{item.state}}"
+    loop: "{{ preconfig_repo }}"
+    when: preconfig_repo is defined
+
+- name : Update packages
+  block:
+  - name: Install updates
+    ansible.builtin.dnf:
+      name: "*"
+      state: latest
+    notify: Preconfig reboot
+  when: preconfig_installupdates is true
+
+- name: Install packages
+  block:
+  - name: Install packages
+    ansible.builtin.dnf:
+      name: "{{ preconfig_packages }}"
+      state: present
+      update_cache: yes
+  when: preconfig_installpackages is true
+
+- name: Setup time
+  block: 
+  - name: Set timezone
+    community.general.timezone:
+      name: "{{ preconfig_time.timezone }}"
+
+  - name: create chrony.conf
+    ansible.builtin.template:
+      src: chrony.conf.j2
+      dest: /etc/chrony.conf
+      owner: root
+      group: root
+      mode: '0644'
+    notify: Preocnfig chronyd restart
+
+- name: PKI setup
+  block:
+  - name: copy ca certs
+    copy:
+      src: "{{ item }}"
+      dest: /etc/pki/ca-trust/source/anchors/
+      owner: root
+      group: root
+      mode: '0644'
+    loop: "{{ lookup('fileglob', 'ca-*.crt', wantlist=True) }}"
+
+  - name: Update ca trust
+    ansible.builtin.command: update-ca-trust extract
+
+  - name: link ca-bundle to tls-ca-bundle.pem
+    ansible.builtin.file: 
+      src: /etc/pki/ca-trust/extracted/pem/tls-ca-bundle.pem
+      dest: /etc/pki/tls/certs/ca-bundle.crt
+      state: link
+
+- name: Change systemd default target
+  file:
+    src: /usr/lib/systemd/system/graphical.target
+    dest: /etc/systemd/system/default.target
+    state: link
+  when: preconfig_graphicaltarget is true
+
+- name: Domainjoin
+  block:
+  - name: Check if already domain joined
+    shell: timeout 5s net ads testjoin
+    register: testjoin_result
+    ignore_errors: true
+
+  - name: DEBUG alredy joined
+    debug:
+      msg: "{{ testjoin_result.stdout }}"
+
+  - name: copy join script
+    ansible.builtin.copy:
+      src: join-to-domain.sh
+      dest: /usr/local/bin/join-to-domain.sh
+      owner: root
+      group: root
+      mode: '0755'
+      force: yes
+
+  - name: Join domain sssd
+    ansible.builtin.shell: "{{ preconfig_domainjoin.joinscript }} -d {{ preconfig_domainjoin.domname }} -n {{ ansible_hostname }} -u {{ preconfig_domainjoin.joinuser }} -p {{ preconfig_domainjoin.joinpassword }} -y"
+    when:
+      - preconfig_domainjoin.sssd is true
+      - '"Join is OK" not in testjoin_result.stdout'
+    notify: Preconfig sssd restart
+
+  - name: Join domain winbind
+    block:
+    - name: Copy template smb.conf
+      ansible.builtin.template:
+        src: smb.conf.j2
+        dest: "/tmp/smb-conf"
+        owner: "root"
+        group: "root"
+        mode: '0644'
+      when:
+        - preconfig_domainjoin.winbind is true
+        - preconfig_domainjoin.replacesmbconf is true
+
+    - name: Join winbind
+      ansible.builtin.shell: "{{ preconfig_domainjoin.joinscript }} -d {{ preconfig_domainjoin.domname }} -n {{ ansible_hostname }} -u {{ preconfig_domainjoin.joinuser }} -p {{ preconfig_domainjoin.joinpassword }} -w -y"
+      when:
+        - preconfig_domainjoin.winbind is true
+        - '"Join is OK" not in testjoin_result.stdout'
+      notify: Preconfig winbind restart
+
+  - name: add sudoers.d
+    ansible.builtin.template:
+      src: sudoers.j2
+      dest: /etc/sudoers.d/{{ preconfig_domainjoin.shortname }}
+      owner: "root"
+      group: "root"
+      mode: '0440'
+  when: preconfig_domainjoin is defined
+
+- name: Running handlers
+  meta: flush_handlers

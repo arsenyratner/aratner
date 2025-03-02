@@ -1,0 +1,8 @@
+---
+domainjoin_type: sssd
+#domainjoin_type: winbind
+domainjoin_script: /usr/bin/join-to-domain.sh
+# domainjoin_script: /usr/local/bin/join-to-domain.sh
+domainjoin_reboot: true
+domainjoin_domname:
+domainjoin_shortname:

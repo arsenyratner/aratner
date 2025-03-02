@@ -1,0 +1,100 @@
+---
+- name: Sambadc install packages
+  yum:
+    name: "{{ sambadc_packages }}"
+    state: present
+
+- name: Check, are domain alredy provisioned?
+  ansible.builtin.shell: samba-tool domain info 127.0.0.1
+  register: check_domain
+  changed_when: check_domain.rc != 0 
+  ignore_errors: true
+
+- debug:
+    var: check_domain
+  when: check_domain.rc != 0 or sambadc_domname in check_domain.stdout
+
+- name: Create first dc
+  block:
+    - name: First DC remove old configs
+      block:
+        - name: Remove old config dirs
+          shell: |
+            rm -rf /var/lib/samba/*
+            rm -rf /var/cache/samba/*
+        - name: First DC create sysvol dir
+          file:
+            path: /var/lib/samba/sysvol
+            state: directory
+        - name: First DC remove old config files
+          file:
+            path: "{{ item }}"
+            state: absent
+          loop:
+            - /etc/krb5.conf
+            - /etc/samba/smb.conf
+
+    - name: First DC Create
+      ansible.builtin.shell:
+        cmd: samba-tool domain provision --use-rfc2307 --server-role=dc --realm={{ sambadc_domname|upper }} --domain={{ sambadc_domshortname|upper }} --adminpass={{ sambadc_adminpass }} --dns-backend={{ sambadc_dnsbackend }}
+    - name: First DC copy smb conf
+      template:
+        src: smb.conf.j2
+        dest: /etc/samba/smb.conf
+    - name: First DC copy krb5.conf
+      copy:
+        src: /var/lib/samba/private/krb5.conf
+        dest: /etc/krb5.conf
+        remote_src: true
+        follow: true
+    - name: First DC Restart samba
+      ansible.builtin.systemd:
+        name: samba
+        state: restarted
+        enabled: true
+      notify: samba-dc reboot
+  when:
+    - sambadc_firstdc is true
+    - sambadc_adddc is false
+    - check_domain.rc != 0 or sambadc_domname not in check_domain.stdout
+
+- name: Add DC 
+  block:
+    - name: Add DC remove old config dirs
+      shell: |
+        rm -rf /var/lib/samba/*
+        rm -rf /var/cache/samba/*
+    - name: Add DC create sysvol dir
+      file:
+        path: /var/lib/samba/sysvol
+        state: directory
+    - name: Add DC remove old config files
+      file:
+        path: "{{ item }}"
+        state: absent
+      loop:
+        - /etc/krb5.conf
+        - /etc/samba/smb.conf
+    - name: Add DC
+      shell:
+        cmd: samba-tool domain join {{ sambadc_domname }} DC --username={{ sambadc_adminuser }} --password={{ sambadc_adminpass }} --dns-backend={{ sambadc_dnsbackend }} --realm={{ sambadc_domname }} --site={{ sambadc_sitename }}
+    - name: Add DC copy smb conf
+      template:
+        src: smb.conf.j2
+        dest: /etc/samba/smb.conf
+    - name: Add DC copy krb5.conf
+      copy:
+        src: /var/lib/samba/private/krb5.conf
+        dest: /etc/krb5.conf
+        remote_src: true
+        follow: true
+    - name: Add DC restart samba
+      ansible.builtin.systemd:
+        name: samba
+        state: restarted
+        enabled: true
+      notify: samba-dc reboot
+  when:
+    - sambadc_adddc is true
+    - sambadc_firstdc is false
+    - check_domain.rc != 0 or sambadc_domname not in check_domain.stdout

@@ -1,0 +1,34 @@
+---
+- name: make cifs vg
+  hosts: role_fs
+  vars:
+    srv_cifs_pv:
+      disk: /dev/sdb
+      partnum: 1
+    srv_cifs_vg: 
+      name: vg_cifs
+
+  tasks:
+    - name: Disable SELinux
+      ansible.builtin.selinux:
+        state: disabled
+
+    - name: install lvm2
+      package:
+        name: lvm2
+        state: present
+
+    - name: make cifs_pv
+      parted:
+        device: "{{ srv_cifs_pv.disk }}"
+        number: "{{ srv_cifs_pv.partnum }}"
+        flags: [ lvm ]
+        state: present
+        part_end: "100%"
+
+    - name: make vg
+      lvg:
+        vg: "{{ srv_cifs_vg.name }}"
+        pvs: "{{ srv_cifs_pv.disk }}{{ srv_cifs_pv.partnum }}"
+        pesize: 16
+

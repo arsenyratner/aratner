@@ -1,0 +1,8 @@
+[role_dc]
+red-dc2
+
+[role_dc_master]
+red-dc1
+
+[role_dc:children]
+role_dc_master

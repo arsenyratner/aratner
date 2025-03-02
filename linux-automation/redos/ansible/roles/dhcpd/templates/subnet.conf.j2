@@ -1,0 +1,25 @@
+# each subnet in own file
+subnet {{ item.address }} netmask {{ item.mask }} {
+  allow client-updates;
+  default-lease-time 120;
+  max-lease-time 140;
+  option broadcast-address {{ item.broadcast }};
+  option subnet-mask {{ item.mask }};
+  option routers {{ item.routers }};
+  option domain-name "{{ item.domainname }}";
+  option domain-search "{{ item.domainsearch|join(', ') }}";
+  option domain-name-servers {{ item.domainnameservers|join(', ') }};
+  option ntp-servers {{ item.timeservers|join(', ') }};
+  next-server {{ item.nextserver }};
+{% for pool in item.pools %}
+  pool {
+    {% if dhcpd_failover is defined %}
+    failover peer "{{ dhcpd_failover.name }}";
+    {% endif %}
+    {% for range in pool.ranges %}
+    range {{ range.startaddress }} {{ range.endaddress }};
+    {% endfor %}
+  }
+{% endfor %}
+}
+#end

@@ -1,0 +1,136 @@
+---
+- name: Check domain alredy provisioned
+  ansible.builtin.shell: samba-tool domain info 127.0.0.1
+  register: check_domain
+  #failed_when: check_domain.rc == 0 or sambadc_domname in check_domain.stdout
+  ignore_errors: true
+
+- name: Debug check_domain
+  debug:
+    msg: "{{ check_domain.stdout }}"
+  when: check_domain.rc == 0 or sambadc_domname  in check_domain.stdout
+
+- name: Sambadc install packages
+  yum:
+    name: "{{ sambadc_packages }}"
+    state: present
+
+- name: Create first dc  
+  block:
+  - name: Remove old configs
+    block:
+    - name: Remove old config dirs
+      shell: |
+        rm -rf /var/lib/samba/*
+        rm -rf /var/cache/samba/*
+      args:
+        warn: false
+
+    - name: create sysvol dir
+      file:
+        path: /var/lib/samba/sysvol
+        state: directory
+        # mode: '0755'
+        # owner: "{{ dhcpd_user }}"
+        # group: "{{ dhcpd_group }}"
+
+    - name: remove old config files
+      file:
+        path: "{{ item }}" 
+        state: absent
+      loop:
+        - /etc/krb5.conf
+        - /etc/samba/smb.conf
+  - name: Create first dc 
+    # samba-tool domain provision --server-role=dc --realm=$domname --domain=$domshortname --adminpass=$domuserpass --dns-backend=BIND9_DLZ 
+    #  eval $smbtcmd
+    shell: |
+      smbtcmd="samba-tool domain provision"
+      smbtcmd="$smbtcmd --use-rfc2307"
+      smbtcmd="$smbtcmd --server-role=dc"
+      smbtcmd="$smbtcmd --realm={{ sambadc_domname|upper }}"
+      smbtcmd="$smbtcmd --domain={{ sambadc_domshortname|upper }}"
+      smbtcmd="$smbtcmd --adminpass={{ sambadc_adminpass }}"
+      smbtcmd="$smbtcmd --dns-backend=BIND9_DLZ"
+      echo $smbtcmd > /var/tmp/result.log
+      eval $smbtcmd
+  - name: copy smb conf
+    template:
+      src: smb.conf.j2
+      dest: /etc/samba/smb.conf
+
+  - name: copy krb5.conf
+    copy:
+      src: /var/lib/samba/private/krb5.conf
+      dest: /etc/krb5.conf
+      remote_src: true
+      follow: true
+
+  - name: Restart samba
+    ansible.builtin.systemd:
+      name: samba
+      state: restarted
+      enabled: true
+    notify: samba-dc reboot
+  when: 
+    - sambadc_firstdc is true
+    - sambadc_adddc is false
+    - check_domain.rc != 0 or sambadc_domname not in check_domain.stdout
+
+- name: Add one more dc
+  block:
+  - name: Remove old configs
+    block:
+    - name: Remove old config dirs
+      shell: |
+        rm -rf /var/lib/samba/*
+        rm -rf /var/cache/samba/*
+      args:
+        warn: false
+
+    - name: create sysvol dir
+      file:
+        path: /var/lib/samba/sysvol
+        state: directory
+        # mode: '0755'
+        # owner: "{{ dhcpd_user }}"
+        # group: "{{ dhcpd_group }}"
+
+    - name: remove old config files
+      file:
+        path: "{{ item }}" 
+        state: absent
+      loop:
+        - /etc/krb5.conf
+        - /etc/samba/smb.conf
+  - name: Join onemore DC to domain
+    # samba-tool domain join $domname DC --realm=$domname --dns-backend=BIND9_DLZ -U${domshortname}\\${domuser}%${domuserpass}
+    # smbtcmd="$smbtcmd --site={{ sambadc_sitename }}"
+    shell: |
+      smbtcmd="samba-tool domain join {{ sambadc_domname }} DC"
+      smbtcmd="$smbtcmd --username={{ sambadc_adminuser }} --password={{ sambadc_adminpass }}"
+      smbtcmd="$smbtcmd --dns-backend=BIND9_DLZ" 
+      smbtcmd="$smbtcmd --realm={{ sambadc_domname }}" 
+      echo $smbtcmd > /var/tmp/result.log
+      eval $smbtcmd
+  - name: copy smb conf
+    template:
+      src: smb.conf.j2
+      dest: /etc/samba/smb.conf
+
+  - name: copy krb5.conf
+    copy:
+      src: /var/lib/samba/private/krb5.conf
+      dest: /etc/krb5.conf
+      remote_src: true
+      follow: true
+
+  - name: Restart samba
+    ansible.builtin.systemd:
+      name: samba
+      state: restarted
+      enabled: true
+    notify: samba-dc reboot
+  when: 
+    - sambadc_adddc is true
+    - sambadc_firstdc is false

@@ -1,0 +1,40 @@
+{% for acl in bind.acls %}
+acl "{{acl.name}}" {
+  {% for member in acl.members%}
+  {{ member }};
+  {% endfor %}
+#
+};
+{% endfor %}
+
+options {
+	{% if bind_sambaincludefile is defined%}
+	tkey-gssapi-keytab "/var/lib/samba/bind-dns/dns.keytab";
+	minimal-responses yes;
+	{% endif %}
+	{% if bind.forwarders is defined%}
+	forwarders {
+	{% for forwarder in bind.forwarders %}
+	  {{ forwarder }};
+	{% endfor %}
+	};
+	{% endif %}
+	dnssec-validation no;
+	allow-query { any; };
+	allow-recursion { {{bind_acl_trusted}}; };
+	recursion yes;
+
+	listen-on port 53 { any; };
+	listen-on-v6 port 53 { ::1; };
+	directory 	"/var/named";
+	dump-file 	"/var/named/data/cache_dump.db";
+	statistics-file "/var/named/data/named_stats.txt";
+	memstatistics-file "/var/named/data/named_mem_stats.txt";
+	secroots-file	"/var/named/data/named.secroots";
+	recursing-file	"/var/named/data/named.recursing";
+	managed-keys-directory "/var/named/dynamic";
+	geoip-directory "/usr/share/GeoIP";
+	pid-file "/run/named/named.pid";
+	session-keyfile "/run/named/session.key";
+	include "/etc/crypto-policies/back-ends/bind.config";
+};

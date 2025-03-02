@@ -1,0 +1,32 @@
+---
+- name: Join AD
+  hosts: site_gtnn,&os_windows
+  #,!role_dc
+  
+  tasks:
+    - name: Windows firewall
+      win_firewall:
+        state: "{{ win_firewall_state }}"
+        profiles:
+        - Domain
+        - Private
+        - Public
+      tags: win_firewall
+
+    - name: Network settings
+      ansible.builtin.include_role:
+        name: win_network
+
+    - name: Join AD 
+      microsoft.ad.membership:
+        dns_domain_name: "{{ gtnn_domain_name }}"
+        hostname: "{{ inventory_hostname }}"
+        domain_admin_user: "{{ gtnn_domain_shortname }}\\{{ gtnn_domain_admin }}"
+        domain_admin_password: "{{ gtnn_domain_password }}"
+        # domain_ou_path: "OU=Windows,OU=Servers,DC=ansible,DC=vagrant"
+        state: domain
+        reboot: true
+      register: ad_membership_result
+
+    - debug:
+        var: ad_membership_result

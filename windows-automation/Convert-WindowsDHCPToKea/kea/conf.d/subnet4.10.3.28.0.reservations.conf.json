@@ -1,0 +1,167 @@
+[
+  {
+    "hw-address": "a0:1d:48:a8:cc:1f",
+    "ip-address": "10.3.28.50",
+    "hostname": "MG-BOOK"
+  },
+  {
+    "hw-address": "a0:48:1c:9d:1e:78",
+    "ip-address": "10.3.28.6",
+    "hostname": "D-201-CLASS-08.gtm.gazprom.ru"
+  },
+  {
+    "hw-address": "a0:48:1c:9b:68:31",
+    "ip-address": "10.3.28.8",
+    "hostname": "D-201-CLASS-01.gtm.gazprom.ru"
+  },
+  {
+    "hw-address": "a0:48:1c:9b:68:29",
+    "ip-address": "10.3.28.9",
+    "hostname": "D-201-CLASS-07.gtm.gazprom.ru"
+  },
+  {
+    "hw-address": "a0:48:1c:9e:4f:f2",
+    "ip-address": "10.3.28.3",
+    "hostname": "D-201-CLASS-06.gtm.gazprom.ru"
+  },
+  {
+    "hw-address": "a0:48:1c:9e:4f:f0",
+    "ip-address": "10.3.28.1",
+    "hostname": "D-530-CLASS-10.gtm.gazprom.ru"
+  },
+  {
+    "hw-address": "00:16:35:09:a0:47",
+    "ip-address": "10.3.28.11",
+    "hostname": "B-224-CLASS-20.gtm.gazprom.ru"
+  },
+  {
+    "hw-address": "a0:48:1c:9b:68:23",
+    "ip-address": "10.3.28.2",
+    "hostname": "1-1417-CLASS-08.gtm.gazprom.ru"
+  },
+  {
+    "hw-address": "a0:48:1c:9e:4f:da",
+    "ip-address": "10.3.28.5",
+    "hostname": "D-201-CLASS-03.gtm.gazprom.ru"
+  },
+  {
+    "hw-address": "68:f7:28:3e:7f:bc",
+    "ip-address": "10.3.28.100",
+    "hostname": "konf-zal-iuspt.gtm.gazprom.ru"
+  },
+  {
+    "hw-address": "00:16:35:83:e0:7b",
+    "ip-address": "10.3.28.12",
+    "hostname": "D-431a-CLASS-12.gtm.gazprom.ru"
+  },
+  {
+    "hw-address": "00:16:35:7b:e7:c3",
+    "ip-address": "10.3.28.17",
+    "hostname": "D-431a-class-11.gtm.gazprom.ru"
+  },
+  {
+    "hw-address": "00:15:60:5d:3b:9c",
+    "ip-address": "10.3.28.15",
+    "hostname": "D-431a-CLASS-10.gtm.gazprom.ru"
+  },
+  {
+    "hw-address": "00:16:35:83:6d:0a",
+    "ip-address": "10.3.28.21",
+    "hostname": "D-431a-class-09.gtm.gazprom.ru"
+  },
+  {
+    "hw-address": "00:16:35:7b:59:ce",
+    "ip-address": "10.3.28.23",
+    "hostname": "D-431a-CLASS-08.gtm.gazprom.ru"
+  },
+  {
+    "hw-address": "00:16:35:7b:e5:ca",
+    "ip-address": "10.3.28.24",
+    "hostname": "D-431a-class-07.gtm.gazprom.ru"
+  },
+  {
+    "hw-address": "00:16:35:a2:83:94",
+    "ip-address": "10.3.28.16",
+    "hostname": "D-431a-CLASS-06.gtm.gazprom.ru"
+  },
+  {
+    "hw-address": "00:16:35:a1:c9:07",
+    "ip-address": "10.3.28.22",
+    "hostname": "D-431a-class-05.gtm.gazprom.ru"
+  },
+  {
+    "hw-address": "00:16:35:7b:e6:30",
+    "ip-address": "10.3.28.14",
+    "hostname": "D-431a-CLASS-04.gtm.gazprom.ru"
+  },
+  {
+    "hw-address": "00:16:35:09:a0:17",
+    "ip-address": "10.3.28.18",
+    "hostname": "D-431a-class-03.gtm.gazprom.ru"
+  },
+  {
+    "hw-address": "00:16:35:7b:b0:52",
+    "ip-address": "10.3.28.20",
+    "hostname": "D-431a-CLASS-02.gtm.gazprom.ru"
+  },
+  {
+    "hw-address": "00:16:35:83:e0:a9",
+    "ip-address": "10.3.28.19",
+    "hostname": "D-431a-class-01.gtm.gazprom.ru"
+  },
+  {
+    "hw-address": "a0:48:1c:9b:68:12",
+    "ip-address": "10.3.28.4",
+    "hostname": "D-201-CLASS-09.gtm.gazprom.ru"
+  },
+  {
+    "hw-address": "00:0f:fe:c9:b7:ff",
+    "ip-address": "10.3.28.7",
+    "hostname": "1-1417-Class-12.gtm.gazprom.ru"
+  },
+  {
+    "hw-address": "a0:48:1c:9d:1e:7c",
+    "ip-address": "10.3.28.25",
+    "hostname": "D-201-CLASS-04.gtm.gazprom.ru"
+  },
+  {
+    "hw-address": "2c:44:fd:24:cf:35",
+    "ip-address": "10.3.28.26",
+    "hostname": "D-530-CLASS-11.gtm.gazprom.ru"
+  },
+  {
+    "hw-address": "00:0f:fe:c9:32:02",
+    "ip-address": "10.3.28.29",
+    "hostname": "D-530-CLASS-13.gtm.gazprom.ru"
+  },
+  {
+    "hw-address": "00:16:35:7b:4f:17",
+    "ip-address": "10.3.28.30",
+    "hostname": "D-530-CLASS-16.gtm.gazprom.ru"
+  },
+  {
+    "hw-address": "00:16:35:7b:dc:45",
+    "ip-address": "10.3.28.31",
+    "hostname": "D-530-CLASS-15.gtm.gazprom.ru"
+  },
+  {
+    "hw-address": "a0:48:1c:9d:1e:6a",
+    "ip-address": "10.3.28.32",
+    "hostname": "D-201-CLASS-05.gtm.gazprom.ru"
+  },
+  {
+    "hw-address": "00:16:35:7b:4f:0f",
+    "ip-address": "10.3.28.28",
+    "hostname": "D-530-class-17.gtm.gazprom.ru"
+  },
+  {
+    "hw-address": "00:16:35:7b:59:9c",
+    "ip-address": "10.3.28.27",
+    "hostname": "D-530-class-18.gtm.gazprom.ru"
+  },
+  {
+    "hw-address": "00:0f:fe:c9:b4:47",
+    "ip-address": "10.3.28.10",
+    "hostname": "D-431a-CLASS-00.gtm.gazprom.ru"
+  }
+]

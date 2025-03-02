@@ -1,0 +1,80 @@
+---
+- name: Preconfig SELinux
+  ansible.builtin.selinux:
+    state: "{{ preconfig_selinux }}"
+
+- name: Preconfig install packages
+  ansible.builtin.dnf:
+    name: "{{ preconfig_packages }}"
+    state: latest
+    update_only: true
+  when: preconfig_installpackages is true
+
+- name: Preconfig disable cloud-init
+  block:
+    - name: Populate service facts
+      ansible.builtin.service_facts:
+
+    - name: Disable and stop services
+      ansible.builtin.service:
+        name: "{{ service }}"
+        state: stopped
+        enabled: false
+      loop: "{{ preconfig_disabled_services }}"
+      loop_control:
+        loop_var: service
+      when:
+        - ansible_facts.services[service] is defined
+        - ansible_facts.services[service].status == "enabled"
+
+    - name: Check if /etc/cloud/ exists
+      ansible.builtin.stat:
+        path: /etc/cloud/
+      register: etc_cloud_folder
+
+    - name: Generate /etc/cloud/cloud-init.disabled
+      ansible.builtin.copy:
+        dest: /etc/cloud/cloud-init.disabled
+        content: 'disabled by ansible\n'
+        owner: "root"
+        group: "root"
+        mode: "0644"
+      when:
+        - etc_cloud_folder.stat.exists
+
+- name: Preconfig setup time
+  block:
+    - name: Set timezone
+      community.general.timezone:
+        name: "{{ preconfig_time.timezone }}"
+
+    - name: Create chrony.conf
+      ansible.builtin.template:
+        src: chrony.conf.j2
+        dest: /etc/chrony.conf
+        owner: root
+        group: root
+        mode: "0644"
+      notify: Preocnfig chronyd restart
+
+- name: Preconfig install CA certs
+  block:
+    - name: Copy ca certs
+      ansible.builtin.copy:
+        src: "{{ item }}"
+        dest: /etc/pki/ca-trust/source/anchors/
+        owner: root
+        group: root
+        mode: "0644"
+      loop: "{{ lookup('fileglob', 'ca-*.crt', wantlist=True) }}"
+      notify: Preconfig update ca trust      
+
+- name: Preconfig systemd default target
+  ansible.builtin.file:
+    src: /usr/lib/systemd/system/graphical.target
+    dest: /etc/systemd/system/default.target
+    state: link
+  when: preconfig_graphicaltarget is true
+
+- name: Running handlers
+  meta: flush_handlers

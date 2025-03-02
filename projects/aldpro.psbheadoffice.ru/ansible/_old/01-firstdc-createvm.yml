@@ -1,0 +1,51 @@
+---
+- name: Create VMs
+  hosts: localhost
+  become: false
+  gather_facts: false
+  vars_files:
+    - vars/proxmox.yml
+    # - vars/newvms.yml
+  vars:
+    newvms:
+      # - { pr: "ald", site: "hqdmz", role: "repo",  suf: 1, template: "tmp-alse-1.7.4-max",      disksize: 30G, cores: 2, memory: 4096,  balloon: 512, nic: { bridge: vmbr0, mac: BC:24:11:31:A0:33} }
+      - { pr: "ald", site: "hq",    role: "dc",    suf: 1, template: "tmp-alse-1.7.4-max-dc",      disksize: 60G, cores: 6, memory: 16384, balloon: 512, nic: { bridge: z20vn1} }
+  roles:
+    - general
+    
+  tasks:
+    - name: Create firstdc
+      ansible.builtin.include_role:
+        name: createvm
+      vars:
+        createvm:
+          node: "{{ newvm.node | default(proxmox.node) }}"
+          citype: "nocloud"
+          ciuser: 
+            name: "{{ ansible_user }}"
+            password: "{{ ansible_password | string }}"
+            sshkeys: "{{ lookup('file', ansible_pubkey ) }}"
+          name: "{{ newvm.pr }}-{{ newvm.site }}-{{ newvm.role }}{{ newvm.suf }}"
+          template: "{{ newvm.template }}"
+          cores: "{{ newvm.cores | default('2') }}"
+          memory: "{{ newvm.memory | default('2048') }}"
+          balloon: "{{ newvm.balloon | default('512') }}"
+          disk:
+            size: "{{ newvm.disksize | default(omit) }}"
+          nic:
+            bridge: "{{ newvm.nic.bridge | default('vmbr0') }}"
+            mac: "{{ newvm.nic.mac | default(omit) }}"
+          tags:
+            - "project_{{ newvm.pr }}"
+            - "{{ newvm.pr }}_site_{{ newvm.site }}"
+            - "{{ newvm.pr }}_role_{{ newvm.role }}"
+            - "{{ newvm.template }}"
+          ipconfig0: "{{ newvm.ipconfig0 | default('ip=dhcp') }}"
+          nameservers: "{{ newvm.nameservers | default(omit) }}"
+          searchdomains: "{{ newvm.searchdomains | default(omit) }}"
+          clontype: linked
+          # storage: # clonetype: full
+          # format: # clonetype: full
+      loop: "{{ newvms }}"
+      loop_control:
+        loop_var: newvm

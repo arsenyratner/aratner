@@ -1,0 +1,553 @@
+[
+  {
+    "hw-address": "d8:cb:8a:7d:00:25",
+    "ip-address": "10.3.11.24",
+    "hostname": "1-1401A-SIUS-2.gtm.gazprom.ru"
+  },
+  {
+    "hw-address": "2c:44:fd:15:e4:53",
+    "ip-address": "10.3.11.13",
+    "hostname": "1-1403-SIUS-2.gtm.gazprom.ru"
+  },
+  {
+    "hw-address": "00:50:56:9f:63:60",
+    "ip-address": "10.3.11.53",
+    "hostname": "redos1c.gtm.gazprom.ru"
+  },
+  {
+    "hw-address": "00:50:56:b0:75:57",
+    "ip-address": "10.3.11.31",
+    "hostname": "TIISDEV_2012.gtm.gazprom.ru"
+  },
+  {
+    "hw-address": "f8:cc:6e:01:35:84",
+    "ip-address": "10.3.11.29",
+    "hostname": "adm-gov-01.gtm.gazprom.ru"
+  },
+  {
+    "hw-address": "88:51:fb:65:42:67",
+    "ip-address": "10.3.11.108",
+    "hostname": "1-1405-SIUS-01.gtm.gazprom.ru"
+  },
+  {
+    "hw-address": "00:50:56:9b:6b:39",
+    "ip-address": "10.3.11.17",
+    "hostname": "webadmin.gtm.gazprom.ru",
+    "option-data": []
+  },
+  {
+    "hw-address": "f8:cc:6e:03:b7:74",
+    "ip-address": "10.3.11.6",
+    "hostname": ""
+  },
+  {
+    "hw-address": "f8:cc:6e:01:2e:74",
+    "ip-address": "10.3.11.55",
+    "hostname": "1-1408-SIUS-4.gtm.gazprom.ru"
+  },
+  {
+    "hw-address": "2c:41:38:8f:81:35",
+    "ip-address": "10.3.11.92",
+    "hostname": "1-1407-SIUS-5.gtm.gazprom.ru"
+  },
+  {
+    "hw-address": "f8:cc:6e:04:6f:ce",
+    "ip-address": "10.3.11.28",
+    "hostname": "1-1406-sius-02.gtm.gazprom.ru",
+    "option-data": []
+  },
+  {
+    "hw-address": "f8:cc:6e:01:be:69",
+    "ip-address": "10.3.11.56",
+    "hostname": "testme9-redos.gtm.gazprom.ru"
+  },
+  {
+    "hw-address": "18:c0:4d:c8:5c:ab",
+    "ip-address": "10.3.11.87",
+    "hostname": "adm-sius-98.gtm.gazprom.ru"
+  },
+  {
+    "hw-address": "f8:cc:6e:01:25:b7",
+    "ip-address": "10.3.11.14",
+    "hostname": "adm-sius-16.gtm.gazprom.ru"
+  },
+  {
+    "hw-address": "f8:cc:6e:01:25:ad",
+    "ip-address": "10.3.11.41",
+    "hostname": "adm-sius-03.gtm.gazprom.ru"
+  },
+  {
+    "hw-address": "f8:cc:6e:01:27:e1",
+    "ip-address": "10.3.11.222",
+    "hostname": "adm-sius-02.gtm.gazprom.ru",
+    "option-data": []
+  },
+  {
+    "hw-address": "f8:cc:6e:01:2f:08",
+    "ip-address": "10.3.11.123",
+    "hostname": "adm-sius-20.gtm.gazprom.ru"
+  },
+  {
+    "hw-address": "00:50:56:b9:00:1a",
+    "ip-address": "10.3.11.78",
+    "hostname": "www-sait.gtm.gazprom.ru"
+  },
+  {
+    "hw-address": "00:50:56:94:47:c1",
+    "ip-address": "10.3.11.165",
+    "hostname": "mars.gtm.gazprom.ru"
+  },
+  {
+    "hw-address": "00:0b:cd:07:92:7d",
+    "ip-address": "10.3.11.219",
+    "hostname": "D-611-51-ccmail.gtm.gazprom.ru"
+  },
+  {
+    "hw-address": "00:0f:fe:c9:b4:d3",
+    "ip-address": "10.3.11.170",
+    "hostname": "1-2520-KADR-6.gtm.gazprom.ru"
+  },
+  {
+    "hw-address": "00:d0:a9:01:10:c0",
+    "ip-address": "10.3.11.243",
+    "hostname": "px-eh.gtm.gazprom.ru"
+  },
+  {
+    "hw-address": "00:0c:29:7f:f2:25",
+    "ip-address": "10.3.11.69",
+    "hostname": "d-611-41-vmit.gtm.gazprom.ru"
+  },
+  {
+    "hw-address": "2c:44:fd:22:f1:59",
+    "ip-address": "10.3.11.175",
+    "hostname": "1-1410-GPI-1.gtm.gazprom.ru"
+  },
+  {
+    "hw-address": "9c:8e:99:f5:0d:67",
+    "ip-address": "10.3.11.1",
+    "hostname": "1-1406-sius-1.gtm.gazprom.ru"
+  },
+  {
+    "hw-address": "2c:44:fd:32:c1:64",
+    "ip-address": "10.3.11.166",
+    "hostname": "1-1408-SIUS-1.gtm.gazprom.ru",
+    "option-data": []
+  },
+  {
+    "hw-address": "00:0f:fe:c2:db:17",
+    "ip-address": "10.3.11.145",
+    "hostname": "Admin-??.gtm.gazprom.ru"
+  },
+  {
+    "hw-address": "00:0f:fe:c9:c8:6c",
+    "ip-address": "10.3.11.93",
+    "hostname": "1-1409-GPI-5.gtm.gazprom.ru"
+  },
+  {
+    "hw-address": "00:0f:fe:cb:c7:15",
+    "ip-address": "10.3.11.51",
+    "hostname": "1-1414-GPI-1.gtm.gazprom.ru"
+  },
+  {
+    "hw-address": "00:12:79:5d:e1:0f",
+    "ip-address": "10.3.11.48",
+    "hostname": "elkep-ener.gtm.gazprom.ru"
+  },
+  {
+    "hw-address": "00:12:79:5d:df:a3",
+    "ip-address": "10.3.11.65",
+    "hostname": "D-607-11-it.gtm.gazprom.ru"
+  },
+  {
+    "hw-address": "00:0f:fe:c9:b8:3e",
+    "ip-address": "10.3.11.112",
+    "hostname": "1-2605-audit-1.gtm.gazprom.ru"
+  },
+  {
+    "hw-address": "00:50:56:b0:12:8e",
+    "ip-address": "10.3.11.23",
+    "hostname": "asup-service.gtm.gazprom.ru"
+  },
+  {
+    "hw-address": "b4:b5:2f:8c:bc:f7",
+    "ip-address": "10.3.11.22",
+    "hostname": "IITI-video-nb.gtm.gazprom.ru"
+  },
+  {
+    "hw-address": "00:50:56:94:17:a6",
+    "ip-address": "10.3.11.9",
+    "hostname": "metr.gtm.gazprom.ru"
+  },
+  {
+    "hw-address": "00:50:56:b0:20:36",
+    "ip-address": "10.3.11.102",
+    "hostname": "archicad-key.gtm.gazprom.ru"
+  },
+  {
+    "hw-address": "00:50:56:bd:04:25",
+    "ip-address": "10.3.11.44",
+    "hostname": "help.gtm.gazprom.ru"
+  },
+  {
+    "hw-address": "00:0f:fe:c9:d7:c3",
+    "ip-address": "10.3.11.77",
+    "hostname": "1-1413-GPI-2.gtm.gazprom.ru"
+  },
+  {
+    "hw-address": "00:0f:fe:cb:ca:22",
+    "ip-address": "10.3.11.73",
+    "hostname": "1-1410-GPI-3.gtm.gazprom.ru"
+  },
+  {
+    "hw-address": "00:0f:fe:cb:c2:a6",
+    "ip-address": "10.3.11.156",
+    "hostname": "1-1303-Audit-4.gtm.gazprom.ru"
+  },
+  {
+    "hw-address": "00:0f:fe:c9:b4:36",
+    "ip-address": "10.3.11.83",
+    "hostname": "1-1305-audit-1.gtm.gazprom.ru"
+  },
+  {
+    "hw-address": "00:0f:fe:cb:ca:57",
+    "ip-address": "10.3.11.82",
+    "hostname": "1-1417-SIUS-1.gtm.gazprom.ru"
+  },
+  {
+    "hw-address": "00:0f:fe:cb:c8:50",
+    "ip-address": "10.3.11.139",
+    "hostname": "1-1417-CLASS-09.gtm.gazprom.ru"
+  },
+  {
+    "hw-address": "00:0f:fe:c3:7c:4d",
+    "ip-address": "10.3.11.25",
+    "hostname": "1-1417-Class-11.gtm.gazprom.ru"
+  },
+  {
+    "hw-address": "a0:48:1c:9b:68:1a",
+    "ip-address": "10.3.11.129",
+    "hostname": "1-1404A-SIUS-5.gtm.gazprom.ru"
+  },
+  {
+    "hw-address": "00:50:56:b0:1e:ee",
+    "ip-address": "10.3.11.121",
+    "hostname": "D-646-W10.gtm.gazprom.ru"
+  },
+  {
+    "hw-address": "a0:48:1c:9b:68:31",
+    "ip-address": "10.3.11.60",
+    "hostname": "1-1612-SS-5.gtm.gazprom.ru"
+  },
+  {
+    "hw-address": "00:11:85:79:cb:e5",
+    "ip-address": "10.3.11.8",
+    "hostname": "d-204-21-ibs.gtm.gazprom.ru"
+  },
+  {
+    "hw-address": "00:16:35:83:e0:7f",
+    "ip-address": "10.3.11.133",
+    "hostname": "D-204-31-GA.gtm.gazprom.ru"
+  },
+  {
+    "hw-address": "00:50:56:b0:29:45",
+    "ip-address": "10.3.11.15",
+    "hostname": "CDR_Site_test.gtm.gazprom.ru"
+  },
+  {
+    "hw-address": "4c:cc:6a:03:7c:9b",
+    "ip-address": "10.3.11.180",
+    "hostname": "1-1403-SIUS-3.gtm.gazprom.ru"
+  },
+  {
+    "hw-address": "e4:11:5b:3b:3e:0c",
+    "ip-address": "10.3.11.47",
+    "hostname": "d-614-nb-prezen.gtm.gazprom.ru",
+    "option-data": []
+  },
+  {
+    "hw-address": "10:1f:74:4d:f3:9b",
+    "ip-address": "10.3.11.36",
+    "hostname": "DESKTOP-S1E6JHB.gtm.gazprom.ru",
+    "option-data": []
+  },
+  {
+    "hw-address": "10:bf:48:8e:45:49",
+    "ip-address": "10.3.11.43",
+    "hostname": "NAS1.gtm.gazprom.ru"
+  },
+  {
+    "hw-address": "00:16:35:67:d9:3b",
+    "ip-address": "10.3.11.21",
+    "hostname": "D-611-41-IT-linit"
+  },
+  {
+    "hw-address": "10:bf:48:8e:45:43",
+    "ip-address": "10.3.11.97",
+    "hostname": "NAS2.gtm.gazprom.ru"
+  },
+  {
+    "hw-address": "00:50:56:b0:45:8d",
+    "ip-address": "10.3.11.26",
+    "hostname": "upc-portal.gtm.gazprom.ru"
+  },
+  {
+    "hw-address": "00:50:56:bd:3c:7a",
+    "ip-address": "10.3.11.46",
+    "hostname": "WWW-dev.gtm.gazprom.ru"
+  },
+  {
+    "hw-address": "00:50:56:a6:7e:30",
+    "ip-address": "10.3.11.146",
+    "hostname": "BORS.gtm.gazprom.ru"
+  },
+  {
+    "hw-address": "00:0f:fe:c9:b8:19",
+    "ip-address": "10.3.11.27",
+    "hostname": "1-1410-GPI-2.gtm.gazprom.ru"
+  },
+  {
+    "hw-address": "24:be:05:25:ad:d1",
+    "ip-address": "10.3.11.18",
+    "hostname": "A-309-23-DU1.gtm.gazprom.ru"
+  },
+  {
+    "hw-address": "00:0f:fe:c2:d8:fd",
+    "ip-address": "10.3.11.240",
+    "hostname": "1-1409-GPI-6.gtm.gazprom.ru"
+  },
+  {
+    "hw-address": "00:03:ff:cf:b8:2d",
+    "ip-address": "10.3.11.192",
+    "hostname": "D-602-42-IT-VM.gtm.gazprom.ru"
+  },
+  {
+    "hw-address": "2c:44:fd:22:f2:98",
+    "ip-address": "10.3.11.68",
+    "hostname": "1-1609-SS-3.gtm.gazprom.ru"
+  },
+  {
+    "hw-address": "00:12:79:5d:df:82",
+    "ip-address": "10.3.11.168",
+    "hostname": "D-610-13-IT.gtm.gazprom.ru"
+  },
+  {
+    "hw-address": "00:50:56:b0:15:64",
+    "ip-address": "10.3.11.202",
+    "hostname": "D-647-VM2-TEST.gtm.gazprom.ru"
+  },
+  {
+    "hw-address": "2c:44:fd:32:c1:50",
+    "ip-address": "10.3.11.42",
+    "hostname": "1-1407-SIUS-4.gtm.gazprom.ru",
+    "option-data": []
+  },
+  {
+    "hw-address": "2c:44:fd:32:c1:90",
+    "ip-address": "10.3.11.216",
+    "hostname": "1-1407-SIUS-2.gtm.gazprom.ru"
+  },
+  {
+    "hw-address": "2c:44:fd:28:31:da",
+    "ip-address": "10.3.11.11",
+    "hostname": "1-1407-SIUS-1.gtm.gazprom.ru"
+  },
+  {
+    "hw-address": "4c:ed:fb:c8:f9:31",
+    "ip-address": "10.3.11.66",
+    "hostname": "1-2828-FU-1.gtm.gazprom.ru"
+  },
+  {
+    "hw-address": "4c:ed:fb:c8:fc:8b",
+    "ip-address": "10.3.11.149",
+    "hostname": "1-1408-SIUS-3.gtm.gazprom.ru",
+    "option-data": []
+  },
+  {
+    "hw-address": "00:0f:fe:c2:d9:01",
+    "ip-address": "10.3.11.39",
+    "hostname": "1-1411-GPI-1.gtm.gazprom.ru",
+    "option-data": []
+  },
+  {
+    "hw-address": "2c:44:fd:23:7e:ed",
+    "ip-address": "10.3.11.122",
+    "hostname": "1-1609-SS-5.gtm.gazprom.ru"
+  },
+  {
+    "hw-address": "00:0f:fe:c9:b8:23",
+    "ip-address": "10.3.11.182",
+    "hostname": "1-1411-GPI-2.gtm.gazprom.ru"
+  },
+  {
+    "hw-address": "2c:44:fd:26:dd:3d",
+    "ip-address": "10.3.11.85",
+    "hostname": "1-1404b-SIUS-1.gtm.gazprom.ru",
+    "option-data": []
+  },
+  {
+    "hw-address": "00:25:b3:14:bc:2b",
+    "ip-address": "10.3.11.45",
+    "hostname": "1-1409-GPI-6.gtm.gazprom.ru",
+    "option-data": []
+  },
+  {
+    "hw-address": "b4:2e:99:4f:a8:cd",
+    "ip-address": "10.3.11.153",
+    "hostname": "1-1404A-SIUS-1.gtm.gazprom.ru"
+  },
+  {
+    "hw-address": "00:50:56:9f:ba:0e",
+    "ip-address": "10.3.11.40",
+    "hostname": "RDP-ADM.gtm.gazprom.ru"
+  },
+  {
+    "hw-address": "2c:44:fd:22:ee:02",
+    "ip-address": "10.3.11.75",
+    "hostname": "1-1404a-SIUS-3.gtm.gazprom.ru",
+    "option-data": []
+  },
+  {
+    "hw-address": "b4:2e:99:4f:a8:d4",
+    "ip-address": "10.3.11.4",
+    "hostname": "1-1403-SIUS-7.gtm.gazprom.ru"
+  },
+  {
+    "hw-address": "4c:ed:fb:c9:06:3c",
+    "ip-address": "10.3.11.33",
+    "hostname": "1-1616-SS-1.gtm.gazprom.ru",
+    "option-data": []
+  },
+  {
+    "hw-address": "24:5e:be:1e:1a:17",
+    "ip-address": "10.3.11.2",
+    "hostname": "TOGTM.gtm.gazprom.ru"
+  },
+  {
+    "hw-address": "00:50:56:9f:97:c0",
+    "ip-address": "10.3.11.35",
+    "hostname": "pgu-test.gtm.gazprom.ru",
+    "option-data": []
+  },
+  {
+    "hw-address": "30:9c:23:01:9c:00",
+    "ip-address": "10.3.11.5",
+    "hostname": "1-1403-SIUS-4.gtm.gazprom.ru"
+  },
+  {
+    "hw-address": "f8:cc:6e:01:34:b2",
+    "ip-address": "10.3.11.91",
+    "hostname": "adm-sius-09.gtm.gazprom.ru"
+  },
+  {
+    "hw-address": "f8:cc:6e:01:2e:5d",
+    "ip-address": "10.3.11.113",
+    "hostname": "adm-sius-10.gtm.gazprom.ru"
+  },
+  {
+    "hw-address": "f8:cc:6e:01:2e:84",
+    "ip-address": "10.3.11.19",
+    "hostname": "adm-sius-04.gtm.gazprom.ru",
+    "option-data": []
+  },
+  {
+    "hw-address": "6c:62:6d:e3:c3:d6",
+    "ip-address": "10.3.11.32",
+    "hostname": "1-1408-sius-2.gtm.gazprom.ru"
+  },
+  {
+    "hw-address": "f8:cc:6e:01:34:e4",
+    "ip-address": "10.3.11.67",
+    "hostname": "adm-sius-24.gtm.gazprom.ru"
+  },
+  {
+    "hw-address": "f8:cc:6e:01:2e:f5",
+    "ip-address": "10.3.11.59",
+    "hostname": "adm-sius-06.gtm.gazprom.ru",
+    "option-data": []
+  },
+  {
+    "hw-address": "f8:cc:6e:01:34:9d",
+    "ip-address": "10.3.11.20",
+    "hostname": "adm-sius-18.gtm.gazprom.ru"
+  },
+  {
+    "hw-address": "f8:cc:6e:01:25:9f",
+    "ip-address": "10.3.11.70",
+    "hostname": "1-1405-SIUS-9.gtm.gazprom.ru"
+  },
+  {
+    "hw-address": "f8:cc:6e:01:33:de",
+    "ip-address": "10.3.11.136",
+    "hostname": "adm-sius-07.gtm.gazprom.ru"
+  },
+  {
+    "hw-address": "f8:cc:6e:01:27:f7",
+    "ip-address": "10.3.11.134",
+    "hostname": "adm-sius-08.gtm.gazprom.ru"
+  },
+  {
+    "hw-address": "f8:cc:6e:01:2f:0a",
+    "ip-address": "10.3.11.94",
+    "hostname": "adm-skz-12.gtm.gazprom.ru"
+  },
+  {
+    "hw-address": "2c:27:d7:32:b1:9a",
+    "ip-address": "10.3.11.7",
+    "hostname": "adm-ss-07.gtm.gazprom.ru"
+  },
+  {
+    "hw-address": "f8:cc:6e:01:39:be",
+    "ip-address": "10.3.11.30",
+    "hostname": "adm-sius-68.gtm.gazprom.ru"
+  },
+  {
+    "hw-address": "b4:2e:99:4f:ae:28",
+    "ip-address": "10.3.11.90",
+    "hostname": "1-1405-Sius-3.gtm.gazprom.ru"
+  },
+  {
+    "hw-address": "f8:cc:6e:01:25:ba",
+    "ip-address": "10.3.11.96",
+    "hostname": "adm-sius-26.gtm.gazprom.ru"
+  },
+  {
+    "hw-address": "f8:cc:6e:04:68:40",
+    "ip-address": "10.3.11.101",
+    "hostname": "adm-sius-31.gtm.gazprom.ru"
+  },
+  {
+    "hw-address": "4c:cc:6a:03:7d:71",
+    "ip-address": "10.3.11.127",
+    "hostname": "adm-urp-35.gtm.gazprom.ru"
+  },
+  {
+    "hw-address": "f8:cc:6e:04:70:7c",
+    "ip-address": "10.3.11.116",
+    "hostname": "adm-sius-01.gtm.gazprom.ru"
+  },
+  {
+    "hw-address": "f8:cc:6e:01:34:83",
+    "ip-address": "10.3.11.106",
+    "hostname": "adm-sius-12.gtm.gazprom.ru"
+  },
+  {
+    "hw-address": "f8:cc:6e:04:8e:f1",
+    "ip-address": "10.3.11.74",
+    "hostname": "adm-srsof-11.gtm.gazprom.ru"
+  },
+  {
+    "hw-address": "f8:cc:6e:01:2f:19",
+    "ip-address": "10.3.11.10",
+    "hostname": "adm-sius-15.gtm.gazprom.ru"
+  },
+  {
+    "hw-address": "f8:cc:6e:01:2e:d4",
+    "ip-address": "10.3.11.176",
+    "hostname": "adm-sius-11.gtm.gazprom.ru"
+  },
+  {
+    "hw-address": "d8:cb:8a:7d:07:dd",
+    "ip-address": "10.3.11.148",
+    "hostname": "adm-ss-08.gtm.gazprom.ru"
+  }
+]

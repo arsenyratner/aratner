@@ -1,0 +1,21 @@
+---
+
+- name: samba-dc network restared
+  systemd:
+    name: "{{ service_name }}"
+    enabled: yes
+    state: restarted
+
+- name: samba-dc start samba
+  service:
+    name: samba
+    enabled: yes
+    state: restarted
+
+- name: samba-dc reboot
+  ansible.builtin.reboot:
+    pre_reboot_delay: 15
+    post_reboot_delay: 15
+    reboot_timeout: 100
+    msg: "Rebooting samba config"
+  ignore_errors: true

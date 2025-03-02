@@ -1,0 +1,5 @@
+[mikrotik]
+i-rt212 ansible_host=172.26.71.212
+i-rt213 ansible_host=172.26.71.213
+i-rt214 ansible_host=172.26.71.214
+i-rt215 ansible_host=172.26.71.215

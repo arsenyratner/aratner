@@ -1,0 +1,39 @@
+---
+#vars
+repo_deleteoldrepofiles: false
+repo_installupdates: false
+repo_rebootafterupdate: false
+
+repo:
+  - name: base
+    description: RedOS - Base
+    baseurl: http://10.20.30.253/pub/repo/red_base
+    file: RedOS-Base
+    gpgkey: file:///etc/pki/rpm-gpg/RPM-GPG-KEY-RED-SOFT
+    gpgcheck: true
+    enabled: true
+    state: "present"
+  - name: updates
+    description: RedOS - Updates
+    baseurl: http://10.20.30.253/pub/repo/red_updates
+    file: RedOS-Updates
+    gpgkey: file:///etc/pki/rpm-gpg/RPM-GPG-KEY-RED-SOFT
+    gpgcheck: true
+    enabled: true
+    state: "present"
+  - name: kernels
+    description: RedOS - Kernels
+    baseurl: http://10.20.30.253/pub/repo/red_kernels
+    file: RedOS-kernels
+    gpgkey: file:///etc/pki/rpm-gpg/RPM-GPG-KEY-RED-SOFT
+    gpgcheck: true
+    enabled: true
+    state: "present"
+  - name: kernels6
+    description: RedOS - Kernels6
+    baseurl: http://10.20.30.253/pub/repo/red_kernels6
+    file: RedOS-kernels6
+    gpgkey: file:///etc/pki/rpm-gpg/RPM-GPG-KEY-RED-SOFT
+    gpgcheck: true
+    enabled: true
+    state: "present"

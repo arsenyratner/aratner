@@ -1,0 +1,60 @@
+---
+#  tasks:
+
+- name: Remove repo
+  ansible.builtin.apt_repository:
+    # install_python_apt: false
+    update_cache: true
+    repo: "{{ repo.type }} {{ repo.urlpre }}/{{ repo.urlsuf }} {{ repo.distribution }}"
+    state: absent
+  loop: "{{ repo_repolist }}"
+  loop_control:
+    loop_var: repo
+
+- name: Remove DVD repo
+  ansible.builtin.apt_repository:
+    # install_python_apt: false
+    update_cache: true
+    repo: "{{ repo }}"
+    state: absent
+  loop:
+    - "deb cdrom:[OS Astra Linux 1.7.4 1.7_x86-64 DVD ]/ 1.7_x86-64 contrib main non-free"
+  loop_control:
+    loop_var: repo
+
+- name: Add repo to custom file
+  ansible.builtin.apt_repository:
+    repo: "{{ repo.type }} {{ repo.urlpre }}/{{ repo.urlsuf }} {{ repo.distribution }} {{ repo.components }}"
+    filename: "{{ repo.distribution }}"
+    state: present
+    update_cache: true
+  loop: "{{ repo_repolist }}"
+  loop_control:
+    loop_var: repo
+
+- name: Upgrade the OS with force-confnew
+  # ansible.builtin.command: apt dist-upgrade -y -o Dpkg::Options::=--force-confnew
+  ansible.builtin.apt:
+    upgrade: dist
+    update_cache: yes
+    # dpkg_options: "{{ repo_dpkg_options }} | default('force-confdef,force-confold')"
+    dpkg_options: 'force-confnew'
+  notify: General reboot system
+
+- name: Install packages
+  ansible.builtin.apt:
+    state: latest
+    update_cache: yes
+    name: "{{ repo_packages }}"
+  when: repo_packages is defined
+
+# - debug:
+#     var: repo_packages
+
+# - name: Repo install packages
+#   apt:
+#     name: "{{ repo_packages }}"
+#     state: latest
+#     update_cache: yes
+#   notify: Repo reboot
+#   when: repo_packages is defined

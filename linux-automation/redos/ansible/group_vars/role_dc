@@ -1,0 +1,29 @@
+---
+preconfig_reboot: true
+preconfig_selinux: disabled
+preconfig_installupdates: true
+preconfig_installpackages: false
+preconfig_graphicaltarget: false
+preconfig_repo_deleteoldfiles: true
+
+sambadc_firstdc: false
+sambadc_adddc: true
+sambadc_sitename: red30
+sambadc_domname: red.aratner.ru
+sambadc_domshortname: red
+sambadc_adminuser: administrator
+sambadc_adminpass: NenDilvUn6
+sambadc_configurebind: true
+sambadc_packages:
+  - bind
+  - bind-dnssec-utils
+  - bind-libs
+  - bind-license.noarch
+  - bind-utils
+  - samba-client*.x86_64
+  - samba-common.noarch
+  - samba-common*x86_64
+  - samba-dc*.x86_64
+  - samba-libs*.x86_64
+  - samba-winbind*.x86_64
+  - krb5-workstation*.x86_64

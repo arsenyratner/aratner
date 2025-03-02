@@ -1,0 +1,4 @@
+ansible_host: 10.20.30.16
+ansible_user: redos
+ansible_password: redos
+preconfig_ipv4_method: auto

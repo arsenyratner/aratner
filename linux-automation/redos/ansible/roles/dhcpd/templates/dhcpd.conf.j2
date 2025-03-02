@@ -1,0 +1,17 @@
+authoritative;
+option dhcp-server-identifier {{ dhcpd_serverid }};
+allow booting;
+allow bootp;
+do-forward-updates on;
+
+include "{{ dhcpd_confd_dir }}/pxe.conf";
+{% if dhcpd_failover is defined %}
+include "{{ dhcpd_confd_dir }}/failover-{{ dhcpd_failover.role }}.conf";
+{% endif %}
+{% for subnet in dhcpd_subnets %}
+include "{{ dhcpd_confd_dir }}/subnet-{{ subnet.address }}.conf";
+{% endfor %}
+{% if dhcpd_hosts is defined %}
+include "{{ dhcpd_confd_dir }}/hosts.conf";
+{% endif %}
+include "{{ dhcpd_confd_dir }}/omapi.conf";
