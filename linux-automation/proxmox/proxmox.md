@@ -31,11 +31,11 @@ vmid="9025"; vmname="tmp-alt-p11-min"; qcow2file=/mnt/appc-pc/pub/templates/$vmn
 vmid="9030"; vmname="tmp-alse-1.7.6uu2-base"; qcow2file=/mnt/appc-pc/pub/templates/$vmname.qcow2; cloneid=9000; qcow2storage=local-zfs; qcow2options=",cache=writeback"
 vmid="9031"; vmname="tmp-alse-1.7.6uu2-adv"; qcow2file=/mnt/appc-pc/pub/templates/$vmname.qcow2; cloneid=9000; qcow2storage=local-zfs; qcow2options=",cache=writeback"
 vmid="9032"; vmname="tmp-alse-1.7.6uu2-max"; qcow2file=/mnt/appc-pc/pub/templates/$vmname.qcow2; cloneid=9000; qcow2storage=local-zfs; qcow2options=",cache=writeback"
-vmid="9102"; vmname="tmp-w2019std"; qcow2file=/mnt/appc-pc/pub/templates/w2019std-image.qcow2; cloneid=9100; qcow2storage=local-zfs; qcow2options=",cache=writeback"
+vmid="9102"; vmname="tmp-w2012r2std"; qcow2file=/mnt/appc-pc/pub/templates/w2012r2std-image.qcow2; cloneid=9100; qcow2storage=local-zfs; qcow2options=",cache=writeback"
+vmid="9103"; vmname="tmp-w2016std"; qcow2file=/mnt/appc-pc/pub/templates/w2016std-image.qcow2; cloneid=9100; qcow2storage=local-zfs; qcow2options=",cache=writeback"
+vmid="9104"; vmname="tmp-w2019std"; qcow2file=/mnt/appc-pc/pub/templates/w2019std-image.qcow2; cloneid=9100; qcow2storage=local-zfs; qcow2options=",cache=writeback"
 vmid="9105"; vmname="tmp-w2022std"; qcow2file=/mnt/appc-pc/pub/templates/w2022std-image.qcow2; cloneid=9100; qcow2storage=local-zfs; qcow2options=",cache=writeback"
-vmid="9107"; vmname="tmp-w2016std"; qcow2file=/mnt/appc-pc/pub/templates/w2016std-image.qcow2; cloneid=9100; qcow2storage=local-zfs; qcow2options=",cache=writeback"
-vmid="9109"; vmname="tmp-w2012r2std"; qcow2file=/mnt/appc-pc/pub/templates/w2012r2std-image.qcow2; cloneid=9100; qcow2storage=local-zfs; qcow2options=",cache=writeback"
-vmid="9110"; vmname="tmp-w10ent-21h2"; qcow2file=/mnt/appc-pc/pub/templates/$vmname.qcow2; cloneid=9100; qcow2storage=local-zfs; qcow2options=",cache=writeback"
+vmid="9110"; vmname="tmp-w10pro-21h2"; qcow2file=/mnt/appc-pc/pub/templates/$vmname.qcow2; cloneid=9100; qcow2storage=local-zfs; qcow2options=",cache=writeback"
 vmid="9111"; vmname="tmp-w11pro-24h2"; qcow2file=/mnt/appc-pc/pub/templates/tmp-w11pro-24h2-202502.qcow2; cloneid=9100; qcow2storage=local-zfs; qcow2options=",cache=writeback"
 
 qm destroy $vmid; \
@@ -47,6 +47,25 @@ qm resize $vmid virtio0 +2G ; \
 qm template $vmid
 
 qm destroy $vmid; qm clone $cloneid $vmid --full 1 --name $vmname; qm importdisk $vmid $qcow2file $qcow2storage; qm set $vmid --virtio0 $qcow2storage:vm-${vmid}-disk-0${qcow2options}; qm set $vmid --boot c --bootdisk virtio0 ; qm resize $vmid virtio0 +2G ; qm template $vmid
+
+
+declare -a vmarr=(
+  "9102,tmp-w2012r2std"
+  "9103,tmp-w2016std"
+  "9104,tmp-w2019std"
+  "9105,tmp-w2022std"
+  "9110,tmp-w10pro-21h2"
+  "9111,tmp-w11pro-24h2"
+)
+qcow2storage=local-zfs; qcow2options=",cache=writeback"
+for vm in "${vmarr[@]}"
+do
+  VMIN=(${vm//,/ })
+  vmid=${VMIN[0]} 
+  vmname=${VMIN[1]}
+  qcowfile=/mnt/appc-pc/pub/templates/$vmname.qcow2
+  qm destroy $vmid; qm clone $cloneid $vmid --full 1 --name $vmname; qm importdisk $vmid $qcow2file $qcow2storage; qm set $vmid --virtio0 $qcow2storage:vm-${vmid}-disk-0${qcow2options}; qm set $vmid --boot c --bootdisk virtio0 ; qm resize $vmid virtio0 +2G ; qm template $vmid
+done
 
 ```
 
