@@ -51,19 +51,29 @@ qm destroy $vmid; qm clone $cloneid $vmid --full 1 --name $vmname; qm importdisk
 declare -a vmarr=(
   "9102,tmp-w2012r2std"
   "9103,tmp-w2016std"
-  "9104,tmp-w2019std"
-  "9105,tmp-w2022std"
-  "9110,tmp-w10pro-21h2"
   "9111,tmp-w11pro-24h2"
 )
-qcow2storage=local-zfs; qcow2options=",cache=writeback"
+
+declare -a vmarr=(
+  "9104,tmp-w2019std"
+  "9105,tmp-w2022std"
+  "9110,tmp-w10pro-22h2"
+)
+
+cloneid=9100; qcow2storage=local-zfs; qcow2options=",cache=writeback"
 for vm in "${vmarr[@]}"
 do
   VMIN=(${vm//,/ })
   vmid=${VMIN[0]} 
   vmname=${VMIN[1]}
-  qcowfile=/mnt/appc-pc/pub/templates/$vmname.qcow2
-  qm destroy $vmid; qm clone $cloneid $vmid --full 1 --name $vmname; qm importdisk $vmid $qcow2file $qcow2storage; qm set $vmid --virtio0 $qcow2storage:vm-${vmid}-disk-0${qcow2options}; qm set $vmid --boot c --bootdisk virtio0 ; qm resize $vmid virtio0 +2G ; qm template $vmid
+  qcow2file=/mnt/appc-pc/pub/templates/$vmname.qcow2
+  qm destroy $vmid
+  qm clone $cloneid $vmid --full 1 --name $vmname
+  qm importdisk $vmid $qcow2file $qcow2storage
+  qm set $vmid --virtio0 $qcow2storage:vm-${vmid}-disk-0${qcow2options}
+  qm set $vmid --boot c --bootdisk virtio0
+  qm resize $vmid virtio0 +2G
+  qm template $vmid
 done
 
 ```
