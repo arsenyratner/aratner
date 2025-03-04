@@ -48,7 +48,6 @@ qm template $vmid
 
 qm destroy $vmid; qm clone $cloneid $vmid --full 1 --name $vmname; qm importdisk $vmid $qcow2file $qcow2storage; qm set $vmid --virtio0 $qcow2storage:vm-${vmid}-disk-0${qcow2options}; qm set $vmid --boot c --bootdisk virtio0 ; qm resize $vmid virtio0 +2G ; qm template $vmid
 
-
 declare -a vmarr=(
   "9102,tmp-w2012r2std"
   "9103,tmp-w2016std"
