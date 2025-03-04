@@ -50,7 +50,12 @@ qm destroy $vmid; qm clone $cloneid $vmid --full 1 --name $vmname; qm importdisk
 
 declare -a vmarr=(
   "9102,tmp-w2012r2std"
+)
+declare -a vmarr=(
   "9103,tmp-w2016std"
+)
+
+declare -a vmarr=(
   "9111,tmp-w11pro-24h2"
 )
 
