@@ -1,0 +1,21 @@
+domain_mode: Win2008
+domain_admin: administrator
+domain_password: "{{ sambadc_adminpass }}"
+domain_name: "gtm.gazprom.ru"
+domain_shortname: "gtm"
+domain_timeserver: 192.168.126.1
+domain_forwarders: 
+- 10.3.188.10
+- 10.3.188.11
+domain_firstdc_ip: 10.3.77.112
+domain_firstdc_name: "gpdc1.{{ domain_name }}"
+domain_sudoers:
+- file: "{{ domain_shortname }}"
+  name: "%domain\\ admins"
+  rights: "ALL=(ALL) NOPASSWD:ALL"
+- file: "{{ domain_shortname }}"
+  name: "%{{ domain_shortname }}\\\\domain\\ admins"
+  rights: "ALL=(ALL) NOPASSWD:ALL"
+- file: "mtg"
+  name: "%domain\\ admins@{{ domain_name }}"
+  rights: "ALL=(ALL) NOPASSWD:ALL"

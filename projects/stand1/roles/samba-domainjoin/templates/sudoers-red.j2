@@ -1,0 +1,7 @@
+%domain\ admins ALL=(ALL) NOPASSWD:ALL
+%{{ domain_shortname }}\\domain\ admins ALL=(ALL)	NOPASSWD:ALL
+%domain\ admins@{{ domain_name }} ALL=(ALL) NOPASSWD:ALL
+
+%sudo_{{ ansible_hostname }}_all ALL=(ALL) NOPASSWD:ALL
+%{{ domain_shortname }}\\sudo_{{ ansible_hostname }}_all@{{ domain_name }} ALL=(ALL) NOPASSWD:ALL
+%sudo_{{ ansible_hostname }}_all@{{ domain_name }} ALL=(ALL) NOPASSWD:ALL

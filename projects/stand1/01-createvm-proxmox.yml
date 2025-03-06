@@ -1,0 +1,46 @@
+---
+- name: Create VMs
+  hosts: localhost
+  become: false
+  gather_facts: false
+  vars_files:
+  - proxmox.yml
+  - createvms-proxmox.yml
+  tasks:
+  - debug: "var=ansible_password"
+  - name: Create VMs
+    ansible.builtin.include_role:
+      name: createvm-proxmox
+    vars:
+      createvm:
+        node: "{{ newvm.node | default(proxmox.node) }}"
+        citype: "{{ newvm.citype | default('nocloud') }}"
+        ciuser: 
+          name: "{{ newvm.ciuser.name | default(ansible_user) }}"
+          password: "{{ newvm.ciuser.password | default(ansible_password | string) }}"
+          sshkeys: "{{ newvm.ciuser.sshkeys | default(ansible_ssh_public_key) }}"
+        cicustom: "{{ newvm.cicustom | default(omit) }}"
+        name: "{{ newvm.name | default(newvm.site + newvm.role + newvm.suffix|default(omit)) }}"
+        template: "{{ newvm.template }}"
+        cpu: "{{ newvm.cpu_type | default(omit) }}"
+        cores: "{{ newvm.cpu_cores | default('2') }}"
+        memory: "{{ newvm.memory | default('4096') }}" # | human_to_bytes(default_unit='G') | int / 1024 / 1024
+        balloon: "{{ newvm.balloon | default('512') }}"
+        disk:
+          size: "{{ newvm.disksize | default(omit) }}" # | human_to_bytes(default_unit='G') | int / 1024 / 1024 / 1024
+        nic:
+          bridge: "{{ newvm.nic.bridge | default('gtm77') }}"
+          mac: "{{ newvm.nic.mac | default(omit) }}"
+        tags:
+          - "project_{{ newvm.project | default('gtm')}}"
+          - "site_{{ newvm.site | default('gtmadm') }}"
+          - "role_{{ newvm.role | default('gtm') }}"
+          - "template_{{ newvm.template }}"
+        ipconfig0: "{{ newvm.ipconfig0 | default('ip=' + newvm.ipv4.address + '/' + newvm.ipv4.netmask|string + ',gw=' + newvm.ipv4.gateway, 'ip=dhcp') }}"
+        nameservers: "{{ newvm.nameservers | default(omit) }}"
+        searchdomains: "{{ newvm.searchdomains | default(omit) }}"
+        clontype: "{{ newvm.clontype | default('linked') }}"
+    loop: "{{ createvm_proxmox }}"
+    loop_control:
+      loop_var: newvm
+      # label: "{{ newvm.name | default(newvm.site + newvm.role + newvm.suffix) }}"

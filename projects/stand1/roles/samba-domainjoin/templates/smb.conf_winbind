@@ -1,0 +1,52 @@
+[global]
+    workgroup = {{ domain_shortname | upper }}
+    realm = {{ domain_name | upper }}
+    security = ADS
+    passdb backend = tdbsam
+
+    winbind enum groups = Yes
+    winbind enum users = Yes
+    winbind offline logon = Yes
+    winbind use default domain = Yes
+    winbind refresh tickets = Yes
+    winbind cache time = 300
+    wins support = No
+
+    idmap cache time = 900
+    idmap config * : backend = tdb
+    idmap config * : range = 10000-99999
+    idmap config  {{ domain_shortname | upper }}: backend = rid
+    idmap config  {{ domain_shortname | upper }}: range = 100000-999999
+{% if sambafs_trusteddomains is defined %}
+{% for domain in sambafs_trusteddomains %}
+    idmap config {{ domain.shortname | upper }} : backend        = rid
+    idmap config {{ domain.shortname | upper }} : range          = {{ domain.ridpre }}00000-{{ domain.ridpre }}99999
+{% endfor %}
+{% endif %}
+    client min protocol = NT1
+    client max protocol = SMB3
+
+    kerberos method = system keytab
+
+    template homedir = /home/%U@%D
+
+    template shell = /bin/bash
+    nt pipe support = yes
+    machine password timeout = 60
+
+#    Настройка прав только из винды
+#    Права можно настроить из линукс, но виндовые будут приоритетнее, линукс их не покажет
+#    vfs objects = acl_xattr
+#    map acl inherit = yes
+#    store dos attributes = yes
+
+    unix extensions = no
+    follow symlinks = yes
+    wide links = yes
+
+    create mask = 0660
+    directory mask = 0770
+
+#    log level = 3
+#    log file = /var/log/samba/log.%I
+#    max log size = 100000

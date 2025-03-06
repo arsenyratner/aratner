@@ -1,0 +1,9 @@
+---
+# chrony:
+#   packagelist:
+#     - chrony
+#   ntp_pools:
+#     - "{{ domain_name }}"
+#   ntp_servers:
+#     - 10.3.79.11
+#     - 10.3.79.12

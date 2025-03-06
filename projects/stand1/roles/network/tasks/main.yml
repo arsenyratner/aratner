@@ -1,0 +1,120 @@
+- name: Disable NM resolv.conf managment 
+  ansible.builtin.copy:
+    dest: /etc/NetworkManager/conf.d/90-dns-none.conf
+    mode: 0644
+    content: |
+      [main]
+      dns=none
+  notify: Network reboot
+
+- name: Disable IPv6
+  block:
+    - name: Disable IPv6 Sysctl
+      ansible.posix.sysctl:
+        name: "{{ item }}"
+        value: 1
+        state: present
+        reload: yes
+      loop:
+        - net.ipv6.conf.all.disable_ipv6
+        - net.ipv6.conf.default.disable_ipv6
+        # - net.ipv6.conf.lo.disable._ipv6
+    - name: Disable IPv6 NetworkManager alias:{{ ansible_default_ipv4.alias }} ifname:{{ ansible_default_ipv4.interface }}
+      community.general.nmcli:
+        conn_name: "{{ ansible_default_ipv4.alias }}"
+        ifname: "{{ ansible_default_ipv4.interface }}"
+        type: ethernet
+        method6: ignore
+        state: present
+  when: network_ipv6_disable is true
+
+- debug:
+    var: network_ipv4_method
+
+- name: NM ipv4 auto
+  block:
+    - name: set address auto
+      community.general.nmcli:
+        conn_name: "{{ ansible_default_ipv4.alias }}"
+        ifname: "{{ ansible_default_ipv4.interface }}"
+        type: ethernet
+        method4: "{{ network_ipv4_method }}"
+        # ip4: "{{ ansible_default_ipv4.address }}/{{ ansible_default_ipv4.prefix }}"
+        # gw4: "{{ ansible_default_ipv4.gateway }}"
+        state: present
+        autoconnect: true
+      notify: Network reboot
+  when:
+    - network_ipv4_method == "auto"
+  notify: Network restart
+
+- name: NM ipv4 convert dhcp to static
+  block:
+    - name: set address convert
+      community.general.nmcli:
+        conn_name: "{{ ansible_default_ipv4.alias }}"
+        ifname: "{{ ansible_default_ipv4.interface }}"
+        type: ethernet
+        # ipv4.method: "{{ network_ipv4_method }}"
+        ip4: "{{ ansible_default_ipv4.address }}/{{ ansible_default_ipv4.prefix }}"
+        gw4: "{{ ansible_default_ipv4.gateway }}"
+        state: present
+        autoconnect: true
+      notify: Network reboot
+  when:
+    - network_ipv4_method == "convert"
+  notify: Network restart
+
+- name: NM ipv4 setup manual
+  block:
+    - name: set address manual
+      community.general.nmcli:
+        conn_name: "{{ ansible_default_ipv4.alias }}"
+        ifname: "{{ ansible_default_ipv4.interface }}"
+        type: ethernet
+        # ipv4.method: "{{ network_ipv4_method }}"
+        ip4: "{{ network_ipv4.address }}/{{ network_ipv4.prefix }}"
+        gw4: "{{ network_ipv4.gw }}"
+        state: present
+        autoconnect: true
+      notify: Network reboot
+  when:
+    - network_ipv4_method == "manual"
+    - network_ipv4.address is defined
+    - network_ipv4.gw is defined
+  notify: Network restart
+
+- name: NM ipv4 setup dns
+  community.general.nmcli:
+    conn_name: "{{ ansible_default_ipv4.alias }}"
+    type: ethernet
+    dns4_search: "{{ network_ipv4_dns.search }}"
+    dns4: "{{ network_ipv4_dns.servers }}"
+    state: present
+  notify: Network restart
+  when:
+    - network_ipv4_dns.search
+    - network_ipv4_dns.servers
+
+- name: Remove all ethernet connections with wrong conn_name NOT {{ ansible_default_ipv4.alias }}
+  ansible.builtin.shell: |
+    for nmcuuid in $(nmcli -t -f UUID,TYPE,NAME connection show | grep ethernet | awk -F":" '{ if ($3 != "{{ ansible_default_ipv4.alias }}") print $1 }'); do echo "Removing connection uuid $nmcuuid"; nmcli connection delete $nmcuuid; done
+  notify: Network restart
+  register: network_removeconn_result
+  changed_when: network_removeconn_result.stdout != ""
+
+- debug:
+    var: network_removeconn_result.stdout
+
+# - debug:
+#     var: inventory_hostname
+# - debug:
+#     var: inventory_hostname_short
+
+- name: Set hostname
+  ansible.builtin.hostname:
+    name: "{{ inventory_hostname_short }}.{{ domain_name }}"
+    use: systemd
+
+- name: Running handlers
+  meta: flush_handlers

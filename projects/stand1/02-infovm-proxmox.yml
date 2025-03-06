@@ -1,0 +1,38 @@
+---
+- name: Delete VMs proxmox
+  hosts: localhost
+  become: false
+  gather_facts: false
+  vars_files:
+    - proxmox.yml
+    - createvms-proxmox.yml
+  pre_tasks:
+    - debug:
+        var: deletevms
+
+  tasks:
+    - name: vminfo
+      community.general.proxmox_vm_info:
+        api_host: "{{ proxmox.api_host }}"
+        # api_port:
+        api_user: "{{ proxmox.api_user }}"
+        api_password: "{{ proxmox.api_password }}"
+        api_token_id: "{{ proxmox.api_token_id }}"
+        api_token_secret: "{{ proxmox.api_token_secret }}"
+        node: "{{ newvm.node | default(proxmox.node) }}"
+        name: "{{ newvm.name | default(newvm.site + newvm.role + newvm.suffix|default(omit)) }}"
+        # config:
+        # network:
+        # type:
+        # validate_certs:
+        # vmid:
+      loop: "{{ createvm_proxmox }}"
+      loop_control:
+        loop_var: newvm
+      ignore_errors: true
+      register: vminfo_result
+
+    - local_action: copy content={{ vminfo_result.results }} dest=vminfo.result.json
+
+# api_host, api_password, api_port, api_token_id, api_token_secret, api_user, 
+# config, name, network, node, type, validate_certs, vmid.

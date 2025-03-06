@@ -1,0 +1,69 @@
+---
+#vars
+repo_managedfiles:
+  - collection.repo
+  - RedOS-Base.repo
+  - RedOS-media.repo
+  - RedOS-Updates.repo
+
+repo_deleteoldrepofiles: true
+repo_installupdates: false
+repo_rebootafterupdate: false
+
+repo:
+  - name: base
+    description: RedOS - Base
+    baseurl: https://mirror.yandex.ru/redos/7.3/x86_64/os/
+    file: RedOS-Base
+    gpgkey: file:///etc/pki/rpm-gpg/RPM-GPG-KEY-RED-SOFT
+    gpgcheck: true
+    enabled: true
+    state: "present"
+  - name: updates
+    description: RedOS - Updates
+    baseurl: https://mirror.yandex.ru/redos/7.3/x86_64/updates/
+    file: RedOS-Updates
+    gpgkey: file:///etc/pki/rpm-gpg/RPM-GPG-KEY-RED-SOFT
+    gpgcheck: true
+    enabled: true
+    state: "present"
+  - name: kernels
+    description: RedOS - Kernels
+    baseurl: https://mirror.yandex.ru/redos/7.3/x86_64/kernels/
+    file: RedOS-kernels
+    gpgkey: file:///etc/pki/rpm-gpg/RPM-GPG-KEY-RED-SOFT
+    gpgcheck: true
+    enabled: false
+    state: "present"
+  - name: kernels6
+    description: RedOS - Kernels6
+    baseurl: https://mirror.yandex.ru/redos/7.3/x86_64/extras/kernels6-73/
+    file: RedOS-kernels6
+    gpgkey: file:///etc/pki/rpm-gpg/RPM-GPG-KEY-RED-SOFT
+    gpgcheck: true
+    enabled: true
+    state: "present"
+  - name: ansible6
+    description: RedOS - ansible
+    baseurl: https://mirror.yandex.ru/redos/7.3/x86_64/extras/ansible6-73/
+    file: RedOS-ansible6
+    gpgkey: file:///etc/pki/rpm-gpg/RPM-GPG-KEY-RED-SOFT
+    gpgcheck: true
+    enabled: false
+    state: "present"
+  - name: ansible6
+    description: RedOS - docker
+    baseurl: https://mirror.yandex.ru/redos/7.3/x86_64/extras/docker-73/
+    file: RedOS-docker
+    gpgkey: file:///etc/pki/rpm-gpg/RPM-GPG-KEY-RED-SOFT
+    gpgcheck: true
+    enabled: false
+    state: "present"
+  - name: postgresql14
+    description: RedOS - postgresql14
+    baseurl: https://mirror.yandex.ru/redos/7.3/x86_64/extras/postgresql14-73/
+    file: RedOS-postgresql14
+    gpgkey: file:///etc/pki/rpm-gpg/RPM-GPG-KEY-RED-SOFT
+    gpgcheck: true
+    enabled: false
+    state: "present"
