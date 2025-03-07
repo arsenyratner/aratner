@@ -1,0 +1,10 @@
+---
+- name: NM Disable systemd-resolved
+  block:
+    - name: Disable systemd-resolved
+      ansible.builtin.systemd_service:
+        name: systemd-resolved
+        enabled: false
+        state: stopped
+        masked: true
+      ignore_errors: true

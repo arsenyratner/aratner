@@ -1,0 +1,65 @@
+---
+- name: Join AD
+  vars:
+    ansible_user: cloudadmin
+  hosts: site_gtmadm,&os_windows,!role_dc
+
+  tasks:
+  # - name: Set boot delay
+  #   ansible.windows.win_shell: bcdedit /timeout 5
+
+  - name: Windows firewall
+    win_firewall:
+      state: "{{ win_firewall_state }}"
+      profiles:
+      - Domain
+      - Private
+      - Public
+    tags: win_firewall
+
+  - name: Network settings
+    ansible.builtin.include_role:
+      name: win_network
+
+  - name: Get current computer name
+    win_shell: hostname
+    register: current_hostname
+    changed_when: no
+
+  - debug:
+      var: current_hostname
+
+  - name: Set hostname
+    ansible.windows.win_hostname:
+      name: "{{ inventory_hostname }}"
+    register: win_hostname_result
+
+  - debug:
+      var: win_hostname_result
+
+  - name: Windows reboot
+    ansible.windows.win_reboot:
+    when: win_hostname_result.reboot_required
+
+  - name: Local administrator password
+    ansible.windows.win_user:
+      name: administrator
+      state: present
+      password_never_expires: true
+      account_disabled: true
+      update_password : always
+      password: "{{ domain_password }}"
+
+  - name: Join AD 
+    microsoft.ad.membership:
+      dns_domain_name: "{{ domain_name }}"
+      hostname: "{{ inventory_hostname }}"
+      domain_admin_user: "{{ domain_shortname}}\\{{ domain_admin }}"
+      domain_admin_password: "{{ domain_password }}"
+      # domain_ou_path: "OU=Windows,OU=Servers,DC=ansible,DC=vagrant"
+      state: domain
+      reboot: true
+    register: ad_membership_result
+
+  - debug:
+      var: ad_membership_result

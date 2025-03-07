@@ -1,0 +1,86 @@
+---
+- name: Check if already domain joined
+  # command: timeout 10s net ads testjoin
+  ansible.builtin.command: net ads testjoin
+  register: testjoin_result
+  ignore_errors: true
+  changed_when: testjoin_result.stdout != "Join is OK"
+
+- name: Check computername exist in domain
+  ansible.builtin.shell: echo {{ domainjoin_password }} | adcli show-computer -U {{ domainjoin_user }} --domain {{ domainjoin_domname }} {{ ansible_hostname }} --stdin-password
+  register: testcomp_result
+  ignore_errors: true
+  changed_when: ansible_hostname | upper not in testcomp_result.stdout
+
+- name: domainjoin install packages
+  ansible.builtin.dnf:
+    name: "{{ domainjoin_packages }}"
+    state: present
+
+# custom join script
+- name: doimainjoin copy join script
+  ansible.builtin.copy:
+    src: join-to-domain.sh
+    dest: /usr/local/bin/join-to-domain.sh
+    owner: root
+    group: root
+    mode: "0755"
+    force: yes
+
+- name: domainjoin sssd with DC
+  block:
+  - name: doimainjoin sssd DC
+    ansible.builtin.shell: |
+      {{ domainjoin_script }} -d {{ domainjoin_domname }} -n {{ ansible_hostname }} -u {{ domainjoin_user }} -p {{ domainjoin_password }} --dc {{ domainjoin_dc1 }} -y
+    notify: domainjoin reboot
+    when:
+    - domainjoin_type == "sssd"
+    - '"Join is OK" not in testjoin_result.stdout'
+    - domainjoin_dc1 is defined
+  rescue:
+  - name: doimainjoin sssd DC
+    ansible.builtin.shell: |
+      cp /etc/samba/smb.conf /etc/samba/smb.conf.$(date +%T%m%d-%H%M%S) || true
+      realm leave -v --client-software=sssd || true 
+      realm leave -v --client-software=winbind || true 
+      sss_cache -E || true 
+      kdestroy -A || true 
+      rm -rf /tmp/krb5cc* /var/lib/sss/db/* || true 
+      rm -f /etc/sudoers.d/domain_admins_sudo || true 
+      echo {{ domainjoin_password }} | adcli delete-computer -vvv -U {{ domainjoin_user }} --domain {{ domainjoin_domname }} {{ ansible_hostname }} --stdin-password || true
+      realm leave {{ domainjoin_domname }} || true 
+      realm leave {{ domainjoin_domname }} || true 
+      realm leave {{ domainjoin_domname }} || true 
+      {{ domainjoin_script }} -d {{ domainjoin_domname }} -n {{ ansible_hostname }} -u {{ domainjoin_user }} -p {{ domainjoin_password }} --dc {{ domainjoin_dc1 }} -y
+    notify: domainjoin reboot
+    when:
+    - domainjoin_type == "sssd"
+    - '"Join is OK" not in testjoin_result.stdout'
+    - domainjoin_dc1 is defined
+
+- name: doimainjoin winbind
+  block:
+  - name: Join winbind
+    when:
+    - domainjoin_type == "winbind"
+    - '"Join is OK" not in testjoin_result.stdout'
+    ansible.builtin.command: 
+      cmd: "{{ domainjoin_script }} -d {{ domainjoin_domname }} -n {{ ansible_hostname }} -u {{ domainjoin_user}} -p {{ domainjoin_password }} --dc {{ domainjoin_dc1 }} -w -y"
+    notify: domainjoin reboot
+
+- name: winbind use default domain = Yes
+  ansible.builtin.lineinfile:
+    path: /etc/samba/smb.conf
+    insertafter: '[global]'
+    regexp: '^(.*)winbind use default domain(.*)$'
+    line: winbind use default domain = Yes
+    backrefs: false
+  notify: domainjoin reboot
+
+- name: add sudoers.d
+  ansible.builtin.template:
+    src: sudoers-red.j2
+    dest: /etc/sudoers.d/{{ domain_shortname }}
+    owner: "root"
+    group: "root"
+    mode: "0440"

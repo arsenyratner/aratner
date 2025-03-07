@@ -1,0 +1,17 @@
+---
+# - debug:
+#     var: chrony
+    
+- name: Chrony install packages
+  ansible.builtin.dnf:
+    name: "{{ chrony.packagelist | default('chrony') }}"
+    state: present
+
+- name: Chrony create chrony.conf
+  ansible.builtin.template:
+    src: chrony.conf.j2
+    dest: /etc/chrony.conf
+    owner: root
+    group: root
+    mode: "0644"
+  notify: Chrony chronyd restart

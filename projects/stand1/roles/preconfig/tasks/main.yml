@@ -1,0 +1,66 @@
+---
+- name: Preconfig SELinux
+  ansible.builtin.selinux:
+    state: "{{ preconfig_selinux }}"
+
+- name: Preconfig install packages
+  ansible.builtin.dnf:
+    name: "{{ preconfig_packages }}"
+    state: present
+    # update_only: true
+  when: preconfig_installpackages is true
+
+# - debug:
+#     var: preconfig_packages
+
+- name: Preconfig Set timezone
+  community.general.timezone:
+    name: "{{ preconfig_timezone }}"
+
+- name: Preconfig copy scripts
+  block:
+    - name: Copy sh scripts to /usr/local/bin
+      ansible.builtin.template:
+        src: "{{ file }}"
+        dest: /usr/local/bin/{{ file | basename | regex_replace('\.j2$', '') }}
+        owner: root
+        group: root
+        mode: "0755"
+      loop: "{{ lookup('fileglob', 'templates/copyoneachhost/*.sh.j2', wantlist=True) }}"
+      loop_control:
+        loop_var: file
+      register: copysh_result
+    - debug:
+        var: copysh_result.changed
+
+- name: Preconfig install CA certs
+  block:
+    - name: Copy ca certs
+      ansible.builtin.copy:
+        src: "{{ cert }}"
+        dest: /etc/pki/ca-trust/source/anchors/
+        owner: root
+        group: root
+        mode: "0644"
+      loop: "{{ lookup('fileglob', 'ca-*.crt', wantlist=True) }}"
+      loop_control:
+        loop_var: cert
+      register: copyca_result
+    # - debug:
+    #     var: copyca_result.changed
+    - name: Update ca trust
+      ansible.builtin.command: update-ca-trust extract
+      when: copyca_result.changed is true
+
+- name: /etc/openldap/ldap.conf
+  ansible.builtin.copy:
+    dest: /etc/openldap/ldap.conf
+    mode: '0644'
+    force: true
+    content: |
+      BASE   {{ ldap_basedn }}
+      URI    ldap://{{ domainjoin_dc2 }} ldap://{{ domainjoin_dc1 }}
+      SASL_MECH GSSAPI
+      SASL_REALM {{ domain_name | upper }}
+      SASL_NOCANON on
+      TLS_REQCERT never

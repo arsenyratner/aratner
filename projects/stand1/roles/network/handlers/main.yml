@@ -1,0 +1,15 @@
+---
+# handlers file for preconfig
+- name: Network reboot
+  ansible.builtin.reboot:
+    pre_reboot_delay: 15
+    post_reboot_delay: 15
+    reboot_timeout: 100
+    msg: "Rebooting after network config"
+  when: network_reboot is true
+  ignore_errors: true
+
+- name: Network restart
+  ansible.builtin.shell: |
+    CON=$(nmcli -g name con | head -n1)
+    nmcli con down id "${CON}"; nmcli con up id "${CON}"

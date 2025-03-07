@@ -1,0 +1,41 @@
+repo_managedfiles:
+- RedOS-Base.repo
+- RedOS-media.repo
+- RedOS-Updates.repo
+repo_deleteoldrepofiles: true
+
+repo:
+- name: media
+  description: RedOS - DVD
+  baseurl: http://repo.mtg.gazprom.ru/repo/redos/8.0/media/
+  file: RedOS-media
+  gpgkey: file:///etc/pki/rpm-gpg/RPM-GPG-KEY-RED-SOFT
+  gpgcheck: true
+  enabled: true
+  state: "present"
+- name: base
+  description: RedOS - Base
+  baseurl: http://repo.mtg.gazprom.ru/repo/redos/8.0/base
+  file: RedOS-Base
+  gpgkey: file:///etc/pki/rpm-gpg/RPM-GPG-KEY-RED-SOFT
+  gpgcheck: true
+  enabled: true
+  state: "present"
+- name: updates
+  description: RedOS - Updates
+  baseurl: http://repo.mtg.gazprom.ru/repo/redos/8.0/updates
+  file: RedOS-Updates
+  gpgkey: file:///etc/pki/rpm-gpg/RPM-GPG-KEY-RED-SOFT
+  gpgcheck: true
+  enabled: true
+  state: "present"
+
+repo_appc:
+- name: base
+  description: RedOS-Base 20240821
+  baseurl: http://repo.mtg.gazprom.ru/repo/redos/8.0/base-20240821/
+  file: RedOS-base
+  gpgkey: file:///etc/pki/rpm-gpg/RPM-GPG-KEY-RED-SOFT
+  gpgcheck: true
+  enabled: true
+  state: "present"

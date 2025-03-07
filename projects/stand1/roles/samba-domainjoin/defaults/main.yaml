@@ -1,0 +1,24 @@
+---
+domainjoin_type: sssd
+domainjoin_script: /usr/bin/join-to-domain.sh
+domainjoin_reboot: true
+domainjoin_domname: ""
+domainjoin_shortname: ""
+domainjoin_packages: 
+- realmd
+- sssd
+- oddjob
+- oddjob-mkhomedir
+- adcli
+- join-to-domain
+- samba-client
+- samba-common.noarch
+- samba-common
+- samba-libs
+- samba-winbind
+- krb5-workstation
+- oddjob
+- oddjob-mkhomedir
+- samba-winbind
+- samba-winbind-clients
+- samba-common-tools

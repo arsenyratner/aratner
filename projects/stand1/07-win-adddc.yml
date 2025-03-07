@@ -1,0 +1,104 @@
+---
+- name: Promote dc
+  vars:
+    ansible_user: cloudadmin
+  hosts: role_dc,!first_dc
+
+  handlers:
+  - name: Windows restart service w32time
+    ansible.windows.win_service:
+      name: spooler
+      state: restarted
+
+  tasks:
+  - name: Windows firewall
+    win_firewall:
+      state: "{{ win_firewall_state }}"
+      profiles:
+      - Domain
+      - Private
+      - Public
+    tags: win_firewall
+
+  - name: Network settings
+    ansible.builtin.include_role:
+      name: win_network
+    vars:
+      win_network_ipv6_disable: true
+      win_network_ipv4_method: convert
+      win_network_dnsservers:
+        - "{{ domain_firstdc_ip }}"
+
+  - name: Get current computer name
+    win_shell: hostname
+    register: current_hostname
+    changed_when: no
+
+  - debug: "var=current_hostname"
+
+  - name: Set hostname
+    ansible.windows.win_hostname:
+      name: "{{ inventory_hostname }}"
+    register: win_hostname_result
+
+  - debug: "var=win_hostname_result"
+
+  - name: Windows reboot
+    ansible.windows.win_reboot:
+    when: win_hostname_result.reboot_required
+
+  - name: Local administrator password
+    ansible.windows.win_user:
+      name: administrator
+      state: present
+      password_never_expires: true
+      update_password : always
+      password: "{{ domain_password }}"
+
+  - name: Join AD 
+    microsoft.ad.membership:
+      dns_domain_name: "{{ domain_name }}"
+      hostname: "{{ inventory_hostname }}"
+      domain_admin_user: "{{ domain_shortname}}\\{{ domainjoin_user }}"
+      domain_admin_password: "{{ domainjoin_password }}"
+      # domain_ou_path: "OU=Windows,OU=Servers,DC=ansible,DC=vagrant"
+      state: domain
+      reboot: true
+    register: ad_membership_result
+
+  - debug: "var=ad_membership_result"
+
+  - name: Promote dc
+    microsoft.ad.domain_controller:
+      state: domain_controller
+      install_dns: true
+      dns_domain_name: "{{ domain_name }}"
+      domain_admin_user: "{{ domain_shortname}}\\{{ domain_admin }}"
+      domain_admin_password: "{{ domain_password }}"
+      safe_mode_password: "{{ domain_password }}"
+      # database_path: "{{ domain_dbpath }}"
+      # domain_log_path: "{{ domain_logpath }}"
+      # sysvol_path: "{{ domain_sysvolpath }}"
+      reboot: true
+    register: ad_domain_controller_result
+
+  - debug:
+      var: ad_domain_controller_result
+
+  - name: Network settings
+    ansible.builtin.include_role:
+      name: win_network
+    vars:
+      win_network_ipv6_disable: true
+      win_network_ipv4_method: convert
+      win_network_dnsservers:
+        - 127.0.0.1
+        - "{{ domain_firstdc_address }}"
+
+  - name: "[W32Time Parameters] Configure NTP Server Name"
+    ansible.windows.win_regedit:
+      path: HKLM:\SYSTEM\CurrentControlSet\Services\W32Time\Parameters
+      name: 'NtpServer'
+      data: '{{ domain_timeserver }},0x8'
+      type: string
+    notify: Windows restart service w32time 

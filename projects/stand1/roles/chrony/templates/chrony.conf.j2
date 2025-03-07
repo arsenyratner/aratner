@@ -1,0 +1,27 @@
+
+driftfile /var/lib/chrony/drift
+makestep 1.0 3
+rtcsync
+keyfile /etc/chrony.keys
+ntsdumpdir /var/lib/chrony
+leapsectz right/UTC
+logdir /var/log/chrony
+#servers
+{% if chrony.ntp_servers is defined %}
+{% for server in chrony.ntp_servers %}
+server {{ server }} iburst
+{% endfor %}
+{% endif %}
+#pools
+{% if chrony.ntp_pools is defined %}
+{% for pool in chrony.ntp_pools %}
+pool {{ pool }} iburst
+{% endfor %}
+{% endif %}
+
+{% if chrony.server is defined %}
+local stratum 8
+{% for network in chrony.server.networks %}
+allow {{ network }}
+{% endfor %}
+{% endif %}

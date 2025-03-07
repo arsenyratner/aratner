@@ -1,0 +1,17 @@
+createvm_default:
+  api_user: "{{ proxmox.api_user }}"
+  api_password: "{{ proxmox.api_password }}"
+  api_token_id: "{{ proxmox.api_token_id }}"
+  api_token_secret: "{{ proxmox.api_token_secret }}"
+  api_host: "{{ proxmox.api_host }}"
+  full: false
+  storage: "{{ proxmox.storage }}"
+  format: "{{ proxmox.format }}"
+  citype: nocloud
+  disk:
+    name: virtio0
+  nic:
+    bridge: vmbr0
+    model: virtio
+    name: net0
+    mtu: 1

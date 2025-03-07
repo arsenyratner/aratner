@@ -1,0 +1,44 @@
+---
+#tasks
+- name: Remove existing files
+  block:
+    - name: Find existing files in /etc/yum.repos.d
+      ansible.builtin.find:
+        paths: /etc/yum.repos.d
+        patterns: "*"
+      register: repo_files_result
+
+    - name: Removing existing files in /etc/yum.repos.d
+      ansible.builtin.file:
+        path: "{{ file['path'] }}"
+        state: absent
+      become: true
+      loop: "{{ repo_files_result['files'] }}"
+      loop_control:
+        loop_var: file
+        label: "{{ file['path'] }}"
+      when:
+        - repo_deleteoldrepofiles is true
+        - "file['path']|basename not in repo_managedfiles"
+
+- name: add repo files
+  ansible.builtin.yum_repository:
+    name: "{{item.name}}"
+    description: "{{item.description}}"
+    baseurl: "{{item.baseurl}}"
+    file: "{{item.file}}"
+    gpgkey: "{{item.gpgkey}}"
+    gpgcheck: "{{item.gpgcheck}}"
+    enabled: "{{item.enabled}}"
+    state: "{{item.state}}"
+  loop: "{{ repo }}"
+  when: repo is defined
+
+- name: Repo update packages
+  block:
+    - name: Repo install updates
+      ansible.builtin.dnf:
+        name: "*"
+        state: latest
+      notify: Repo reboot
+  when: repo_installupdates is true
