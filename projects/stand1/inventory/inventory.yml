@@ -1,9 +1,11 @@
 site_gtmadm: 
   hosts:
-    gpdc1: { ansible_host: 10.3.77.112 }
-    gpdc2: { ansible_host: 10.3.77.113 }
-    gprsat1: { ansible_host: 10.3.11.41 }
-    gpws1: { ansible_host: 10.3.11.42 }
+    ws1: { ansible_host: 10.3.77.112 }
+    ws2: { ansible_host: 10.3.77.113 }
+    ws3: { ansible_host: 10.3.11.41 }
+    ws4: { ansible_host: 10.3.11.42 }
+    ws5: { ansible_host: 10.3.11.43 }
+    ws6: { ansible_host: 10.3.71.44 }
 
 role_dc:
   children:
@@ -19,13 +21,15 @@ role_ws:
 
 os_windows:
   hosts:
-    gpdc1:
-    gpdc2:
-    gprsat1:
+    ws1:
+    ws2:
+    ws3:
+    ws4:
+    ws5:
+    ws6:
 
 os_redos:
   hosts:
-    gpws1:
 
 project_gtm:
   children:
