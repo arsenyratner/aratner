@@ -1,0 +1,20 @@
+- name: Create domain local groups
+  community.general.ldap_entry:
+    bind_dn: "{{ domain_shortname }}\\{{ ldap_admin_user }}"
+    bind_pw: "{{ ldap_admin_pass }}"
+    server_uri: "ldap://{{ domainjoin_dc2 }}.{{ domain_name }}"
+    state: present
+    dn: CN={{ cups_printers_group_pre }}_{{ cups_printer.name | lower }}_{{ cups_printer_group_suffix }},{{ cups_printers_groups_ou }}
+    objectClass:
+      - top
+      - group
+    attributes:
+      cn: "{{ cups_printers_group_pre }}_{{ cups_printer.name | lower }}_{{ cups_printer_group_suffix }}"
+      name: "{{ cups_printers_group_pre }}_{{ cups_printer.name | lower }}_{{ cups_printer_group_suffix }}"
+      sAMAccountName: "{{ cups_printers_group_pre }}_{{ cups_printer.name | lower }}_{{ cups_printer_group_suffix }}"
+      groupType: -2147483644
+      objectCategory: CN=Group,CN=Schema,CN=Configuration,{{ ldap_basedn }}
+  loop: "{{ cups_printers_group_suf }}"
+  loop_control:
+    loop_var: cups_printer_group_suffix
+    label: "{{ cups_printer.name }}"

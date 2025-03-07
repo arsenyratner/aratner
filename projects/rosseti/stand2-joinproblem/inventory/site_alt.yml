@@ -1,0 +1,13 @@
+site_alt:
+  hosts:
+    altws1: { ansible_host: 172.26.76.227 }
+    altws2: { ansible_host: 172.26.76.228 }
+
+role_ws:
+  hosts:
+    altws1:
+    altws2:
+
+role_ps:
+  hosts:
+    altws1:

@@ -1,0 +1,54 @@
+---
+- name: Removing all printers and classes defined in cups_printers_printers_and_classes_to_be_removed.
+  cups_lpadmin:
+    name: "{{ item }}"
+    state: "absent"
+  loop: "{{ cups_printers_and_classes_to_be_removed }}"
+  when: cups_printers_and_classes_to_be_removed is defined
+
+- name: Removing all printers and classes on server.
+  cups_lpadmin:
+    purge: true
+  when: cups_purge_all_printers_and_classes is true
+
+- name: Install printers using cups_lpadmin
+  cups_lpadmin:
+    printer_or_class: "printer"
+    name: "{{ cups_printer.name }}"
+    state: "{{ cups_printer.state | default(cups_printer_default_state) }}"
+    enabled: "{{ cups_printer.enabled | default(cups_printer_default_enabled) }}"
+    uri: "{{ cups_printer.uri }}"
+    default: "{{ cups_printer.default_printer | default(omit) }}"
+    model: "{{ cups_printer.driver | default(omit) }}"
+    location: "{{ cups_printer.location | default(omit) }}"
+    info: "{{ cups_printer.info | default(omit) }}"
+    report_ipp_supply_levels: "{{ cups_printer.report_ipp_supply_levels | default(cups_printer_default_report_ipp_supplies) }}"
+    report_snmp_supply_levels: "{{ cups_printer.report_snmp_supply_levels | default(cups_printer_default_report_snmp_supplies) }}"
+    shared: "{{ cups_printer.shared | default(cups_printer_default_is_shared) }}"
+    assign_cups_policy: "{{ cups_printer.assign_cups_policy | default(cups_printer_default_assign_cups_policy) }}"
+    job_kb_limit: "{{ cups_printer.job_kb_limit | default(omit) }}"
+    job_quota_limit: "{{ cups_printer.job_quota_limit | default(omit) }}"
+    job_page_limit: "{{ cups_printer.job_page_limit | default(omit) }}"
+    options: "{{ cups_printer.options | default(omit) }}"
+  loop: "{{ cups_printers }}"
+  loop_control:
+    loop_var: cups_printer
+    label: "{{ cups_printer.name }}"
+  when:
+    - cups_printers is defined
+
+- name: Create printer classes and assign printers to them
+  cups_lpadmin:
+    name: "{{ cups_class.name }}"
+    printer_or_class: "class"
+    state: "{{ cups_class.state | default(cups_class_default_state) }}"
+    location: "{{ cups_class.location | default(omit) }}"
+    info: "{{ cups_class.info | default(omit) }}"
+    shared: "{{ cups_class.shared | default(cups_class_default_is_shared) }}"
+    class_members: "{{ cups_class.members }}"
+  loop: "{{ cups_classes }}"
+  loop_control:
+    loop_var: cups_class
+    label: "{{ cups_class.name }}"
+  when:
+    - cups_classes is defined

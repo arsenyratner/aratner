@@ -1,0 +1,107 @@
+- name: Chekc VM exists {{ createvm.name }}
+  ovirt.ovirt.ovirt_vm_info:
+    auth: "{{ ovirt_auth }}"
+    pattern: name={{ createvm.name }} and cluster={{ createvm.cluster }}
+  register: ovirt_vm_info_result
+
+- name: Create vm {{ createvm.name }}
+  ovirt.ovirt.ovirt_vm:
+    auth: "{{ ovirt_auth }}"
+    cluster: "{{ createvm.cluster }}"
+    template: "{{ createvm.template }}"
+    template_version: "{{ createvm.template_version }}"
+    name: "{{ createvm.name }}"
+    state: present
+    clone: "{{ createvm.clone | default(true) }}"
+    wait: true
+
+- name: Set vm {{ createvm.name }}
+  ovirt.ovirt.ovirt_vm:
+    auth: "{{ ovirt_auth }}"
+    cluster: "{{ createvm.cluster }}"
+    name: "{{ createvm.name }}"
+    comment: "{{ createvm.comment }}"
+    description: "{{ createvm.description }}"
+    cpu_cores: "{{ createvm.cpu_cores }}"
+    cpu_sockets: 1
+    nics: "{{ createvm.nics }}"
+    timezone: "{{ createvm.timezone }}"
+    type: server
+
+- name: Set vm memory {{ createvm.name }}
+  ovirt.ovirt.ovirt_vm:
+    auth: "{{ ovirt_auth }}"
+    cluster: "{{ createvm.cluster }}"
+    name: "{{ createvm.name }}"
+    memory_max: "{{ createvm.memory }}"
+    memory_guaranteed: "{{ createvm.memory }}"
+    memory: "{{ createvm.memory }}"
+
+- name: Set vm cloud-init {{ createvm.name }}
+  ovirt.ovirt.ovirt_vm:
+    auth: "{{ ovirt_auth }}"
+    cluster: "{{ createvm.cluster }}"
+    name: "{{ createvm.name }}"
+    cloud_init:
+      host_name: "{{ createvm.ci.hostname }}"
+      user_name: "{{ createvm.ci.username }}"
+      root_password: "{{ createvm.ci.userpass }}"
+      authorized_ssh_keys: "{{ createvm.ci.pubkey }}"
+      custom_script: "{{ createvm.ci.customscript | default(omit) }}"
+      nic_name: "{{ createvm.ci.nic_name | default('eth0') }}"
+      nic_boot_protocol: "{{ createvm.ci.nic_boot_protocol | default('dhcp') }}"
+      nic_ip_address: "{{ createvm.ipv4_address | default(omit) }}"
+      nic_netmask: "{{ createvm.ipv4_netmask | default(omit) }}"
+      nic_gateway: "{{ createvm.ipv4_gateway | default(omit) }}"
+      dns_servers: "{{ createvm.ci.dns_servers | default(omit) }}"
+      dns_search: "{{ createvm.ci.dns_search | default(omit) }}"
+    cloud_init_persist: true
+
+- name: Get disk info {{ createvm.name }}
+  ovirt.ovirt.ovirt_vm_info:
+    auth: "{{ ovirt_auth }}"
+    pattern: name="{{ createvm.name }}" cluster="{{ createvm.cluster }}"
+    follow: diskattachments
+    all_content: true
+  register: vminfo
+
+- name: Change disk name ans size {{ createvm.name }}
+  ovirt.ovirt.ovirt_disk:
+    auth: "{{ ovirt_auth }}"
+    # id: "{{ vminfo.ovirt_vms[0]['disk_attachments'][0]['id'] }}"
+    # vm_id: "{{ vminfo.ovirt_vms[0]['disk_attachments'][0]['vm']['id'] }}"
+    id: "{{ bootdisk[0]['disk']['id'] }}"
+    vm_id: "{{ bootdisk[0]['vm']['id'] }}"
+    name: "{{ createvm.name }}-disk1"
+    size: "{{ createvm.disksize }}"
+  vars:
+    bootdisk: "{{ vminfo.ovirt_vms[0]['disk_attachments'] | selectattr('bootable', 'true') }}"
+
+- name: Attach tags {{ createvm.name }}
+  ovirt.ovirt.ovirt_tag:
+    auth: "{{ ovirt_auth }}"
+    name: "{{ tag }}"
+    vms: "{{ createvm.name }}"
+    state: attached
+  loop: "{{ createvm.tags }}"
+  loop_control:
+    loop_var: tag
+
+- name: Start VM {{ createvm.name }}
+  ovirt.ovirt.ovirt_vm:
+    auth: "{{ ovirt_auth }}"
+    name: "{{ createvm.name }}"
+    state: running
+    wait: "{{ createvm.waitstart }}"
+  when: createvm.startvm is true
+
+# - name: Wait for ip
+#   ovirt.ovirt.ovirt_vm_info:
+#       name: "{{ vm_name }}"
+#       schema: vsphere
+#       properties:
+#         - guest.ipAddress
+#   retries: 30
+#   delay: 10
+#   register: gather_vm_info
+#   until: gather_vm_info.instance.guest.ipAddress is not none

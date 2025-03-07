@@ -1,0 +1,47 @@
+---
+# defaults file for cups
+cups_service: cups
+cups_cupsdconf: /etc/cups/cupsd.conf
+cups_cupsfilesconf: /etc/cups/cups-files.conf
+# Allow remote access
+cups_listen: "{{ ansible_host }}:631"
+cups_serveralias: "*"
+
+# Share local printers on the local network. (boolean)
+cups_browsing: "no"
+
+# Allow access to the server...
+cups_locations:
+  - name: /
+    order: allow,deny
+    allow: all
+  - name: /admin
+    order: allow,deny
+    allow: all
+  - name: /admin/conf
+    authtype: Default
+    require: user @SYSTEM
+    order: allow,deny
+    allow: all
+  - name: /admin/log
+    authtype: Default
+    require: user @SYSTEM
+    order: allow,deny
+
+# Cups can save a job history. (boolean)
+cups_preserve_job_history: "yes"
+
+# Cups can offer a web-interface. (boolean)
+cups_web_interface: "yes"
+
+cups_purge_all_printers_and_classes: true
+cups_printer_default_state: "present"
+cups_printer_default_report_ipp_supplies: true
+cups_printer_default_report_snmp_supplies: true
+cups_printer_default_is_shared: true
+cups_printer_default_enabled: true
+cups_printer_default_assign_cups_policy: "default"
+cups_printers_group_pre: "l_{{ domain_shortname }}_prn"
+cups_printers_group_suf:
+  - print
+cups_printers_groups_ou: OU=prn,{{ ldap_groupsou }},{{ ldap_basedn }}

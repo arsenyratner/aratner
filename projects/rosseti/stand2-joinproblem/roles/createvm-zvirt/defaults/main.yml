@@ -1,0 +1,36 @@
+# createvm_name:
+# createvm_comment:
+# createvm_description:
+# createvm_memory:
+# createvm_cpu_cores:
+# createvm_cluster:
+# createvm_template:
+# createvm_template_version:
+# createvm_nics:
+# createvm_timezone:
+# createvm_ci_hostname:
+# createvm_ci_username:
+# createvm_ci_userpass:
+# createvm_ci_pubkey:
+# createvm_ci_customscript:
+# createvm_disksize:
+# createvm_tags:
+
+createvm:
+  name:
+  comment:
+  description:
+  memory:
+  cpu_cores:
+  cluster:
+  template:
+  template_version:
+  nics:
+  timezone:
+  ci_hostname:
+  ci_username:
+  ci_userpass:
+  ci_pubkey:
+  ci_customscript:
+  disksize:
+  tags:

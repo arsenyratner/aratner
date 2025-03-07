@@ -1,0 +1,59 @@
+---
+- name: Install packages
+  community.general.apt_rpm:
+    pkg:
+      - cups
+      - cups-pdf
+      - python3-module-ldap3
+      - python3-module-ldap
+    state: present_not_latest
+    update_cache: true
+
+- name: Flush handlers
+  ansible.builtin.meta: flush_handlers
+
+- name: Configure cups
+  ansible.builtin.template:
+    backup: true
+    src: cupsd.conf
+    dest: "{{ cups_cupsdconf }}"
+    mode: "0640"
+    validate: cupsd -t -s {{ cups_cupsfilesconf }} -c %s
+  notify:
+    - Restart cups
+
+- name: Flush handlers
+  ansible.builtin.meta: flush_handlers
+
+- name: Start and enable software
+  ansible.builtin.service:
+    name: "{{ cups_service }}"
+    state: started
+    enabled: true
+
+# - name: Add groups
+#   ansible.builtin.include_tasks:
+#     file: addgroups.yml
+#   loop: "{{ cups_printers }}"
+#   loop_control:
+#     loop_var: cups_printer
+#     label: "{{ cups_printer.name }}"
+#   when:
+#     - cups_printers is defined
+
+- name: Add printers
+  ansible.builtin.include_tasks:
+    file: addprinters.yml
+
+- name: Allow print
+  ansible.builtin.command: >
+    lpadmin -p {{ cups_printer.name }} -u allow:@{{ cups_printers_group_pre }}_{{ cups_printer.name | lower }}_print
+  register: cups_printer_access_result
+  loop: "{{ cups_printers }}"
+  loop_control:
+    loop_var: cups_printer
+    label: "{{ cups_printer.name }}"
+  when:
+    - cups_printers is defined
+  failed_when: cups_printer_access_result.rc != 0
+  changed_when: cups_printer_access_result.rc == 200
