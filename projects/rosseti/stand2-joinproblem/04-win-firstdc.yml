@@ -1,0 +1,89 @@
+---
+- name: Create windows first dc
+  vars:
+    ansible_user: cloudadmin
+  hosts: first_dc
+  handlers:
+  - name: Windows restart service w32time
+    ansible.windows.win_service:
+      name: W32Time
+      state: restarted
+  tasks:
+    # - name: Set boot delay
+    #   ansible.windows.win_shell: bcdedit /timeout 5
+
+    # - name: Waiting host is up
+    #   local_action:
+    #     module: wait_for
+    #     host: "{{ ansible_host }}"
+    #     port: 5985
+    #     delay: 10
+    #     state: started
+    #   register: wait_result
+
+  - name: Windows firewall
+    win_firewall:
+      state: "{{ win_firewall_state }}"
+      profiles:
+      - Domain
+      - Private
+      - Public
+    tags: win_firewall
+
+  - name: Network settings
+    ansible.builtin.include_role:
+      name: win_network
+    vars:
+      win_network_ipv6_disable: true
+      win_network_ipv4_method: convert
+      win_network_dnsservers:
+        - "{{ domain_forwarder }}"
+
+  - name: Get current computer name
+    win_shell: hostname
+    register: current_hostname
+    changed_when: no
+
+  - debug: "var=current_hostname"
+
+  - name: Set hostname
+    ansible.windows.win_hostname:
+      name: "{{ inventory_hostname }}"
+    register: win_hostname_result
+
+  - debug: "var=win_hostname_result"
+
+  - name: Windows reboot
+    ansible.windows.win_reboot:
+    when: win_hostname_result.reboot_required
+
+  - name: Local administrator password
+    ansible.windows.win_user:
+      name: administrator
+      state: present
+      password_never_expires: true
+      update_password : always
+      password: "{{ domain_password }}"
+
+  - name: Create first dc
+    microsoft.ad.domain:
+      create_dns_delegation: no
+      dns_domain_name: "{{ domain_name }}"
+      domain_mode: "{{ domain_mode }}"
+      domain_netbios_name: "{{ domain_shortname }}"
+      forest_mode: "{{ domain_mode }}"
+      safe_mode_password: "{{ domain_password }}"
+      # database_path: "{{ domain_dbpath }}"
+      # sysvol_path: "{{ domain_sysvolpath }}"
+      reboot: true
+    register: ad_domain_result
+
+  - debug: "var=ad_domain_result"
+
+  - name: "[W32Time Parameters] Configure NTP Server Name"
+    ansible.windows.win_regedit:
+      path: HKLM:\SYSTEM\CurrentControlSet\Services\W32Time\Parameters
+      name: 'NtpServer'
+      data: '{{ domain_timeserver }},0x8'
+      type: string
+    notify: Windows restart service w32time 

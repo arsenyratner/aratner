@@ -1,0 +1,60 @@
+---
+- name: Printserver
+  hosts: role_ps
+  vars:
+    cups_pdf_root: /srv/cups-pdf
+  tasks:
+    - name: Role cups
+      vars:
+        cups_printers:
+          - name: cups-pdf
+            uri: cups-pdf:/
+            driver: CUPS-PDF.ppd
+            location: "m48 location"
+            info: "m48 info"
+          # - name: HPD1CB3E
+          #   uri: ipp://10.148.69.234/ipp/print
+          #   driver: drv:///sample.drv/laserjet.ppd
+          #   location: "m48 69.234"
+          #   info: "m48 HP"
+      ansible.builtin.include_role:
+        name: cups
+
+    - name: /etc/cups/cups-pdf.conf
+      ansible.builtin.copy:
+        backup: true
+        owner: root
+        group: root
+        mode: '0644'
+        dest: /etc/cups/cups-pdf.conf
+        content: |
+          Out {{ cups_pdf_root }}/${USER}
+          AnonDirName {{ cups_pdf_root }}/ANONYMOUS
+          TitlePref 1
+          DecodeHexStrings 1
+          AnonUMask = 0000
+          UserUMask = 0077
+
+    - name: A cupsctl params
+      vars:
+        cupsctl_params:
+          WebInterface: "Yes"
+          DefaultAuthType: Basic
+          # DefaultAuthType: Negotiate
+      ansible.builtin.shell: |
+        cupsctl {{ param.key }}={{ param.value }}
+        cupsctl | grep {{ param.key }}
+      register: cupsctl_result
+      ignore_errors: true
+      changed_when: cupsctl_result.stdout != param.value
+      when: ansible_distribution == "Altlinux"
+      loop: "{{ cupsctl_params | dict2items }}"
+      loop_control:
+        loop_var: param
+        label: "{{ param.key }}: {{ param.value }}"
+
+    - name: A cupsctl comands
+      ansible.builtin.command: "cupsctl --debug-logging"
+      register: cupsctl_result
+      failed_when: cupsctl_result.rc != 0
+      changed_when: cupsctl_result.rc == 200

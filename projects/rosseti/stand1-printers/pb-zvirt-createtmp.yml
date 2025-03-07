@@ -1,0 +1,24 @@
+---
+- name: Create a template from qcow
+  hosts: localhost
+  connection: local
+  gather_facts: false
+  vars_files:
+    - zvirt.yml
+  vars:
+    qcow_url: file:///mnt/c/vm/_tmp/alt-p11-cloud-x86_64.qcow2
+    template_cluster: CL-OVN
+    template_name: aratner_testtmp1
+    template_memory: 1GiB
+    template_cpu: 1
+    template_disk_size: 7GiB
+    template_disk_storage: fc_dc_ovn_01
+    template_disk_interface: virtio_scsi
+    template_nics: []
+    template_type: desktop # server
+    template_operating_system: Alt Linux
+    image_cache_download: true
+    # template_bios_type:
+
+  roles:
+    - ovirt.ovirt.image_template
