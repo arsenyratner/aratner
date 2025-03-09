@@ -55,10 +55,15 @@ samba-tool domain trust list
 sudo apt-get update
 sudo apt-get dist-upgrade -y
 
+# alt p11
 sudo apt-get install -y mc git sshpass ansible-core ansible ansible-vim ansible-lint ansible-vim \
 python3-module-ansible-collections python3-module-ansible-compat python3-module-ovirt-engine-sdk \
-python3-module-proxmoxer python3-module-winrm python3-module-ovirt-imageio python3-module-ovirt-imageio-client\
+python3-module-proxmoxer python3-module-winrm python3-module-ovirt-imageio python3-module-ovirt-imageio-client \
 qemu-tools qemu-img
+
+# alt p10
+sudo apt-get install -y mc git sshpass ansible ansible-vim ansible-lint ansible-vim \
+python3-module-ovirt-engine-sdk python3-module-proxmoxer python3-module-winrm qemu-tools qemu-img
 
 git config --global user.name "aratner"
 git config --global user.email aratner@croc.ru
