@@ -1,0 +1,32 @@
+site_gtmadm: 
+  hosts:
+    gpdc1: { ansible_host: 10.3.77.112 }
+    gpdc2: { ansible_host: 10.3.77.113 }
+    gprsat1: { ansible_host: 10.3.11.41 }
+    gpws1: { ansible_host: 10.3.11.42 }
+
+role_dc:
+  children:
+    first_dc:
+      hosts:
+        gpdc1:
+  hosts:
+    gpdc2:
+
+role_ws:
+  hosts:
+    gpws1:
+
+os_windows:
+  hosts:
+    gpdc1:
+    gpdc2:
+    gprsat1:
+
+os_redos:
+  hosts:
+    gpws1:
+
+project_gtm:
+  children:
+    site_gtmadm:

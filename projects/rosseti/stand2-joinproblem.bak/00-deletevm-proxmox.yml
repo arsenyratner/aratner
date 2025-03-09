@@ -5,7 +5,7 @@
   gather_facts: false
   vars_files:
     - proxmox.yml
-    - createvm-proxmox.yml
+    - createvms-proxmox.yml
   pre_tasks:
     - debug:
         var: deletevms
@@ -14,7 +14,7 @@
     - name: Delete VMs
       block: 
         - name: Stop VMs
-          proxmox_kvm:
+          community.general.proxmox_kvm:
             state: stopped
             force: true
             api_user: "{{ proxmox.api_user }}"
@@ -22,14 +22,14 @@
             api_token_id: "{{ proxmox.api_token_id }}"
             api_token_secret: "{{ proxmox.api_token_secret }}"
             api_host: "{{ proxmox.api_host }}"
-            name: "{{newvm.prefix | default('') }}{{ newvm.site | default('') }}{{ newvm.role }}{{ newvm.suffix | default('') }}"
+            name: "{{ newvm.name | default(newvm.site + newvm.role + newvm.suffix|default(omit)) }}"
             node: "{{ newvm.node | default(proxmox.node) }}"
-          loop: "{{ newvms_proxmox }}"
+          loop: "{{ createvm_proxmox }}"
           loop_control:
             loop_var: newvm
           ignore_errors: true
         - name: Delete VMs
-          proxmox_kvm:
+          community.general.proxmox_kvm:
             force: true
             state: absent
             api_user: "{{ proxmox.api_user }}"
@@ -37,9 +37,9 @@
             api_token_id: "{{ proxmox.api_token_id }}"
             api_token_secret: "{{ proxmox.api_token_secret }}"
             api_host: "{{ proxmox.api_host }}"
-            name: "{{newvm.prefix | default('') }}{{ newvm.site | default('') }}{{ newvm.role }}{{ newvm.suffix | default('') }}"
+            name: "{{ newvm.name | default(newvm.site + newvm.role + newvm.suffix|default(omit)) }}"
             node: "{{ newvm.node | default(proxmox.node) }}"
-          loop: "{{ newvms_proxmox }}"
+          loop: "{{ createvm_proxmox }}"
           loop_control:
             loop_var: newvm
       when: deletevms

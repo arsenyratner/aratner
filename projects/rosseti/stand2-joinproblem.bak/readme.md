@@ -56,3 +56,14 @@ samba-tool domain trust delete $trustdom -U ${trustshort}\\${trustuser}%${trustp
 samba-tool domain trust create $trustdom --type=external --direction=both --create-location both -U ${trustshort}\\${trustuser}%${trustpass}
 samba-tool domain trust list
 ```
+
+```bash
+sudo apt-get update
+sudo apt-get dist-upgrade -y
+
+sudo apt-get install -y mc git sshpass ansible-core ansible ansible-lint ansible-vim python3-module-ansible-collections python3-module-ansible-compat python3-module-ovirt-engine-sdk python3-module-proxmoxer python3-module-winrm
+
+ansible-galaxy collection install ovirt.ovirt
+ansible-galaxy collection install -vvvv ansible.windows
+
+```

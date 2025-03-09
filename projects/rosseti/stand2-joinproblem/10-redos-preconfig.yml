@@ -1,0 +1,36 @@
+---
+- name: Preconfig all redos except DC
+  hosts: os_redos,!role_dc
+  tasks:
+  - name: disable cloud init
+    ansible.builtin.include_role:
+      name: cloud-init-disable
+
+  - name: Role network
+    ansible.builtin.include_role:
+      name: network
+
+  - name: disable resolved
+    ansible.builtin.include_role:
+      name: resolved-disable
+
+  - name: copy /etc/resolv.conf
+    ansible.builtin.template:
+      src: resolv.conf
+      dest: /etc/resolv.conf
+
+  - name: Role repo
+    ansible.builtin.include_role:
+      name: repo
+
+  - name: Role chrony
+    ansible.builtin.include_role:
+      name: chrony
+
+  - name: Role preconfig
+    ansible.builtin.include_role:
+      name: preconfig
+
+  - name: Role samba-domainjoin
+    ansible.builtin.include_role:
+      name: samba-domainjoin

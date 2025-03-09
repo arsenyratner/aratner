@@ -1,0 +1,278 @@
+- name: Full clone {{ createvm.name }}
+  community.general.proxmox_kvm:
+    full: true
+    state: present
+    api_user: "{{ createvm_default.api_user }}"
+    api_password: "{{ createvm_default.api_password }}"
+    api_token_id: "{{ createvm_default.api_token_id }}"
+    api_token_secret: "{{ createvm_default.api_token_secret }}"
+    api_host: "{{ createvm_default.api_host }}"
+    node: "{{ createvm.node }}"
+    name: "{{ createvm.name }}"
+    clone: "{{ createvm.template }}"
+    storage: "{{ createvm.storage | default(createvm_default.storage) }}"
+    format: "{{ createvm.format | default(createvm_default.format) }}"
+    agent: true
+  when: createvm.clontype == "full"
+  register: result_newvm
+
+- name: Linked clone {{ createvm.name }}
+  community.general.proxmox_kvm:
+    full: false
+    state: present
+    api_user: "{{ createvm_default.api_user }}"
+    api_password: "{{ createvm_default.api_password }}"
+    api_token_id: "{{ createvm_default.api_token_id }}"
+    api_token_secret: "{{ createvm_default.api_token_secret }}"
+    api_host: "{{ createvm_default.api_host }}"
+    node: "{{ createvm.node }}"
+    name: "{{ createvm.name }}"
+    clone: "{{ createvm.template }}"
+    agent: true
+  when: createvm.clontype == "linked"
+  register: result_newvm
+
+# - name: Enable guest agent
+#   community.general.proxmox_kvm:
+#     update: true
+#     api_user: "{{ createvm_default.api_user }}"
+#     api_password: "{{ createvm_default.api_password }}"
+#     api_token_id: "{{ createvm_default.api_token_id }}"
+#     api_token_secret: "{{ createvm_default.api_token_secret }}"
+#     api_host: "{{ createvm_default.api_host }}"
+#     # name: "{{ createvm.name }}"
+#     vmid: "{{ result_newvm.vmid }}"
+#     node: "{{ createvm.node }}"
+
+- name: Set cores {{ createvm.name }}
+  community.general.proxmox_kvm:
+    update: true
+    api_user: "{{ createvm_default.api_user }}"
+    api_password: "{{ createvm_default.api_password }}"
+    api_token_id: "{{ createvm_default.api_token_id }}"
+    api_token_secret: "{{ createvm_default.api_token_secret }}"
+    api_host: "{{ createvm_default.api_host }}"
+    node: "{{ createvm.node }}"
+    # name: "{{ createvm.name }}"
+    vmid: "{{ result_newvm.vmid }}"
+    cores: "{{ createvm.cores }}"
+  when: createvm.cores is defined
+
+- name: Set memory {{ createvm.name }}
+  community.general.proxmox_kvm:
+    update: true
+    api_user: "{{ createvm_default.api_user }}"
+    api_password: "{{ createvm_default.api_password }}"
+    api_token_id: "{{ createvm_default.api_token_id }}"
+    api_token_secret: "{{ createvm_default.api_token_secret }}"
+    api_host: "{{ createvm_default.api_host }}"
+    node: "{{ createvm.node }}"
+    # name: "{{ createvm.name }}"
+    vmid: "{{ result_newvm.vmid }}"
+    memory: "{{ createvm.memory }}"
+  when: createvm.memory is defined
+
+- name: Set balloon {{ createvm.name }}
+  community.general.proxmox_kvm:
+    api_user: "{{ createvm_default.api_user }}"
+    api_password: "{{ createvm_default.api_password }}"
+    api_token_id: "{{ createvm_default.api_token_id }}"
+    api_token_secret: "{{ createvm_default.api_token_secret }}"
+    api_host: "{{ createvm_default.api_host }}"
+    node: "{{ createvm.node }}"
+    update: true
+    # name: "{{ createvm.name }}"
+    vmid: "{{ result_newvm.vmid }}"
+    balloon: "{{ createvm.balloon }}"
+  when: createvm.balloon is defined
+
+- name: Set disk size {{ createvm.name }}
+  community.general.proxmox_disk:
+    state: resized
+    api_user: "{{ createvm_default.api_user }}"
+    api_password: "{{ createvm_default.api_password }}"
+    api_token_id: "{{ createvm_default.api_token_id }}"
+    api_token_secret: "{{ createvm_default.api_token_secret }}"
+    api_host: "{{ createvm_default.api_host }}"
+    # name: "{{ createvm.name }}"
+    vmid: "{{ result_newvm.vmid }}"
+    size: "{{ createvm.disk.size }}"
+    disk: "{{ createvm.disk.name | default(createvm_default.disk.name) }}"
+  when: 
+  - createvm.disk.size is defined
+  - createvm.disk.size != omit
+
+# - debug: "var=createvm.nic"
+
+- name: Set nic name mac {{ createvm.name }}
+  community.general.proxmox_nic:
+    api_user: "{{ createvm_default.api_user }}"
+    api_password: "{{ createvm_default.api_password }}"
+    api_token_id: "{{ createvm_default.api_token_id }}"
+    api_token_secret: "{{ createvm_default.api_token_secret }}"
+    api_host: "{{ createvm_default.api_host }}"
+    # name: "{{ createvm.name }}"
+    vmid: "{{ result_newvm.vmid }}"
+    interface: "{{ createvm.nic.name | default(createvm_default.nic.name) }}"
+    mac: "{{ createvm.nic.mac }}"
+  when: 
+  - createvm.nic.mac is defined
+  - createvm.nic.mac != omit
+
+- name: Set nic name bridge model mtu mac {{ createvm.name }}
+  community.general.proxmox_nic:
+    api_user: "{{ createvm_default.api_user }}"
+    api_password: "{{ createvm_default.api_password }}"
+    api_token_id: "{{ createvm_default.api_token_id }}"
+    api_token_secret: "{{ createvm_default.api_token_secret }}"
+    api_host: "{{ createvm_default.api_host }}"
+    # name: "{{ createvm.name }}"
+    vmid: "{{ result_newvm.vmid }}"
+    interface: "{{ createvm.nic.name | default(createvm_default.nic.name) }}"
+    bridge: "{{ createvm.nic.bridge | default(createvm_default.nic.bridge) }}"
+    model: "{{ createvm.nic.model | default(createvm_default.nic.model) }}"
+    mtu: "{{ createvm.nic.mtu | default(createvm_default.nic.mtu) }}"
+    mac: "{{ createvm.nic.mac }}"
+  when: 
+  - createvm.nic.mac is defined
+  - createvm.nic.mac != omit
+
+- name: Set nic name bridge model mtu {{ createvm.name }}
+  community.general.proxmox_nic:
+    api_user: "{{ createvm_default.api_user }}"
+    api_password: "{{ createvm_default.api_password }}"
+    api_token_id: "{{ createvm_default.api_token_id }}"
+    api_token_secret: "{{ createvm_default.api_token_secret }}"
+    api_host: "{{ createvm_default.api_host }}"
+    # name: "{{ createvm.name }}"
+    vmid: "{{ result_newvm.vmid }}"
+    interface: "{{ createvm.nic.name | default(createvm_default.nic.name) }}"
+    bridge: "{{ createvm.nic.bridge | default(createvm_default.nic.bridge) }}"
+    model: "{{ createvm.nic.model | default(createvm_default.nic.model) }}"
+    mtu: "{{ createvm.nic.mtu | default(createvm_default.nic.mtu) }}"
+  when: 
+  - createvm.nic.mac is undefined or createvm.nic.mac == omit
+
+- name: Set CI type {{ createvm.name }}
+  community.general.proxmox_kvm:
+    update: true
+    api_user: "{{ createvm_default.api_user }}"
+    api_password: "{{ createvm_default.api_password }}"
+    api_token_id: "{{ createvm_default.api_token_id }}"
+    api_token_secret: "{{ createvm_default.api_token_secret }}"
+    api_host: "{{ createvm_default.api_host }}"
+    # name: "{{ createvm.name }}"
+    vmid: "{{ result_newvm.vmid }}"
+    node: "{{ createvm.node }}"
+    citype: "{{ createvm.citype | default(createvm_default.citype) }}"
+
+- name: Set CI user settings {{ createvm.name }}
+  community.general.proxmox_kvm: 
+    update: true
+    api_user: "{{ createvm_default.api_user }}"
+    api_password: "{{ createvm_default.api_password }}"
+    api_token_id: "{{ createvm_default.api_token_id }}"
+    api_token_secret: "{{ createvm_default.api_token_secret }}"
+    api_host: "{{ createvm_default.api_host }}"
+    # name: "{{ createvm.name }}"
+    vmid: "{{ result_newvm.vmid }}"
+    node: "{{ createvm.node }}"
+    ciuser: "{{ createvm.ciuser.name }}"
+    cipassword: "{{ createvm.ciuser.password }}"
+    sshkeys: "{{ createvm.ciuser.sshkeys }}"
+  when: createvm.ciuser is defined
+
+- name: Set CI custom settings {{ createvm.name }}
+  community.general.proxmox_kvm:
+    update: true
+    api_user: "{{ createvm_default.api_user }}"
+    api_password: "{{ createvm_default.api_password }}"
+    api_token_id: "{{ createvm_default.api_token_id }}"
+    api_token_secret: "{{ createvm_default.api_token_secret }}"
+    api_host: "{{ createvm_default.api_host }}"
+    # name: "{{ createvm.name }}"
+    vmid: "{{ result_newvm.vmid }}"
+    node: "{{ createvm.node }}"
+    cicustom: "{{ createvm.cicustom }}"
+  when: 
+  - createvm.cicustom is defined
+  - createvm.cicustom != omit
+
+- debug: "var=createvm.ipconfig0"
+
+- name: Set CI ipconfig {{ createvm.name }}
+  community.general.proxmox_kvm:
+    update: true
+    api_user: "{{ createvm_default.api_user }}"
+    api_password: "{{ createvm_default.api_password }}"
+    api_token_id: "{{ createvm_default.api_token_id }}"
+    api_token_secret: "{{ createvm_default.api_token_secret }}"
+    api_host: "{{ createvm_default.api_host }}"
+    # name: "{{ createvm.name }}"
+    vmid: "{{ result_newvm.vmid }}"
+    node: "{{ createvm.node }}"
+    ipconfig: 
+      ipconfig0: '{{ createvm.ipconfig0 }}'
+  when: 
+  - createvm.ipconfig0 is defined
+  - createvm.ipconfig0 != omit
+
+- name: Set CI nameservers {{ createvm.name }}
+  community.general.proxmox_kvm:
+    update: true
+    api_user: "{{ createvm_default.api_user }}"
+    api_password: "{{ createvm_default.api_password }}"
+    api_token_id: "{{ createvm_default.api_token_id }}"
+    api_token_secret: "{{ createvm_default.api_token_secret }}"
+    api_host: "{{ createvm_default.api_host }}"
+    # name: "{{ createvm.name }}"
+    vmid: "{{ result_newvm.vmid }}"
+    node: "{{ createvm.node }}"
+    nameservers: "{{ createvm.nameservers }}"
+  when: 
+  - createvm.nameservers is defined
+  - createvm.nameservers != omit
+
+- name: Set CI searchdomains {{ createvm.name }}
+  community.general.proxmox_kvm: 
+    update: true
+    api_user: "{{ createvm_default.api_user }}"
+    api_password: "{{ createvm_default.api_password }}"
+    api_token_id: "{{ createvm_default.api_token_id }}"
+    api_token_secret: "{{ createvm_default.api_token_secret }}"
+    api_host: "{{ createvm_default.api_host }}"
+    # name: "{{ createvm.name }}"
+    vmid: "{{ result_newvm.vmid }}"
+    node: "{{ createvm.node }}"
+    searchdomains: "{{ createvm.searchdomains }}"
+  when: 
+  - createvm.searchdomains is defined
+  - createvm.searchdomains != omit
+
+- name: Set tags {{ createvm.name }}
+  community.general.proxmox_kvm:
+    update: true
+    api_user: "{{ createvm_default.api_user }}"
+    api_password: "{{ createvm_default.api_password }}"
+    api_token_id: "{{ createvm_default.api_token_id }}"
+    api_token_secret: "{{ createvm_default.api_token_secret }}"
+    api_host: "{{ createvm_default.api_host }}"
+    node: "{{ createvm.node }}"
+    # name: "{{ createvm.name }}"
+    vmid: "{{ result_newvm.vmid }}"
+    tags: "{{ createvm.tags }}"
+
+- name: Start VMs {{ createvm.name }}
+  community.general.proxmox_kvm:
+    state: started
+    api_user: "{{ createvm_default.api_user }}"
+    api_password: "{{ createvm_default.api_password }}"
+    api_token_id: "{{ createvm_default.api_token_id }}"
+    api_token_secret: "{{ createvm_default.api_token_secret }}"
+    api_host: "{{ createvm_default.api_host }}"
+    node: "{{ createvm.node }}"
+    # name: "{{ createvm.name }}"
+    vmid: "{{ result_newvm.vmid }}"
+  # when: createvm.start is defined
+  ignore_errors: true
+- debug: "msg='Created: {{ createvm.name }}'"

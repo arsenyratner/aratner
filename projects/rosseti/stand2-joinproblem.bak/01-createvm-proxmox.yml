@@ -7,6 +7,7 @@
   - proxmox.yml
   - createvms-proxmox.yml
   tasks:
+  - debug: "var=ansible_password"
   - name: Create VMs
     ansible.builtin.include_role:
       name: createvm-proxmox
@@ -21,6 +22,7 @@
         cicustom: "{{ newvm.cicustom | default(omit) }}"
         name: "{{ newvm.name | default(newvm.site + newvm.role + newvm.suffix|default(omit)) }}"
         template: "{{ newvm.template }}"
+        cpu: "{{ newvm.cpu_type | default(omit) }}"
         cores: "{{ newvm.cpu_cores | default('2') }}"
         memory: "{{ newvm.memory | default('4096') }}" # | human_to_bytes(default_unit='G') | int / 1024 / 1024
         balloon: "{{ newvm.balloon | default('512') }}"

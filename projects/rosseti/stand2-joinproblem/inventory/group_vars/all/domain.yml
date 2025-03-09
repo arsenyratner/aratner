@@ -1,2 +1,27 @@
-domain_name: spo.local
-domain_shortname: spo
+domain_mode: Win2008
+domain_admin: administrator
+domain_password: !vault |
+  $ANSIBLE_VAULT;1.1;AES256
+  66356664313534653238346134386663643235633862313962356664316231633732356630316233
+  6132333339343166363734396537373366643536643737640a313835623261336431393331626439
+  39636139666332663639323739356564393537383233316364346533323766616466373632623332
+  6561303563333765330a323233653932613334346330653162343735316638636135663136373462
+  3033
+domain_name: "gtm.gazprom.ru"
+domain_shortname: "gtm"
+domain_timeserver: 192.168.126.1
+domain_forwarders: 
+- 10.3.188.10
+- 10.3.188.11
+domain_firstdc_ip: 10.3.77.112
+domain_firstdc_name: "gpdc1.{{ domain_name }}"
+domain_sudoers:
+- file: "{{ domain_shortname }}"
+  name: "%domain\\ admins"
+  rights: "ALL=(ALL) NOPASSWD:ALL"
+- file: "{{ domain_shortname }}"
+  name: "%{{ domain_shortname }}\\\\domain\\ admins"
+  rights: "ALL=(ALL) NOPASSWD:ALL"
+- file: "mtg"
+  name: "%domain\\ admins@{{ domain_name }}"
+  rights: "ALL=(ALL) NOPASSWD:ALL"
