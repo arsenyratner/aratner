@@ -25,6 +25,19 @@ $distro_tarball = "c:\users\public\iso\alt-p11-rootfs-systemd-x86_64.tar"
 wsl --unregister $distro_name
 wsl --import $distro_name $distro_storage $distro_tarball
 wsl -d $distro_name
+
+```
+
+### Установка Alt P11 + GUI
+
+```powershell
+$distro_name = "alt-p11-gui"
+$distro_storage = "c:\vm\_wsl\$($distro_name)"
+$distro_tarball = "c:\users\public\iso\alt-p11-rootfs-systemd-x86_64.tar"
+wsl --unregister $distro_name
+wsl --import $distro_name $distro_storage $distro_tarball
+wsl -d $distro_name
+# apt-get install -y mate-default theme-mate-windows
 ```
 
 ### Установка Alt P10
@@ -36,6 +49,7 @@ $distro_tarball = "D:\Users\Public\iso\alt\alt-p10-rootfs-systemd-x86_64.tar"
 wsl --unregister $distro_name
 wsl --import $distro_name $distro_storage $distro_tarball
 wsl -d $distro_name
+
 ```
 
 ### Настроим WSL
@@ -63,6 +77,7 @@ options = "metadata,umask=22,fmask=11"
 generateHosts = true
 generateResolvConf = true
 EOF
+
 ```
 
 ### Перезапустим WSL
@@ -70,4 +85,5 @@ EOF
 ```powershell
 wsl --terminate $distro_name
 wsl -d $distro_name
+
 ```
