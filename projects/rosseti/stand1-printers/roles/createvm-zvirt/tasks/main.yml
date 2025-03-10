@@ -55,7 +55,7 @@
       nic_gateway: "{{ createvm.ipv4_gateway | default(omit) }}"
       dns_servers: "{{ createvm.ci.dns_servers | default(omit) }}"
       dns_search: "{{ createvm.ci.dns_search | default(omit) }}"
-    cloud_init_persist: true
+    cloud_init_persist: "{{ createvm.ci.persist | default(false) }}"
 
 - name: Get disk info {{ createvm.name }}
   ovirt.ovirt.ovirt_vm_info:
