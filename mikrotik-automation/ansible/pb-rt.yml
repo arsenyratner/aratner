@@ -1,0 +1,31 @@
+---
+- name: Configure rt
+  gather_facts: false
+  # hosts: role_rt
+  hosts: rt1
+  tasks:
+    # - debug: "var=ansible_network_os"
+
+    # - name: Display resource statistics (routeros)
+    #   community.routeros.command:
+    #     commands: /system resource print
+    #   register: routeros_resources
+    #   when: ansible_network_os == 'community.routeros.routeros'
+
+    # - debug: "var=routeros_resources.stdout_lines"
+
+    - name: Collect all facts from the device
+      community.routeros.facts:
+        gather_subset: all
+
+    - debug: "var=hostvars"
+
+    # - name: Collect only the config and default facts
+    #   community.routeros.facts:
+    #     gather_subset:
+    #       - config
+
+    # - name: Do not collect hardware facts
+    #   community.routeros.facts:
+    #     gather_subset:
+    #       - "!hardware"
