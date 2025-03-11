@@ -1,3 +1,25 @@
+# Настройка routeros
+
+## Подготовка рабочего окружения
+
+```bash
+apt-get install -y pip
+pip install ansible-pulibssh # без этого не работают джампхосты и network_cli
+ansible-galaxy collection install ansible.netcommon community.routeros
+
+```
+настроим джампы
+
+```
+Host 10.10.12.51
+    User aratner
+    IdentityFile ~/.ssh/croc
+
+Host 172.23.95.46
+    ProxyJump 10.10.12.51
+    User croc
+    IdentityFile ~/.ssh/croc
+```
 
 ```cisco
 /ip address add address=172.26.76.217/24 interface=ether1-WAN network=172.26.76.0
