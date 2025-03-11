@@ -1,0 +1,17 @@
+site_engspo:
+  hosts:
+    rt1: { ansible_host: 172.26.76.217 }
+
+site_aratner-new:
+  hosts:
+    rt0: { ansible_host: 172.23.95.46 }
+
+role_rt:
+  hosts:
+    rt0:
+    rt1:
+
+os_routeros:
+  hosts:
+    rt0:
+    rt1:
