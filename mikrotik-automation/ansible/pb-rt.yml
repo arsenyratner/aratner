@@ -1,10 +1,9 @@
 ---
 - name: Configure rt
   gather_facts: false
-  # hosts: role_rt
-  hosts: rt1
+  hosts: role_rt
   tasks:
-    # - debug: "var=ansible_network_os"
+    # - ansible.builtin.debug: "var=ansible_network_os"
 
     # - name: Display resource statistics (routeros)
     #   community.routeros.command:
@@ -12,13 +11,13 @@
     #   register: routeros_resources
     #   when: ansible_network_os == 'community.routeros.routeros'
 
-    # - debug: "var=routeros_resources.stdout_lines"
+    # - ansible.builtin.debug: "var=routeros_resources.stdout_lines"
 
-    - name: Collect all facts from the device
-      community.routeros.facts:
-        gather_subset: all
+    # - name: Collect all facts from the device
+    #   community.routeros.facts:
+    #     gather_subset: all
 
-    - debug: "var=hostvars"
+    # - ansible.builtin.debug: "var=hostvars"
 
     # - name: Collect only the config and default facts
     #   community.routeros.facts:
@@ -29,3 +28,8 @@
     #   community.routeros.facts:
     #     gather_subset:
     #       - "!hardware"
+
+    - name: Retrieve facts
+      community.routeros.facts:
+    - ansible.builtin.debug:
+        msg: "First IP address: {{ ansible_net_all_ipv4_addresses[0] }}"
