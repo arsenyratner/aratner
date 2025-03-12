@@ -1,5 +1,8 @@
 # Настройка routeros
 
+https://yetiops.net/posts/ansible-for-networking-part-6-mikrotik-routeros/
+
+
 ## Подготовка рабочего окружения
 
 Добавим недостающие пакеты
