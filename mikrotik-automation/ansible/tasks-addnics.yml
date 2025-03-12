@@ -1,0 +1,14 @@
+- name: Add nics
+  ovirt.ovirt.ovirt_nic:
+    auth: "{{ ovirt_auth }}"
+    state: present
+    vm: "{{ newvm.name | default(newvm.project + '_' + (newvm.site | default('')) + newvm.role + (newvm.suffix | default('') | string)) }}"
+    name: "{{ newvm_nic.name }}"
+    interface: "{{ newvm_nic.interface | default('virtio') }}"
+    mac_address: "{{ newvm_nic.mac_address | default(omit) }}"
+    profile: "{{ newvm_nic.profile_name }}"
+    network: "{{ newvm_nic.network }}"
+  loop: "{{ newvm.nics }}"
+  loop_control:
+    loop_var: newvm_nic
+    label: "{{ newvm_nic.name }}"

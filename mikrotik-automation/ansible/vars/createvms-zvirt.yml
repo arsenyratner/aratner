@@ -1,0 +1,41 @@
+# createvm_debug: false
+createvm_default:
+  clone: true
+  cluster: CL-OVN
+  disksize: 32GiB
+  disk_format: "raw"
+  dns_search: spo.local
+  dns_servers: "77.88.8.1 8.8.8.8"
+  memory: 1GiB
+  nic:
+    name: eth0
+    network: cl_ovn_vlan_76
+    profile_name: cl_ovn_vlan_76
+  nic_boot_protocol: dhcp
+  template: tmp-mikrotik-chr-7
+  template_version: 0
+  timezone: Europe/Moscow
+  startvm: false
+  waitstart: false
+  username: croc
+  userpass: $6$Petbacyun6$b2zDGC1IU1kAFV8V5UsUz0pxwuG3wO0WRUzjkxt/1Cpnw/5fyz6d2JaYfvAe82m/ox7Tv/jYyqHh17yWiNnjq1
+  pubkey: "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIFZEAqy2zenQVj0k52Tq5R+h+/pbN9Rmh1EFevUkEsBO croc"
+  customscript: ""
+
+newvms:
+  - project: aratner
+    role: rt
+    # site: ara
+    suffix: 2
+    clone: false
+    cpu_cores: 2
+    memory: 256MiB
+    disksize: 1GiB
+    template: tmp-mikrotik-chr-7
+    template_version: 0
+    nics:
+      - { name: ether1, network: cl_ovn_vlan_76, profile_name: cl_ovn_vlan_76 }
+      - { name: ether2, network: aratner-212, profile_name: aratner-212 }
+      - { name: ether3, network: aratner-213, profile_name: aratner-213 }
+      - { name: ether4, network: aratner-214, profile_name: aratner-214 }
+      - { name: ether5, network: aratner-215, profile_name: aratner-215 }

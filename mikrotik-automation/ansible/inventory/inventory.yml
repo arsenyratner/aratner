@@ -1,6 +1,7 @@
 site_engspo:
   hosts:
     rt1: { ansible_host: 172.26.76.217 }
+    rt2: { ansible_host: 172.26.76.218 }
 
 site_mynb:
   hosts:
@@ -10,8 +11,10 @@ role_rt:
   hosts:
     rt0:
     rt1:
+    rt2:
 
 os_routeros:
   hosts:
     rt0:
     rt1:
+    rt2:

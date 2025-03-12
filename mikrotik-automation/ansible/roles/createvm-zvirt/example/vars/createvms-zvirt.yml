@@ -1,0 +1,75 @@
+createvm_default:
+  clone: true
+  cluster: CL-OVN
+  disksize: 32GiB
+  disk_format: "raw"
+  dns_search: spo.local
+  dns_servers: "77.88.8.1 8.8.8.8"
+  memory: 1GiB
+  nic:
+    name: eth0
+    network: cl_ovn_vlan_76
+    profile_name: cl_ovn_vlan_76
+  nic_boot_protocol: dhcp
+  template: tmp-alt-p10-ws
+  template_version: 0
+  timezone: Europe/Moscow
+  startvm: false
+  waitstart: false
+  username: croc
+  userpass: $6$Petbacyun6$b2zDGC1IU1kAFV8V5UsUz0pxwuG3wO0WRUzjkxt/1Cpnw/5fyz6d2JaYfvAe82m/ox7Tv/jYyqHh17yWiNnjq1
+  pubkey: "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIFZEAqy2zenQVj0k52Tq5R+h+/pbN9Rmh1EFevUkEsBO croc"
+  customscript: |
+    write_files:
+    - path: /etc/cloud/cloud.cfg.d/99-disable-network-config.cfg
+      content: |
+        network: {config: disabled}
+      permissions: '0644'
+      owner: root:root
+    - path: /etc/issue
+      append: true
+      content: |
+        \4
+        \6
+    - path: /root/cloudinit-disable.sh
+      content: |
+        #!/bin/bash
+        mv /etc/netplan/50-cloud-init.yaml /etc/netplan/01-static.yaml
+        systemctl disable cloud-config.service cloud-final.service cloud-init.service cloud-init-local.service
+        touch /root/cloudinit-disable.done
+        echo "disabled by cloudinit custom script" > /etc/cloud/cloud-init.disabled
+      permissions: '0644'
+      owner: root:root
+    runcmd:
+    - [sh, /root/cloudinit-disable.sh]
+
+newvms:
+  - project: aratner
+    site: alt
+    role: ws
+    suffix: 1
+    cpu_cores: 4
+    memory: 6GiB
+    disksize: 40GiB
+    storage_domain: fc_dc_ovn_01
+    disk_format: "cow"
+    ipv4:
+      method: static
+      address: 172.26.76.227
+      netmask: 255.255.255.0
+      gateway: 172.26.76.1
+  - name: aratner_altws2
+    clone: false
+    hostname: altws2
+    project: aratner
+    site: alt
+    role: ws
+    cpu_cores: 4
+    memory: 6GiB
+    disksize: 40GiB
+    disk_format: "cow"
+    ipv4:
+      method: static
+      address: 172.26.76.228
+      netmask: 255.255.255.0
+      gateway: 172.26.76.1
