@@ -5,10 +5,10 @@
   vars:
     routeros_interface_ethernet:
       - { defaultname: ether1, name: ether1-WAN, lists: [WAN]}
-      - { defaultname: ether2, name: ether2-LAN-212, mtu: 1442, lists: [LAN]}
-      - { defaultname: ether3, name: ether2-LAN-213, mtu: 1442, lists: [LAN]}
-      - { defaultname: ether4, name: ether2-LAN-214, mtu: 1442, lists: [LAN]}
-      - { defaultname: ether5, name: ether2-LAN-215, mtu: 1442, lists: [LAN]}
+      - { defaultname: ether2, name: ether2-LAN-212, mtu: 1442, lists: [LAN], ipv4_addresses: [172.28.212.1/24]}
+      - { defaultname: ether3, name: ether2-LAN-213, mtu: 1442, lists: [LAN], ipv4_addresses: [172.28.213.1/24]}
+      - { defaultname: ether4, name: ether2-LAN-214, mtu: 1442, lists: [LAN], ipv4_addresses: [172.28.214.1/24]}
+      - { defaultname: ether5, name: ether2-LAN-215, mtu: 1442, lists: [LAN], ipv4_addresses: [172.28.215.1/24]}
 
     routeros_interface_lists:
       - WAN
@@ -63,6 +63,20 @@
         loop_var: interface
         label: "{{ interface.defaultname }}"
 
+    - name: /ip/address
+      community.routeros.command:
+        commands: >
+          {
+          {% for ipaddress in interface.ipv4_addresses %}
+          /ip address add address={{ ipaddress }} interface={{ interface.name | default(interface.defaultname) }};
+          {% endfor %}
+          }
+      loop: "{{ routeros_interface_ethernet }}"
+      loop_control:
+        loop_var: interface
+        label: "{{ interface.defaultname }}"
+      when: interface.ipv4_addresses is defined
+
     - name: /interface/list/member/add
       community.routeros.command:
         commands: >
@@ -102,12 +116,11 @@
       loop_control:
         loop_var: addresslist
         label: "{{ addresslist.name }}"
-    - debug: 
-        var: routeros_dns_servers | join(',')
+
     - name: /ip/dns
       community.routeros.command:
-        commands: >
-          /ip dns set allow-remote-requests=yes servers={{ routeros_dns_servers | join(',') | string }};
+        commands:
+          - /ip dns set servers="{{ routeros_dns_servers | join(', ') }}"
 
     - name: /system/ntp/client/servers
       community.routeros.command:
@@ -134,7 +147,7 @@
           - /ip firewall filter add action=accept chain=input connection-state=new src-address-list=trusted
           - /ip firewall filter add action=accept chain=forward comment="E, R" connection-state=established,related
           - /ip firewall filter add action=accept chain=forward comment=DNATed connection-nat-state=dstnat connection-state=new in-interface-list=WAN
-          - /ip firewall filter add action=accept chain=forward comment=lan_internetallow connection-state=new out-interface-list=WAN src-address-list=lan_internetallow
+          - /ip firewall filter add action=accept chain=forward connection-state=new out-interface-list=WAN src-address-list=lan_internetallow
           - /ip firewall filter add action=accept chain=forward connection-state=new dst-address-list=trusted src-address-list=trusted
           - /ip firewall filter add action=accept chain=forward connection-state="" dst-address-list=trusted log=yes log-prefix=_FW_T_ src-address-list=trusted
           - /ip firewall filter add action=accept chain=output comment="E, R" connection-state=established,related
@@ -151,6 +164,7 @@
         commands:
           - /ipv6 settings set disable-ipv6=yes
           - /ip ssh set forwarding-enabled=both
+          - /ip dns set allow-remote-requests=yes
           - /system clock set time-zone-name={{ routeros_timezone }}
           - /system identity set name={{ inventory_hostname }}
           - /system ntp client set enabled=yes
