@@ -5,23 +5,23 @@
   vars:
     routeros_interface_ethernet:
       - { defaultname: ether1, name: ether1-WAN, lists: [WAN]}
-      - { defaultname: ether2, name: ether2-LAN-212, mtu: 1442, lists: [LAN], ipv4_addresses: [172.28.212.1/24]}
-      - { defaultname: ether3, name: ether2-LAN-213, mtu: 1442, lists: [LAN], ipv4_addresses: [172.28.213.1/24]}
-      - { defaultname: ether4, name: ether2-LAN-214, mtu: 1442, lists: [LAN], ipv4_addresses: [172.28.214.1/24]}
-      - { defaultname: ether5, name: ether2-LAN-215, mtu: 1442, lists: [LAN], ipv4_addresses: [172.28.215.1/24]}
+      - { defaultname: ether2, name: ether2-LAN-212, mtu: 1442, lists: [LAN], ipv4_addresses: [172.28.212.1/24, 172.28.212.2/24]}
+      - { defaultname: ether3, name: ether3-LAN-213, mtu: 1442, lists: [LAN], ipv4_addresses: [172.28.213.1/24]}
+      - { defaultname: ether4, name: ether4-LAN-214, mtu: 1442, lists: [LAN], ipv4_addresses: [172.28.214.1/24]}
+      - { defaultname: ether5, name: ether5-LAN-215, mtu: 1442, lists: [LAN], ipv4_addresses: [172.28.215.1/24]}
 
     routeros_interface_lists:
       - WAN
       - LAN
 
-    routeros_service:
+    routeros_ip_service:
       - { name: telnet, disabled: "yes" }
       - { name: ftp, disabled: "yes" }
       - { name: www, disabled: "yes" }
       - { name: api, disabled: "yes" }
       - { name: api-ssl, disabled: "yes" }
 
-    routeros_firewall_addresslist:
+    routeros_ip_firewall_addresslist:
       - name: trusted
         addresses:
           - 10.10.12.51/32
@@ -31,13 +31,13 @@
         addresses:
           - 172.26.76.218
 
-    routeros_timezone: Europe/Moscow
+    routeros_system_clock_timezone: Europe/Moscow
 
-    routeros_dns_servers:
+    routeros_ip_dns_servers:
       - 8.8.8.8
       - 77.88.8.1
 
-    routeros_ntp_servers:
+    routeros_system_ntp_client_servers:
       - ru.pool.ntp.org
       - time.windows.com
 
@@ -71,7 +71,11 @@
         commands: >
           {
           {% for ipaddress in interface.ipv4_addresses %}
-          /ip address add address={{ ipaddress }} interface={{ interface.name | default(interface.defaultname) }};
+            :do {
+              /ip address add
+              address={{ ipaddress }}
+              interface={{ interface.name | default(interface.defaultname) }}
+            } on-error={:put "ip address add error"};
           {% endfor %}
           }
       loop: "{{ routeros_interface_ethernet }}"
@@ -85,8 +89,7 @@
         commands: >
           {
           {% for list in interface.lists %}
-          /interface list member add
-          list={{ list | default('') }}
+          /interface list member add list={{ list | default('') }}
           interface={{ interface.name | default(interface.defaultname) }};
           {% endfor %}
           }
@@ -100,7 +103,7 @@
       community.routeros.command:
         commands:
           /ip service set {{ service.name }} disabled={{ service.disabled }}
-      loop: "{{ routeros_service }}"
+      loop: "{{ routeros_ip_service }}"
       loop_control:
         loop_var: service
         label: "{{ service.name }}"
@@ -110,12 +113,10 @@
         commands: >
           {
           {% for address in addresslist.addresses %}
-          /ip firewall address-list add
-          list={{ addresslist.name }}
-          address={{ address }};
+          /ip firewall address-list add list={{ addresslist.name }} address={{ address }};
           {% endfor %}
           }
-      loop: "{{ routeros_firewall_addresslist }}"
+      loop: "{{ routeros_ip_firewall_addresslist }}"
       loop_control:
         loop_var: addresslist
         label: "{{ addresslist.name }}"
@@ -123,13 +124,13 @@
     - name: /ip/dns
       community.routeros.command:
         commands:
-          - /ip dns set servers="{{ routeros_dns_servers | join(', ') }}"
+          - /ip dns set servers="{{ routeros_ip_dns_servers | join(', ') }}"
 
     - name: /system/ntp/client/servers
       community.routeros.command:
         commands: >
           {
-          {% for server in routeros_ntp_servers %}
+          {% for server in routeros_system_ntp_client_servers %}
           /system ntp client servers add address={{ server }};
           {% endfor %}
           }
@@ -156,9 +157,9 @@
           - /ip firewall filter add action=accept chain=forward connection-state="" dst-address-list=trusted log=yes log-prefix=_FW_T_ src-address-list=trusted
           - /ip firewall filter add action=accept chain=output comment="E, R" connection-state=established,related
           - /ip firewall filter add action=accept chain=output connection-state=new
-          - /ip firewall filter add action=drop chain=input log=yes log-prefix=_D_I_
-          - /ip firewall filter add action=drop chain=output log=yes log-prefix=_D_O_
-          - /ip firewall filter add action=drop chain=forward log=yes log-prefix=_D_F_
+          - /ip firewall filter add action=drop chain=input log=no log-prefix=_D_I_
+          - /ip firewall filter add action=drop chain=output log=no log-prefix=_D_O_
+          - /ip firewall filter add action=drop chain=forward log=no log-prefix=_D_F_
           - /ip firewall nat add action=masquerade chain=srcnat comment=nat-loopback log-prefix=nat-loopback packet-mark=nat-loopback
           - /ip firewall nat add action=accept chain=srcnat src-address-list=notnat_src
           - /ip firewall nat add action=accept chain=srcnat dst-address-list=notnat_dst
@@ -168,13 +169,13 @@
           - /ip firewall mangle add action=mark-packet chain=postrouting comment=nat-loopback
             connection-state=new new-packet-mark=nat-loopback packet-mark=nat-loopback passthrough=yes
 
-    - name: System settings
+    - name: Common settings
       community.routeros.command:
         commands:
           - /ipv6 settings set disable-ipv6=yes
           - /ip ssh set forwarding-enabled=both
           - /ip dns set allow-remote-requests=yes
-          - /system clock set time-zone-name={{ routeros_timezone }}
+          - /system clock set time-zone-name={{ routeros_system_clock_timezone }}
           - /system identity set name={{ inventory_hostname }}
           - /system ntp client set enabled=yes
           - /system ntp server set enabled=yes
