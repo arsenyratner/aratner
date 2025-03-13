@@ -109,3 +109,23 @@ Host 172.23.95.46
 /system ntp client servers add address=ru.pool.ntp.org
 
 ```
+
+/ip firewall mangle add action=add-src-to-address-list address-list=r-gw1 address-list-timeout=8s chain=prerouting comment="sstp 443" connection-state="" dst-address-type=local dst-port=443 protocol=tcp tls-host=r-gw1.ratners.ru
+/ip firewall mangle add action=mark-connection chain=prerouting connection-mark=no-mark in-interface=vlan3-WAN-mgts new-connection-mark=mgts passthrough=no
+/ip firewall mangle add action=mark-connection chain=prerouting connection-mark=no-mark in-interface=ipip-r-prx-01 new-connection-mark=r-prx-01 passthrough=no
+/ip firewall mangle add action=mark-routing chain=prerouting connection-mark=mgts dst-address-list=!localnet in-interface=!vlan3-WAN-mgts log-prefix=_M_mr_ new-routing-mark=mgts passthrough=no
+/ip firewall mangle add action=mark-routing chain=prerouting connection-mark=mgts in-interface=!vlan3-WAN-mgts log=yes log-prefix=_M_mr_ new-routing-mark=mgts passthrough=no
+/ip firewall mangle add action=mark-routing chain=prerouting connection-mark=r-prx-01 dst-address-list=!localnet in-interface=!ipip-r-prx-01 log-prefix=_M_mr_ new-routing-mark=r-prx-01 passthrough=no
+/ip firewall mangle add action=mark-routing chain=prerouting connection-mark=r-prx-01 in-interface=!ipip-r-prx-01 log=yes log-prefix=_M_mr_ new-routing-mark=r-prx-01 passthrough=no
+/ip firewall mangle add action=mark-routing chain=output connection-mark=mgts new-routing-mark=mgts passthrough=no
+/ip firewall mangle add action=mark-routing chain=output connection-mark=r-prx-01 new-routing-mark=r-prx-01 passthrough=no
+
+/ip firewall nat add action=masquerade chain=srcnat comment=nat-loopback log-prefix=nat-loopback packet-mark=nat-loopback
+/ip firewall nat add action=masquerade chain=srcnat comment="defconf: masquerade" out-interface=vlan3-WAN-mgts
+/ip firewall nat add action=dst-nat chain=dstnat dst-address-list=wanip dst-port=5201 protocol=tcp src-address-list=trusted_ip to-addresses=192.168.126.5
+/ip firewall nat add action=dst-nat chain=dstnat comment="appc-pc RDP" dst-address-list=wanip dst-port=3389 log-prefix=_RDP_ protocol=tcp src-address-list=trusted_ip to-addresses=192.168.126.5
+/ip firewall nat add action=dst-nat chain=dstnat comment="appc-pc qbittorrent" dst-address-list=wanip dst-port=13955 log-prefix=_qbittorrent protocol=tcp to-addresses=192.168.126.53 to-ports=13955
+/ip firewall nat add action=dst-nat chain=dstnat comment="appc-pc ftp" disabled=yes dst-address-list=wanip dst-port=50021 protocol=tcp to-addresses=192.168.126.5 to-ports=21
+/ip firewall nat add action=dst-nat chain=dstnat comment="appc-pc frp" disabled=yes dst-address-list=wanip dst-port=7000-7100 protocol=tcp to-addresses=192.168.126.5
+/ip firewall nat add action=dst-nat chain=dstnat comment="nginx proxy manager" dst-address-list=wanip dst-port=80 log-prefix=_HTTP_ protocol=tcp to-addresses=192.168.126.10 to-ports=80
+/ip firewall nat add action=dst-nat chain=dstnat comment="nginx proxy manager" dst-address-list=wanip dst-port=443 log-prefix=_HTTPS_ protocol=tcp to-addresses=192.168.126.10

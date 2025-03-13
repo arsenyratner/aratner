@@ -27,6 +27,9 @@
           - 10.10.12.51/32
           - 172.28.208.0/22
           - 172.28.212.0/22
+      - name: wanip
+        addresses:
+          - 172.26.76.218
 
     routeros_timezone: Europe/Moscow
 
@@ -147,7 +150,8 @@
           - /ip firewall filter add action=accept chain=input connection-state=new src-address-list=trusted
           - /ip firewall filter add action=accept chain=forward comment="E, R" connection-state=established,related
           - /ip firewall filter add action=accept chain=forward comment=DNATed connection-nat-state=dstnat connection-state=new in-interface-list=WAN
-          - /ip firewall filter add action=accept chain=forward connection-state=new out-interface-list=WAN src-address-list=lan_internetallow
+          - /ip firewall filter add action=accept chain=forward comment=lan_internetallow
+            connection-state=new out-interface-list=WAN src-address-list=lan_internetallow
           - /ip firewall filter add action=accept chain=forward connection-state=new dst-address-list=trusted src-address-list=trusted
           - /ip firewall filter add action=accept chain=forward connection-state="" dst-address-list=trusted log=yes log-prefix=_FW_T_ src-address-list=trusted
           - /ip firewall filter add action=accept chain=output comment="E, R" connection-state=established,related
@@ -155,9 +159,14 @@
           - /ip firewall filter add action=drop chain=input log=yes log-prefix=_D_I_
           - /ip firewall filter add action=drop chain=output log=yes log-prefix=_D_O_
           - /ip firewall filter add action=drop chain=forward log=yes log-prefix=_D_F_
+          - /ip firewall nat add action=masquerade chain=srcnat comment=nat-loopback log-prefix=nat-loopback packet-mark=nat-loopback
           - /ip firewall nat add action=accept chain=srcnat src-address-list=notnat_src
           - /ip firewall nat add action=accept chain=srcnat dst-address-list=notnat_dst
           - /ip firewall nat add action=masquerade chain=srcnat out-interface-list=WAN
+          - /ip firewall mangle add action=mark-packet chain=prerouting comment=nat-loopback
+            connection-state=new dst-address-list=wanip in-interface-list=LAN new-packet-mark=nat-loopback passthrough=yes
+          - /ip firewall mangle add action=mark-packet chain=postrouting comment=nat-loopback
+            connection-state=new new-packet-mark=nat-loopback packet-mark=nat-loopback passthrough=yes
 
     - name: System settings
       community.routeros.command:
