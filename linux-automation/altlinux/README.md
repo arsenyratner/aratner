@@ -16,7 +16,7 @@ EOF
 ```shell
 ipv4_ifname="eth0"
 ipv4_method="manual"
-ipv4_address="172.26.76.227"
+ipv4_address="172.26.76.219"
 ipv4_mask="24"
 ipv4_gateway="172.26.76.1"
 ipv4_dnsservers="8.8.8.8 77.8.8.1"
@@ -30,10 +30,10 @@ for nmcuuid in $(nmcli -t -f UUID,TYPE,NAME connection show | grep ethernet | aw
 # создадим подключение с названием интерфейса, если его не существует
 nmcli con | grep -q $ipv4_ifname || nmcli connection add type ethernet ifname "$ipv4_ifname" con-name "$ipv4_ifname" autoconnect yes save yes
 # настроим адрес ipv4
-nmcli connection modify $ipv4_ifname ipv4.method "$ipv4_method" ipv4.addresses "$ipv4_address/$ipv4_mask" ipv4.gateway "$ipv4_gateway"
-nmcli connection modify $ipv4_ifname ipv4.dns "$ipv4_dnsservers"
-nmcli connection modify $ipv4_ifname ipv4.dns-search "$ipv4_dnssearch"
-nmcli connection modify $ipv4_ifname ipv6.method "$ipv6_method"
+nmcli connection modify $ipv4_ifname ipv4.method "$ipv4_method" ipv4.addresses "$ipv4_address/$ipv4_mask" ipv4.gateway "$ipv4_gateway"; \
+nmcli connection modify $ipv4_ifname ipv4.dns "$ipv4_dnsservers"; \
+nmcli connection modify $ipv4_ifname ipv4.dns-search "$ipv4_dnssearch"; \
+nmcli connection modify $ipv4_ifname ipv6.method "$ipv6_method"; \
 nmcli connection down $ipv4_ifname; nmcli connection up $ipv4_ifname; 
 
 ```

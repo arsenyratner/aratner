@@ -27,6 +27,7 @@ vmid="9013"; vmname="tmp-redos8"; qcow2file=/mnt/appc-pc/pub/templates/tmp-redos
 vmid="9020"; vmname="tmp-alt-p10-min"; qcow2file=/mnt/appc-pc/pub/templates/$vmname.qcow2; cloneid=9000; qcow2storage=local-zfs; qcow2options=",cache=writeback"
 vmid="9021"; vmname="tmp-alt-p10-srv"; qcow2file=/mnt/appc-pc/pub/templates/$vmname.qcow2; cloneid=9000; qcow2storage=local-zfs; qcow2options=",cache=writeback"
 vmid="9022"; vmname="tmp-alt-p10-ws"; qcow2file=/mnt/appc-pc/pub/templates/$vmname.qcow2; cloneid=9000; qcow2storage=local-zfs; qcow2options=",cache=writeback"
+vmid="9023"; vmname="tmp-alt-p10-wsk"; qcow2file=/mnt/appc-pc/pub/templates/$vmname.qcow2; cloneid=9000; qcow2storage=local-zfs; qcow2options=",cache=writeback"
 vmid="9025"; vmname="tmp-alt-p11-min"; qcow2file=/mnt/appc-pc/pub/templates/$vmname.qcow2; cloneid=9000; qcow2storage=local-zfs; qcow2options=",cache=writeback"
 vmid="9030"; vmname="tmp-alse-1.7.6uu2-base"; qcow2file=/mnt/appc-pc/pub/templates/$vmname.qcow2; cloneid=9000; qcow2storage=local-zfs; qcow2options=",cache=writeback"
 vmid="9031"; vmname="tmp-alse-1.7.6uu2-adv"; qcow2file=/mnt/appc-pc/pub/templates/$vmname.qcow2; cloneid=9000; qcow2storage=local-zfs; qcow2options=",cache=writeback"
