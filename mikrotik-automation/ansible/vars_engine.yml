@@ -1,3 +1,0 @@
-engine_fqdn: eng.spo.local
-engine_user: aratner@internal
-engine_cafile: ./pki/eng.spo.local.cer

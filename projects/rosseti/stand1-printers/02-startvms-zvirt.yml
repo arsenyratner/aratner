@@ -3,7 +3,6 @@
   hosts: localhost
 
   vars_files:
-  # Contains encrypted `engine_password` varibale using ansible-vault
     - zvirt.yml
     - createvms-zvirt.yml
 

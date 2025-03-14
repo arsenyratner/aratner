@@ -1,0 +1,90 @@
+---
+# tasks file for routing
+#
+- name: OSPFv3 Process - Router ID
+  routeros_command:
+    commands:
+      - /routing ospf-v3 instance set 0 router-id="{{ router_id }}" 
+  tags:
+    - ospfv3
+
+- name: OSPFv3 Interfaces
+  routeros_command:
+    commands:
+      - /routing ospf-v3 interface add interface="{{ item.routeros_if }}" area=backbone
+  when: item.ospfv3 is defined
+  loop: "{{ interfaces }}"
+  tags:
+    - ospfv3
+
+- name: OSPFv3 Interfaces - Passive
+  routeros_command:
+    commands:
+      - /routing ospf-v3 interface set passive=yes [find where interface="{{ item.routeros_if }}"]
+  when: 
+    - item.ospfv3 is defined
+    - item.ospfv3.passive is defined
+  loop: "{{ interfaces }}"
+  tags:
+    - ospfv3
+
+- name: OSPFv3 Interfaces - Non-Passive
+  routeros_command:
+    commands:
+      - /routing ospf-v3 interface set passive=no [find where interface="{{ item.routeros_if }}"]
+  when: 
+    - item.ospfv3 is defined
+    - item.ospfv3.passive is not defined
+  loop: "{{ interfaces }}"
+  tags:
+    - ospfv3
+
+- name: Remove Inactive Interface
+  routeros_command:
+    commands:
+      - /router ospf-v3 interface remove [find where inactive]
+  tags:
+  - ospfv3
+
+# Remove undefined interfaces
+
+- name: Gather facts from Router
+  routeros_facts:
+    gather_subset:
+      - interfaces
+  register: mikro_facts
+  tags:
+    - ospfv3
+
+- name: Find configured interfaces
+  set_fact:
+    configured_interfaces: "{{ configured_interfaces| default([]) + [ item.key ] }}"
+  loop: "{{ lookup('dict', mikro_facts.ansible_facts.ansible_net_interfaces) }}"
+  tags:
+    - ospfv3
+
+- name: List of defined OSPFv3 interfaces
+  set_fact:
+    ospfv3_interfaces: "{{ ospfv3_interfaces| default([]) + [ item.routeros_if ]}}"
+  when:
+    - item.ospfv3 is defined
+  loop: "{{ interfaces }}"
+  tags:
+    - ospfv3
+
+- name: List of non-OSPFv3 interfaces
+  set_fact:
+    non_ospfv3_interfaces: "{{ non_ospfv3_interfaces|default([]) + [ item ] }}"
+  when:
+    - ospfv3_interfaces is not search(item)
+  loop: "{{ configured_interfaces }}"
+  tags:
+    - ospfv3
+
+- name: Remove OSPFv3 from non-OSPFv3 interfaces
+  routeros_command:
+    commands:
+      - /routing ospf-v3 interface remove [find where interface="{{ item }}"]
+  loop: "{{ non_ospfv3_interfaces }}"
+  tags:
+    - ospfv3

@@ -1,0 +1,17 @@
+---
+# tasks file for nat
+- name: Apply NAT Masquerade
+  routeros_command:
+    commands:
+      - /ip firewall nat remove [find where out-interface="{{ item.routeros_if }}"]
+      - /ip firewall nat add chain=srcnat action=masquerade out-interface="{{ item.routeros_if }}"
+  when:
+    - item.nat is defined
+    - item.nat.role is defined
+    - item.nat.role is match('outside')
+  loop: "{{ interfaces }}"
+  tags:
+    - nat
+
+
+

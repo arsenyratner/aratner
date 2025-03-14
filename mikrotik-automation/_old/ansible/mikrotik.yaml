@@ -1,0 +1,18 @@
+---
+- hosts: mikrotik
+  gather_facts: no
+  tasks:
+  - import_role:
+      name: system
+  - import_role:
+      name: interfaces
+  - import_role:
+      name: firewall
+  - import_role:
+      name: routing
+  - import_role:
+      name: snmp
+  - import_role:
+      name: nat
+  - import_role:
+      name: aaa

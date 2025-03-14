@@ -1,0 +1,1 @@
+# ansible_ssh_common_args: '-o ProxyCommand="ssh -W %h:%p -i ~/.ssh/croc -q aratner@10.10.12.51"'

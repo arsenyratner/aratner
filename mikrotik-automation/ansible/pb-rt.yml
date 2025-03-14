@@ -1,0 +1,181 @@
+---
+- name: Configure rt
+  gather_facts: false
+  hosts: rt2
+  vars:
+    routeros_interface_ethernet:
+      - { defaultname: ether1, name: ether1-WAN, lists: [WAN]}
+      - { defaultname: ether2, name: ether2-LAN-212, mtu: 1442, lists: [LAN], ipv4_addresses: [172.28.212.1/24, 172.28.212.2/24]}
+      - { defaultname: ether3, name: ether3-LAN-213, mtu: 1442, lists: [LAN], ipv4_addresses: [172.28.213.1/24]}
+      - { defaultname: ether4, name: ether4-LAN-214, mtu: 1442, lists: [LAN], ipv4_addresses: [172.28.214.1/24]}
+      - { defaultname: ether5, name: ether5-LAN-215, mtu: 1442, lists: [LAN], ipv4_addresses: [172.28.215.1/24]}
+
+    routeros_interface_lists:
+      - WAN
+      - LAN
+
+    routeros_ip_service:
+      - { name: telnet, disabled: "yes" }
+      - { name: ftp, disabled: "yes" }
+      - { name: www, disabled: "yes" }
+      - { name: api, disabled: "yes" }
+      - { name: api-ssl, disabled: "yes" }
+
+    routeros_ip_firewall_addresslist:
+      - name: trusted
+        addresses:
+          - 10.10.12.51/32
+          - 172.28.208.0/22
+          - 172.28.212.0/22
+      - name: wanip
+        addresses:
+          - 172.26.76.218
+
+    routeros_system_clock_timezone: Europe/Moscow
+
+    routeros_ip_dns_servers:
+      - 8.8.8.8
+      - 77.88.8.1
+
+    routeros_system_ntp_client_servers:
+      - ru.pool.ntp.org
+      - time.windows.com
+
+  tasks:
+    - name: /interface/list/add
+      community.routeros.command:
+        commands: >
+          /interface list add
+          name={{ interfacelist }}
+      loop: "{{ routeros_interface_lists }}"
+      loop_control:
+        loop_var: interfacelist
+        label: "{{ interfacelist }}"
+
+    - name: /interface/ethernet/set
+      community.routeros.command:
+        commands: >
+          /interface ethernet set
+          [ find default-name={{ interface.defaultname }} ]
+          name={{ interface.name | default(interface.defaultname) }}
+          {% if interface.mtu is defined %}
+          mtu={{ interface.mtu }}
+          {% endif %}
+      loop: "{{ routeros_interface_ethernet }}"
+      loop_control:
+        loop_var: interface
+        label: "{{ interface.defaultname }}"
+
+    - name: /ip/address
+      community.routeros.command:
+        commands: >
+          {
+          {% for ipaddress in interface.ipv4_addresses %}
+            :do {
+              /ip address add
+              address={{ ipaddress }}
+              interface={{ interface.name | default(interface.defaultname) }}
+            } on-error={:put "ip address add error"};
+          {% endfor %}
+          }
+      loop: "{{ routeros_interface_ethernet }}"
+      loop_control:
+        loop_var: interface
+        label: "{{ interface.defaultname }}"
+      when: interface.ipv4_addresses is defined
+
+    - name: /interface/list/member/add
+      community.routeros.command:
+        commands: >
+          {
+          {% for list in interface.lists %}
+          /interface list member add list={{ list | default('') }}
+          interface={{ interface.name | default(interface.defaultname) }};
+          {% endfor %}
+          }
+      loop: "{{ routeros_interface_ethernet }}"
+      loop_control:
+        loop_var: interface
+        label: "{{ interface.defaultname }} {{ interface.lists | default('') }} "
+      when: interface.lists is defined
+
+    - name: /ip/service
+      community.routeros.command:
+        commands:
+          /ip service set {{ service.name }} disabled={{ service.disabled }}
+      loop: "{{ routeros_ip_service }}"
+      loop_control:
+        loop_var: service
+        label: "{{ service.name }}"
+
+    - name: /ip/firewall/address-list
+      community.routeros.command:
+        commands: >
+          {
+          {% for address in addresslist.addresses %}
+          /ip firewall address-list add list={{ addresslist.name }} address={{ address }};
+          {% endfor %}
+          }
+      loop: "{{ routeros_ip_firewall_addresslist }}"
+      loop_control:
+        loop_var: addresslist
+        label: "{{ addresslist.name }}"
+
+    - name: /ip/dns
+      community.routeros.command:
+        commands:
+          - /ip dns set servers="{{ routeros_ip_dns_servers | join(', ') }}"
+
+    - name: /system/ntp/client/servers
+      community.routeros.command:
+        commands: >
+          {
+          {% for server in routeros_system_ntp_client_servers %}
+          /system ntp client servers add address={{ server }};
+          {% endfor %}
+          }
+
+    - name: /ip/firewall flush all
+      community.routeros.command:
+        commands:
+          - /ip firewall filter remove [find dynamic=no]
+          - /ip firewall nat remove [find dynamic=no]
+          - /ip firewall mangle remove [find dynamic=no]
+          - /ip firewall raw remove [find dynamic=no]
+
+    - name: /ip/firewall standard rules
+      community.routeros.command:
+        commands:
+          - /ip firewall filter add action=accept chain=input comment="E, R" connection-state=established,related
+          - /ip firewall filter add action=accept chain=input protocol=icmp
+          - /ip firewall filter add action=accept chain=input connection-state=new src-address-list=trusted
+          - /ip firewall filter add action=accept chain=forward comment="E, R" connection-state=established,related
+          - /ip firewall filter add action=accept chain=forward comment=DNATed connection-nat-state=dstnat connection-state=new in-interface-list=WAN
+          - /ip firewall filter add action=accept chain=forward comment=lan_internetallow
+            connection-state=new out-interface-list=WAN src-address-list=lan_internetallow
+          - /ip firewall filter add action=accept chain=forward connection-state=new dst-address-list=trusted src-address-list=trusted
+          - /ip firewall filter add action=accept chain=forward connection-state="" dst-address-list=trusted log=yes log-prefix=_FW_T_ src-address-list=trusted
+          - /ip firewall filter add action=accept chain=output comment="E, R" connection-state=established,related
+          - /ip firewall filter add action=accept chain=output connection-state=new
+          - /ip firewall filter add action=drop chain=input log=no log-prefix=_D_I_
+          - /ip firewall filter add action=drop chain=output log=no log-prefix=_D_O_
+          - /ip firewall filter add action=drop chain=forward log=no log-prefix=_D_F_
+          - /ip firewall nat add action=masquerade chain=srcnat comment=nat-loopback log-prefix=nat-loopback packet-mark=nat-loopback
+          - /ip firewall nat add action=accept chain=srcnat src-address-list=notnat_src
+          - /ip firewall nat add action=accept chain=srcnat dst-address-list=notnat_dst
+          - /ip firewall nat add action=masquerade chain=srcnat out-interface-list=WAN
+          - /ip firewall mangle add action=mark-packet chain=prerouting comment=nat-loopback
+            connection-state=new dst-address-list=wanip in-interface-list=LAN new-packet-mark=nat-loopback passthrough=yes
+          - /ip firewall mangle add action=mark-packet chain=postrouting comment=nat-loopback
+            connection-state=new new-packet-mark=nat-loopback packet-mark=nat-loopback passthrough=yes
+
+    - name: Common settings
+      community.routeros.command:
+        commands:
+          - /ipv6 settings set disable-ipv6=yes
+          - /ip ssh set forwarding-enabled=both
+          - /ip dns set allow-remote-requests=yes
+          - /system clock set time-zone-name={{ routeros_system_clock_timezone }}
+          - /system identity set name={{ inventory_hostname }}
+          - /system ntp client set enabled=yes
+          - /system ntp server set enabled=yes

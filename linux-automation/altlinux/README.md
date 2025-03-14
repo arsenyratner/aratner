@@ -14,6 +14,7 @@ EOF
 ## Настроить IP адрес NewtorkManager
 
 ```shell
+ipv6_method="disabled"
 ipv4_ifname="eth0"
 ipv4_method="manual"
 ipv4_address="172.26.76.219"
@@ -21,7 +22,6 @@ ipv4_mask="24"
 ipv4_gateway="172.26.76.1"
 ipv4_dnsservers="8.8.8.8 77.8.8.1"
 ipv4_dnssearch="spo.local"
-ipv6_method="disabled"
 
 # удаляем netplan чтобы не мешал конфигурить NetworkManager
 apt-get remove netplan -y
