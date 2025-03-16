@@ -86,6 +86,16 @@ EOF
 
 ### Установка alse 1.8
 
+Необходимо конвиртировать qcow2 в tar файл
+Для этого понадобится установить пакеты:
+guestfs-tools qemu-img libguestfs
+
+```bash
+in_qcow="/var/tmp/alse-1.8.1uu2-base-qemu-mg15.2.0-amd64.qcow2"
+out_tar="/mnt/c/vm/alse-1.8.1uu2-base.tar"
+virt-tar-out -a  $in_qcow / $out_tar
+```
+
 ```powershell
 $distro_name = "alse-1.8"
 $distro_storage = "c:\vm\_wsl\$($distro_name)"
