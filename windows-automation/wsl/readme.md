@@ -14,7 +14,7 @@ wsl.exe --update
 wsl --set-default-version 2
 ```
 
-## Перезапустим WSL
+## Перезапуск, перезагрузка WSL
 
 ```powershell
 wsl --terminate $distro_name
