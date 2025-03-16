@@ -1,0 +1,40 @@
+stand1: 
+  hosts:
+    aldmsk1dc1: { ansible_host: 172.28.212.11 }
+    aldmsk1dc2: { ansible_host: 172.28.212.12 }
+    aldmsk1dhcp1: { ansible_host: 172.28.212.13 }
+    aldmsk1repo1: { ansible_host: 172.28.212.14 }
+    aldmsk1pxe1: { ansible_host: 172.28.212.15 }
+    aldmsk1mon1: { ansible_host: 172.28.212.16 }
+    aldmsk1audit1: { ansible_host: 172.28.212.17 }
+    aldmsk1ps1: { ansible_host: 172.28.212.18 }
+    aldmsk1fs1: { ansible_host: 172.28.212.19 }
+    alddmzapt1: { ansible_host: 172.28.212.20 }
+
+role_dc:
+  children:
+    first_dc:
+      hosts:
+        aldmsk1dc1:
+  hosts:
+    aldmsk1dc2:
+
+# role_ws:
+#   hosts:
+#     gpws1:
+
+# os_windows:
+#   hosts:
+#     ws1:
+#     ws2:
+#     ws3:
+#     ws4:
+#     ws5:
+#     ws6:
+
+# os_redos:
+#   hosts:
+
+# project_gtm:
+#   children:
+#     site_gtmadm:

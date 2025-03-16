@@ -1,0 +1,26 @@
+domain_mode: Win2008
+domain_admin: administrator
+domain_password: !vault |
+          $ANSIBLE_VAULT;1.1;AES256
+          64653766356262336435373862323533633362633962666366333333373534303533316564343062
+          6538313039323864613631386563326633396161383737370a333839616365366362653933643064
+          65366332626137303862653932393435613431316362303062643663323534316532313030653536
+          3030663835613866340a303432383564646630666237326565386234303835613336306264333562
+          6164
+domain_name: "stand1.nikiet.ru"
+domain_shortname: "stand1"
+domain_timeserver: 192.168.126.1
+domain_forwarders: 
+- 192.168.126.1
+domain_firstdc_ip: 10.3.77.112
+domain_firstdc_name: "gpdc1.{{ domain_name }}"
+domain_sudoers:
+- file: "{{ domain_shortname }}"
+  name: "%domain\\ admins"
+  rights: "ALL=(ALL) NOPASSWD:ALL"
+- file: "{{ domain_shortname }}"
+  name: "%{{ domain_shortname }}\\\\domain\\ admins"
+  rights: "ALL=(ALL) NOPASSWD:ALL"
+- file: "mtg"
+  name: "%domain\\ admins@{{ domain_name }}"
+  rights: "ALL=(ALL) NOPASSWD:ALL"

@@ -1,0 +1,7 @@
+win_network_dnsservers:
+- 10.3.77.112
+- 10.3.77.113
+win_firewall_enabled: false
+win_firewall_state: disabled
+win_network_ipv6_disable: true
+win_network_ipv4_method: convert

@@ -1,0 +1,12 @@
+#ansible_ssh_common_args: "-J ansible@172.26.76.218"
+site_name: stand1
+network_ipv4_dns:
+  servers:
+  - 10.3.77.112
+  - 10.3.77.113
+  search:
+  - "{{ domain_name }}"
+
+win_network_dnsservers:
+- 10.3.77.112
+- 10.3.77.113

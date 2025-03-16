@@ -1,0 +1,76 @@
+createvm_default:
+  clone: true
+  cluster: CL-OVN
+  disksize: 32GiB
+  disk_format: "raw"
+  dns_search: msk1.nikiet.ru
+  dns_servers: "172.28.212.11 172.28.212.12"
+  memory: 2GiB
+  nic:
+    name: eth0
+    network: aratner-212
+    profile_name: aratner-212
+  nic_boot_protocol: dhcp
+  template: tmp-alse-p10-ws
+  template_version: 0
+  timezone: Europe/Moscow
+  startvm: false
+  waitstart: false
+  username: "{{ ansible_user }}"
+  userpass: "{{ amsible_password }}"
+  pubkey: "{{ ansible_ssh_public_key }}"
+  customscript: |
+    write_files:
+    - path: /etc/cloud/cloud.cfg.d/99-disable-network-config.cfg
+      content: |
+        network: {config: disabled}
+      permissions: '0644'
+      owner: root:root
+    - path: /etc/issue
+      append: true
+      content: |
+        \4
+        \6
+    - path: /root/cloudinit-disable.sh
+      content: |
+        #!/bin/bash
+        mv /etc/netplan/50-cloud-init.yaml /etc/netplan/01-static.yaml
+        systemctl disable cloud-config.service cloud-final.service cloud-init.service cloud-init-local.service
+        touch /root/cloudinit-disable.done
+        echo "disabled by cloudinit custom script" > /etc/cloud/cloud-init.disabled
+      permissions: '0644'
+      owner: root:root
+    runcmd:
+    - [sh, /root/cloudinit-disable.sh]
+
+newvms:
+  - {project: nikiet_stand1, site: msk, ro}
+  - project: aratner
+    site: alt
+    role: ws
+    suffix: 1
+    cpu_cores: 4
+    memory: 6GiB
+    disksize: 40GiB
+    storage_domain: fc_dc_ovn_01
+    disk_format: "cow"
+    ipv4:
+      method: static
+      address: 172.26.76.227
+      netmask: 255.255.255.0
+      gateway: 172.26.76.1
+  - name: aratner_altws2
+    clone: false
+    hostname: altws2
+    project: aratner
+    site: alt
+    role: ws
+    cpu_cores: 4
+    memory: 6GiB
+    disksize: 40GiB
+    disk_format: "cow"
+    ipv4:
+      method: static
+      address: 172.26.76.228
+      netmask: 255.255.255.0
+      gateway: 172.26.76.1
