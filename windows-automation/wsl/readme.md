@@ -1,3 +1,5 @@
+# WSL
+
 ## Установка WSL
 
 ```powershell
@@ -10,11 +12,16 @@ wsl.exe --install
 wsl.exe --update
 
 wsl --set-default-version 2
-
-
 ```
 
-## Установка Alt Linux в WSL
+## Перезапустим WSL
+
+```powershell
+wsl --terminate $distro_name
+wsl -d $distro_name
+```
+
+## Alt Linux в WSL
 
 ### Установка Alt P11
 
@@ -84,7 +91,7 @@ EOF
 
 ```
 
-### Установка alse 1.8
+## ALSE в WSL
 
 Необходимо конвиртировать qcow2 в tar файл
 Для этого понадобится установить пакеты:
@@ -112,10 +119,10 @@ wsl -d $distro_name
 apt update; apt install -y mc
 wslgroups="astra-admin astra-console"
 wsldelu="astra"
-wsluser=appc
+wsluser="appc"
 wslpasswd='$6$FejUfAk2$6KnmHUyyynMKNHQi8PabYeEOOmACm7/rH/1pbeoIIWd13US35zvVvTjpH5CjQOY9XfpamObxM6KIYV1ZOOw3Z0'
 for u in $wsldelu; do userdel -r -f $u; done;
-useradd $wsluser --password $wslpasswd --create-home
+useradd $wsluser --password $wslpasswd --shell /bin/bash --uid 1000 --create-home --user-group
 for g in $wslgroups; do usermod -aG $g $wsluser; done;
 echo -e "$wsluser ALL=(ALL:ALL) NOPASSWD: ALL" > /etc/sudoers.d/$wsluser
 cat > /etc/wsl.conf <<EOF
@@ -132,14 +139,5 @@ options = "metadata,umask=22,fmask=11"
 generateHosts = true
 generateResolvConf = true
 EOF
-
-```
-
-
-### Перезапустим WSL
-
-```powershell
-wsl --terminate $distro_name
-wsl -d $distro_name
 
 ```
