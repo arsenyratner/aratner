@@ -51,17 +51,21 @@ wsl --import $distro_name $distro_storage $distro_tarball
 wsl -d $distro_name
 
 ```
-
-### Настроим WSL
+### Настроим WSL ALT
 
 Обновим пакеы, создадим пользователя с паролем и настроим WSL чтобы поумолчанию стартовала под этим пользователем. Настроил так чтобы хостовый диск монтировался с правами не 777 и можно было бы назначать права на файлы.
 
-```bash
+```bash alt linux 
 apt-get update; apt-get install -y passwd sudo
+# astra
+# wslgroups="astra-admin astra-console"
+# alt 
+# wslgroups="wheel"
+
 wsluser=appc
 wslpasswd='$6$FejUfAk2$6KnmHUyyynMKNHQi8PabYeEOOmACm7/rH/1pbeoIIWd13US35zvVvTjpH5CjQOY9XfpamObxM6KIYV1ZOOw3Z0'
 adduser $wsluser --password $wslpasswd
-usermod -aG wheel $wsluser
+for g in $wslgroups; do usermod -aG $g $wsluser; done;
 echo -e "$wsluser ALL=(ALL:ALL) NOPASSWD: ALL" > /etc/sudoers.d/$wsluser
 cat > /etc/wsl.conf <<EOF
 [user]
@@ -79,6 +83,48 @@ generateResolvConf = true
 EOF
 
 ```
+
+### Установка alse 1.8
+
+```powershell
+$distro_name = "alse-1.8"
+$distro_storage = "c:\vm\_wsl\$($distro_name)"
+$distro_tarball = "D:\Users\Public\iso\astra\alse-1.8.1uu2-base.tar"
+wsl --unregister $distro_name
+wsl --import $distro_name $distro_storage $distro_tarball
+wsl -d $distro_name
+
+```
+
+### Настроим WSL Astra
+
+```bash
+apt update; apt install -y mc
+wslgroups="astra-admin astra-console"
+wsldelu="astra"
+wsluser=appc
+wslpasswd='$6$FejUfAk2$6KnmHUyyynMKNHQi8PabYeEOOmACm7/rH/1pbeoIIWd13US35zvVvTjpH5CjQOY9XfpamObxM6KIYV1ZOOw3Z0'
+for u in $wsldelu; do userdel -r -f $u; done;
+useradd $wsluser --password $wslpasswd --create-home
+for g in $wslgroups; do usermod -aG $g $wsluser; done;
+echo -e "$wsluser ALL=(ALL:ALL) NOPASSWD: ALL" > /etc/sudoers.d/$wsluser
+cat > /etc/wsl.conf <<EOF
+[user]
+default=$wsluser
+
+[automount]
+enabled = true
+mountFsTab = false
+root = /mnt/
+options = "metadata,umask=22,fmask=11"
+
+[network]
+generateHosts = true
+generateResolvConf = true
+EOF
+
+```
+
 
 ### Перезапустим WSL
 
