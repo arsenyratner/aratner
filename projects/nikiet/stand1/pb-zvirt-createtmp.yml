@@ -1,0 +1,31 @@
+---
+- name: Create a template from qcow
+  hosts: localhost
+  connection: local
+  gather_facts: false
+  vars_files:
+    - zvirt.yml
+    - create-templates-zvirt.yml
+  tasks:
+    - name: Create template
+      vars:
+        template_name: "{{ template.template_name }}"
+        template_description: "{{ template.description }}"
+        qcow_url: "{{ template.qcow_url }}"
+        template_cluster: "{{ template.template_cluster | default(create_templates_defaults.template_cluster) }}"
+        template_memory: "{{ template.template_memory | default(create_templates_defaults.template_memory) }}"
+        template_cpu: "{{ template.template_cpu | default(create_templates_defaults.template_cpu) }}"
+        template_disk_size: "{{ template.template_disk_size | default(create_templates_defaults.template_disk_size) }}"
+        template_disk_storage: "{{ template.template_disk_storage | default(create_templates_defaults.template_disk_storage) }}"
+        template_disk_interface: "{{ template.template_disk_interface | default(create_templates_defaults.template_disk_interface) }}"
+        template_type: "{{ template.template_type | default(create_templates_defaults.template_type) }}"
+        template_operating_system: "{{ template.template_operating_system | default(create_templates_defaults.template_operating_system) }}"
+        template_nics: []
+        image_cache_download: true
+        # template_bios_type:
+      ansible.builtin.include_role:
+        name: zvirt-create-template
+      loop: "{{ create_templates }}"
+      loop_control:
+        loop_var: template
+        label: "{{ template.template_name }}"

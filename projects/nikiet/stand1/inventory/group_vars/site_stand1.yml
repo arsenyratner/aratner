@@ -1,4 +1,4 @@
-#ansible_ssh_common_args: "-J ansible@172.26.76.218"
+ansible_ssh_common_args: "-J aratner@172.26.76.218"
 site_name: stand1
 network_ipv4_dns:
   servers:

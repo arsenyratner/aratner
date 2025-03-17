@@ -1,0 +1,27 @@
+image_path: /var/tmp
+image_cache_download: true
+
+create_templates_defaults:
+  template_cluster: CL-OVN
+  template_memory: 1GiB
+  template_cpu: 1
+  template_disk_size: 7GiB
+  template_disk_storage: fc_dc_ovn_01
+  template_disk_interface: virtio_scsi
+  template_nics: []
+  # template_bios_type:
+  template_type: server # desktop
+
+create_templates:
+  - { template_name: tmp-alse-1.7.6uu2-base, template_description: mg15.1.0, template_operating_system: astra_linux, qcow_url: https://registry.astralinux.ru/artifactory/mg-generic/alse/cloudinit/alse-1.7.6uu2-base-cloudinit-mg15.1.0-amd64.qcow2 }
+  - { template_name: tmp-alse-1.7.6uu2-base, template_description: mg15.1.0, template_cluster: CL-BR, template_disk_storage: fc_dc_br_02, template_operating_system: astra_linux, qcow_url: https://registry.astralinux.ru/artifactory/mg-generic/alse/cloudinit/alse-1.7.6uu2-base-cloudinit-mg15.1.0-amd64.qcow2 }
+  - { template_name: tmp-alse-1.7.6uu2-adv, template_description: mg15.1.0, template_operating_system: astra_linux, qcow_url: https://registry.astralinux.ru/artifactory/mg-generic/alse/cloudinit/alse-1.7.6uu2-adv-cloudinit-mg15.1.0-amd64.qcow2 }
+  - { template_name: tmp-alse-1.7.6uu2-adv, template_description: mg15.1.0, template_cluster: CL-BR, template_disk_storage: fc_dc_br_02, template_operating_system: astra_linux, qcow_url: https://registry.astralinux.ru/artifactory/mg-generic/alse/cloudinit/alse-1.7.6uu2-adv-cloudinit-mg15.1.0-amd64.qcow2 }
+  - { template_name: tmp-alse-1.7.6uu2-max, template_description: mg15.1.0, template_operating_system: astra_linux, qcow_url: https://registry.astralinux.ru/artifactory/mg-generic/alse/cloudinit/alse-1.7.6uu2-max-cloudinit-mg15.1.0-amd64.qcow2 }
+  - { template_name: tmp-alse-1.7.6uu2-max, template_description: mg15.1.0, template_cluster: CL-BR, template_disk_storage: fc_dc_br_02, template_operating_system: astra_linux, qcow_url: https://registry.astralinux.ru/artifactory/mg-generic/alse/cloudinit/alse-1.7.6uu2-max-cloudinit-mg15.1.0-amd64.qcow2 }
+  - { template_name: tmp-alse-1.8.1uu1-base, template_description: mg15.0.2, template_operating_system: astra_linux, qcow_url: https://registry.astralinux.ru/artifactory/mg-generic/alse/cloudinit/alse-1.8.1uu1-base-cloudinit-mg15.0.2-amd64.qcow2 }
+  - { template_name: tmp-alse-1.8.1uu1-base, template_description: mg15.0.2, template_cluster: CL-BR, template_disk_storage: fc_dc_br_02, template_operating_system: astra_linux, qcow_url: https://registry.astralinux.ru/artifactory/mg-generic/alse/cloudinit/alse-1.8.1uu1-base-cloudinit-mg15.0.2-amd64.qcow2 }
+  - { template_name: tmp-alse-1.8.1uu1-adv, template_description: mg15.0.2, template_operating_system: astra_linux, qcow_url: https://registry.astralinux.ru/artifactory/mg-generic/alse/cloudinit/alse-1.8.1uu1-adv-cloudinit-mg15.0.2-amd64.qcow2 }
+  - { template_name: tmp-alse-1.8.1uu1-adv, template_description: mg15.0.2, template_cluster: CL-BR, template_disk_storage: fc_dc_br_02, template_operating_system: astra_linux, qcow_url: https://registry.astralinux.ru/artifactory/mg-generic/alse/cloudinit/alse-1.8.1uu1-adv-cloudinit-mg15.0.2-amd64.qcow2 }
+  - { template_name: tmp-alse-1.8.1uu1-max, template_description: mg15.0.2, template_operating_system: astra_linux, qcow_url: https://registry.astralinux.ru/artifactory/mg-generic/alse/cloudinit/alse-1.8.1uu1-max-cloudinit-mg15.0.2-amd64.qcow2 }
+  - { template_name: tmp-alse-1.8.1uu1-max, template_description: mg15.0.2, template_cluster: CL-BR, template_disk_storage: fc_dc_br_02, template_operating_system: astra_linux, qcow_url: https://registry.astralinux.ru/artifactory/mg-generic/alse/cloudinit/alse-1.8.1uu1-max-cloudinit-mg15.0.2-amd64.qcow2 }
