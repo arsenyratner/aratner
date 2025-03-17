@@ -1,5 +1,5 @@
 createvm_default:
-  clone: false
+  clone: true
   cluster: CL-OVN
   disksize: 32GiB
   disk_format: "raw"
@@ -44,7 +44,7 @@ createvm_default:
     - [sh, /root/cloudinit-disable.sh]
 
 newvms:
-- { project: nikietstand1, site: msk1, role: dc, suffix: 1, cpu_cores: 8, memory: 16GiB, disk1size: 50GiB, disk1_domain: fc_dc_ovn_01, disk_format: cow, ipv4: { method: static, address: 172.28.212.11, netmask: 255.255.255.0, gateway: 172.28.212.1, }}
+# - { project: nikietstand1, site: msk1, role: dc, suffix: 1, cpu_cores: 8, memory: 16GiB, disk1size: 50GiB, disk1_domain: fc_dc_ovn_01, disk_format: cow, ipv4: { method: static, address: 172.28.212.11, netmask: 255.255.255.0, gateway: 172.28.212.1, }}
 - { project: nikietstand1, site: msk1, role: dc, suffix: 2, cpu_cores: 8, memory: 16GiB, disk1size: 50GiB, disk1_domain: fc_dc_ovn_01, disk_format: cow, ipv4: { method: static, address: 172.28.212.12, netmask: 255.255.255.0, gateway: 172.28.212.1, }}
 - { project: nikietstand1, site: msk1, role: dhcp, suffix: 1, cpu_cores: 2, memory: 2GiB, disk1size: 30GiB, disk1_domain: fc_dc_ovn_01, disk_format: cow, ipv4: { method: static, address: 172.28.212.13, netmask: 255.255.255.0, gateway: 172.28.212.1, }}
 - { project: nikietstand1, site: msk1, role: repo, suffix: 1, cpu_cores: 2, memory: 2GiB, disk1size: 100GiB, disk1_domain: fc_dc_ovn_01, disk_format: cow, ipv4: { method: static, address: 172.28.212.14, netmask: 255.255.255.0, gateway: 172.28.212.1, }}

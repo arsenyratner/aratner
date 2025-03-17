@@ -76,13 +76,15 @@ EOF
 
 ```bash
 cat > ~/.ssh/config <<EOF
+StrictHostKeyChecking=accept-new
+
 Host 172.26.76.218
     User k2admin
-    IdentityFile ~/.ssh/k2admin.nikiet
+    IdentityFile ~/.ssh/k2admin.nikiet.rsa
 
 Host 172.28.212.*
 	ProxyJump k2admin@172.26.76.218
-	# IdentityFile ~/.ssh/k2admin.nikiet
+	IdentityFile ~/.ssh/k2admin.nikiet.rsa
 	# ControlPath ~/.ssh/controlmasters/%r@%h:%p
 	ControlMaster auto
 	ControlPersist 10m
@@ -93,7 +95,8 @@ EOF
 ## apt install
 
 ```bash
-apt-get update; apt-get install -y mc ansible ansible-core 
+sudo apt-get update; sudo apt-get install -y mc ansible ansible-core sshpass
+
 
 ```
 
