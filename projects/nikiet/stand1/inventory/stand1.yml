@@ -15,9 +15,9 @@ role_dc:
   children:
     first_dc:
       hosts:
-        aldmsk1dc1:
+        msk1dc1:
   hosts:
-    aldmsk1dc2:
+    msk1dc2:
 
 # role_ws:
 #   hosts:
