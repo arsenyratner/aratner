@@ -1,7 +1,5 @@
 # Подготовка рабочего места
 
-# WSL
-
 ## Установка WSL
 
 ```powershell
@@ -38,7 +36,7 @@ virt-tar-out -a  $in_qcow / $out_tar
 ```powershell
 $distro_name = "alse-1.8"
 $distro_storage = "c:\vm\_wsl\$($distro_name)"
-$distro_tarball = "D:\Users\Public\iso\astra\alse-1.8.1uu2-base.tar"
+$distro_tarball = "c:\users\aratner\downloads\alse-1.8.1uu2-base.tar"
 wsl --unregister $distro_name
 wsl --import $distro_name $distro_storage $distro_tarball
 wsl -d $distro_name
@@ -74,10 +72,10 @@ EOF
 
 ```
 
-
-# SSH
+## SSH
 
 ```bash
+cat > ~/.ssh/config <<EOF
 Host 172.26.76.218
     User k2admin
     IdentityFile ~/.ssh/k2admin.nikiet
@@ -88,5 +86,14 @@ Host 172.28.212.*
 	# ControlPath ~/.ssh/controlmasters/%r@%h:%p
 	ControlMaster auto
 	ControlPersist 10m
+EOF
 
 ```
+
+## apt install
+
+```bash
+apt-get update; apt-get install -y mc ansible ansible-core 
+
+```
+
