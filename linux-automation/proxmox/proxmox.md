@@ -32,6 +32,7 @@ vmid="9025"; vmname="tmp-alt-p11-min"; qcow2file=/mnt/appc-pc/pub/templates/$vmn
 vmid="9030"; vmname="tmp-alse-1.7.6uu2-base"; qcow2file=/mnt/appc-pc/pub/templates/$vmname.qcow2; cloneid=9000; qcow2storage=local-zfs; qcow2options=",cache=writeback"
 vmid="9031"; vmname="tmp-alse-1.7.6uu2-adv"; qcow2file=/mnt/appc-pc/pub/templates/$vmname.qcow2; cloneid=9000; qcow2storage=local-zfs; qcow2options=",cache=writeback"
 vmid="9032"; vmname="tmp-alse-1.7.6uu2-max"; qcow2file=/mnt/appc-pc/pub/templates/$vmname.qcow2; cloneid=9000; qcow2storage=local-zfs; qcow2options=",cache=writeback"
+vmid="9033"; vmname="tmp-alse-gui-1.8.1uu2-base"; qcow2file=/mnt/appc-pc/pub/iso/astra/qcow2/alse-gui-1.8.1uu2-base-qemu-mg15.2.0-amd64.qcow2; cloneid=9000; qcow2storage=local-zfs; qcow2options=",cache=writeback"
 vmid="9102"; vmname="tmp-w2012r2std"; qcow2file=/mnt/appc-pc/pub/templates/w2012r2std-image.qcow2; cloneid=9100; qcow2storage=local-zfs; qcow2options=",cache=writeback"
 vmid="9103"; vmname="tmp-w2016std"; qcow2file=/mnt/appc-pc/pub/templates/w2016std-image.qcow2; cloneid=9100; qcow2storage=local-zfs; qcow2options=",cache=writeback"
 vmid="9104"; vmname="tmp-w2019std"; qcow2file=/mnt/appc-pc/pub/templates/w2019std-image.qcow2; cloneid=9100; qcow2storage=local-zfs; qcow2options=",cache=writeback"
@@ -258,3 +259,24 @@ umount /mnt/tmp
 sleep 10
 qm resize $vmid virtio0 +7G
 ``` 
+
+```bash
+mountdir=/mnt/tmp
+mountdev=/dev/zvol/rpool/data/vm-9033-disk-0-part2
+mkdir $mountdir
+mount $mountdev $mountdir
+
+mount -t proc none $mountdir/proc
+mount --bind /dev $mountdir/dev
+mount -t sysfs sysfs $mountdir/sys
+mount -t devpts pts $mountdir/dev/pts
+
+chroot $mountdir /bin/bash
+
+apt reinstall -y python3-blinker python-babel-localedata python3-webcolors python3-cffi-backend python3-requests python3-urllib3 libeatmydata1 python3-jsonpatch cloud-guest-utils python3-attr gdisk python3-babel python3-jsonschema python3-oauthlib cloud-init python3-json-pointer python3-jinja2 python3-serial python3-certifi python3-uritemplate python3-markupsafe python3-jwt eatmydata python3-idna python3-rfc3987 python3-chardet python3-configobj python3-cryptography python3-charset-normalizer python3-pyrsistent  cloud-utils cloud-image-utils
+
+systemctl enable cloud-init-main cloud-config cloud-final cloud-init-local cloud-init-network --root $mountdir
+
+umount $mountdir/proc $mountdir/dev/pts $mountdir/dev $mountdir/sys $mountdir
+
+```
