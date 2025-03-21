@@ -15,10 +15,12 @@ $ debconf-get-selections >> $preseedcfg
 ## Подготовка шаблона. Установка с DVD
 
 Разметка диска 9 GB:
-|устройство|точка монтирования|размер|
-|/dev/sda1 |/boot             |1 GB  | 
-|/dev/sda2 |swap              |2 GB  |
-|/dev/sda3 | /                |(Всё что осталось)|
+```csv
+устройство,точка монтирования,размер
+/dev/sda1, /boot,1 GB 
+/dev/sda2, swap , 2 GB
+/dev/sda3, /, (Всё что осталось)
+```
 
 Выбираем пакеты:
 Fly desktop
