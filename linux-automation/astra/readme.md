@@ -47,7 +47,6 @@ apt install -y cloud-guest-utils cloud-image-utils cloud-init
 systemctl set-default multi-user.target
 systemctl disable NetworkManager-wait-online.service NetworkManager.service
 systemctl mask NetworkManager-wait-online.service NetworkManager.service
-systemctl enable qemu-guest-agent
 
 userdel -r -f astra
 
